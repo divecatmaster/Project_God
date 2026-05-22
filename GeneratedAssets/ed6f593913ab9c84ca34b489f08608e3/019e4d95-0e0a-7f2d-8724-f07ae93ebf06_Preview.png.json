@@ -1,0 +1,12 @@
+{
+    "asset": "ed6f593913ab9c84ca34b489f08608e3",
+    "fileName": "019e4d95-0e0a-7f2d-8724-f07ae93ebf06_Preview.png",
+    "prompt": "seamless tileable soft stylized fog mist white smoke on transparent background high quality atmospheric cloud layer",
+    "negativePrompt": "",
+    "model": "gemini-3.1-flash-texture",
+    "modelName": "Gemini 3.1 Nano Banana 2",
+    "customSeed": 116630541,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation"
+}
