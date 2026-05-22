@@ -12,7 +12,7 @@ public class GameSceneManager : MonoBehaviour
 
     void EndLoading()
     {
-        LoadingDim.DOFade(0f, 1f).OnComplete(()=>
+        LoadingDim.DOFade(0f, 2f).OnComplete(()=>
         {
             LoadingDim.raycastTarget = false;
         });

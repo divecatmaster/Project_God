@@ -29,7 +29,7 @@ public class SheetData
 public class GoogleSheetManager : MonoBehaviour
 {
     //private string url = "https://docs.google.com/spreadsheets/d/1m2NbZP72bcnHJa_o6xj9rESUxQCdCh5gP02FWu0G9UE/export?gid=57827555&format=tsv&range=A3:C";
-    private string url = "https://docs.google.com/spreadsheets/d/1L9bxKsKpNHRX510cM2ITKcHz-qbFlVRM2G4ibI98Hn4/export?gid=0&format=tsv&range=A3:C";
+    private string url = "https://docs.google.com/spreadsheets/d/1kuJM4DpKxa3vVgr0U9Nz8aj5AKTFbYXg_ubdOA1HVsE/export?gid=0&format=tsv&range=A3:C";
 
     List<string> names = new List<string>();
     List<string> names_enc = new List<string>();
