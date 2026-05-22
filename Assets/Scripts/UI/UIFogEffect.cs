@@ -94,6 +94,7 @@ namespace God.UI
             // Reset offsets
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+            rect.transform.localPosition = new Vector3(rect.transform.localPosition.x, (rect.transform.localPosition.y - 150f), rect.transform.localPosition.z);
         }
 
         public void Pause() => isPaused = true;
