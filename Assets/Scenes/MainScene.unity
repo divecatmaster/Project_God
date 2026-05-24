@@ -3578,6 +3578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572233728}
   - component: {fileID: 1572233727}
+  - component: {fileID: 1572233729}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3597,6 +3598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d1d47f7ae7d07478949d55fdeeca0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageManager
+  _currentLanguage: 1
 --- !u!4 &1572233728
 Transform:
   m_ObjectHideFlags: 0
@@ -3612,6 +3614,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1572233729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572233726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5b957955a2fae4f98186bfa6a79bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundManager
+  audioMixer: {fileID: 24100000, guid: b50b6f270d8a8d147ac13b403594dff1, type: 2}
+  bgmGroup: {fileID: 4757592988388812293, guid: b50b6f270d8a8d147ac13b403594dff1, type: 2}
+  sfxGroup: {fileID: -7671094117983660288, guid: b50b6f270d8a8d147ac13b403594dff1, type: 2}
+  uiGroup: {fileID: -7823284849368852525, guid: b50b6f270d8a8d147ac13b403594dff1, type: 2}
+  openingGroup: {fileID: 2278867709898014325, guid: b50b6f270d8a8d147ac13b403594dff1, type: 2}
+  sfxPoolSize: 10
+  uiPoolSize: 5
+  loadSettingsOnAwake: 1
+  bgmSourceA: {fileID: 0}
+  bgmSourceB: {fileID: 0}
+  openingSource: {fileID: 0}
+  library: {fileID: 11400000, guid: 56698fa2af3d6cb498c597f2b364901b, type: 2}
 --- !u!1 &1602932857
 GameObject:
   m_ObjectHideFlags: 0
