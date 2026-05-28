@@ -9,6 +9,7 @@ public class MainSceneManager : MonoBehaviour
     public static string nextScene;
     public void OnClickNewGame()
     {
+        Data_Manager.Instance.SetNewGame();
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {

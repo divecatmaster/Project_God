@@ -10,6 +10,7 @@ public class Opening : MonoBehaviour
 {
         [SerializeField] TextMeshProUGUI Main_Text;
         [SerializeField] TextMeshProUGUI Main_Text_Sub;
+        [SerializeField] CanvasGroup CanvasGroup;
         [SerializeField] Image MainBG;
         [SerializeField] TextMeshProUGUI Sub_Text_1;
         [SerializeField] TextMeshProUGUI Sub_Text_2;
@@ -244,6 +245,7 @@ public class Opening : MonoBehaviour
                 Main_Text.DOFade(0, 2f);
                 yield return new WaitForSeconds(2f);
                 Main_Text.text = "";
+                CanvasGroup.DOFade(0, 1f).OnComplete(() => this.gameObject.SetActive(false));
         }
 
         #region Utility

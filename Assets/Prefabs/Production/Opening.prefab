@@ -822,13 +822,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1133267385827439065}
   - component: {fileID: 7242045841742513229}
+  - component: {fileID: 3193315179377973040}
   m_Layer: 5
   m_Name: Opening
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1133267385827439065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -870,9 +871,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Opening
   Main_Text: {fileID: 6715716288011074034}
   Main_Text_Sub: {fileID: 5252003971519681684}
+  CanvasGroup: {fileID: 3193315179377973040}
   MainBG: {fileID: 3155914910151702945}
   Sub_Text_1: {fileID: 4466183738567783027}
   Sub_Text_2: {fileID: 6503941695691545222}
+--- !u!225 &3193315179377973040
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915855690607522389}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &6160249712876299349
 PrefabInstance:
   m_ObjectHideFlags: 0

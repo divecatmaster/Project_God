@@ -16,14 +16,14 @@ public class GenerateButton : Editor
         {
             googleSheetManager.OnClickPartSave("Language");
         }
-        // else if (GUILayout.Button("DialogueSet"))
-        // {
-        //     googleSheetManager.OnClickPartSave("DialogueSet");
-        // }
-        // else if (GUILayout.Button("DialogueChoiceSet"))
-        // {
-        //     googleSheetManager.OnClickPartSave("DialogueChoiceSet");
-        // }
+        else if (GUILayout.Button("2.Story"))
+        {
+            googleSheetManager.OnClickPartSave("Story");
+        }
+        else if (GUILayout.Button("3.Select"))
+        {
+            googleSheetManager.OnClickPartSave("Select");
+        }
         // else if (GUILayout.Button("DialogueText"))
         // {
         //     googleSheetManager.OnClickPartSave("DialogueText");

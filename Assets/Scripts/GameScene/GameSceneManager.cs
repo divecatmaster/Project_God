@@ -5,8 +5,13 @@ using UnityEngine.UI;
 public class GameSceneManager : MonoBehaviour
 {
     [SerializeField] Image LoadingDim;
+    [SerializeField] Opening OpeningObj;
     void OnEnable()
     {
+        if (Data_Manager.Instance.IsNewGame)
+        {
+            OpeningObj.gameObject.SetActive(true);
+        }
         EndLoading();
     }
 
