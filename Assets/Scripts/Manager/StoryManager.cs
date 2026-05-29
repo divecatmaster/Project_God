@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class StoryManager : MonoBehaviour
 {
@@ -11,12 +12,12 @@ public class StoryManager : MonoBehaviour
 
     Story_Data _currentStory;
 
-    private void Awake() 
+    private void Awake()
     {
         NextBtn.onClick.AddListener(OnClickNext);
     }
 
-    private void Start() 
+    private void Start()
     {
         if (Data_Manager.Instance.IsNewGame)
         {
@@ -41,12 +42,18 @@ public class StoryManager : MonoBehaviour
     {
         if (_currentStory != null)
         {
-            Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+            Play_Typewriter();
         }
     }
 
     void GetNextStory()
     {
+        if (_isBusy)
+        {
+            Skip();
+            return;
+        }
+
         if (_currentStory != null)
         {
             var nextIndex = _currentStory.Next_Index;
@@ -63,4 +70,55 @@ public class StoryManager : MonoBehaviour
     {
         GetNextStory();
     }
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Production
+    private Coroutine _typeRoutine;
+    private bool _isBusy;
+    private float charactersPerSecond = 20f;
+    void Play_Typewriter()
+    {
+        Stop_Typewriter();
+        Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+        Context.maxVisibleCharacters = 0;
+        _typeRoutine = StartCoroutine(TypeRoutine());
+    }
+
+    public void Stop_Typewriter()
+    {
+        if (_typeRoutine != null)
+        {
+            StopCoroutine(_typeRoutine);
+            _typeRoutine = null;
+        }
+        _isBusy = false;
+    }
+
+    public void Skip()
+    {
+        if (!_isBusy) return;
+        Stop_Typewriter();
+        Context.maxVisibleCharacters = LanguageManager.Instance.GetText(_currentStory.Language_Key).Length;
+    }
+
+    private IEnumerator TypeRoutine()
+    {
+        _isBusy = true;
+        Context.ForceMeshUpdate();
+
+        int totalVisibleCharacters = Context.textInfo.characterCount;
+        int counter = 0;
+
+        float waitTime = 1f / Mathf.Max(0.1f, charactersPerSecond);
+
+        while (counter <= totalVisibleCharacters)
+        {
+            Context.maxVisibleCharacters = counter;
+
+            counter++;
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        _isBusy = false;
+    }
+    #endregion
 }
