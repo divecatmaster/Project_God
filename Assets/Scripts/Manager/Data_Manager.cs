@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Globalization;
+using System;
 
 public class Data_Manager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Data_Manager : MonoBehaviour
     {
         LoadStoryData();
         LoadSelectData();
+        LoadSaveData();
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Story
@@ -101,7 +103,29 @@ public class Data_Manager : MonoBehaviour
         return null;
     }
     #endregion
-//------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region SaveData
+    Dictionary<int, Save_Data> SaveData_Dic = new Dictionary<int, Save_Data>();
+    void LoadSaveData()
+    {
+        
+    }
+
+    public Dictionary<int, Save_Data> GetAllSaveData()
+    {
+        return SaveData_Dic;
+    }
+
+    public Save_Data GetSaveData(int slotIndex)
+    {
+        if (SaveData_Dic.ContainsKey(slotIndex))
+        {
+            return SaveData_Dic[slotIndex];
+        }
+        return null;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region CSV_Util
     int CSV_Int_Checker(object obj)
     {
@@ -162,4 +186,12 @@ public class Select_Data
     public int Index;
     public List<string> Language_Key = new List<string>();
     public List<int> Next_Index = new List<int>();
+}
+
+public class Save_Data
+{
+    public int SlotIndex;
+    public int StoryIndex = -1;
+    public DateTime SaveDate;
+    public TimeSpan PlayTime;
 }

@@ -45,5 +45,9 @@ static public class UIUtility
     static public Color Select_On_Color = new Color(0.2470588f, 0.3490196f, 0.4509804f, 0.6f);
     static public Color Select_On_Line_Color = new Color(1f, 1f, 1f, 0.6f);
     static public Color Select_On_Font_Color = new Color(0.8666667f, 0.9058824f, 1f, 1f);
+    static public Color Save_On_Star_Color = new Color(0.8196079f, 0.8745098f, 1f, 1f);
+    static public Color Save_Off_Star_Color = new Color(0.5254902f, 0.5882353f, 0.7411765f, 1f);
+    static public Color Save_On_Glow_Color = new Color(0.7607843f, 0.8470588f, 1f, 0.8f);
+    static public Color Select_On_Remove_Color = new Color(0.6392157f, 0.6705883f, 0.7333333f, 1f);
     #endregion
 }

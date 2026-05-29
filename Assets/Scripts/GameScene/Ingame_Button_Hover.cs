@@ -17,6 +17,10 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private Image buttonOutline;
     [SerializeField] private Sprite[] buttonOutlineSprites;
 
+    [Header("Save")]
+    [SerializeField] Image Star;
+    [SerializeField] Image Remove_Btn;
+
     [SerializeField] private float tweenDuration = 0.7f;
 
     private readonly Color glowOnColor = new Color(1f, 1f, 1f, 0.29f);
@@ -69,6 +73,14 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                 if (text != null)
                     text.color = UIUtility.Select_Off_Font_Color;
                 break;
+            case Hover_Type.Save:
+                {
+                    Star.color = UIUtility.Save_Off_Star_Color;
+                    glow.color = UIUtility.Common_Off_Color;
+                    text.color = UIUtility.Save_Off_Star_Color;
+                    Remove_Btn.color = UIUtility.Common_Off_Color;
+                }
+                break;
         }
     }
 
@@ -91,6 +103,14 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     buttonOutline.sprite = buttonOutlineSprites[1];
 
                 text?.DOColor(UIUtility.Select_On_Font_Color, tweenDuration);
+                break;
+            case Hover_Type.Save:
+                {
+                    Star.DOColor(UIUtility.Save_On_Star_Color, tweenDuration);
+                    glow.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    text.DOColor(UIUtility.Save_On_Star_Color, tweenDuration);
+                    Remove_Btn.DOColor(UIUtility.Select_On_Remove_Color, tweenDuration);
+                }
                 break;
         }
     }
@@ -115,6 +135,14 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
 
                 text?.DOColor(UIUtility.Select_Off_Font_Color, tweenDuration);
                 break;
+            case Hover_Type.Save:
+                {
+                    Star.DOColor(UIUtility.Save_Off_Star_Color, tweenDuration);
+                    glow.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    text.DOColor(UIUtility.Save_Off_Star_Color, tweenDuration);
+                    Remove_Btn.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                }
+                break;
         }
     }
 }
@@ -123,5 +151,6 @@ public enum Hover_Type
 {
     None,
     Button,
-    Select
+    Select,
+    Save
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 
 public class StoryManager : MonoBehaviour
 {
@@ -28,8 +29,6 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button AppearBtn;
 
     Story_Data _currentStory;
-    Dictionary<string, Sprite> _body_dic = new Dictionary<string, Sprite>();
-    Dictionary<string, Sprite> _face_dic = new Dictionary<string, Sprite>();
     string _currentBody;
     string _currentFace;
 
@@ -250,51 +249,33 @@ public class StoryManager : MonoBehaviour
         {
             if (_currentBody != _currentStory.Body)
             {
-                if (_body_dic.ContainsKey(_currentStory.Body))
+                var target = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
+                if (target != null)
                 {
-                    Body_Img.sprite = _body_dic[_currentStory.Body];
+                    Body_Img.sprite = target;
                     Body_Img.gameObject.SetActive(true);
                     _currentBody = _currentStory.Body;
                 }
                 else
                 {
-                    var res = Resources.Load<Sprite>($"Character/{_currentStory.Body}");
-                    if (res != null)
-                    {
-                        Body_Img.sprite = res;
-                        Body_Img.gameObject.SetActive(true);
-                        _body_dic.Add(_currentStory.Body, res);
-                        _currentBody = _currentStory.Body;
-                    }
-                    else
-                    {
-                        _currentBody = "";
-                    }
+                    Body_Img.gameObject.SetActive(false);
+                    _currentBody = "";
                 }
             }
 
             if (_currentFace != _currentStory.Face)
             {
-                if (_face_dic.ContainsKey(_currentStory.Face))
+                var target = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
+                if (target != null)
                 {
-                    Face_Img.sprite = _face_dic[_currentStory.Face];
+                    Face_Img.sprite = target;
                     Face_Img.gameObject.SetActive(true);
                     _currentFace = _currentStory.Face;
                 }
                 else
                 {
-                    var res = Resources.Load<Sprite>($"Character/{_currentStory.Face}");
-                    if (res != null)
-                    {
-                        Face_Img.sprite = res;
-                        Face_Img.gameObject.SetActive(true);
-                        _face_dic.Add(_currentStory.Face, res);
-                        _currentFace = _currentStory.Face;
-                    }
-                    else
-                    {
-                        _currentFace = "";
-                    }
+                    Face_Img.gameObject.SetActive(false);
+                    _currentFace = "";
                 }
             }
         }
