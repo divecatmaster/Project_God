@@ -82,7 +82,7 @@ public class Data_Manager : MonoBehaviour
             var newData = new Select_Data();
             newData.Index = (int)data[i]["index"];
             var indexData = data[i]["story_index"].ToString();
-            var split = indexData.Split(',');
+            var split = indexData.Split('/');
             for (int a = 0; a < split.Length; a++)
             {
                 newData.Next_Index.Add(UIUtility.StringToInt(split[a]));
@@ -90,6 +90,15 @@ public class Data_Manager : MonoBehaviour
             }
             Select_Dic.Add(newData.Index, newData);
         }
+    }
+
+    public Select_Data GetSelectData(int index)
+    {
+        if (Select_Dic.ContainsKey(index))
+        {
+            return Select_Dic[index];
+        }
+        return null;
     }
     #endregion
 //------------------------------------------------------------------------------------------------------------------------------------------------

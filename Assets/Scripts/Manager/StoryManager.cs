@@ -19,8 +19,13 @@ public class StoryManager : MonoBehaviour
     [SerializeField] GameObject[] Select_Buttons;
     [SerializeField] TextMeshProUGUI[] Select_Texts;
 
+    [Header("Hide")]
+    [SerializeField] GameObject[] HideTargets;
+
     [Header("Buttons")]
     [SerializeField] Button NextBtn;
+    [SerializeField] Button HideBtn;
+    [SerializeField] Button AppearBtn;
 
     Story_Data _currentStory;
     Dictionary<string, Sprite> _body_dic = new Dictionary<string, Sprite>();
@@ -31,6 +36,8 @@ public class StoryManager : MonoBehaviour
     private void Awake()
     {
         NextBtn.onClick.AddListener(OnClickNext);
+        HideBtn.onClick.AddListener(OnClickHide);
+        AppearBtn.onClick.AddListener(OnClickAppear);
     }
 
     private void Start()
@@ -151,12 +158,70 @@ public class StoryManager : MonoBehaviour
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Select
+    List<int> _tempSelectIndex = new List<int>();
     void SetSelect()
     {
         Default_Obj.SetActive(false);
         Select_Obj.SetActive(true);
 
-        //_currentStory.Select_Index
+        ResetSelect();
+        var data = Data_Manager.Instance.GetSelectData(_currentStory.Select_Index);
+        if (data != null)
+        {
+            _tempSelectIndex = new List<int>();
+            for (int i = 0; i < data.Next_Index.Count; i++)
+            {
+                Select_Buttons[i].gameObject.SetActive(true);
+                Select_Texts[i].text = LanguageManager.Instance.GetText(data.Language_Key[i]);
+                _tempSelectIndex.Add(data.Next_Index[i]);
+            }
+        }
+    }
+
+    void ResetSelect()
+    {
+        for (int i = 0; i < Select_Buttons.Length; i++)
+        {
+            Select_Buttons[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void OnClickSelect(int idx)
+    {
+        var target = Data_Manager.Instance.GetStoryData(_tempSelectIndex[idx]);
+        if (target != null)
+        {
+            _currentStory = target;
+            SetStory();
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Hide
+    void OnClickHide()
+    {
+        for (int i = 0; i < HideTargets.Length; i++)
+        {
+            HideTargets[i].gameObject.SetActive(false);
+        }
+        AppearBtn.gameObject.SetActive(true);
+    }
+
+    void OnClickAppear()
+    {
+        for (int i = 0; i < HideTargets.Length; i++)
+        {
+            HideTargets[i].gameObject.SetActive(true);
+        }
+        AppearBtn.gameObject.SetActive(false);
+        if (_currentStory.Select_Index == 0)
+        {
+            Select_Obj.SetActive(false);
+        }
+        else
+        {
+            Default_Obj.SetActive(false);
+        }
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
