@@ -24,6 +24,12 @@ public class Popup_Save : PopupBase
         base.Open(onComplete);
     }
 
+    public override void Close(Action onComplete = null)
+    {
+        base.Close(onComplete);
+        _currentGroup = -1;
+    }
+
     public void SetPopup(int type)
     {
         for (int i = 0; i < Groups.Length; i++)
@@ -85,6 +91,22 @@ public class Popup_Save : PopupBase
         saveData.SaveDate = new DateTime(2026, 05, 29, 13, 39, 00);
         saveData.PlayTime = new TimeSpan(0,1,28,10);
         item_3.SetItem(_currentGroup, saveData, OnClickItem);
+
+        var item_4 = GetItem();
+        saveData = new Save_Data();
+        saveData.SlotIndex = 4;
+        saveData.StoryIndex = -1;
+        saveData.SaveDate = DateTime.MinValue;
+        saveData.PlayTime = new TimeSpan();
+        item_4.SetItem(_currentGroup, saveData, OnClickItem);
+
+        var item_5 = GetItem();
+        saveData = new Save_Data();
+        saveData.SlotIndex = 5;
+        saveData.StoryIndex = -1;
+        saveData.SaveDate = DateTime.MinValue;
+        saveData.PlayTime = new TimeSpan();
+        item_5.SetItem(_currentGroup, saveData, OnClickItem);
     }
 
     void ResetItems()
@@ -101,6 +123,7 @@ public class Popup_Save : PopupBase
         {
             if (!_itemList[i].gameObject.activeSelf)
             {
+                _itemList[i].gameObject.SetActive(true);
                 return _itemList[i];
             }
         }
