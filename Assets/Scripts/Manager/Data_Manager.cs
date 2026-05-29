@@ -20,7 +20,9 @@ public class Data_Manager : MonoBehaviour
     private void Start()
     {
         LoadStoryData();
+        LoadSelectData();
     }
+//------------------------------------------------------------------------------------------------------------------------------------------------
     #region Story
     Dictionary<int, Story_Data> Story_Dic = new Dictionary<int, Story_Data>();
     public bool IsNewGame { get; private set; } = false;
@@ -35,7 +37,7 @@ public class Data_Manager : MonoBehaviour
             newData.Index = (int)data[i]["index"];
             newData.Language_Key = data[i]["language_key"].ToString();
             newData.Language_Production = CSV_Int_Checker(data[i]["language_production"]);
-            newData.Character = CSV_Int_Checker(data[i]["character"]);
+            newData.Name = CSV_Int_Checker(data[i]["name"]);
             newData.Body = data[i]["body"].ToString();
             newData.Face = data[i]["face"].ToString();
             newData.Select_Index = CSV_Int_Checker(data[i]["select_index"]);
@@ -68,7 +70,29 @@ public class Data_Manager : MonoBehaviour
         SaveStory_Index = index;
     }
     #endregion
-
+//------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Select
+    Dictionary<int, Select_Data> Select_Dic = new Dictionary<int, Select_Data>();
+    void LoadSelectData()
+    {
+        Select_Dic = new Dictionary<int, Select_Data>();
+        var data = CSVReader.ReadOriginal("Select");
+        for (int i = 0; i < data.Count; i++)
+        {
+            var newData = new Select_Data();
+            newData.Index = (int)data[i]["index"];
+            var indexData = data[i]["story_index"].ToString();
+            var split = indexData.Split(',');
+            for (int a = 0; a < split.Length; a++)
+            {
+                newData.Next_Index.Add(UIUtility.StringToInt(split[a]));
+                newData.Language_Key.Add($"select_{newData.Index}_{(a + 1)}");
+            }
+            Select_Dic.Add(newData.Index, newData);
+        }
+    }
+    #endregion
+//------------------------------------------------------------------------------------------------------------------------------------------------
     #region CSV_Util
     int CSV_Int_Checker(object obj)
     {
@@ -112,7 +136,7 @@ public class Story_Data
     public int Index;
     public string Language_Key;
     public int Language_Production;
-    public int Character;
+    public int Name;
     public string Body;
     public string Face;
     public int Select_Index;
@@ -122,4 +146,11 @@ public class Story_Data
     public float Appear_Production_Time;
     public bool Auto_Next;
     public bool My_Name;
+}
+
+public class Select_Data
+{
+    public int Index;
+    public List<string> Language_Key = new List<string>();
+    public List<int> Next_Index = new List<int>();
 }

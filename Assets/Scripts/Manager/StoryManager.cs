@@ -2,15 +2,31 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StoryManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI Context;
+    [SerializeField] TextMeshProUGUI Name_Text;
+    [SerializeField] Image Body_Img;
+    [SerializeField] Image Face_Img;
+    
+    [Header("Default")]
+    [SerializeField] GameObject Default_Obj;
+
+    [Header("Select")]
+    [SerializeField] GameObject Select_Obj;
+    [SerializeField] GameObject[] Select_Buttons;
+    [SerializeField] TextMeshProUGUI[] Select_Texts;
 
     [Header("Buttons")]
     [SerializeField] Button NextBtn;
 
     Story_Data _currentStory;
+    Dictionary<string, Sprite> _body_dic = new Dictionary<string, Sprite>();
+    Dictionary<string, Sprite> _face_dic = new Dictionary<string, Sprite>();
+    string _currentBody;
+    string _currentFace;
 
     private void Awake()
     {
@@ -42,7 +58,16 @@ public class StoryManager : MonoBehaviour
     {
         if (_currentStory != null)
         {
-            Play_Typewriter();
+            Set_Name();
+            Set_Character();
+            if (_currentStory.Select_Index == 0)
+            {
+                Play_Typewriter();    
+            }
+            else
+            {
+                SetSelect();
+            }
         }
     }
 
@@ -71,19 +96,21 @@ public class StoryManager : MonoBehaviour
         GetNextStory();
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    #region Production
+    #region Default_Production
     private Coroutine _typeRoutine;
     private bool _isBusy;
     private float charactersPerSecond = 20f;
     void Play_Typewriter()
     {
+        Default_Obj.SetActive(true);
+        Select_Obj.SetActive(false);
         Stop_Typewriter();
         Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
         Context.maxVisibleCharacters = 0;
         _typeRoutine = StartCoroutine(TypeRoutine());
     }
 
-    public void Stop_Typewriter()
+    void Stop_Typewriter()
     {
         if (_typeRoutine != null)
         {
@@ -93,7 +120,7 @@ public class StoryManager : MonoBehaviour
         _isBusy = false;
     }
 
-    public void Skip()
+    void Skip()
     {
         if (!_isBusy) return;
         Stop_Typewriter();
@@ -119,6 +146,93 @@ public class StoryManager : MonoBehaviour
         }
 
         _isBusy = false;
+    }
+    #endregion
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Select
+    void SetSelect()
+    {
+        Default_Obj.SetActive(false);
+        Select_Obj.SetActive(true);
+
+        //_currentStory.Select_Index
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Resource_Setting
+    void Set_Name()
+    {
+        var name = _currentStory.Name;
+        if (name == 0)
+        {
+            Name_Text.text = "";
+        }
+        else
+        {
+            Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
+        }
+    }
+
+    void Set_Character()
+    {
+        if (string.IsNullOrEmpty(_currentStory.Body))
+        {
+            Body_Img.gameObject.SetActive(false);
+            _currentBody = "";
+        }
+        else
+        {
+            if (_currentBody != _currentStory.Body)
+            {
+                if (_body_dic.ContainsKey(_currentStory.Body))
+                {
+                    Body_Img.sprite = _body_dic[_currentStory.Body];
+                    Body_Img.gameObject.SetActive(true);
+                    _currentBody = _currentStory.Body;
+                }
+                else
+                {
+                    var res = Resources.Load<Sprite>($"Character/{_currentStory.Body}");
+                    if (res != null)
+                    {
+                        Body_Img.sprite = res;
+                        Body_Img.gameObject.SetActive(true);
+                        _body_dic.Add(_currentStory.Body, res);
+                        _currentBody = _currentStory.Body;
+                    }
+                    else
+                    {
+                        _currentBody = "";
+                    }
+                }
+            }
+
+            if (_currentFace != _currentStory.Face)
+            {
+                if (_face_dic.ContainsKey(_currentStory.Face))
+                {
+                    Face_Img.sprite = _face_dic[_currentStory.Face];
+                    Face_Img.gameObject.SetActive(true);
+                    _currentFace = _currentStory.Face;
+                }
+                else
+                {
+                    var res = Resources.Load<Sprite>($"Character/{_currentStory.Face}");
+                    if (res != null)
+                    {
+                        Face_Img.sprite = res;
+                        Face_Img.gameObject.SetActive(true);
+                        _face_dic.Add(_currentStory.Face, res);
+                        _currentFace = _currentStory.Face;
+                    }
+                    else
+                    {
+                        _currentFace = "";
+                    }
+                }
+            }
+        }
     }
     #endregion
 }
