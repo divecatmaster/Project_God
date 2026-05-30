@@ -53,7 +53,14 @@ public class Popup_Save_Item : MonoBehaviour
             Saved.SetActive(false);
             Empty.SetActive(true);
             RemoveButton.gameObject.SetActive(false);
-            Right.SetActive(false);
+            if (groupType == 1)
+            {
+                Right.SetActive(false);
+            }
+            else
+            {
+                Right.SetActive(true);
+            }
         }
         else
         {

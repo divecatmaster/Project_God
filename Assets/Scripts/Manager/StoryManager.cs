@@ -4,9 +4,11 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using System;
 
 public class StoryManager : MonoBehaviour
 {
+    [SerializeField] Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
     [SerializeField] Image Body_Img;
@@ -27,6 +29,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button NextBtn;
     [SerializeField] Button HideBtn;
     [SerializeField] Button AppearBtn;
+    [SerializeField] Button SaveBtn;
 
     Story_Data _currentStory;
     string _currentBody;
@@ -37,6 +40,7 @@ public class StoryManager : MonoBehaviour
         NextBtn.onClick.AddListener(OnClickNext);
         HideBtn.onClick.AddListener(OnClickHide);
         AppearBtn.onClick.AddListener(OnClickAppear);
+        SaveBtn.onClick.AddListener(OnClickSave);;
     }
 
     private void Start()
@@ -48,6 +52,7 @@ public class StoryManager : MonoBehaviour
             {
                 _currentStory = target;
             }
+            Data_Manager.Instance.StartTimer(new TimeSpan());
         }
         else
         {
@@ -74,6 +79,7 @@ public class StoryManager : MonoBehaviour
             {
                 SetSelect();
             }
+            Data_Manager.Instance.SetSaveStory_Index(_currentStory.Index);
         }
     }
 
@@ -279,6 +285,24 @@ public class StoryManager : MonoBehaviour
                 }
             }
         }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Save
+    Popup_Save _popup_Save;
+    void OnClickSave()
+    {
+        if (_popup_Save == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Save");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Save = item.GetComponent<Popup_Save>();
+            }
+        }
+        _popup_Save.SetPopup(1);
+        _popup_Save.Open();
     }
     #endregion
 }

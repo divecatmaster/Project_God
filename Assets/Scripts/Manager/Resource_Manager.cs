@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public class Resource_Manager : MonoBehaviour
 {
     public static Resource_Manager Instance;
+    [SerializeField] Transform Common_Canvas;
+    [SerializeField] GameObject Yes_Or_No_Obj;
+    Popup_YesOrNo _YesOrNo;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -15,6 +19,17 @@ public class Resource_Manager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public Popup_YesOrNo Get_Yes_Or_No()
+    {
+        if (_YesOrNo == null)
+        {
+            var item = Instantiate(Yes_Or_No_Obj, Common_Canvas);
+            _YesOrNo = item.GetComponent<Popup_YesOrNo>();
+        }
+
+        return _YesOrNo;
     }
 
     Dictionary<string, Sprite> _body_dic = new Dictionary<string, Sprite>();

@@ -81,6 +81,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     Remove_Btn.color = UIUtility.Common_Off_Color;
                 }
                 break;
+            case Hover_Type.YesOrNo:
+                {
+                    glow.color = UIUtility.Common_Off_Color;
+                    buttonBG.color = UIUtility.YesOrNo_Off_BG_Color;
+                    text.color = UIUtility.YesOrNo_Off_Text_Color;
+                }
+                break;
         }
     }
 
@@ -98,7 +105,7 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
             case Hover_Type.Select:
                 buttonBG?.DOColor(UIUtility.Select_On_Color, tweenDuration);
                 buttonOutline?.DOColor(UIUtility.Select_On_Line_Color, tweenDuration);
-                
+
                 if (buttonOutline != null && buttonOutlineSprites != null && buttonOutlineSprites.Length > 1)
                     buttonOutline.sprite = buttonOutlineSprites[1];
 
@@ -112,6 +119,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     Remove_Btn.DOColor(UIUtility.Select_On_Remove_Color, tweenDuration);
                 }
                 break;
+            case Hover_Type.YesOrNo:
+                {
+                    glow.DOColor(UIUtility.YesOrNo_On_Glow_Color, tweenDuration);
+                    buttonBG.DOColor(UIUtility.YesOrNo_On_BG_Color, tweenDuration);
+                    text.DOColor(UIUtility.YesOrNo_Off_Text_Color, tweenDuration);
+                }
+                break;
         }
     }
 
@@ -122,18 +136,21 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
         switch (type)
         {
             case Hover_Type.Button:
-                text?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
-                glow?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                {
+                    text?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    glow?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                }
                 break;
-
             case Hover_Type.Select:
-                buttonBG?.DOColor(UIUtility.Select_Off_Color, tweenDuration);
-                buttonOutline?.DOColor(UIUtility.Select_Off_Line_Color, tweenDuration);
+                {
+                    buttonBG?.DOColor(UIUtility.Select_Off_Color, tweenDuration);
+                    buttonOutline?.DOColor(UIUtility.Select_Off_Line_Color, tweenDuration);
 
-                if (buttonOutline != null && buttonOutlineSprites != null && buttonOutlineSprites.Length > 0)
-                    buttonOutline.sprite = buttonOutlineSprites[0];
+                    if (buttonOutline != null && buttonOutlineSprites != null && buttonOutlineSprites.Length > 0)
+                        buttonOutline.sprite = buttonOutlineSprites[0];
 
-                text?.DOColor(UIUtility.Select_Off_Font_Color, tweenDuration);
+                    text?.DOColor(UIUtility.Select_Off_Font_Color, tweenDuration);
+                }
                 break;
             case Hover_Type.Save:
                 {
@@ -141,6 +158,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     glow.DOColor(UIUtility.Common_Off_Color, tweenDuration);
                     text.DOColor(UIUtility.Save_Off_Star_Color, tweenDuration);
                     Remove_Btn.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                }
+                break;
+            case Hover_Type.YesOrNo:
+                {
+                    glow.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    buttonBG.DOColor(UIUtility.YesOrNo_Off_BG_Color, tweenDuration);
+                    text.DOColor(UIUtility.YesOrNo_Off_Text_Color, tweenDuration);
                 }
                 break;
         }
@@ -152,5 +176,6 @@ public enum Hover_Type
     None,
     Button,
     Select,
-    Save
+    Save,
+    YesOrNo
 }

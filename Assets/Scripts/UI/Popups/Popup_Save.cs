@@ -68,45 +68,21 @@ public class Popup_Save : PopupBase
     {
         ResetItems();
 
-        var item_1 = GetItem();
-        var saveData = new Save_Data();
-        saveData.SlotIndex = 1;
-        saveData.StoryIndex = 23;
-        saveData.SaveDate = new DateTime(2026, 05, 19, 13, 39, 00);
-        saveData.PlayTime = new TimeSpan(0,0,30,10);
-        item_1.SetItem(_currentGroup, saveData, OnClickItem);
-
-        var item_2 = GetItem();
-        saveData = new Save_Data();
-        saveData.SlotIndex = 2;
-        saveData.StoryIndex = -1;
-        saveData.SaveDate = DateTime.MinValue;
-        saveData.PlayTime = new TimeSpan();
-        item_2.SetItem(_currentGroup, saveData, OnClickItem);
-
-        var item_3 = GetItem();
-        saveData = new Save_Data();
-        saveData.SlotIndex = 3;
-        saveData.StoryIndex = 128;
-        saveData.SaveDate = new DateTime(2026, 05, 29, 13, 39, 00);
-        saveData.PlayTime = new TimeSpan(0,1,28,10);
-        item_3.SetItem(_currentGroup, saveData, OnClickItem);
-
-        var item_4 = GetItem();
-        saveData = new Save_Data();
-        saveData.SlotIndex = 4;
-        saveData.StoryIndex = -1;
-        saveData.SaveDate = DateTime.MinValue;
-        saveData.PlayTime = new TimeSpan();
-        item_4.SetItem(_currentGroup, saveData, OnClickItem);
-
-        var item_5 = GetItem();
-        saveData = new Save_Data();
-        saveData.SlotIndex = 5;
-        saveData.StoryIndex = -1;
-        saveData.SaveDate = DateTime.MinValue;
-        saveData.PlayTime = new TimeSpan();
-        item_5.SetItem(_currentGroup, saveData, OnClickItem);
+        var saveData = Data_Manager.Instance.GetAllSaveData();
+        for (int i = 0; i < 20; i++)
+        {
+            var item = GetItem();
+            if (saveData.ContainsKey(i + 1))
+            {
+                item.SetItem(_currentGroup, saveData[i + 1], OnClickItem);
+            }
+            else
+            {
+                var newData = new Save_Data();
+                newData.SlotIndex = i + 1;
+                item.SetItem(_currentGroup, newData, OnClickItem);
+            }
+        }
     }
 
     void ResetItems()
@@ -137,7 +113,26 @@ public class Popup_Save : PopupBase
 
     void OnClickItem(int slotIdx)
     {
-        
+        if (_currentGroup == 1)//로드
+        {
+            
+        }
+        else//세이브
+        {
+            var target = Data_Manager.Instance.GetSaveData(slotIdx);
+            if (target == null)
+            {
+                Resource_Manager.Instance.Get_Yes_Or_No().SetPopup(string.Format(LanguageManager.Instance.GetText("Save_Warning_1"), slotIdx), () =>
+                {
+                    var newData = new Save_Data();
+                    newData.SlotIndex = slotIdx;
+                    newData.StoryIndex = Data_Manager.Instance.SaveStory_Index;
+                    newData.SaveDate = DateTime.Now;
+                    newData.PlayTime = Data_Manager.Instance.GetPlayTime();
+                    Data_Manager.Instance.SetSaveData(newData);
+                });
+            }
+        }
     }
 
     void OnClickClose()

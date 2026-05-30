@@ -24,7 +24,22 @@ public class Data_Manager : MonoBehaviour
         LoadSelectData();
         LoadSaveData();
     }
-//------------------------------------------------------------------------------------------------------------------------------------------------
+
+    float _playTimer;
+
+    private void Update()
+    {
+        if (!_startGame) return;
+
+        _playTimer += Time.unscaledDeltaTime;
+
+        if (_playTimer >= 1f)
+        {
+            _currentPlayTime += TimeSpan.FromSeconds(_playTimer).Ticks;
+            _playTimer = 0f;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Story
     Dictionary<int, Story_Data> Story_Dic = new Dictionary<int, Story_Data>();
     public bool IsNewGame { get; private set; } = false;
@@ -106,9 +121,14 @@ public class Data_Manager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region SaveData
     Dictionary<int, Save_Data> SaveData_Dic = new Dictionary<int, Save_Data>();
+    bool _startGame;
+    long _currentPlayTime;
     void LoadSaveData()
     {
-        
+        for (int i = 0; i < 20; i++)
+        {
+            SaveManager.Instance.Load(i);
+        }
     }
 
     public Dictionary<int, Save_Data> GetAllSaveData()
@@ -123,6 +143,23 @@ public class Data_Manager : MonoBehaviour
             return SaveData_Dic[slotIndex];
         }
         return null;
+    }
+
+    public void SetSaveData(Save_Data data)
+    {
+        SaveData_Dic[data.SlotIndex] = data;
+    }
+
+    public void StartTimer(TimeSpan savedTime)
+    {
+        _startGame = true;
+        _currentPlayTime = savedTime.Ticks;
+        _playTimer = 0f;
+    }
+
+    public TimeSpan GetPlayTime()
+    {
+        return new TimeSpan(_currentPlayTime);
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,6 +229,19 @@ public class Save_Data
 {
     public int SlotIndex;
     public int StoryIndex = -1;
-    public DateTime SaveDate;
-    public TimeSpan PlayTime;
+
+    public long SaveDateTicks;
+    public long PlayTimeTicks;
+
+    public DateTime SaveDate
+    {
+        get => SaveDateTicks <= 0 ? DateTime.MinValue : new DateTime(SaveDateTicks);
+        set => SaveDateTicks = value.Ticks;
+    }
+
+    public TimeSpan PlayTime
+    {
+        get => PlayTimeTicks <= 0 ? TimeSpan.Zero : new TimeSpan(PlayTimeTicks);
+        set => PlayTimeTicks = value.Ticks;
+    }
 }

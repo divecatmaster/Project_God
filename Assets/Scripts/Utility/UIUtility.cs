@@ -49,5 +49,10 @@ static public class UIUtility
     static public Color Save_Off_Star_Color = new Color(0.5254902f, 0.5882353f, 0.7411765f, 1f);
     static public Color Save_On_Glow_Color = new Color(0.7607843f, 0.8470588f, 1f, 0.8f);
     static public Color Select_On_Remove_Color = new Color(0.6392157f, 0.6705883f, 0.7333333f, 1f);
+    static public Color YesOrNo_Off_BG_Color = new Color(0.2941177f, 0.3607843f, 0.5019608f, 1f);
+    static public Color YesOrNo_Off_Text_Color = new Color(0.7372549f, 0.7647059f, 0.8156863f, 1f);
+    static public Color YesOrNo_On_Glow_Color = new Color(0.4509804f, 0.5333334f, 0.7098039f, 0.6980392f);
+    static public Color YesOrNo_On_BG_Color = new Color(0.4509804f, 0.5333334f, 0.7098039f, 1f);
+    static public Color YesOrNo_On_Text_Color = new Color(0.7843137f, 0.8431373f, 0.945098f, 1f);
     #endregion
 }
