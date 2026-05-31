@@ -85,11 +85,10 @@ namespace DiveCat.God.UI.Popups
             if (_popupStack.Count == 0) return;
 
             PopupBase top = _popupStack[_popupStack.Count - 1];
-            
-            // Only close if it's fully opened to prevent animation overlap issues
+
             if (top.State == PopupState.Opened)
             {
-                top.Close();
+                top.CloseByEscape();
             }
         }
 

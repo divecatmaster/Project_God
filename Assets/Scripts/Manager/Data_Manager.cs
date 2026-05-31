@@ -123,6 +123,7 @@ public class Data_Manager : MonoBehaviour
     Dictionary<int, Save_Data> SaveData_Dic = new Dictionary<int, Save_Data>();
     bool _startGame;
     long _currentPlayTime;
+    int _tempLoadIndex;
     void LoadSaveData()
     {
         for (int i = 0; i < 20; i++)
@@ -148,6 +149,13 @@ public class Data_Manager : MonoBehaviour
     public void SetSaveData(Save_Data data)
     {
         SaveData_Dic[data.SlotIndex] = data;
+        SaveManager.Instance.Save(data.SlotIndex);
+    }
+
+    public void RemoveSaveData(int slotIdx)
+    {
+        SaveData_Dic.Remove(slotIdx);
+        SaveManager.Instance.Delete(slotIdx);
     }
 
     public void StartTimer(TimeSpan savedTime)
@@ -157,9 +165,29 @@ public class Data_Manager : MonoBehaviour
         _playTimer = 0f;
     }
 
+    public void StopTimer()
+    {
+        _startGame = false;
+        _playTimer = 0f;
+    }
+
     public TimeSpan GetPlayTime()
     {
         return new TimeSpan(_currentPlayTime);
+    }
+
+    public void Set_TempIndex(int slotIndex)
+    {
+        _tempLoadIndex = slotIndex;
+    }
+
+    public Save_Data Get_TempSavedata()
+    {
+        if (SaveData_Dic.ContainsKey(_tempLoadIndex))
+        {
+            return SaveData_Dic[_tempLoadIndex];
+        }
+        return null;
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------

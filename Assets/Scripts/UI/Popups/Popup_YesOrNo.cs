@@ -10,15 +10,21 @@ public class Popup_YesOrNo : PopupBase
     [SerializeField] Button ExitBtn;
     [SerializeField] Button YesBtn;
     [SerializeField] Button NoBtn;
+    [SerializeField] GameObject YesOrNo;
+    [SerializeField] GameObject Confirm;
+    [SerializeField] Button Confirm_Btn;
 
     Action _yesCallback;
     Action _noCallback;
+    Action _confirmCallback;
 
     protected override void Awake()
     {
         ExitBtn.onClick.AddListener(OnClickExit);
         YesBtn.onClick.AddListener(OnClickYes);
         NoBtn.onClick.AddListener(OnClickNo);
+        Confirm_Btn.onClick.AddListener(OnClickConfirm);
+
     }
 
     public void SetPopup(string title, Action yesCallback, Action noCallback)
@@ -26,6 +32,9 @@ public class Popup_YesOrNo : PopupBase
         Title.text = title;
         _yesCallback = yesCallback;
         _noCallback = noCallback;
+        _confirmCallback = null;
+        YesOrNo.SetActive(true);
+        Confirm.SetActive(false);
     }
 
     public void SetPopup(string title, Action yesCallback)
@@ -33,27 +42,62 @@ public class Popup_YesOrNo : PopupBase
         Title.text = title;
         _yesCallback = yesCallback;
         _noCallback = null;
+        _confirmCallback = null;
+        YesOrNo.SetActive(true);
+        Confirm.SetActive(false);
+    }
+
+    public void SetPopup_One(string title, Action confirmCallback)
+    {
+        Title.text = title;
+        _yesCallback = null;
+        _noCallback = null;
+        _confirmCallback = confirmCallback;
+        YesOrNo.SetActive(false);
+        Confirm.SetActive(true);
+    }
+
+    public override void Close(Action onComplete = null)
+    {
+        _yesCallback = null;
+        _noCallback = null;
+        _confirmCallback = null;
+
+        base.Close(onComplete);
+    }
+
+    public override void CloseByEscape()
+    {
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        _noCallback?.Invoke();
+        Close();
     }
 
     void OnClickExit()
     {
+        _noCallback?.Invoke();
         Close();
     }
 
     void OnClickYes()
     {
         _yesCallback?.Invoke();
+        Close();
     }
 
     void OnClickNo()
     {
-        if (_noCallback != null)
-        {
-            _noCallback.Invoke();
-        }
-        else
-        {
-            OnClickExit();
-        }
+        _noCallback?.Invoke();
+        Close();
+    }
+
+    void OnClickConfirm()
+    {
+        _confirmCallback?.Invoke();
+        Close();
     }
 }

@@ -8,6 +8,7 @@ using System;
 
 public class StoryManager : MonoBehaviour
 {
+    public static StoryManager Instance;
     [SerializeField] Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
@@ -37,10 +38,18 @@ public class StoryManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         NextBtn.onClick.AddListener(OnClickNext);
         HideBtn.onClick.AddListener(OnClickHide);
         AppearBtn.onClick.AddListener(OnClickAppear);
-        SaveBtn.onClick.AddListener(OnClickSave);;
+        SaveBtn.onClick.AddListener(OnClickSave);
     }
 
     private void Start()
@@ -63,6 +72,19 @@ public class StoryManager : MonoBehaviour
             }
         }
         SetStory();
+    }
+
+    public void LoadGame(Action endCallback)
+    {
+        var saveData = Data_Manager.Instance.Get_TempSavedata();
+        var target = Data_Manager.Instance.GetStoryData(saveData.StoryIndex);
+        if (target != null)
+        {
+            _currentStory = target;
+        }
+        Data_Manager.Instance.StartTimer(saveData.PlayTime);
+        SetStory();
+        endCallback.Invoke();
     }
 
     void SetStory()

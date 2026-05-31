@@ -67,6 +67,11 @@ namespace DiveCat.God.UI.Popups
             
             onComplete?.Invoke();
         }
+        
+        public virtual void CloseByEscape()
+        {
+            Close();
+        }
 
         protected virtual async Awaitable AnimateOpen()
         {

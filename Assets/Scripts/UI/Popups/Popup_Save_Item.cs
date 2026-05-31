@@ -26,17 +26,20 @@ public class Popup_Save_Item : MonoBehaviour
     [SerializeField] Button SaveButton;
     [SerializeField] Button RemoveButton;
 
-    Action<int> _callback;
+    Action<int> _saveCallback;
+    Action<int> _removeCallback;
     Save_Data _data;
     private void Awake()
     {
         SaveButton.onClick.AddListener(OnClickSave);
+        RemoveButton.onClick.AddListener(OnClickRemove);
     }
 
-    public void SetItem(int groupType, Save_Data data, Action<int> callback)
+    public void SetItem(int groupType, Save_Data data, Action<int> saveCallback, Action<int> removeCallback)
     {
         _data = data;
-        _callback = callback;
+        _saveCallback = saveCallback;
+        _removeCallback = removeCallback;
         if (groupType == 0)
         {
             SaveTitle.text = LanguageManager.Instance.GetText("Save_Title");
@@ -123,6 +126,11 @@ public class Popup_Save_Item : MonoBehaviour
 
     void OnClickSave()
     {
-        _callback?.Invoke(_data.SlotIndex);
+        _saveCallback?.Invoke(_data.SlotIndex);
+    }
+
+    void OnClickRemove()
+    {
+        _removeCallback?.Invoke(_data.SlotIndex);
     }
 }
