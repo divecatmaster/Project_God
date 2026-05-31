@@ -6,18 +6,42 @@ using DiveCat.God.UI.Popups;
 
 public class MainSceneManager : MonoBehaviour
 {
+    public static MainSceneManager Instance;
     [SerializeField] Transform Popup_Trans;
     [SerializeField] Image LoadingDim;
     public static string nextScene;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     public void OnClickNewGame()
     {
         Data_Manager.Instance.SetNewGame();    
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
+            PopupManager.Instance.CloseAllPopupsFast();
             nextScene = "GameScene";
             SceneManager.LoadScene("LoadingScene");
-            PopupManager.Instance.CloseAllPopups();
+        });
+    }
+
+    public void OnClickGame()
+    {
+        LoadingDim.raycastTarget = true;
+        LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            PopupManager.Instance.CloseAllPopupsFast();
+            nextScene = "GameScene";
+            SceneManager.LoadScene("LoadingScene");
         });
     }
 

@@ -522,7 +522,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &63589771
 RectTransform:
@@ -2684,7 +2684,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainSceneManager
   Popup_Trans: {fileID: 40460264}
   LoadingDim: {fileID: 1602932859}
-  Skip_Opening: 1
 --- !u!4 &1031235612
 Transform:
   m_ObjectHideFlags: 0
@@ -3238,7 +3237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -101,6 +101,15 @@ namespace DiveCat.God.UI.Popups
             }
         }
 
+        public void CloseAllPopupsFast()
+        {
+            // Iterate backwards to avoid collection modification issues while closing
+            for (int i = _popupStack.Count - 1; i >= 0; i--)
+            {
+                _popupStack[i].CloseFast();
+            }
+        }
+
         public bool IsAnyPopupOpen()
         {
             return _popupStack.Count > 0;

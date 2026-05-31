@@ -135,7 +135,9 @@ public class Popup_Save : PopupBase
                 {
                     if (_openType == 0)//메인화면
                     {
-                        
+                        Data_Manager.Instance.SetSaveStory_Index(target.StoryIndex);
+                        MainSceneManager.Instance.OnClickGame();
+                        Data_Manager.Instance.StartTimer(target.PlayTime);
                     }
                     else//인게임
                     {

@@ -42,7 +42,7 @@ public class GameSceneManager : MonoBehaviour
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).OnComplete(()=>
         {
-            PopupManager.Instance.CloseAllPopups();
+            PopupManager.Instance.CloseAllPopupsFast();
             StoryManager.Instance.LoadGame(()=>
             {
                 EndLoading();

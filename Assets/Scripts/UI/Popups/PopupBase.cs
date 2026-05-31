@@ -67,7 +67,30 @@ namespace DiveCat.God.UI.Popups
             
             onComplete?.Invoke();
         }
-        
+
+        public virtual async void CloseFast(Action onComplete = null)
+        {
+            if (State == PopupState.Closed)
+                return;
+
+            State = PopupState.Closed;
+
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0f;
+
+            if (useScaleAnimation)
+            {
+                contentRoot.localScale = startScale;
+            }
+
+            gameObject.SetActive(false);
+
+            PopupManager.Instance.UnregisterClosedPopup(this);
+
+            onComplete?.Invoke();
+        }
+
         public virtual void CloseByEscape()
         {
             Close();
