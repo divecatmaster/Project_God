@@ -6,6 +6,7 @@ using System;
 public class Data_Manager : MonoBehaviour
 {
     public static Data_Manager Instance;
+    public static string nextScene;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -77,9 +78,9 @@ public class Data_Manager : MonoBehaviour
         return null;
     }
 
-    public void SetNewGame()
+    public void SetNewGame(bool isNew = false)
     {
-        IsNewGame = true;
+        IsNewGame = isNew;
     }
 
     public void SetSaveStory_Index(int index)
@@ -144,6 +145,11 @@ public class Data_Manager : MonoBehaviour
             return SaveData_Dic[slotIndex];
         }
         return null;
+    }
+
+    public void SetData(Save_Data data)
+    {
+        SaveData_Dic[data.SlotIndex] = data;
     }
 
     public void SetSaveData(Save_Data data)

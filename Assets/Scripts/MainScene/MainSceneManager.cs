@@ -9,7 +9,6 @@ public class MainSceneManager : MonoBehaviour
     public static MainSceneManager Instance;
     [SerializeField] Transform Popup_Trans;
     [SerializeField] Image LoadingDim;
-    public static string nextScene;
 
     private void Awake()
     {
@@ -20,27 +19,43 @@ public class MainSceneManager : MonoBehaviour
         }
 
         Instance = this;
+        LoadingDim.raycastTarget = true;
+        LoadingDim.color = Color.black;
+    }
+
+    void OnEnable()
+    {
+        EndLoading();
+    }
+
+    void EndLoading()
+    {
+        LoadingDim.DOFade(0f, 2f).OnComplete(() =>
+        {
+            LoadingDim.raycastTarget = false;
+        });
     }
 
     public void OnClickNewGame()
     {
-        Data_Manager.Instance.SetNewGame();    
+        Data_Manager.Instance.SetNewGame(true);
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
             PopupManager.Instance.CloseAllPopupsFast();
-            nextScene = "GameScene";
+            Data_Manager.nextScene = "GameScene";
             SceneManager.LoadScene("LoadingScene");
         });
     }
 
     public void OnClickGame()
     {
+        Data_Manager.Instance.SetNewGame(false);
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
             PopupManager.Instance.CloseAllPopupsFast();
-            nextScene = "GameScene";
+            Data_Manager.nextScene = "GameScene";
             SceneManager.LoadScene("LoadingScene");
         });
     }

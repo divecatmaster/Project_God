@@ -88,6 +88,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     text.color = UIUtility.YesOrNo_Off_Text_Color;
                 }
                 break;
+            case Hover_Type.Option:
+                {
+                    buttonBG.color = UIUtility.Common_Off_Color;
+                    Star.color = UIUtility.Common_Off_Color;
+                    text.color = UIUtility.YesOrNo_Off_Text_Color;
+                }
+                break;
         }
     }
 
@@ -124,6 +131,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     glow.DOColor(UIUtility.YesOrNo_On_Glow_Color, tweenDuration);
                     buttonBG.DOColor(UIUtility.YesOrNo_On_BG_Color, tweenDuration);
                     text.DOColor(UIUtility.YesOrNo_Off_Text_Color, tweenDuration);
+                }
+                break;
+            case Hover_Type.Option:
+                {
+                    buttonBG?.DOColor(UIUtility.Option_On_BG_Color, tweenDuration);
+                    Star.DOColor(UIUtility.Common_On_Color, tweenDuration);
+                    text.DOColor(UIUtility.YesOrNo_On_Text_Color, tweenDuration);
                 }
                 break;
         }
@@ -167,6 +181,13 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     text.DOColor(UIUtility.YesOrNo_Off_Text_Color, tweenDuration);
                 }
                 break;
+            case Hover_Type.Option:
+                {
+                    buttonBG?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    Star.DOColor(UIUtility.Common_Off_Color, tweenDuration);
+                    text.DOColor(UIUtility.YesOrNo_Off_Text_Color, tweenDuration);
+                }
+                break;
         }
     }
 }
@@ -177,5 +198,6 @@ public enum Hover_Type
     Button,
     Select,
     Save,
-    YesOrNo
+    YesOrNo,
+    Option
 }

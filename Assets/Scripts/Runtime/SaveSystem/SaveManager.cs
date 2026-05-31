@@ -111,7 +111,7 @@ public sealed class SaveManager : MonoBehaviour
                 return false;
             }
 
-            Data_Manager.Instance.SetSaveData(loadedData);
+            Data_Manager.Instance.SetData(loadedData);
             _currentSlotIndex = slotIndex;
 
             Debug.Log($"[SaveManager] Loaded: {path}");

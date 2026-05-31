@@ -31,6 +31,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button HideBtn;
     [SerializeField] Button AppearBtn;
     [SerializeField] Button SaveBtn;
+    [SerializeField] Button MenuBtn;
 
     Story_Data _currentStory;
     string _currentBody;
@@ -50,6 +51,7 @@ public class StoryManager : MonoBehaviour
         HideBtn.onClick.AddListener(OnClickHide);
         AppearBtn.onClick.AddListener(OnClickAppear);
         SaveBtn.onClick.AddListener(OnClickSave);
+        MenuBtn.onClick.AddListener(OnClickMenu);
     }
 
     private void Start()
@@ -312,7 +314,7 @@ public class StoryManager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Save
     Popup_Save _popup_Save;
-    void OnClickSave()
+    public void OnClickSave()
     {
         if (_popup_Save == null)
         {
@@ -325,6 +327,23 @@ public class StoryManager : MonoBehaviour
         }
         _popup_Save.SetPopup(1);
         _popup_Save.Open();
+    }
+    #endregion
+//------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Menu
+    Popup_Menu _popup_Menu;
+    public void OnClickMenu()
+    {
+        if (_popup_Menu == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Menu");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Menu = item.GetComponent<Popup_Menu>();
+            }
+        }
+        _popup_Menu.Open();
     }
     #endregion
 }

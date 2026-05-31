@@ -2,6 +2,7 @@ using DG.Tweening;
 using DiveCat.God.UI.Popups;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameSceneManager : MonoBehaviour
         }
 
         Instance = this;
+        LoadingDim.raycastTarget = true;
+        LoadingDim.color = Color.black;
     }
 
     void OnEnable()
@@ -47,6 +50,17 @@ public class GameSceneManager : MonoBehaviour
             {
                 EndLoading();
             });
+        });
+    }
+
+    public void GoToMainScene()
+    {
+        LoadingDim.raycastTarget = true;
+        LoadingDim.DOFade(1f, 2f).OnComplete(()=>
+        {
+            PopupManager.Instance.CloseAllPopupsFast();
+            Data_Manager.nextScene = "MainScene";
+            SceneManager.LoadScene("LoadingScene");
         });
     }
 }
