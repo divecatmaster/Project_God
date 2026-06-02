@@ -1,3 +1,4 @@
+using System;
 using DiveCat.God.UI.Popups;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,12 @@ public class Popup_Menu : PopupBase
         EndBtn.onClick.AddListener(OnClickEnd);
 
         base.Awake();
+    }
+
+    public override void Open(Action onComplete = null)
+    {
+        transform.SetAsLastSibling();
+        base.Open(onComplete);
     }
 
     void OnClickContinue()

@@ -22,6 +22,7 @@ public class Popup_Save : PopupBase
 
     public override void Open(Action onComplete = null)
     {
+        transform.SetAsLastSibling();
         base.Open(onComplete);
     }
 

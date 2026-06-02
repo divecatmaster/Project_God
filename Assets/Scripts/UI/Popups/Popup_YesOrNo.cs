@@ -27,6 +27,12 @@ public class Popup_YesOrNo : PopupBase
 
     }
 
+    public override void Open(Action onComplete = null)
+    {
+        transform.SetAsLastSibling();
+        base.Open(onComplete);
+    }
+
     public void SetPopup(string title, Action yesCallback, Action noCallback)
     {
         Title.text = title;
