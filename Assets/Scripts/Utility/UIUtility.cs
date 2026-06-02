@@ -55,5 +55,7 @@ static public class UIUtility
     static public Color YesOrNo_On_BG_Color = new Color(0.4509804f, 0.5333334f, 0.7098039f, 1f);
     static public Color YesOrNo_On_Text_Color = new Color(0.7843137f, 0.8431373f, 0.945098f, 1f);
     static public Color Option_On_BG_Color = new Color(0.5764706f, 0.6666667f, 0.8235294f, 0.1f);
+    static public Color Slider_On_Star_Color = new Color(0.8745098f, 0.9137255f, 1f, 1f);
+    static public Color Slider_Off_Star_Color = new Color(0.5333334f, 0.6196079f, 0.8196079f, 1f);
     #endregion
 }

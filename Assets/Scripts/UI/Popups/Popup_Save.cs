@@ -15,6 +15,7 @@ public class Popup_Save : PopupBase
     List<Popup_Save_Item> _itemList = new List<Popup_Save_Item>();
     int _currentGroup = -1;
     int _openType = -1;//0=main, 1=game
+    bool _isInit = false;
     protected override void Awake()
     {
         CloseBtn.onClick.AddListener(OnClickClose);
@@ -34,6 +35,7 @@ public class Popup_Save : PopupBase
 
     public void SetPopup(int type)
     {
+        _isInit = true;
         _openType = type;
         for (int i = 0; i < Groups.Length; i++)
         {
@@ -59,11 +61,21 @@ public class Popup_Save : PopupBase
         if (_currentGroup != -1)
         {
             if (_currentGroup == idx) return;
-            
-            Groups[_currentGroup].SetSelected(false);
+
+            Groups[_currentGroup].SetSelected(false, false);
         }
         _currentGroup = idx;
-        Groups[_currentGroup].SetSelected(true);
+
+        if (_isInit)
+        {
+            Groups[_currentGroup].SetSelected(true);
+        }
+        else
+        {
+            Groups[_currentGroup].SetSelected(true, false);
+        }
+        _isInit = false;
+
         SetItems();
     }
 

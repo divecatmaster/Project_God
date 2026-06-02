@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0bb7f8c6cf682ac45a75bd3d91126427
+guid: f8d0e1a5d96b71f4f96b67b23ce5a968
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,45 +123,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bg_popup_1_0
+      name: Scroll_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 84
-        width: 454
-        height: 345
+        x: 11
+        y: 0
+        width: 10
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 200, y: 150, z: 200, w: 150}
+      border: {x: 0, y: 6, z: 0, w: 6}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6a60bb8082ffcc42830228f018bc519
-      internalID: 158940902
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bg_popup_1_1
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 84
-        width: 454
-        height: 345
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 141, y: 141, z: 141, w: 141}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8305a730cec5ad4295fe6f7fcedce82
-      internalID: -660081817
+      spriteID: 64104093179bbbe48875926fad78dadc
+      internalID: 673707749
       vertices: []
       indices: 
       edges: []
@@ -170,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 27bb2fe661efe6f46b9969280bfbb45f
+    spriteID: abd1bffce41ab3d4b9f9812b40779008
     internalID: 0
     vertices: []
     indices: 
@@ -182,8 +160,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Bg_popup_1_0: 158940902
-      Bg_popup_1_1: -660081817
+      Scroll_0: 673707749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

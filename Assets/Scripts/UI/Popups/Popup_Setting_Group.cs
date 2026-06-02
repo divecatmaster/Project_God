@@ -1,10 +1,10 @@
 using System;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using DG.Tweening;
 
-public class Popup_Save_Group : MonoBehaviour
+public class Popup_Setting_Group : MonoBehaviour
 {
     [SerializeField] Button Btn;
     [SerializeField] Image Star;
@@ -12,25 +12,25 @@ public class Popup_Save_Group : MonoBehaviour
     [SerializeField] TextMeshProUGUI Text;
     [SerializeField] Image Line;
 
-    int _btnIdx;
     Action<int> _callback;
+    int _idx;
     Color _lineColor = new Color(0.6901961f, 0.7607843f, 0.8901961f, 1f);
     Color _textOffColor = new Color(0.8352941f, 0.8352941f, 0.8352941f, 1f);
     Vector2 _textSmall = new Vector2(132.31f, 160);
     Vector2 _textLarge = new Vector2(168.65f, 160);
-    private void Awake() 
+    private void Awake()
     {
         Btn.onClick.AddListener(OnClickBtn);
     }
 
     public void SetButton(int idx, Action<int> callback)
     {
-        _btnIdx = idx;
+        _idx = idx;
         _callback = callback;
         SetSelected(false);
     }
 
-    public void SetSelected(bool isSelected,bool isImmediately = true)
+    public void SetSelected(bool isSelected, bool isImmediately = true)
     {
         if (isSelected)
         {
@@ -70,6 +70,6 @@ public class Popup_Save_Group : MonoBehaviour
 
     void OnClickBtn()
     {
-        _callback?.Invoke(_btnIdx);
+        _callback?.Invoke(_idx);
     }
 }

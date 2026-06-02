@@ -75,4 +75,19 @@ public class MainSceneManager : MonoBehaviour
         _popup_Save.SetPopup(0);
         _popup_Save.Open();
     }
+
+    Popup_Setting _popup_Setting;
+    public void OnClickSetting()
+    {
+        if (_popup_Setting == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Setting");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Setting = item.GetComponent<Popup_Setting>();
+            }
+        }
+        _popup_Setting.Open();
+    }
 }
