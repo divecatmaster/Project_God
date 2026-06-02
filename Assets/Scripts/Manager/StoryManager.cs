@@ -33,7 +33,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button SaveBtn;
     [SerializeField] Button MenuBtn;
 
-    Story_Data _currentStory;
+    [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
 

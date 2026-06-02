@@ -235,6 +235,7 @@ public class Data_Manager : MonoBehaviour
     #endregion
 }
 
+[Serializable]
 public class Story_Data
 {
     public int Index;
