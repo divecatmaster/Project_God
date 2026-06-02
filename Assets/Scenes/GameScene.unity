@@ -1567,6 +1567,7 @@ MonoBehaviour:
   Name_Text: {fileID: 1026455382}
   Body_Img: {fileID: 1854241989}
   Face_Img: {fileID: 1291205663}
+  NameDeco: {fileID: 1331017918}
   Default_Obj: {fileID: 1780429851}
   Select_Obj: {fileID: 2069450686}
   Select_Buttons:
@@ -1589,6 +1590,20 @@ MonoBehaviour:
   AppearBtn: {fileID: 745566755}
   SaveBtn: {fileID: 112818921}
   MenuBtn: {fileID: 94809189}
+  _currentStory:
+    Index: 0
+    Language_Key: 
+    Language_Production: 0
+    Name: 0
+    Body: 
+    Face: 
+    Select_Index: 0
+    BG: 0
+    Next_Index: 0
+    Appear_Production: 0
+    Appear_Production_Time: 0
+    Auto_Next: 0
+    My_Name: 0
 --- !u!4 &580768660
 Transform:
   m_ObjectHideFlags: 0

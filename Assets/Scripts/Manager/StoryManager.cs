@@ -14,6 +14,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI Name_Text;
     [SerializeField] Image Body_Img;
     [SerializeField] Image Face_Img;
+    [SerializeField] GameObject NameDeco;
     
     [Header("Default")]
     [SerializeField] GameObject Default_Obj;
@@ -261,10 +262,12 @@ public class StoryManager : MonoBehaviour
         if (name == 0)
         {
             Name_Text.text = "";
+            NameDeco.gameObject.SetActive(false);
         }
         else
         {
             Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
+            NameDeco.gameObject.SetActive(true);
         }
     }
 
