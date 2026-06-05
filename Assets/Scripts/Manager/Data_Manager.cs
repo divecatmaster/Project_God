@@ -242,7 +242,9 @@ public class Data_Manager : MonoBehaviour
     public int TextSpeed { get; private set; } = 50;
     public float AutoSpeed { get; private set; } = 3f;
     public int Production_Effect { get; private set; } = 1;
-    public int ScreenMode { get; private set; } = 0;
+    public int ScreenMode { get; private set; } = 2;
+    public int Screen_Width { get; private set; } = 1920;
+    public int Screen_Height { get; private set; } = 1080;
 
     void InitSettingValue()
     {
@@ -253,6 +255,8 @@ public class Data_Manager : MonoBehaviour
         Sound_Effect = PlayerPrefs.GetInt("Sound_Effect", 100);
         Sound_UI = PlayerPrefs.GetInt("Sound_UI", 100);
         ScreenMode = PlayerPrefs.GetInt("ScreenMode", 0);
+        Screen_Width = PlayerPrefs.GetInt("Screen_Width", 1920);
+        Screen_Height = PlayerPrefs.GetInt("Screen_Height", 1080);
     }
 
     public void SetSound_BG(int value)
@@ -309,6 +313,16 @@ public class Data_Manager : MonoBehaviour
 
         ScreenMode = value;
         PlayerPrefs.SetInt("ScreenMode", value);
+    }
+
+    public void SetScreenResolution(int width, int height)
+    {
+        if (Screen_Width == width && Screen_Height == height) return;
+
+        Screen_Width = width;
+        Screen_Height = height;
+        PlayerPrefs.SetInt("Screen_Width", width);
+        PlayerPrefs.SetInt("Screen_Height", height);
     }
     #endregion
 }
