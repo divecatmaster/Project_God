@@ -1565,6 +1565,7 @@ MonoBehaviour:
   Popup_Trans: {fileID: 1856786139}
   Context: {fileID: 793907103}
   Name_Text: {fileID: 1026455382}
+  BG: {fileID: 1945137387}
   Body_Img: {fileID: 1854241989}
   Face_Img: {fileID: 1291205663}
   NameDeco: {fileID: 1331017918}

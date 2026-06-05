@@ -12,6 +12,7 @@ public class StoryManager : MonoBehaviour
     public Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
+    [SerializeField] Image BG;
     [SerializeField] Image Body_Img;
     [SerializeField] Image Face_Img;
     [SerializeField] GameObject NameDeco;
@@ -94,6 +95,7 @@ public class StoryManager : MonoBehaviour
     {
         if (_currentStory != null)
         {
+            Set_BG();
             Set_Name();
             Set_Character();
             if (_currentStory.Select_Index == 0)
@@ -318,6 +320,11 @@ public class StoryManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void Set_BG()
+    {
+        BG.sprite = Resource_Manager.Instance.Get_BG(_currentStory.BG);
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
