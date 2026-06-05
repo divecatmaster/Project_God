@@ -42,14 +42,14 @@ public class Popup_Setting_Sound : MonoBehaviour
 
     void OnDisable()
     {
-        PlayerPrefs.SetInt("Sound_BG", _backgroundValue);
-        PlayerPrefs.SetInt("Sound_Effect", _effectValue);
-        PlayerPrefs.SetInt("Sound_UI", _uiValue);
+        Data_Manager.Instance.SetSound_BG(_backgroundValue);
+        Data_Manager.Instance.SetSound_Effect(_effectValue);
+        Data_Manager.Instance.SetSound_UI(_uiValue);
     }
 
     void Set_Background()
     {
-        Background_Value_Change(PlayerPrefs.GetInt("Sound_BG", 100));
+        Background_Value_Change(Data_Manager.Instance.Sound_BG);
     }
 
     public void Background_Value_Change(float value)
@@ -71,7 +71,7 @@ public class Popup_Setting_Sound : MonoBehaviour
 
     void Set_Effect()
     {
-        Effect_Value_Change(PlayerPrefs.GetInt("Sound_Effect", 100));
+        Effect_Value_Change(Data_Manager.Instance.Sound_Effect);
     }
 
     public void Effect_Value_Change(float value)
@@ -93,7 +93,7 @@ public class Popup_Setting_Sound : MonoBehaviour
 
     void Set_UI()
     {
-        UI_Value_Change(PlayerPrefs.GetInt("Sound_UI", 100));
+        UI_Value_Change(Data_Manager.Instance.Sound_UI);
     }
 
     public void UI_Value_Change(float value)

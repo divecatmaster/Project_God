@@ -136,7 +136,6 @@ public class StoryManager : MonoBehaviour
     #region Default_Production
     private Coroutine _typeRoutine;
     private bool _isBusy;
-    private float charactersPerSecond = 20f;
     void Play_Typewriter()
     {
         Default_Obj.SetActive(true);
@@ -171,8 +170,15 @@ public class StoryManager : MonoBehaviour
 
         int totalVisibleCharacters = Context.textInfo.characterCount;
         int counter = 0;
+        
+        float waitTime = Mathf.Lerp(0.12f, 0.001f, Data_Manager.Instance.TextSpeed / 100f);
 
-        float waitTime = 1f / Mathf.Max(0.1f, charactersPerSecond);
+        if (Data_Manager.Instance.TextSpeed >= 100)
+        {
+            Context.maxVisibleCharacters = totalVisibleCharacters;
+            _isBusy = false;
+            yield break;
+        }
 
         while (counter <= totalVisibleCharacters)
         {

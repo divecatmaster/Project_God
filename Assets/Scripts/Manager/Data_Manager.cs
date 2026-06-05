@@ -21,6 +21,7 @@ public class Data_Manager : MonoBehaviour
 
     private void Start()
     {
+        InitSettingValue();
         LoadStoryData();
         LoadSelectData();
         LoadSaveData();
@@ -231,6 +232,73 @@ public class Data_Manager : MonoBehaviour
         }
 
         return 0f;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Setting
+    public int Sound_BG { get; private set; } = 100;
+    public int Sound_Effect { get; private set; } = 100;
+    public int Sound_UI { get; private set; } = 100;
+    public int TextSpeed { get; private set; } = 50;
+    public float AutoSpeed { get; private set; } = 3f;
+    public int Production_Effect { get; private set; } = 1;
+
+    void InitSettingValue()
+    {
+        TextSpeed = PlayerPrefs.GetInt("TextSpeed", 50);
+        AutoSpeed = PlayerPrefs.GetFloat("AutoSpeed", 3f);
+        Production_Effect = PlayerPrefs.GetInt("Production_Effect", 1);
+        Sound_BG = PlayerPrefs.GetInt("Sound_BG", 100);
+        Sound_Effect = PlayerPrefs.GetInt("Sound_Effect", 100);
+        Sound_UI = PlayerPrefs.GetInt("Sound_UI", 100);
+    }
+
+    public void SetSound_BG(int value)
+    {
+        if (Sound_BG == value) return;
+        
+        Sound_BG = value;
+        PlayerPrefs.SetInt("Sound_BG", value);
+    }
+
+    public void SetSound_Effect(int value)
+    {
+        if (Sound_Effect == value) return;
+        
+        Sound_Effect = value;
+        PlayerPrefs.SetFloat("Sound_Effect", value);
+    }
+
+    public void SetSound_UI(int value)
+    {
+        if (Sound_UI == value) return;
+
+        Sound_UI = value;
+        PlayerPrefs.SetInt("Sound_UI", value);
+    }
+
+    public void SetTextSpeed(int value)
+    {
+        if (TextSpeed == value) return;
+        
+        TextSpeed = value;
+        PlayerPrefs.SetInt("TextSpeed", value);
+    }
+
+    public void SetAutoSpeed(float value)
+    {
+        if (TextSpeed == value) return;
+        
+        AutoSpeed = value;
+        PlayerPrefs.SetFloat("AutoSpeed", value);
+    }
+
+    public void SetProduction_Effect(int value)
+    {
+        if (Production_Effect == value) return;
+
+        Production_Effect = value;
+        PlayerPrefs.SetInt("Production_Effect", value);
     }
     #endregion
 }

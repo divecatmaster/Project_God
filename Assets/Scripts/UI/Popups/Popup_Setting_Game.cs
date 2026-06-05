@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Popup_Setting_Game : MonoBehaviour
 {
@@ -21,9 +22,13 @@ public class Popup_Setting_Game : MonoBehaviour
     [SerializeField] GameObject Production_On;
     [SerializeField] GameObject Production_Off;
 
+    [Header("Example")]
+    [SerializeField] TextMeshProUGUI ExampleText;
+
     int _textSpeedValue;
-    int _autoSpeedValue;
+    float _autoSpeedValue;
     int _productionValue;
+    private Coroutine _typeRoutine;
 
     private void Awake() 
     {
@@ -37,18 +42,30 @@ public class Popup_Setting_Game : MonoBehaviour
         Set_TextSpeed();
         Set_AutoSpeed();
         Set_Production();
+        if (_typeRoutine != null)
+        {
+            StopCoroutine(_typeRoutine);
+            _typeRoutine = null;
+        }
+        _typeRoutine = StartCoroutine(SetExample());
     }
 
     void OnDisable()
     {
-        PlayerPrefs.SetInt("TextSpeed", _textSpeedValue);
-        PlayerPrefs.SetInt("AutoSpeed", _autoSpeedValue);
-        PlayerPrefs.SetInt("Production_Effect", _productionValue);
+        if (_typeRoutine != null)
+        {
+            StopCoroutine(_typeRoutine);
+            _typeRoutine = null;
+        }
+
+        Data_Manager.Instance.SetTextSpeed(_textSpeedValue);
+        Data_Manager.Instance.SetAutoSpeed(_autoSpeedValue);
+        Data_Manager.Instance.SetProduction_Effect(_productionValue);
     }
 
     void Set_TextSpeed()
     {
-        TextSpeed_Value_Change(PlayerPrefs.GetInt("TextSpeed", 100));
+        TextSpeed_Value_Change(Data_Manager.Instance.TextSpeed);
     }
 
     public void TextSpeed_Value_Change(float value)
@@ -70,12 +87,12 @@ public class Popup_Setting_Game : MonoBehaviour
 
     void Set_AutoSpeed()
     {
-        AutoSpeed_Value_Change(PlayerPrefs.GetInt("AutoSpeed", 100));
+        AutoSpeed_Value_Change(Data_Manager.Instance.AutoSpeed);
     }
 
     public void AutoSpeed_Value_Change(float value)
     {
-        _autoSpeedValue = Mathf.RoundToInt(value);
+        _autoSpeedValue = Mathf.Round(value * 10f) / 10f;
         AutoSpeed_Slider.value = _autoSpeedValue;
         if (_autoSpeedValue > 0)
         {
@@ -87,12 +104,12 @@ public class Popup_Setting_Game : MonoBehaviour
             AutoSpeed_Star.color = UIUtility.Slider_Off_Star_Color;
             AutoSpeed_StarGlow.SetActive(false);
         }
-        AutoSpeed_Amount.text = _autoSpeedValue.ToString();
+        AutoSpeed_Amount.text = $"{_autoSpeedValue}s";
     }
 
     void Set_Production()
     {
-        _productionValue = PlayerPrefs.GetInt("Production_Effect", 1);
+        _productionValue = Data_Manager.Instance.Production_Effect;
 
         if (_productionValue == 1)
         {
@@ -126,6 +143,44 @@ public class Popup_Setting_Game : MonoBehaviour
         {
             Production_On.SetActive(false);
             Production_Off.SetActive(true);
+        }
+    }
+
+    private IEnumerator SetExample()
+    {
+        int idx = 0;
+        while (true)
+        {
+            ExampleText.text = LanguageManager.Instance.GetText($"Sample_Text_{idx}");
+            ExampleText.maxVisibleCharacters = 0;
+            ExampleText.ForceMeshUpdate();
+
+            int totalVisibleCharacters = ExampleText.textInfo.characterCount;
+            int counter = 0;
+
+            float waitTime = Mathf.Lerp(0.12f, 0.001f, _textSpeedValue / 100f);
+
+            if (_textSpeedValue >= 100)
+            {
+                ExampleText.maxVisibleCharacters = totalVisibleCharacters;
+            }
+            else
+            {
+                while (counter <= totalVisibleCharacters)
+                {
+                    ExampleText.maxVisibleCharacters = counter;
+
+                    counter++;
+                    yield return new WaitForSeconds(waitTime);
+                }
+            }
+
+            idx++;
+            if (idx >= 2)
+            {
+                idx = 0;
+            }
+            yield return new WaitForSeconds(_autoSpeedValue);
         }
     }
 }
