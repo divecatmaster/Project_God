@@ -29,7 +29,6 @@ public class Popup_YesOrNo : PopupBase
 
     public override void Open(Action onComplete = null)
     {
-        transform.SetAsLastSibling();
         base.Open(onComplete);
     }
 

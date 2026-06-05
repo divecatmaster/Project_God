@@ -35,7 +35,7 @@ namespace DiveCat.God.UI.Popups
         public virtual async void Open(Action onComplete = null)
         {
             if (State != PopupState.Closed) return;
-
+            transform.SetAsLastSibling();
             State = PopupState.Opening;
             gameObject.SetActive(true);
             

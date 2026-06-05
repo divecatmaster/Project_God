@@ -26,7 +26,6 @@ public class Popup_Menu : PopupBase
 
     public override void Open(Action onComplete = null)
     {
-        transform.SetAsLastSibling();
         base.Open(onComplete);
     }
 
@@ -40,9 +39,19 @@ public class Popup_Menu : PopupBase
         StoryManager.Instance.OnClickSave();
     }
 
+    Popup_Setting _popup_Setting;
     void OnClickSetting()
     {
-
+        if (_popup_Setting == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Setting");
+            if (target != null)
+            {
+                var item = Instantiate(target, StoryManager.Instance.Popup_Trans);
+                _popup_Setting = item.GetComponent<Popup_Setting>();
+            }
+        }
+        _popup_Setting.Open();
     }
 
     void OnClickMainBtn()

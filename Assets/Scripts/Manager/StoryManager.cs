@@ -9,7 +9,7 @@ using System;
 public class StoryManager : MonoBehaviour
 {
     public static StoryManager Instance;
-    [SerializeField] Transform Popup_Trans;
+    public Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
     [SerializeField] Image Body_Img;
