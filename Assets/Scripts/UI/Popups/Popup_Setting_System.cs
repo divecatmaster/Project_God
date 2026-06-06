@@ -11,17 +11,21 @@ public class Popup_Setting_System : MonoBehaviour
     [SerializeField] TMP_Dropdown Resolution_Dropdown;
     private readonly List<Resolution> _resolutionList = new();
 
+    [Header("Language")]
+    [SerializeField] TMP_Dropdown Language_Dropdown;
+
     private void Awake()
     {
         ScreenMode_Dropdown.onValueChanged.AddListener(OnValueChange_ScreenMode);
         Resolution_Dropdown.onValueChanged.AddListener(OnValueChange_Resolution);
-
+        Language_Dropdown.onValueChanged.AddListener(OnValueChange_Language);
     }
 
     void OnEnable()
     {
         SetScreenMode();
         SetResolutionDropdown();
+        SetLanguage();
     }
 
     void SetScreenMode()
@@ -135,5 +139,41 @@ public class Popup_Setting_System : MonoBehaviour
             return $"{resolution.width} x {resolution.height} (16:10)";
 
         return $"{resolution.width} x {resolution.height}";
+    }
+
+    void SetLanguage()
+    {
+        Language_Dropdown.ClearOptions();
+
+        var list = new List<string>();
+        for (int i = 0; i < (int)LanguageType.MAX; i++)
+        {
+            list.Add(LanguageManager.Instance.GetText($"Language_{(LanguageType)i}"));
+        }
+        Language_Dropdown.AddOptions(list);
+        
+        Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage());
+        Language_Dropdown.RefreshShownValue();
+    }
+
+    void OnValueChange_Language(int index)
+    {
+        if ((int)LanguageManager.Instance.GetCurrentLanguage() == index)
+            return;
+
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        popup.Open();
+        popup.SetPopup(LanguageManager.Instance.GetText("Language_Warning"), () =>
+        {
+            this.gameObject.SetActive(false);
+            popup.Close();
+            LanguageManager.Instance.SetLanguage((LanguageType)index);
+        },
+        () =>
+        {
+            Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage());
+            Language_Dropdown.RefreshShownValue();
+            popup.Close();
+        });
     }
 }

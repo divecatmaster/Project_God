@@ -68,5 +68,6 @@ public enum LanguageType
 {
     EN = 0,
     KR,
-    JA
+    JA,
+    MAX
 }
