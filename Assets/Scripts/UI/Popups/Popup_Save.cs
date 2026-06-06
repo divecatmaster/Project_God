@@ -32,7 +32,7 @@ public class Popup_Save : PopupBase
         _currentGroup = -1;
     }
 
-    public void SetPopup(int type)
+    public void SetPopup(int type, int group = 0)
     {
         _isInit = true;
         _openType = type;
@@ -51,7 +51,7 @@ public class Popup_Save : PopupBase
         {
             Groups[0].gameObject.SetActive(true);
             Groups[1].gameObject.SetActive(true);
-            OnClickGroup(0);
+            OnClickGroup(group);
         }
     }
 

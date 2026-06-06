@@ -38,6 +38,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
+    bool _isHide = false;
 
     private void Awake()
     {
@@ -76,6 +77,60 @@ public class StoryManager : MonoBehaviour
             }
         }
         SetStory();
+    }
+
+    private void Update() 
+    {
+        if (IsActivePopup())
+        {
+            return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            if (_currentStory != null)
+            {
+                if (_currentStory.Next_Index != 0)
+                {
+                    if (!_isHide)
+                    {
+                        GetNextStory();
+                    }
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))//스킵
+        {
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))//Auto
+        {
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))//Save
+        {
+            OnClickSave();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))//Load
+        {
+            OnClickLoad();
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))//Hide
+        {
+            if (_isHide)
+            {
+                OnClickAppear();
+            }
+            else
+            {
+                OnClickHide();
+            }
+        }
     }
 
     public void LoadGame(Action endCallback)
@@ -238,6 +293,7 @@ public class StoryManager : MonoBehaviour
     #region Hide
     void OnClickHide()
     {
+        _isHide = true;
         for (int i = 0; i < HideTargets.Length; i++)
         {
             HideTargets[i].gameObject.SetActive(false);
@@ -247,6 +303,7 @@ public class StoryManager : MonoBehaviour
 
     void OnClickAppear()
     {
+        _isHide = false;
         for (int i = 0; i < HideTargets.Length; i++)
         {
             HideTargets[i].gameObject.SetActive(true);
@@ -332,6 +389,11 @@ public class StoryManager : MonoBehaviour
     Popup_Save _popup_Save;
     public void OnClickSave()
     {
+        if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return;
+        }
+
         if (_popup_Save == null)
         {
             var target = Resources.Load<GameObject>("Popup/Popup_Save");
@@ -341,7 +403,28 @@ public class StoryManager : MonoBehaviour
                 _popup_Save = item.GetComponent<Popup_Save>();
             }
         }
-        _popup_Save.SetPopup(1);
+        _popup_Save.SetPopup(1, 0);
+        _popup_Save.Open();
+    }
+
+
+    public void OnClickLoad()
+    {
+        if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        if (_popup_Save == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Save");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Save = item.GetComponent<Popup_Save>();
+            }
+        }
+        _popup_Save.SetPopup(1, 1);
         _popup_Save.Open();
     }
     #endregion
@@ -360,6 +443,23 @@ public class StoryManager : MonoBehaviour
             }
         }
         _popup_Menu.Open();
+    }
+    #endregion
+//------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Utility
+    public bool IsActivePopup()
+    {
+        if (_popup_Menu != null && _popup_Menu.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        return false;
     }
     #endregion
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace DiveCat.God.UI.Popups
@@ -57,7 +58,36 @@ namespace DiveCat.God.UI.Popups
 
             if (closeTopOnEscape && Input.GetKeyDown(KeyCode.Escape))
             {
-                CloseTopmostPopup();
+                if (_popupStack.Count == 0)
+                {
+                    var currentScene = SceneManager.GetActiveScene().name;
+                    switch (currentScene)
+                    {
+                        case "MainScene":
+                            {
+                                var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+                                popup.Open();
+                                popup.SetPopup(LanguageManager.Instance.GetText("EndGame"), () =>
+                                {
+                                    Application.Quit();
+                                },
+                                () =>
+                                {
+                                    popup.Close();
+                                });
+                            }
+                            break;
+                        case "GameScene":
+                            {
+                                StoryManager.Instance.OnClickMenu();
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    CloseTopmostPopup();
+                }
                 _isEscPressedThisFrame = true;
             }
         }
