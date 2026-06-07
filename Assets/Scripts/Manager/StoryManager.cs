@@ -35,11 +35,14 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button AppearBtn;
     [SerializeField] Button SaveBtn;
     [SerializeField] Button MenuBtn;
+    [SerializeField] Button AutoBtn;
+    [SerializeField] Button SkipBtn;
 
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
     bool _isHide = false;
+    bool _isAuto = false;
 
     private void Awake()
     {
@@ -56,6 +59,8 @@ public class StoryManager : MonoBehaviour
         AppearBtn.onClick.AddListener(OnClickAppear);
         SaveBtn.onClick.AddListener(OnClickSave);
         MenuBtn.onClick.AddListener(OnClickMenu);
+        AutoBtn.onClick.AddListener(OnClickAuto);
+        SkipBtn.onClick.AddListener(OnClickSkip);
     }
 
     private void Start()
@@ -80,16 +85,36 @@ public class StoryManager : MonoBehaviour
         SetStory();
     }
 
+    float _currentAutoTime = 0f;
     private void Update() 
     {
         if (IsActivePopup())
         {
             return;
         }
+
+        if (_isAuto && !_isHide)
+        {
+            if (_currentStory != null)
+            {
+                if (_currentStory.Next_Index != 0)
+                {
+                    if (!_isBusy)
+                    {
+                        _currentAutoTime += Time.deltaTime;
+                        if (_currentAutoTime >= Data_Manager.Instance.AutoSpeed)
+                        {
+                            GetNextStory();
+                            _currentAutoTime = 0f;
+                        }
+                    }
+                }
+            }
+        }
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            if (_currentStory != null)
+            if (_currentStory != null && !_isAuto)
             {
                 if (_currentStory.Next_Index != 0)
                 {
@@ -103,12 +128,12 @@ public class StoryManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))//스킵
         {
-            
+            OnClickSkip();
         }
 
         if (Input.GetKeyDown(KeyCode.A))//Auto
         {
-            
+            OnClickAuto();
         }
 
         if (Input.GetKeyDown(KeyCode.S))//Save
@@ -188,7 +213,10 @@ public class StoryManager : MonoBehaviour
 
     void OnClickNext()
     {
-        GetNextStory();
+        if (!_isAuto)
+        {
+            GetNextStory();    
+        }
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Default_Production
@@ -460,7 +488,59 @@ public class StoryManager : MonoBehaviour
         _popup_Menu.Open();
     }
     #endregion
-//------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Auto
+    void OnClickAuto()
+    {
+        if (_isAuto)
+        {
+            AutoBtn.image.color = new Color(0.8823529f, 0.9215686f, 0.9803922f, 0.8f);
+        }
+        else
+        {
+            _currentAutoTime = 0f;
+            AutoBtn.image.color = new Color(0.5607843f, 0.7686275f, 1f, 1f);
+        }
+        _isAuto = !_isAuto;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Skip
+    void OnClickSkip()
+    {
+        if (_currentStory.Select_Index == 0)
+        {
+            var target = Data_Manager.Instance.GetNextSelect(_currentStory.Index);
+            if (target != null)
+            {
+                var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+                popup.Open();
+                popup.SetPopup(LanguageManager.Instance.GetText("Skip_Warning_1"), () =>
+                {
+                    _currentStory = target;
+                    SetStory();
+                    _currentAutoTime = 0f;
+                    popup.Close();
+                },
+                () =>
+                {
+                    popup.Close();
+                });
+            }
+            else
+            {
+                var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+                popup.Open();
+                popup.SetPopup_One(LanguageManager.Instance.GetText("Skip_Warning_2"), () =>
+                {
+                    popup.Close();
+                });
+            }
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
     #region Utility
     public bool IsActivePopup()
     {
@@ -470,6 +550,11 @@ public class StoryManager : MonoBehaviour
         }
 
         if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (Resource_Manager.Instance.Get_Yes_Or_No().gameObject.activeSelf)
         {
             return true;
         }

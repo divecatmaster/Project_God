@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Globalization;
 using System;
+using System.Linq;
 
 public class Data_Manager : MonoBehaviour
 {
@@ -87,6 +88,14 @@ public class Data_Manager : MonoBehaviour
     public void SetSaveStory_Index(int index)
     {
         SaveStory_Index = index;
+    }
+
+    public Story_Data GetNextSelect(int currentIndex)
+    {
+        return Story_Dic.Values
+        .Where(x => x.Index > currentIndex && x.Select_Index != 0)
+        .OrderBy(x => x.Index)
+        .FirstOrDefault();
     }
     #endregion
 //------------------------------------------------------------------------------------------------------------------------------------------------
