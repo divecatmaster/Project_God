@@ -7,7 +7,6 @@ public class Popup_Log_Item : MonoBehaviour
     [SerializeField] GameObject Line;
     [SerializeField] GameObject Select;
     [SerializeField] TextMeshProUGUI Context;
-    [SerializeField] TextMeshProUGUI TimeText;
 
     public void SetItem(Story_Data story)
     {
