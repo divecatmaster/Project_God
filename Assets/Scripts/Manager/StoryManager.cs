@@ -22,7 +22,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] GameObject Default_Obj;
 
     [Header("Select")]
-    [SerializeField] GameObject Select_Obj;
+    [SerializeField] CanvasGroup Select_Obj;
     [SerializeField] GameObject[] Select_Buttons;
     [SerializeField] TextMeshProUGUI[] Select_Texts;
 
@@ -197,7 +197,8 @@ public class StoryManager : MonoBehaviour
     void Play_Typewriter()
     {
         Default_Obj.SetActive(true);
-        Select_Obj.SetActive(false);
+        Select_Obj.gameObject.SetActive(false);
+        Select_Obj.alpha = 0f;
         Stop_Typewriter();
         Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
         Context.maxVisibleCharacters = 0;
@@ -256,7 +257,10 @@ public class StoryManager : MonoBehaviour
     void SetSelect()
     {
         Default_Obj.SetActive(false);
-        Select_Obj.SetActive(true);
+
+        Select_Obj.gameObject.SetActive(true);
+        Select_Obj.alpha = 0f;
+        Select_Obj.DOFade(1f, 0.5f);
 
         ResetSelect();
         var data = Data_Manager.Instance.GetSelectData(_currentStory.Select_Index);
@@ -312,7 +316,7 @@ public class StoryManager : MonoBehaviour
         AppearBtn.gameObject.SetActive(false);
         if (_currentStory.Select_Index == 0)
         {
-            Select_Obj.SetActive(false);
+            Select_Obj.gameObject.SetActive(false);
         }
         else
         {
