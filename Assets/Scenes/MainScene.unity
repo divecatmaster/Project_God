@@ -4977,14 +4977,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -80
       objectReference: {fileID: 0}
-    - target: {fileID: 5154796967130228932, guid: c71e9a22e40fde949aa98e8a398e95b8, type: 3}
-      propertyPath: m_VerticalScrollbar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5154796967130228932, guid: c71e9a22e40fde949aa98e8a398e95b8, type: 3}
-      propertyPath: m_HorizontalScrollbar
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5436428083335645325, guid: c71e9a22e40fde949aa98e8a398e95b8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
