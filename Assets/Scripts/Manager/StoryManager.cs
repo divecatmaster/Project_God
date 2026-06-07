@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using System;
+using DG.Tweening;
 
 public class StoryManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Image BG;
     [SerializeField] Image Body_Img;
     [SerializeField] Image Face_Img;
-    [SerializeField] GameObject NameDeco;
+    [SerializeField] CanvasGroup NameDeco;
     
     [Header("Default")]
     [SerializeField] GameObject Default_Obj;
@@ -326,13 +327,23 @@ public class StoryManager : MonoBehaviour
         var name = _currentStory.Name;
         if (name == 0)
         {
-            Name_Text.text = "";
-            NameDeco.gameObject.SetActive(false);
+            if (NameDeco.gameObject.activeSelf)
+            {
+                NameDeco.DOFade(0f, 0.5f).OnComplete(() => NameDeco.gameObject.SetActive(false));
+                Name_Text.DOFade(0f, 0.5f).OnComplete(() => Name_Text.text = "");
+            }
         }
         else
         {
             Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
-            NameDeco.gameObject.SetActive(true);
+            if (!NameDeco.gameObject.activeSelf)
+            {
+                NameDeco.gameObject.SetActive(true);
+                NameDeco.alpha = 0f;
+                NameDeco.DOFade(1f, 0.5f);
+                
+                Name_Text.DOFade(1f, 0.5f);
+            }
         }
     }
 
