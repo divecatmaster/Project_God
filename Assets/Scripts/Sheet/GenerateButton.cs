@@ -24,6 +24,10 @@ public class GenerateButton : Editor
         {
             googleSheetManager.OnClickPartSave("Select");
         }
+        else if (GUILayout.Button("4.NameColor"))
+        {
+            googleSheetManager.OnClickPartSave("NameColor");
+        }
         // else if (GUILayout.Button("DialogueText"))
         // {
         //     googleSheetManager.OnClickPartSave("DialogueText");

@@ -247,7 +247,8 @@ public class StoryManager : MonoBehaviour
     {
         if (!_isBusy) return;
         Stop_Typewriter();
-        Context.maxVisibleCharacters = LanguageManager.Instance.GetText(_currentStory.Language_Key).Length;
+        Context.ForceMeshUpdate();
+        Context.maxVisibleCharacters = Context.textInfo.characterCount;
     }
 
     private IEnumerator TypeRoutine()
@@ -256,7 +257,6 @@ public class StoryManager : MonoBehaviour
         Context.ForceMeshUpdate();
 
         int totalVisibleCharacters = Context.textInfo.characterCount;
-        int counter = 0;
         
         float waitTime = Mathf.Lerp(0.12f, 0.001f, Data_Manager.Instance.TextSpeed / 100f);
 
@@ -267,11 +267,9 @@ public class StoryManager : MonoBehaviour
             yield break;
         }
 
-        while (counter <= totalVisibleCharacters)
+        for (int i = 0; i <= totalVisibleCharacters; i++)
         {
-            Context.maxVisibleCharacters = counter;
-
-            counter++;
+            Context.maxVisibleCharacters = i;
             yield return new WaitForSeconds(waitTime);
         }
 
@@ -288,6 +286,7 @@ public class StoryManager : MonoBehaviour
 
         Select_Obj.gameObject.SetActive(true);
         Select_Obj.alpha = 0f;
+        Select_Obj.DOKill();
         Select_Obj.DOFade(1f, 0.5f);
 
         ResetSelect();
@@ -361,6 +360,8 @@ public class StoryManager : MonoBehaviour
         {
             if (NameDeco.gameObject.activeSelf)
             {
+                NameDeco.DOKill();
+                Name_Text.DOKill();
                 NameDeco.DOFade(0f, 0.5f).OnComplete(() => NameDeco.gameObject.SetActive(false));
                 Name_Text.DOFade(0f, 0.5f).OnComplete(() => Name_Text.text = "");
             }
@@ -368,8 +369,11 @@ public class StoryManager : MonoBehaviour
         else
         {
             Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
+            Name_Text.color = Data_Manager.Instance.GetNameColor(name);
             if (!NameDeco.gameObject.activeSelf)
             {
+                NameDeco.DOKill();
+                Name_Text.DOKill();
                 NameDeco.gameObject.SetActive(true);
                 NameDeco.alpha = 0f;
                 NameDeco.DOFade(1f, 0.5f);

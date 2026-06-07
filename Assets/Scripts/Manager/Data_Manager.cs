@@ -26,6 +26,7 @@ public class Data_Manager : MonoBehaviour
         LoadStoryData();
         LoadSelectData();
         LoadSaveData();
+        InitNameColor();
     }
 
     float _playTimer;
@@ -204,6 +205,32 @@ public class Data_Manager : MonoBehaviour
             return SaveData_Dic[_tempLoadIndex];
         }
         return null;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region NameColor
+    Dictionary<int, Color> NameColor_Dic = new Dictionary<int, Color>();
+    void InitNameColor()
+    {
+        NameColor_Dic = new Dictionary<int, Color>();
+
+        var data = CSVReader.ReadOriginal("NameColor");
+        for (int i = 0; i < data.Count; i++)
+        {
+            var idx = (int)data[i]["index"];
+            var color = data[i]["color_code"].ToString();
+            var realColor = UIUtility.HexToColor(color);
+            NameColor_Dic.Add(idx, realColor);
+        }
+    }
+
+    public Color GetNameColor(int idx)
+    {
+        if (NameColor_Dic.ContainsKey(idx))
+        {
+            return NameColor_Dic[idx];    
+        }
+        return Color.white;
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
