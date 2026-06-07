@@ -35,11 +35,13 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button AppearBtn;
     [SerializeField] Button SaveBtn;
     [SerializeField] Button MenuBtn;
+    [SerializeField] Button AutoBtn;
 
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
     bool _isHide = false;
+    bool _isAuto = false;
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class StoryManager : MonoBehaviour
         AppearBtn.onClick.AddListener(OnClickAppear);
         SaveBtn.onClick.AddListener(OnClickSave);
         MenuBtn.onClick.AddListener(OnClickMenu);
+        AutoBtn.onClick.AddListener(OnClickAuto);
     }
 
     private void Start()
@@ -80,8 +83,28 @@ public class StoryManager : MonoBehaviour
         SetStory();
     }
 
+    float _currentAutoTime = 0f;
     private void Update() 
     {
+        if (_isAuto && !_isHide)
+        {
+            if (_currentStory != null)
+            {
+                if (_currentStory.Next_Index != 0)
+                {
+                    if (!_isBusy)
+                    {
+                        _currentAutoTime += Time.deltaTime;
+                        if (_currentAutoTime >= Data_Manager.Instance.AutoSpeed)
+                        {
+                            GetNextStory();
+                            _currentAutoTime = 0f;
+                        }
+                    }
+                }
+            }
+        }
+
         if (IsActivePopup())
         {
             return;
@@ -89,7 +112,7 @@ public class StoryManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            if (_currentStory != null)
+            if (_currentStory != null && !_isAuto)
             {
                 if (_currentStory.Next_Index != 0)
                 {
@@ -188,7 +211,10 @@ public class StoryManager : MonoBehaviour
 
     void OnClickNext()
     {
-        GetNextStory();
+        if (!_isAuto)
+        {
+            GetNextStory();    
+        }
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Default_Production
@@ -460,7 +486,24 @@ public class StoryManager : MonoBehaviour
         _popup_Menu.Open();
     }
     #endregion
-//------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Auto
+    void OnClickAuto()
+    {
+        if (_isAuto)
+        {
+            AutoBtn.image.color = new Color(0.8823529f, 0.9215686f, 0.9803922f, 0.8f);
+        }
+        else
+        {
+            _currentAutoTime = 0f;
+            AutoBtn.image.color = new Color(0.5607843f, 0.7686275f, 1f, 1f);
+        }
+        _isAuto = !_isAuto;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
     #region Utility
     public bool IsActivePopup()
     {
