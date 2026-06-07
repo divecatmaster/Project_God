@@ -1592,6 +1592,7 @@ MonoBehaviour:
   SaveBtn: {fileID: 112818921}
   MenuBtn: {fileID: 94809189}
   AutoBtn: {fileID: 2015754059}
+  SkipBtn: {fileID: 8343892}
   _currentStory:
     Index: 0
     Language_Key: 

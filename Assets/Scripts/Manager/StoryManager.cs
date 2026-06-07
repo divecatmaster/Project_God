@@ -36,6 +36,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button SaveBtn;
     [SerializeField] Button MenuBtn;
     [SerializeField] Button AutoBtn;
+    [SerializeField] Button SkipBtn;
 
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
@@ -59,6 +60,7 @@ public class StoryManager : MonoBehaviour
         SaveBtn.onClick.AddListener(OnClickSave);
         MenuBtn.onClick.AddListener(OnClickMenu);
         AutoBtn.onClick.AddListener(OnClickAuto);
+        SkipBtn.onClick.AddListener(OnClickSkip);
     }
 
     private void Start()
@@ -86,6 +88,11 @@ public class StoryManager : MonoBehaviour
     float _currentAutoTime = 0f;
     private void Update() 
     {
+        if (IsActivePopup())
+        {
+            return;
+        }
+
         if (_isAuto && !_isHide)
         {
             if (_currentStory != null)
@@ -104,11 +111,6 @@ public class StoryManager : MonoBehaviour
                 }
             }
         }
-
-        if (IsActivePopup())
-        {
-            return;
-        }
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
@@ -126,12 +128,12 @@ public class StoryManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))//스킵
         {
-            
+            OnClickSkip();
         }
 
         if (Input.GetKeyDown(KeyCode.A))//Auto
         {
-            
+            OnClickAuto();
         }
 
         if (Input.GetKeyDown(KeyCode.S))//Save
@@ -503,6 +505,41 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Skip
+    void OnClickSkip()
+    {
+        if (_currentStory.Select_Index == 0)
+        {
+            var target = Data_Manager.Instance.GetNextSelect(_currentStory.Index);
+            if (target != null)
+            {
+                var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+                popup.Open();
+                popup.SetPopup(LanguageManager.Instance.GetText("Skip_Warning_1"), () =>
+                {
+                    _currentStory = target;
+                    SetStory();
+                    _currentAutoTime = 0f;
+                    popup.Close();
+                },
+                () =>
+                {
+                    popup.Close();
+                });
+            }
+            else
+            {
+                var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+                popup.Open();
+                popup.SetPopup_One(LanguageManager.Instance.GetText("Skip_Warning_2"), () =>
+                {
+                    popup.Close();
+                });
+            }
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
 
     #region Utility
     public bool IsActivePopup()
@@ -513,6 +550,11 @@ public class StoryManager : MonoBehaviour
         }
 
         if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (Resource_Manager.Instance.Get_Yes_Or_No().gameObject.activeSelf)
         {
             return true;
         }
