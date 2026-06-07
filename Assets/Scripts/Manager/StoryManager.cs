@@ -37,6 +37,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button MenuBtn;
     [SerializeField] Button AutoBtn;
     [SerializeField] Button SkipBtn;
+    [SerializeField] Button LogBtn;
 
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
@@ -61,6 +62,7 @@ public class StoryManager : MonoBehaviour
         MenuBtn.onClick.AddListener(OnClickMenu);
         AutoBtn.onClick.AddListener(OnClickAuto);
         SkipBtn.onClick.AddListener(OnClickSkip);
+        LogBtn.onClick.AddListener(OnClickLog);
     }
 
     private void Start()
@@ -157,6 +159,14 @@ public class StoryManager : MonoBehaviour
                 OnClickHide();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.PageUp) || Input.mouseScrollDelta.y > 0)//Log
+        {
+            OnClickLog();
+        }
+
+        float wheel = Input.mouseScrollDelta.y;
+
     }
 
     public void LoadGame(Action endCallback)
@@ -544,6 +554,40 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Log
+    Popup_Log _popup_Log;
+    public void OnClickLog()
+    {
+        if (_popup_Log == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Log");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Log = item.GetComponent<Popup_Log>();
+            }
+        }
+        _popup_Log.Open();
+
+        if (_currentStory.Select_Index != 0)//현재 선택지
+        {
+            var temp = Data_Manager.Instance.GetBeforeStory(_currentStory.Index);
+            if (temp != null)
+            {
+                _popup_Log.SetItems(temp.Index);
+            }
+            else
+            {
+                _popup_Log.SetItems(_currentStory.Index);    
+            }
+        }
+        else
+        {
+            _popup_Log.SetItems(_currentStory.Index);
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
 
     #region Utility
     public bool IsActivePopup()
@@ -554,6 +598,11 @@ public class StoryManager : MonoBehaviour
         }
 
         if (_popup_Save != null && _popup_Save.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (_popup_Log != null && _popup_Log.gameObject.activeSelf)
         {
             return true;
         }

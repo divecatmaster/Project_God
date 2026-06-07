@@ -1593,6 +1593,7 @@ MonoBehaviour:
   MenuBtn: {fileID: 94809189}
   AutoBtn: {fileID: 2015754059}
   SkipBtn: {fileID: 8343892}
+  LogBtn: {fileID: 1134344559}
   _currentStory:
     Index: 0
     Language_Key: 
@@ -4769,14 +4770,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6d99444883eb3b4b8bcd7b44ac5983d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0f744cb032caf84da9f5701a96aabef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

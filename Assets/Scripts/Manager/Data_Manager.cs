@@ -98,8 +98,33 @@ public class Data_Manager : MonoBehaviour
         .OrderBy(x => x.Index)
         .FirstOrDefault();
     }
+
+    public List<Story_Data> GetLogData(int currentIndex)
+    {
+        // 현재 인덱스 이전/현재 데이터 중 가장 가까운 선택지 찾기
+        Story_Data prevSelect = Story_Dic.Values
+            .Where(x => x.Index <= currentIndex && x.Select_Index != 0)
+            .OrderByDescending(x => x.Index)
+            .FirstOrDefault();
+
+        int startIndex = prevSelect != null ? prevSelect.Index : 0;
+
+        // 가장 가까운 선택지부터 현재 인덱스까지 가져오기
+        return Story_Dic.Values
+            .Where(x => x.Index >= startIndex && x.Index <= currentIndex)
+            .OrderBy(x => x.Index)
+            .ToList();
+    }
+
+    public Story_Data GetBeforeStory(int currentIndex)
+    {
+        return Story_Dic.Values
+        .Where(x => x.Index < currentIndex)
+        .OrderByDescending(x => x.Index)
+        .FirstOrDefault();
+    }
     #endregion
-//------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Select
     Dictionary<int, Select_Data> Select_Dic = new Dictionary<int, Select_Data>();
     void LoadSelectData()
