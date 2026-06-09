@@ -470,13 +470,16 @@ public class StoryManager : MonoBehaviour
 
     void Set_Character()
     {
-        if (string.IsNullOrEmpty(_currentStory.Body))
+        string nextBody = _currentStory.Body;
+        string nextFace = _currentStory.Face;
+
+        if (string.IsNullOrEmpty(nextBody))
         {
             HideCharacter();
             return;
         }
 
-        var bodySprite = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
+        Sprite bodySprite = Resource_Manager.Instance.Get_Body_Image(nextBody);
 
         if (bodySprite == null)
         {
@@ -484,110 +487,49 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
-        bool wasHidden = !CharacterGroup.gameObject.activeSelf || CharacterGroup.alpha <= 0f;
+        Sprite faceSprite = null;
 
-        if (_currentBody != _currentStory.Body)
+        if (!string.IsNullOrEmpty(nextFace))
         {
-            if (wasHidden)
-            {
-                Body_Img.DOKill();
-                Body_Img.gameObject.SetActive(true);
-                Body_Img.sprite = bodySprite;
-                Body_Img.color = Color.white;
-            }
-            else
-            {
-                ChangeBodyFade(bodySprite);
-            }
-
-            _currentBody = _currentStory.Body;
+            faceSprite = Resource_Manager.Instance.Get_Face_Image(nextFace);
         }
 
-        if (!string.IsNullOrEmpty(_currentStory.Face))
-        {
-            if (_currentFace != _currentStory.Face)
-            {
-                var faceSprite = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
+        bool wasHidden =
+            !CharacterGroup.gameObject.activeSelf ||
+            CharacterGroup.alpha <= 0.01f;
 
-                if (faceSprite != null)
-                {
-                    if (wasHidden)
-                    {
-                        Face_Img.DOKill();
-                        Face_Img.gameObject.SetActive(true);
-                        Face_Img.sprite = faceSprite;
-                        Face_Img.color = Color.white;
-                    }
-                    else
-                    {
-                        if (_currentFace == "")
-                        {
-                            ShowFace(faceSprite);
-                        }
-                        else
-                        {
-                            ChangeFaceFade(faceSprite);    
-                        }
-                    }
-                    _currentFace = _currentStory.Face;
-                }
-                else
-                {
-                    Face_Img.gameObject.SetActive(false);
-                    Face_FadeImg.gameObject.SetActive(false);
-                    _currentFace = "";
-                }
-            }
-        }
-        else
-        {
-            if (_currentFace != "")
-            {
-                HideFace();
-            }
-            else
-            {
-                Face_Img.gameObject.SetActive(false);
-                Face_FadeImg.gameObject.SetActive(false);
-                _currentFace = "";
-            }
-        }
+        bool bodyChanged = _currentBody != nextBody;
+        bool faceChanged = _currentFace != nextFace;
 
+        if (!bodyChanged && !faceChanged)
+            return;
+
+        // 캐릭터가 없었다가 등장하는 경우
         if (wasHidden)
         {
+            SetCharacterInstant(bodySprite, faceSprite, nextBody, nextFace);
             ShowCharacter();
+            return;
         }
-    }
 
-    void ShowCharacter()
-    {
-        CharacterGroup.DOKill();
-
-        CharacterGroup.gameObject.SetActive(true);
-        CharacterGroup.alpha = 0f;
-
-        CharacterGroup.DOFade(1f, 0.5f);
-    }
-
-    void HideCharacter()
-    {
-        CharacterGroup.DOKill();
-
-        if (!CharacterGroup.gameObject.activeSelf)
+        // Body가 바뀌면 Body + Face 세트로 크로스페이드
+        if (bodyChanged)
         {
-            _currentBody = "";
+            ChangeCharacterFade(bodySprite, faceSprite, nextBody, nextFace);
+            return;
+        }
+
+        // Body는 그대로고 Face만 사라지는 경우
+        if (string.IsNullOrEmpty(nextFace) || faceSprite == null)
+        {
+            HideFace();
             _currentFace = "";
             return;
         }
 
-        CharacterGroup.DOFade(0f, 0.5f)
-            .OnComplete(() =>
-            {
-                CharacterGroup.gameObject.SetActive(false);
-                CharacterGroup.alpha = 0f;
-                _currentBody = "";
-                _currentFace = "";
-            });
+        // Body는 그대로고 Face만 바뀌는 경우
+        ChangeFaceFade(faceSprite);
+        _currentFace = nextFace;
     }
 
     void HideFace()
@@ -602,44 +544,6 @@ public class StoryManager : MonoBehaviour
             {
                 Face_Img.gameObject.SetActive(false);
                 Face_Img.color = Color.white;
-            });
-
-        _currentFace = "";
-    }
-
-    void ShowFace(Sprite nextSprite)
-    {
-        Face_Img.DOKill();
-        Face_FadeImg.DOKill();
-
-        Face_FadeImg.gameObject.SetActive(false);
-
-        Face_Img.gameObject.SetActive(true);
-        Face_Img.sprite = nextSprite;
-
-        Face_Img.color = UIUtility.Common_Off_Color;
-
-        Face_Img.DOFade(1f, 0.5f);
-    }
-
-    void ChangeBodyFade(Sprite nextSprite)
-    {
-        Body_Img.DOKill();
-        Body_FadeImg.DOKill();
-
-        Body_Img.gameObject.SetActive(true);
-        Body_FadeImg.gameObject.SetActive(true);
-
-        Body_FadeImg.sprite = nextSprite;
-        Body_FadeImg.color = UIUtility.Common_Off_Color;
-
-        Body_FadeImg.DOFade(1f, 0.5f)
-            .OnComplete(() =>
-            {
-                Body_Img.sprite = nextSprite;
-
-                Body_FadeImg.color = UIUtility.Common_Off_Color;
-                Body_FadeImg.gameObject.SetActive(false);
             });
     }
 
@@ -659,51 +563,173 @@ public class StoryManager : MonoBehaviour
             {
                 Face_Img.sprite = nextSprite;
                 Face_Img.color = Color.white;
+                Face_Img.gameObject.SetActive(true);
 
                 Face_FadeImg.color = UIUtility.Common_Off_Color;
                 Face_FadeImg.gameObject.SetActive(false);
             });
     }
 
-    // if (string.IsNullOrEmpty(_currentStory.Body))
-    //     {
-    //         Body_Img.gameObject.SetActive(false);
-    //         _currentBody = "";
-    //     }
-    //     else
-    //     {
-    //         if (_currentBody != _currentStory.Body)
-    //         {
-    //             var target = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
-    //             if (target != null)
-    //             {
-    //                 Body_Img.sprite = target;
-    //                 Body_Img.gameObject.SetActive(true);
-    //                 _currentBody = _currentStory.Body;
-    //             }
-    //             else
-    //             {
-    //                 Body_Img.gameObject.SetActive(false);
-    //                 _currentBody = "";
-    //             }
-    //         }
+    void SetCharacterInstant(Sprite bodySprite, Sprite faceSprite, string bodyKey, string faceKey)
+    {
+        KillCharacterTweens();
 
-    //         if (_currentFace != _currentStory.Face)
-    //         {
-    //             var target = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
-    //             if (target != null)
-    //             {
-    //                 Face_Img.sprite = target;
-    //                 Face_Img.gameObject.SetActive(true);
-    //                 _currentFace = _currentStory.Face;
-    //             }
-    //             else
-    //             {
-    //                 Face_Img.gameObject.SetActive(false);
-    //                 _currentFace = "";
-    //             }
-    //         }
-    //     }
+        CharacterGroup.gameObject.SetActive(true);
+
+        Body_Img.gameObject.SetActive(true);
+        Body_Img.sprite = bodySprite;
+        Body_Img.color = Color.white;
+
+        if (faceSprite != null)
+        {
+            Face_Img.gameObject.SetActive(true);
+            Face_Img.sprite = faceSprite;
+            Face_Img.color = Color.white;
+            _currentFace = faceKey;
+        }
+        else
+        {
+            Face_Img.gameObject.SetActive(false);
+            _currentFace = "";
+        }
+
+        Body_FadeImg.gameObject.SetActive(false);
+        Face_FadeImg.gameObject.SetActive(false);
+
+        _currentBody = bodyKey;
+    }
+
+    Tween _characterDelayTween;
+
+    void ChangeCharacterFade(Sprite bodySprite, Sprite faceSprite, string bodyKey, string faceKey)
+    {
+        KillCharacterTweens();
+
+        Body_Img.gameObject.SetActive(true);
+        Body_FadeImg.gameObject.SetActive(true);
+
+        Body_Img.color = Color.white;
+
+        Body_FadeImg.sprite = bodySprite;
+        Body_FadeImg.color = UIUtility.Common_Off_Color;
+
+        Body_Img.DOFade(0f, 0.5f);
+        Body_FadeImg.DOFade(1f, 0.5f);
+
+        if (faceSprite != null)
+        {
+            Face_Img.gameObject.SetActive(true);
+            Face_FadeImg.gameObject.SetActive(true);
+
+            Face_FadeImg.sprite = faceSprite;
+            Face_FadeImg.color = UIUtility.Common_Off_Color;
+
+            // 이전 얼굴이 있었음
+            if (!string.IsNullOrEmpty(_currentFace))
+            {
+                Face_Img.color = Color.white;
+
+                Face_Img.DOFade(0f, 0.5f);
+                Face_FadeImg.DOFade(1f, 0.5f);
+            }
+            // 이전 얼굴이 없었음
+            else
+            {
+                Face_Img.gameObject.SetActive(false);
+
+                Face_FadeImg.DOFade(1f, 0.5f);
+            }
+        }
+        else
+        {
+            Face_FadeImg.gameObject.SetActive(false);
+            Face_Img.DOFade(0f, 0.5f);
+        }
+
+        _characterDelayTween = DOVirtual.DelayedCall(0.5f, () =>
+        {
+            Body_Img.sprite = bodySprite;
+            Body_Img.color = Color.white;
+            Body_Img.gameObject.SetActive(true);
+
+            Body_FadeImg.color = UIUtility.Common_Off_Color;
+            Body_FadeImg.gameObject.SetActive(false);
+
+            if (faceSprite != null)
+            {
+                Face_Img.sprite = faceSprite;
+                Face_Img.color = Color.white;
+                Face_Img.gameObject.SetActive(true);
+
+                Face_FadeImg.color = UIUtility.Common_Off_Color;
+                Face_FadeImg.gameObject.SetActive(false);
+
+                _currentFace = faceKey;
+            }
+            else
+            {
+                Face_Img.gameObject.SetActive(false);
+                Face_Img.color = Color.white;
+
+                Face_FadeImg.color = UIUtility.Common_Off_Color;
+                Face_FadeImg.gameObject.SetActive(false);
+
+                _currentFace = "";
+            }
+
+            _currentBody = bodyKey;
+            _characterDelayTween = null;
+        });
+    }
+
+    void KillCharacterTweens()
+    {
+        _characterDelayTween?.Kill();
+        _characterDelayTween = null;
+
+        CharacterGroup.DOKill();
+
+        Body_Img.DOKill();
+        Face_Img.DOKill();
+        Body_FadeImg.DOKill();
+        Face_FadeImg.DOKill();
+    }
+
+    void ShowCharacter()
+    {
+        CharacterGroup.DOKill();
+
+        CharacterGroup.gameObject.SetActive(true);
+        CharacterGroup.alpha = 0f;
+
+        CharacterGroup.DOFade(1f, 0.5f);
+    }
+
+    void HideCharacter()
+    {
+        KillCharacterTweens();
+
+        if (!CharacterGroup.gameObject.activeSelf)
+        {
+            _currentBody = "";
+            _currentFace = "";
+            return;
+        }
+
+        CharacterGroup.DOFade(0f, 0.5f)
+            .OnComplete(() =>
+            {
+                CharacterGroup.gameObject.SetActive(false);
+                CharacterGroup.alpha = 0f;
+
+                Body_FadeImg.gameObject.SetActive(false);
+                Face_FadeImg.gameObject.SetActive(false);
+
+                _currentBody = "";
+                _currentFace = "";
+            });
+    }
+
 
     void Set_BG(bool isForce = false)
     {
