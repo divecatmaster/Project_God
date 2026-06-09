@@ -272,11 +272,11 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1410,story_282,“이곳에서 천계로 가는 길이 열리는 건 한 달에 한 번뿐이란다.”,,3,Character_Main_0,Character_Main_0_1,,1,1411,,,FALSE,FALSE
 1411,story_283,"“보름달이 뜨는, 바로 오늘 같은 날이지.”",,3,Character_Main_0,Character_Main_0_1,,1,1412,,,FALSE,FALSE
 1412,story_284,연한 하늘빛의 머리카락이,,,,,,1,1413,,,FALSE,FALSE
-1413,story_285,달빛을 머금어 은은하게 빛났다.,,,,,,101,1414,,,FALSE,FALSE
+1413,story_285,달빛을 머금어 은은하게 빛났다.,,,,,,101,1414,3,0.5,FALSE,FALSE
 1414,story_286,보름달과 그의 미소가 퍽 잘 어울려 이상하리 만큼 눈을 뗄 수 없었다.,,,,,,101,1415,,,FALSE,FALSE
 1415,story_287,그 모습을 보자 심장이 다시 두근거렸다.,,,,,,101,1416,,,FALSE,FALSE
 1416,story_288,“...아이야.”,,3,,,,101,1417,,,FALSE,FALSE
-1417,story_289,"“그...심장이, 꽤 크게 울리는구나.”",,3,,,,120,1418,,,FALSE,FALSE
+1417,story_289,"“그...심장이, 꽤 크게 울리는구나.”",,3,,,,120,1418,3,0.5,FALSE,FALSE
 1418,story_290,"그도 느꼈는지,",,,,,,120,1419,,,FALSE,FALSE
 1419,story_291,조금 부끄러운 듯 시선을 피했다.,,,,,,120,1420,,,FALSE,FALSE
 1420,story_292,"(정말, 쓸데없이 솔직해서는...!)",,2,,,,120,1421,,,FALSE,FALSE
@@ -431,7 +431,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1749,story_439,“...곤란하구나.”,,3,Character_Main_0,Character_Main_0_11,,4,1750,,,FALSE,FALSE
 1750,story_440,"그 역시 내 감정을 느끼고 있는 듯,",,,Character_Main_0,Character_Main_0_4,,4,1751,,,FALSE,FALSE
 1751,story_441,얼굴이 붉어진 채 시선을 피했다.,,,Character_Main_0,Character_Main_0_4,,4,1752,,,FALSE,FALSE
-1752,story_442,주변이 조용해지며,,,,,,102,1753,,,FALSE,FALSE
+1752,story_442,주변이 조용해지며,,,,,,102,1753,3,0.5,FALSE,FALSE
 1753,story_443,정적이 흘렀다.,,,,,,102,1754,,,FALSE,FALSE
 1754,story_444,텅 빈 신당 안에는,,,,,,102,1755,,,FALSE,FALSE
 1755,story_445,누구의 것인지 모를 심장 소리만이 가득 찼다.,,,,,,102,1756,,,FALSE,FALSE
@@ -441,7 +441,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1759,story_449,"(아니야, 아무렇지 않은 게 아니라 도망치지 못하고 있는 거야...)",,2,,,,102,1760,,,FALSE,FALSE
 1760,story_450,"(떨어져야 하는데, 그러고 싶지 않아...)",,2,,,,102,1761,,,FALSE,FALSE
 1761,story_451,그의 숨이 닿을 만큼 가까운 거리.,,,,,,102,1762,,,FALSE,FALSE
-1762,story_452,"그리고 그의 감정이, 그대로 흘러 들어온다.",,,,,,103,1763,,,FALSE,FALSE
+1762,story_452,"그리고 그의 감정이, 그대로 흘러 들어온다.",,,,,,103,1763,3,0.5,FALSE,FALSE
 1763,story_453,"조심스러움,",,,,,,103,1764,,,FALSE,FALSE
 1764,story_454,망설임.,,,,,,103,1765,,,FALSE,FALSE
 1765,story_455,그리고...,,,,,,103,1766,,,FALSE,FALSE
@@ -470,7 +470,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1885,story_477,아주 잠깐 멈췄다.,,,,,,104,1886,,,FALSE,FALSE
 1886,story_478,"숨이 얽히고,",,,,,,104,1887,,,FALSE,FALSE
 1887,story_479,심장이 미친 듯이 뛰었다.,,,,,,104,1888,,,FALSE,FALSE
-1888,story_480,그리고,,,,,,104,1889,,,FALSE,FALSE
+1888,story_480,그리고...,,,,,,104,1889,,,FALSE,FALSE
 1889,story_481,입술이 닿았다.,,,,,,104,1890,,,FALSE,FALSE
 1890,story_482,"조심스럽지만,",,,,,,104,1891,,,FALSE,FALSE
 1891,story_483,더 이상 참지 않은 느낌.,,,,,,104,1892,,,FALSE,FALSE
@@ -479,19 +479,19 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1894,story_486,“......”,,3,,,,104,1895,,,FALSE,FALSE
 1895,story_487,"“...내가 먼저, 참지 못했구나.”",,3,,,,104,1896,,,FALSE,FALSE
 1896,story_488,"그의 얼굴이, 어쩔 줄 모른다는 듯이 붉어졌다.",,,,,,104,2000,,,FALSE,FALSE
-1897,story_489,“...내가 어떤 상태인지...”,,2,,,,105,1898,,,FALSE,FALSE
-1898,story_490,“...그래.”,,3,,,,105,1899,,,FALSE,FALSE
-1899,story_491,“전부.”,,3,,,,105,1900,,,FALSE,FALSE
-1900,story_492,"그의 손이,",,,,,,105,1901,,,FALSE,FALSE
-1901,story_493,내 어깨 위에서 아주 조금 힘이 들어갔다.,,,,,,105,1902,,,FALSE,FALSE
-1902,story_494,“윽...이대로라면...”,,3,,,,105,1903,,,FALSE,FALSE
-1903,story_495,그가 더 말하지 못하고 멈췄다.,,,,,,105,1904,,,FALSE,FALSE
-1904,story_496,하지만...,,,,,,105,1905,,,FALSE,FALSE
-1905,story_497,이미 전해지고 있었다.,,,,,,105,1906,,,FALSE,FALSE
-1906,story_498,참고 있는 그의 감정이.,,,,,,105,1907,,,FALSE,FALSE
-1907,story_499,“...그럼...”,,2,,,,105,1908,,,FALSE,FALSE
-1908,story_500,"말이 끝나기도 전에,",,,,,,105,1909,,,FALSE,FALSE
-1909,story_501,내 시선이 그의 입술에 닿았다.,,,,,,105,1910,,,FALSE,FALSE
+1897,story_489,“...내가 어떤 상태인지...”,,2,,,,103,1898,,,FALSE,FALSE
+1898,story_490,“...그래.”,,3,,,,103,1899,,,FALSE,FALSE
+1899,story_491,“전부.”,,3,,,,103,1900,,,FALSE,FALSE
+1900,story_492,"그의 손이,",,,,,,103,1901,,,FALSE,FALSE
+1901,story_493,나를 붙잡은 채 멈춰 있었다.,,,,,,103,1902,,,FALSE,FALSE
+1902,story_494,“윽...이대로라면...”,,3,,,,103,1903,,,FALSE,FALSE
+1903,story_495,그가 더 말하지 못하고 멈췄다.,,,,,,103,1904,,,FALSE,FALSE
+1904,story_496,하지만...,,,,,,103,1905,,,FALSE,FALSE
+1905,story_497,이미 전해지고 있었다.,,,,,,103,1906,,,FALSE,FALSE
+1906,story_498,참고 있는 그의 감정이.,,,,,,103,1907,,,FALSE,FALSE
+1907,story_499,“...그럼...”,,2,,,,103,1908,,,FALSE,FALSE
+1908,story_500,"말이 끝나기도 전에,",,,,,,103,1909,,,FALSE,FALSE
+1909,story_501,내 시선이 그의 입술에 닿았다.,,,,,,103,1910,,,FALSE,FALSE
 1910,story_502,그 순간—,,,,,,105,1911,,,FALSE,FALSE
 1911,story_503,그의 숨이 아주 짧게 흔들렸다.,,,,,,105,1912,,,FALSE,FALSE
 1912,story_504,“...{0}...”,,3,,,,105,1913,,,FALSE,FALSE
@@ -542,38 +542,38 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1957,story_549,“{0}...”,,3,,,,106,1958,,,FALSE,FALSE
 1958,story_550,그가 내 어깨에 얼굴을 파묻었다.,,,,,,106,2000,,,FALSE,FALSE
 2000,story_551,숨이 아직도 가쁘게 흔들리고 있었다.,,,,,,4,2001,,,FALSE,FALSE
-2001,story_553,“...이 상태로는...”,,3,Character_Main_0,Character_Main_11,,4,2002,,,FALSE,FALSE
-2002,story_554,“감정이 더 깊어질 것 같구나.”,,3,Character_Main_0,Character_Main_11,,4,2003,,,FALSE,FALSE
-2003,story_555,“......”,,2,Character_Main_0,Character_Main_11,,4,2004,,,FALSE,FALSE
-2004,story_556,“그럼...”,,2,Character_Main_0,Character_Main_11,,4,2005,,,FALSE,FALSE
-2005,story_557,“그래도.”,,3,Character_Main_0,Character_Main_11,,4,2006,,,FALSE,FALSE
-2006,story_558,그가 작게 웃었다.,,,Character_Main_0,Character_Main_11,,4,2007,,,FALSE,FALSE
-2007,story_559,"아주, 미묘하게.",,,Character_Main_0,Character_Main_11,,4,2008,,,FALSE,FALSE
-2008,story_560,“...멈출 생각은 없구나.”,,3,Character_Main_0,Character_Main_11,,4,2009,,,FALSE,FALSE
-2009,story_561,그의 말에 내 얼굴이 붉게 달아올랐다.,,,Character_Main_0,Character_Main_11,,4,2010,,,FALSE,FALSE
-2010,story_562,"아직도 숨이 제대로 돌아오지 않고,",,,Character_Main_0,Character_Main_11,,4,2011,,,FALSE,FALSE
-2011,story_563,심장이 미친 듯이 뛰었다.,,,Character_Main_0,Character_Main_11,,4,2012,,,FALSE,FALSE
-2012,story_564,“...이거...”,,2,Character_Main_0,Character_Main_02,,4,2013,,,FALSE,FALSE
-2013,story_565,“누구의 감정인지 모르겠어요...”,,2,Character_Main_0,Character_Main_02,,4,2014,,,FALSE,FALSE
-2014,story_566,“......”,,3,Character_Main_0,Character_Main_02,,4,2015,,,FALSE,FALSE
-2015,story_567,그는 대답하지 않았다.,,,Character_Main_0,Character_Main_02,,4,2016,,,FALSE,FALSE
-2016,story_568,내가 당황해 하며 혼란스러워하자,,,Character_Main_0,Character_Main_02,,4,2017,,,FALSE,FALSE
-2017,story_569,"조용히, 나를 끌어당겼다.",,,Character_Main_0,Character_Main_02,,4,2018,,,FALSE,FALSE
-2018,story_570,"“...괜찮단다, 아이야.”",,3,Character_Main_0,Character_Main_02,,4,2019,,,FALSE,FALSE
-2019,story_571,"“조금, 놀랐지.”",,3,Character_Main_0,Character_Main_02,,4,2020,,,FALSE,FALSE
-2020,story_572,그의 손이 다시 내 등을 천천히 쓸어 내렸다.,,,Character_Main_0,Character_Main_02,,4,2021,,,FALSE,FALSE
-2021,story_573,“이건... 네가 이상한 게 아니야.”,,3,Character_Main_0,Character_Main_02,,4,2022,,,FALSE,FALSE
-2022,story_574,"“...내 쪽에서도, 같은 걸 느끼고 있으니까.”",,3,Character_Main_0,Character_Main_02,,4,2023,,,FALSE,FALSE
-2023,story_575,그가 작게 웃었다.,,,Character_Main_0,Character_Main_01,,4,2024,,,FALSE,FALSE
-2024,story_576,“그러니까... 혼자서 버티려고 하지 말거라.”,,3,Character_Main_0,Character_Main_01,,4,2025,,,FALSE,FALSE
-2025,story_577,"그의 말에,",,,Character_Main_0,Character_Main_01,,4,2026,,,FALSE,FALSE
-2026,story_578,"조금, 아주 조금 숨이 가라앉았다.",,,Character_Main_0,Character_Main_01,,4,2027,,,FALSE,FALSE
-2027,story_579,하지만—,,,Character_Main_0,Character_Main_01,,4,2028,,,FALSE,FALSE
-2028,story_580,애틋한 이 감정은,,,Character_Main_0,Character_Main_01,,4,2029,,,FALSE,FALSE
-2029,story_581,단순히 지금 생긴 게 아닌 것 같았다.,,,Character_Main_0,Character_Main_01,,4,2030,,,FALSE,FALSE
-2030,story_582,어딘가 익숙하다.,,,Character_Main_0,Character_Main_01,,4,2031,,,FALSE,FALSE
-2031,story_583,“이상해요...”,,2,Character_Main_0,Character_Main_01,,4,2032,,,FALSE,FALSE
-2032,story_584,“신 님을 처음 만난 게 아닌 것 같아요...”,,2,Character_Main_0,Character_Main_01,,4,2033,,,FALSE,FALSE
+2001,story_553,“...이 상태로는...”,,3,Character_Main_0,Character_Main_0_11,,4,2002,,,FALSE,FALSE
+2002,story_554,“감정이 더 깊어질 것 같구나.”,,3,Character_Main_0,Character_Main_0_11,,4,2003,,,FALSE,FALSE
+2003,story_555,“......”,,2,Character_Main_0,Character_Main_0_11,,4,2004,,,FALSE,FALSE
+2004,story_556,“그럼...”,,2,Character_Main_0,Character_Main_0_11,,4,2005,,,FALSE,FALSE
+2005,story_557,“그래도.”,,3,Character_Main_0,Character_Main_0_11,,4,2006,,,FALSE,FALSE
+2006,story_558,그가 작게 웃었다.,,,Character_Main_0,Character_Main_0_11,,4,2007,,,FALSE,FALSE
+2007,story_559,"아주, 미묘하게.",,,Character_Main_0,Character_Main_0_11,,4,2008,,,FALSE,FALSE
+2008,story_560,“...멈출 생각은 없구나.”,,3,Character_Main_0,Character_Main_0_11,,4,2009,,,FALSE,FALSE
+2009,story_561,그의 말에 내 얼굴이 붉게 달아올랐다.,,,Character_Main_0,Character_Main_0_11,,4,2010,,,FALSE,FALSE
+2010,story_562,"아직도 숨이 제대로 돌아오지 않고,",,,Character_Main_0,Character_Main_0_11,,4,2011,,,FALSE,FALSE
+2011,story_563,심장이 미친 듯이 뛰었다.,,,Character_Main_0,Character_Main_0_11,,4,2012,,,FALSE,FALSE
+2012,story_564,“...이거...”,,2,Character_Main_0,Character_Main_0_2,,4,2013,,,FALSE,FALSE
+2013,story_565,“누구의 감정인지 모르겠어요...”,,2,Character_Main_0,Character_Main_0_2,,4,2014,,,FALSE,FALSE
+2014,story_566,“......”,,3,Character_Main_0,Character_Main_0_2,,4,2015,,,FALSE,FALSE
+2015,story_567,그는 대답하지 않았다.,,,Character_Main_0,Character_Main_0_2,,4,2016,,,FALSE,FALSE
+2016,story_568,내가 당황해 하며 혼란스러워하자,,,Character_Main_0,Character_Main_0_2,,4,2017,,,FALSE,FALSE
+2017,story_569,"조용히, 나를 끌어당겼다.",,,Character_Main_0,Character_Main_0_2,,4,2018,,,FALSE,FALSE
+2018,story_570,"“...괜찮단다, 아이야.”",,3,Character_Main_0,Character_Main_0_2,,4,2019,,,FALSE,FALSE
+2019,story_571,"“조금, 놀랐지.”",,3,Character_Main_0,Character_Main_0_2,,4,2020,,,FALSE,FALSE
+2020,story_572,그의 손이 다시 내 등을 천천히 쓸어 내렸다.,,,Character_Main_0,Character_Main_0_2,,4,2021,,,FALSE,FALSE
+2021,story_573,“이건... 네가 이상한 게 아니야.”,,3,Character_Main_0,Character_Main_0_2,,4,2022,,,FALSE,FALSE
+2022,story_574,"“...내 쪽에서도, 같은 걸 느끼고 있으니까.”",,3,Character_Main_0,Character_Main_0_2,,4,2023,,,FALSE,FALSE
+2023,story_575,그가 작게 웃었다.,,,Character_Main_0,Character_Main_0_1,,4,2024,,,FALSE,FALSE
+2024,story_576,“그러니까... 혼자서 버티려고 하지 말거라.”,,3,Character_Main_0,Character_Main_0_1,,4,2025,,,FALSE,FALSE
+2025,story_577,"그의 말에,",,,Character_Main_0,Character_Main_0_1,,4,2026,,,FALSE,FALSE
+2026,story_578,"조금, 아주 조금 숨이 가라앉았다.",,,Character_Main_0,Character_Main_0_1,,4,2027,,,FALSE,FALSE
+2027,story_579,하지만—,,,Character_Main_0,Character_Main_0_1,,4,2028,,,FALSE,FALSE
+2028,story_580,애틋한 이 감정은,,,Character_Main_0,Character_Main_0_1,,4,2029,,,FALSE,FALSE
+2029,story_581,단순히 지금 생긴 게 아닌 것 같았다.,,,Character_Main_0,Character_Main_0_1,,4,2030,,,FALSE,FALSE
+2030,story_582,어딘가 익숙하다.,,,Character_Main_0,Character_Main_0_1,,4,2031,,,FALSE,FALSE
+2031,story_583,“이상해요...”,,2,Character_Main_0,Character_Main_0_1,,4,2032,,,FALSE,FALSE
+2032,story_584,“신 님을 처음 만난 게 아닌 것 같아요...”,,2,Character_Main_0,Character_Main_0_1,,4,2033,,,FALSE,FALSE
 2033,story_585,“{0}.”,,3,Character_Main_0_10,,,4,2034,,,FALSE,FALSE
 2034,story_586,“이건 단순한 연결이 아닌 것 같구나.”,,3,Character_Main_0_10,,,4,2035,,,FALSE,FALSE
 2035,story_587,그가 말을 잠시 멈췄다.,,,Character_Main_0_10,,,4,2036,,,FALSE,FALSE
@@ -589,8 +589,8 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2045,story_597,"“하지만, 살아 있는 존재가 스스로 드나들 수 있는 곳도 아니지.”",,3,Character_Main_0_10,,,4,2046,,,FALSE,FALSE
 2046,story_598,"그가 잠시 고민하는 듯하더니,",,,Character_Main_0_10,,,4,2047,,,FALSE,FALSE
 2047,story_599,내 손을 조용히 감쌌다.,,,Character_Main_0_10,,,4,2048,,,FALSE,FALSE
-2048,story_600,"“그래도 우리는 지금 연결되어 있으니,”",,3,Character_Main_0,Character_Main_01,,4,2049,,,FALSE,FALSE
-2049,story_601,“같이 갈 수 있을 거란다.”,,3,Character_Main_0,Character_Main_01,,4,2050,,,FALSE,FALSE
+2048,story_600,"“그래도 우리는 지금 연결되어 있으니,”",,3,Character_Main_0,Character_Main_0_1,,4,2049,,,FALSE,FALSE
+2049,story_601,“같이 갈 수 있을 거란다.”,,3,Character_Main_0,Character_Main_0_1,,4,2050,,,FALSE,FALSE
 2050,story_602,"그의 말을 끝으로,",,,,,,4,2051,,,FALSE,FALSE
 2051,story_603,공기가 서서히 가라앉았다.,,,,,,4,2052,,,FALSE,FALSE
 2052,story_604,"주변의 빛이 희미하게 흔들리며,",,,,,,4,2053,,,FALSE,FALSE
@@ -609,14 +609,14 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2065,story_617,천천히 일렁이고 있었다.,,,,,,10,2066,,,FALSE,FALSE
 2066,story_618,"내가 밟고 있는 것이 땅인지,",,,,,,10,2067,,,FALSE,FALSE
 2067,story_619,그림자인지조차 구분이 가지 않았다.,,,,,,10,2068,,,FALSE,FALSE
-2068,story_620,“...명계란다.”,,3,Character_Main_0,Character_Main_01,,10,2069,,,FALSE,FALSE
-2069,story_621,"그의 목소리가,",,,Character_Main_0,Character_Main_01,,10,2070,,,FALSE,FALSE
-2070,story_622,평소보다 조금 낮게 가라앉아 있었다.,,,Character_Main_0,Character_Main_01,,10,2071,,,FALSE,FALSE
-2071,story_623,“살아 있는 존재가 오래 머물 곳은 아니지.”,,3,Character_Main_0,Character_Main_01,,10,2072,,,FALSE,FALSE
-2072,story_624,"그의 손이,",,,Character_Main_0,Character_Main_01,,10,2073,,,FALSE,FALSE
-2073,story_625,조금 더 강하게 내 손을 붙잡았다.,,,Character_Main_0,Character_Main_01,,10,2074,,,FALSE,FALSE
-2074,story_626,"그 힘에 이곳이 얼마나 위험한 곳인지,",,,Character_Main_0,Character_Main_01,,10,2075,,,FALSE,FALSE
-2075,story_627,말하지 않아도 전해졌다.,,,Character_Main_0,Character_Main_01,,10,2076,,,FALSE,FALSE
+2068,story_620,“...명계란다.”,,3,Character_Main_0,Character_Main_0_1,,10,2069,,,FALSE,FALSE
+2069,story_621,"그의 목소리가,",,,Character_Main_0,Character_Main_0_1,,10,2070,,,FALSE,FALSE
+2070,story_622,평소보다 조금 낮게 가라앉아 있었다.,,,Character_Main_0,Character_Main_0_1,,10,2071,,,FALSE,FALSE
+2071,story_623,“살아 있는 존재가 오래 머물 곳은 아니지.”,,3,Character_Main_0,Character_Main_0_1,,10,2072,,,FALSE,FALSE
+2072,story_624,"그의 손이,",,,Character_Main_0,Character_Main_0_1,,10,2073,,,FALSE,FALSE
+2073,story_625,조금 더 강하게 내 손을 붙잡았다.,,,Character_Main_0,Character_Main_0_1,,10,2074,,,FALSE,FALSE
+2074,story_626,"그 힘에 이곳이 얼마나 위험한 곳인지,",,,Character_Main_0,Character_Main_0_1,,10,2075,,,FALSE,FALSE
+2075,story_627,말하지 않아도 전해졌다.,,,Character_Main_0,Character_Main_0_1,,10,2076,,,FALSE,FALSE
 2076,story_628,두리번거리며 길을 찾으려던 그때—,,,,,,10,2077,,,FALSE,FALSE
 2077,story_629,"어둠이, 천천히 갈라졌다.",,,,,,10,2078,,,FALSE,FALSE
 2078,story_630,"마치 우리를 중심으로,",,,,,,10,2079,,,FALSE,FALSE
@@ -685,10 +685,10 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2525,story_692,몸 곳곳이 찢어진 상처로 가득했다.,,,,,,9,2526,,,FALSE,FALSE
 2526,story_693,“작은... 짐승...?”,,6,,,,9,2527,,,FALSE,FALSE
 2527,story_694,“도마뱀...인가...?”,,6,,,,9,2528,,,FALSE,FALSE
-2528,story_695,“너는 누구니...?”,,6,,,,9,2529,,,FALSE,FALSE
+2528,story_695,“너는 누구니...?”,,6,,,,107,2529,,,FALSE,FALSE
 2529,story_696,나는 조심스럽게 그 작은 짐승을 들어 올렸다.,,,,,,107,2530,,,FALSE,FALSE
 2530,story_697,“...다쳤구나...”,,6,,,,107,2531,,,FALSE,FALSE
-2531,story_698,"두 손으로 감싸듯 안아, 신당 앞에 내려놓았다.",,,,,,9,2532,,,FALSE,FALSE
+2531,story_698,"두 손으로 감싸듯 안아, 신당 앞에 내려놓았다.",,,,,,107,2532,,,FALSE,FALSE
 2532,story_699,"깨끗한 물을 떠와 상처를 닦아주고,",,,,,,9,2533,,,FALSE,FALSE
 2533,story_700,작은 열매를 주워 조심스레 앞에 놓아주었다.,,,,,,9,2534,,,FALSE,FALSE
 2534,story_701,“...이런 걸 먹을지는 모르겠지만...”,,6,,,,9,2535,,,FALSE,FALSE
@@ -702,14 +702,14 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2542,story_709,"기도를 하고,",,,,,,9,2543,,,FALSE,FALSE
 2543,story_710,작은 짐승을 돌보는 것이 어느새 당연한 일이 되어 있었다.,,,,,,9,2544,,,FALSE,FALSE
 2544,story_711,"어느날,",,,,,,9,2545,,,FALSE,FALSE
-2545,story_712,오늘도 있을 거라 믿고,,,,,,9,2546,,,FALSE,FALSE
+2545,story_712,"오늘도 있을 거라고 믿고,",,,,,,9,2546,,,FALSE,FALSE
 2546,story_713,조금 들뜬 마음으로 신당을 찾았다.,,,,,,9,2547,,,FALSE,FALSE
 2547,story_714,하지만 그곳에는 아무것도 없었다.,,,,,,9,2548,,,FALSE,FALSE
-2548,story_715,"계절이 바뀌고,",,,,,,8,2549,,,FALSE,FALSE
-2549,story_716,계속해서 신당을 찾아갔지만...,,,,,,8,2550,,,FALSE,FALSE
-2550,story_717,그 작은 짐승은 다시 나타나지 않았다.,,,,,,8,2551,,,FALSE,FALSE
-2551,story_718,어딘가 외로운 기분이 들었지만,,,,,,8,2552,,,FALSE,FALSE
-2552,story_719,나는 여전히 그 자리에서 기도를 이어갔다.,,,,,,8,2553,,,FALSE,FALSE
+2548,story_715,"계절이 바뀌고도,",,,,,,8,2549,,,FALSE,FALSE
+2549,story_716,그 작은 짐승은 다시 나타나지 않았다.,,,,,,8,2550,,,FALSE,FALSE
+2550,story_717,"마음 한구석이 허전했지만,",,,,,,8,2551,,,FALSE,FALSE
+2551,story_718,나는 그 자리를 떠나지 못했다.,,,,,,8,2552,,,FALSE,FALSE
+2552,story_719,오늘도 변함없이 기도를 올리고 있었다.,,,,,,8,2553,,,FALSE,FALSE
 2553,story_720,"“신 님, 신 님, 제가 아프지 않게...”",,6,,,,8,2554,,,FALSE,FALSE
 2554,story_721,"기도를 마치려 하는데,",,,,,,8,2555,,,FALSE,FALSE
 2555,story_722,갑자기 심장이 조여 들었다.,,,,,,8,2556,,,FALSE,FALSE
@@ -746,7 +746,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2586,story_753,"""신의 힘이 인간의 몸에 스며든 결과...""",,7,Character_3,,,8,2587,,,FALSE,FALSE
 2587,story_754,"""그 아이는 더 이상 인간도, 신도 아니다.""",,7,Character_3,,,8,2588,,,FALSE,FALSE
 2588,story_755,"""반신 반인.""",,7,Character_3,,,8,2589,,,FALSE,FALSE
-2589,story_756,"""존재 자체가 균형을 무너뜨리는 금기다.""",,7,Character_3,,,8,2590,,,FALSE,FALSE
+2589,story_756,"""누군가의 대가 위에서만 살아갈 수 있는 존재다.""",,7,Character_3,,,8,2590,,,FALSE,FALSE
 2590,story_757,"""제거하거라.""",,7,Character_3,,,8,2591,,,FALSE,FALSE
 2591,story_758,“......”,,3,Character_Main_1,Character_Main_1_4,,8,2592,,,FALSE,FALSE
 2592,story_759,"그의 눈이, 아주 잠깐 크게 흔들렸다.",,,Character_Main_1,Character_Main_1_4,,8,2593,,,FALSE,FALSE
@@ -757,7 +757,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2597,story_764,"갑작스럽게 쏟아진 힘을 감당하지 못한 채,",,,,,,8,2598,,,FALSE,FALSE
 2598,story_765,그가 고통에 몸부림치며 신력을 제어하지 못하고,,,,,,8,2599,,,FALSE,FALSE
 2599,story_766,하늘에서 인간계로 떨어졌던 순간까지.,,,,,,8,2600,,,FALSE,FALSE
-2600,story_767,“...이 아이는...”,,3,,,,108,2601,,,FALSE,FALSE
+2600,story_767,“...이 아이는...”,,3,, ,,108,2601,,,FALSE,FALSE
 2601,story_768,"그의 손이, 미세하게 떨렸다.",,,,,,108,2602,,,FALSE,FALSE
 2602,story_769,마치 익숙한 온기를 다시 떠올린 것처럼.,,,,,,108,2603,,,FALSE,FALSE
 2603,story_770,"그는 아무것도 하지 못한 채,",,,,,,108,2604,,,FALSE,FALSE
@@ -1131,7 +1131,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3600,story_1137,“...왜...”,,3,,,,115,3601,,,FALSE,FALSE
 3601,story_1138,“...내가 아닌 네가...”,,3,,,,115,3602,,,FALSE,FALSE
 3602,story_1139,손 위에 남아 있는 희미한 빛.,,,,,,115,3603,,,FALSE,FALSE
-3603,story_1140,이제는 점점 흐려지고 있다.,,,,,,116,3604,,,FALSE,FALSE
+3603,story_1140,마지막 흔적마저 서서히 흩어졌다.,,,,,,116,3604,,,FALSE,FALSE
 3604,story_1141,그는 그 빛을 감싸 쥐듯 손을 말아 쥐었다.,,,,,,116,3605,,,FALSE,FALSE
 3605,story_1142,“...기다리마.”,,3,,,,116,3606,,,FALSE,FALSE
 3606,story_1143,"“설령, 다시는 돌아오지 않는다 해도.”",,3,,,,116,3607,,,FALSE,FALSE
@@ -1148,7 +1148,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3801,story_1154,“조금만 확인할 수는 없나요...”,,2,Character_1,,,10,3802,,,FALSE,FALSE
 3802,story_1155,“욕심이 많구나.”,,5,Character_1,,,10,3803,,,FALSE,FALSE
 3803,story_1156,“좋다.”,,5,Character_1,,,10,3804,,,FALSE,FALSE
-3804,story_1157,“하지만— 끝까지 보게 되지는 못할 것이다.”,,5,Character_1,,,10,3805,,,FALSE,FALSE
+3804,story_1157,“하지만...끝까지 보게 되지는 못할 것이다.”,,5,Character_1,,,10,3805,,,FALSE,FALSE
 3805,story_1158,빛이—,,,,,,10,3806,,,FALSE,FALSE
 3806,story_1159,"조각처럼 갈라져,",,,,,,10,3807,,,FALSE,FALSE
 3807,story_1160,우리에게 스며들었다.,,,,,,10,3808,,,FALSE,FALSE
@@ -1280,55 +1280,55 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3933,story_1286,이제 그곳엔 신이 없다.,,,,,,9,3934,,,FALSE,FALSE
 3934,story_1287,그저—,,,,,,9,3935,,,FALSE,FALSE
 3935,story_1288,서로를 애틋하도록 좋아하게 된 두 사람이 있을 뿐이다.,,,,,,9,3936,,,FALSE,FALSE
-3936,story_1289,“...오늘도 늦었어요.”,,2,,,,9,3937,,,FALSE,FALSE
-3937,story_1290,“조금 길을 헤맸단다.”,,3,,,,9,3938,,,FALSE,FALSE
-3938,story_1291,“...거짓말.”,,2,,,,9,3939,,,FALSE,FALSE
-3939,story_1292,“들켰구나.”,,3,,,,9,3940,,,FALSE,FALSE
-3940,story_1293,그의 말에 웃음이 먼저 새어 나온다.,,,,,,9,3941,,,FALSE,FALSE
-3941,story_1294,“...근데요.”,,2,,,,9,3942,,,FALSE,FALSE
-3942,story_1295,“이상한 거 알아요?”,,2,,,,9,3943,,,FALSE,FALSE
-3943,story_1296,“무엇이.”,,3,,,,9,3944,,,FALSE,FALSE
-3944,story_1297,“왜인지 모르겠는데...”,,2,,,,9,3945,,,FALSE,FALSE
-3945,story_1298,"“당신 기다리는 거, 좋아요.”",,2,,,,9,3946,,,FALSE,FALSE
-3946,story_1299,그의 눈동자가 아주 살짝 흔들린다.,,,,,,9,3947,,,FALSE,FALSE
-3947,story_1300,“그래.”,,3,,,,9,3948,,,FALSE,FALSE
-3948,story_1301,“나도 그렇단다.”,,3,,,,9,3949,,,FALSE,FALSE
-3949,story_1302,“정말요?”,,2,,,,9,3950,,,FALSE,FALSE
-3950,story_1303,“그래서—”,,3,,,,9,3951,,,FALSE,FALSE
-3951,story_1304,그가 나에게 가까이 다가온다.,,,,,,9,3952,,,FALSE,FALSE
-3952,story_1305,"“...늦었는데도, 돌아오게 되는 거겠지.”",,3,,,,9,3953,,,FALSE,FALSE
-3953,story_1306,“...!”,,2,,,,9,3954,,,FALSE,FALSE
-3954,story_1307,심장이 괜스레 빨라진다.,,,,,,9,3955,,,FALSE,FALSE
-3955,story_1308,“그런 말...”,,2,,,,9,3956,,,FALSE,FALSE
-3956,story_1309,“...반칙이에요...”,,2,,,,9,3957,,,FALSE,FALSE
-3957,story_1310,"얼굴이 붉어진 채로 대답하자,",,,,,,9,3958,,,FALSE,FALSE
-3958,story_1311,그가 작게 웃는다.,,,,,,9,3959,,,FALSE,FALSE
-3959,story_1312,“가끔... 생각나요.”,,2,,,,9,3960,,,FALSE,FALSE
-3960,story_1313,“우리가 뭔가 엄청난 선택 했던 것 같다는 거”,,2,,,,9,3961,,,FALSE,FALSE
-3961,story_1314,“그래.”,,3,,,,9,3962,,,FALSE,FALSE
-3962,story_1315,"“...아마, 그랬겠지.”",,3,,,,9,3963,,,FALSE,FALSE
-3963,story_1316,“후회하세요?”,,2,,,,9,3964,,,FALSE,FALSE
-3964,story_1317,그는 잠깐도 망설이지 않는다.,,,,,,9,3965,,,FALSE,FALSE
-3965,story_1318,“아니.”,,3,,,,9,3966,,,FALSE,FALSE
-3966,story_1319,“전혀.”,,3,,,,9,3967,,,FALSE,FALSE
-3967,story_1320,나는 조용히 웃으며 작게 속삭였다.,,,,,,9,3968,,,FALSE,FALSE
-3968,story_1321,“...다행이다.”,,2,,,,9,3969,,,FALSE,FALSE
-3969,story_1322,"그에게 한 발짝 다가가며,",,,,,,9,3970,,,FALSE,FALSE
-3970,story_1323,손을 조심스럽게 잡았다.,,,,,,9,3971,,,FALSE,FALSE
-3971,story_1324,“저도요.”,,2,,,,9,3972,,,FALSE,FALSE
-3972,story_1325,“이유는 잘 기억 안 나는데...”,,2,,,,9,3973,,,FALSE,FALSE
-3973,story_1326,“그래도—”,,2,,,,9,3974,,,FALSE,FALSE
-3974,story_1327,조금 더 가까이.,,,,,,9,3975,,,FALSE,FALSE
-3975,story_1328,“지금이 좋아요.”,,2,,,,9,3976,,,FALSE,FALSE
-3976,story_1329,"그의 손에, 살짝 힘이 들어간다.",,,,,,9,3977,,,FALSE,FALSE
-3977,story_1330,놓치지 않겠다는 것처럼.,,,,,,9,3978,,,FALSE,FALSE
-3978,story_1331,“나도.”,,3,,,,9,3979,,,FALSE,FALSE
-3979,story_1332,“지금이 좋단다.”,,3,,,,9,3980,,,FALSE,FALSE
-3980,story_1333,그와 가까운 거리에서 눈이 마주친다.,,,,,,9,3981,,,FALSE,FALSE
-3981,story_1334,“이상하네요.”,,2,,,,9,3982,,,FALSE,FALSE
-3982,story_1335,“다 기억나는 것도 아닌데...”,,2,,,,9,3983,,,FALSE,FALSE
-3983,story_1336,“그래도 충분하지 않니.”,,3,,,,9,3984,,,FALSE,FALSE
-3984,story_1337,“왜요?”,,2,,,,9,3985,,,FALSE,FALSE
+3936,story_1289,“...오늘도 늦었어요.”,,2,Character_Main_2,Character_Main_2_1,,9,3937,,,FALSE,FALSE
+3937,story_1290,“조금 길을 헤맸단다.”,,3,Character_Main_2,Character_Main_2_1,,9,3938,,,FALSE,FALSE
+3938,story_1291,“...거짓말.”,,2,Character_Main_2,Character_Main_2_4,,9,3939,,,FALSE,FALSE
+3939,story_1292,“들켰구나.”,,3,Character_Main_2,Character_Main_2_4,,9,3940,,,FALSE,FALSE
+3940,story_1293,그의 말에 웃음이 먼저 새어 나온다.,,,Character_Main_2,Character_Main_2_4,,9,3941,,,FALSE,FALSE
+3941,story_1294,“...근데요.”,,2,Character_Main_2,Character_Main_2_1,,9,3942,,,FALSE,FALSE
+3942,story_1295,“이상한 거 알아요?”,,2,Character_Main_2,Character_Main_2_1,,9,3943,,,FALSE,FALSE
+3943,story_1296,“무엇이.”,,3,Character_Main_2,Character_Main_2_1,,9,3944,,,FALSE,FALSE
+3944,story_1297,“왜인지 모르겠는데...”,,2,Character_Main_2,Character_Main_2_1,,9,3945,,,FALSE,FALSE
+3945,story_1298,"“당신 기다리는 거, 좋아요.”",,2,Character_Main_2,Character_Main_2_1,,9,3946,,,FALSE,FALSE
+3946,story_1299,그의 눈동자가 아주 살짝 흔들린다.,,,Character_Main_2,Character_Main_2_2,,9,3947,,,FALSE,FALSE
+3947,story_1300,“그래.”,,3,Character_Main_2,Character_Main_2_2,,9,3948,,,FALSE,FALSE
+3948,story_1301,“나도 그렇단다.”,,3,Character_Main_2,Character_Main_2_4,,9,3949,,,FALSE,FALSE
+3949,story_1302,“정말요?”,,2,Character_Main_2,Character_Main_2_4,,9,3950,,,FALSE,FALSE
+3950,story_1303,“그래서—”,,3,Character_Main_2,Character_Main_2_4,,9,3951,,,FALSE,FALSE
+3951,story_1304,그가 나에게 가까이 다가온다.,,,Character_Main_2,Character_Main_2_4,,9,3952,,,FALSE,FALSE
+3952,story_1305,"“...늦었는데도, 돌아오게 되는 거겠지.”",,3,Character_Main_2,Character_Main_2_4,,9,3953,,,FALSE,FALSE
+3953,story_1306,“...!”,,2,Character_Main_2,Character_Main_2_4,,9,3954,,,FALSE,FALSE
+3954,story_1307,심장이 괜스레 빨라진다.,,,Character_Main_2,Character_Main_2_4,,9,3955,,,FALSE,FALSE
+3955,story_1308,“그런 말...”,,2,Character_Main_2,Character_Main_2_4,,9,3956,,,FALSE,FALSE
+3956,story_1309,“...반칙이에요...”,,2,Character_Main_2,Character_Main_2_4,,9,3957,,,FALSE,FALSE
+3957,story_1310,"얼굴이 붉어진 채로 대답하자,",,,Character_Main_2,Character_Main_2_4,,9,3958,,,FALSE,FALSE
+3958,story_1311,그가 작게 웃는다.,,,Character_Main_2,Character_Main_2_3,,9,3959,,,FALSE,FALSE
+3959,story_1312,“가끔... 생각나요.”,,2,Character_Main_2,Character_Main_2_1,,9,3960,,,FALSE,FALSE
+3960,story_1313,“우리가 뭔가 엄청난 선택 했던 것 같다는 거”,,2,Character_Main_2,Character_Main_2_1,,9,3961,,,FALSE,FALSE
+3961,story_1314,“그래.”,,3,Character_Main_2,Character_Main_2_1,,9,3962,,,FALSE,FALSE
+3962,story_1315,"“...아마, 그랬겠지.”",,3,Character_Main_2,Character_Main_2_1,,9,3963,,,FALSE,FALSE
+3963,story_1316,“후회하세요?”,,2,Character_Main_2,Character_Main_2_1,,9,3964,,,FALSE,FALSE
+3964,story_1317,그는 잠깐도 망설이지 않는다.,,,Character_Main_2,Character_Main_2_1,,9,3965,,,FALSE,FALSE
+3965,story_1318,“아니.”,,3,Character_Main_2,Character_Main_2_4,,9,3966,,,FALSE,FALSE
+3966,story_1319,“전혀.”,,3,Character_Main_2,Character_Main_2_4,,9,3967,,,FALSE,FALSE
+3967,story_1320,나는 조용히 웃으며 작게 속삭였다.,,,Character_Main_2,Character_Main_2_4,,9,3968,,,FALSE,FALSE
+3968,story_1321,“...다행이다.”,,2,Character_Main_2,Character_Main_2_4,,9,3969,,,FALSE,FALSE
+3969,story_1322,"그에게 한 발짝 다가가며,",,,Character_Main_2,Character_Main_2_4,,9,3970,,,FALSE,FALSE
+3970,story_1323,손을 조심스럽게 잡았다.,,,Character_Main_2,Character_Main_2_4,,9,3971,,,FALSE,FALSE
+3971,story_1324,“저도요.”,,2,Character_Main_2,Character_Main_2_4,,9,3972,,,FALSE,FALSE
+3972,story_1325,“이유는 잘 기억 안 나는데...”,,2,Character_Main_2,Character_Main_2_4,,9,3973,,,FALSE,FALSE
+3973,story_1326,“그래도—”,,2,Character_Main_2,Character_Main_2_4,,9,3974,,,FALSE,FALSE
+3974,story_1327,조금 더 가까이.,,,Character_Main_2,Character_Main_2_4,,9,3975,,,FALSE,FALSE
+3975,story_1328,“지금이 좋아요.”,,2,Character_Main_2,Character_Main_2_4,,9,3976,,,FALSE,FALSE
+3976,story_1329,"그의 손에, 살짝 힘이 들어간다.",,,Character_Main_2,Character_Main_2_4,,9,3977,,,FALSE,FALSE
+3977,story_1330,놓치지 않겠다는 것처럼.,,,Character_Main_2,Character_Main_2_4,,9,3978,,,FALSE,FALSE
+3978,story_1331,“나도.”,,3,Character_Main_2,Character_Main_2_3,,9,3979,,,FALSE,FALSE
+3979,story_1332,“지금이 좋단다.”,,3,Character_Main_2,Character_Main_2_3,,9,3980,,,FALSE,FALSE
+3980,story_1333,그와 가까운 거리에서 눈이 마주친다.,,,Character_Main_2,Character_Main_2_3,,9,3981,,,FALSE,FALSE
+3981,story_1334,“이상하네요.”,,2,Character_Main_2,Character_Main_2_3,,9,3982,,,FALSE,FALSE
+3982,story_1335,“다 기억나는 것도 아닌데...”,,2,Character_Main_2,Character_Main_2_3,,9,3983,,,FALSE,FALSE
+3983,story_1336,“그래도 충분하지 않니.”,,3,Character_Main_2,Character_Main_2_4,,9,3984,,,FALSE,FALSE
+3984,story_1337,“왜요?”,,2,Character_Main_2,Character_Main_2_4,,9,3985,,,FALSE,FALSE
 3985,story_1338,"그가 나에게 조용히, 그리고 아주 가까이 다가왔다.",,,,,,119,3986,,,FALSE,FALSE
 3986,story_1339,“이렇게 가까이 있을 수 있으니까.”,,3,,,,119,3987,,,FALSE,FALSE
 3987,story_1340,숨이 살짝 겹친다.,,,,,,119,3988,,,FALSE,FALSE

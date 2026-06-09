@@ -743,24 +743,34 @@ public class StoryManager : MonoBehaviour
 
         if (_currentBgIndex != _currentStory.BG)
         {
-            ChangeBG(Resource_Manager.Instance.Get_BG(_currentStory.BG));
+            ChangeBG(_currentStory);
             _currentBgIndex = _currentStory.BG;
         }
     }
 
-    public void ChangeBG(Sprite sprite)
+    public void ChangeBG(Story_Data data)
     {
+        var sprite = Resource_Manager.Instance.Get_BG(_currentStory.BG);
+
+        FadeBG.DOKill();
+        FadeBG.rectTransform.DOKill();
+
         FadeBG.sprite = sprite;
         FadeBG.color = UIUtility.Common_Off_Color;
+        FadeBG.rectTransform.localScale = Vector3.one;
 
-        // 살짝 확대된 상태로 시작
-        FadeBG.rectTransform.localScale = Vector3.one * 1.05f;
+        int productionIndex = data.Appear_Production.IndexOf(3);
 
-        FadeBG.DOFade(1f, 0.5f);
+        if (productionIndex >= 0)
+        {
+            float duration = data.Appear_Production_Time[productionIndex];
 
-        FadeBG.rectTransform
-            .DOScale(1f, 0.5f)
-            .SetEase(Ease.OutQuad);
+            FadeBG.rectTransform.localScale = Vector3.one * 1.05f;
+
+            FadeBG.rectTransform
+                .DOScale(1f, duration)
+                .SetEase(Ease.OutQuad);
+        }
 
         FadeBG.DOFade(1f, 0.5f)
             .OnComplete(() =>

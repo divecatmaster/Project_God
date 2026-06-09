@@ -64,8 +64,27 @@ public class Data_Manager : MonoBehaviour
             newData.Select_Index = CSV_Int_Checker(data[i]["select_index"]);
             newData.BG = (int)data[i]["bg"];
             newData.Next_Index = CSV_Int_Checker(data[i]["next_index"]);
-            newData.Appear_Production = CSV_Int_Checker(data[i]["appear_production"]);
-            newData.Appear_Production_Time = CSV_float_Checker(data[i]["appear_production_time"]);
+
+            var tempProduction = data[i]["appear_production"].ToString();
+            if (!string.IsNullOrEmpty(tempProduction))
+            {
+                var splitProduction = tempProduction.Split('/');
+                for (int a = 0; a < splitProduction.Length; a++)
+                {
+                    newData.Appear_Production.Add(UIUtility.StringToInt(splitProduction[a]));
+                }
+            }
+
+            var tempProductionTIme = data[i]["appear_production_time"].ToString();
+            if (!string.IsNullOrEmpty(tempProductionTIme))
+            {
+                var splitProductionTime = tempProductionTIme.Split('/');
+                for (int a = 0; a < splitProductionTime.Length; a++)
+                {
+                    newData.Appear_Production_Time.Add(CSV_float_Checker(splitProductionTime[a]));
+                }
+            }
+            
             newData.Auto_Next = data[i]["auto_next"].ToString() == "FALSE" ? false : true;
             newData.My_Name = data[i]["my_name"].ToString() == "FALSE" ? false : true;
             Story_Dic.Add(newData.Index, newData);
@@ -294,6 +313,27 @@ public class Data_Manager : MonoBehaviour
 
         return 0f;
     }
+
+    float CSV_float_Checker(string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            return 0f;
+        }
+
+        if (float.TryParse(
+            str,
+            NumberStyles.Float,
+            CultureInfo.InvariantCulture,
+            out float result))
+        {
+            return result;
+        }
+
+        return 0f;
+    }
+
+
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Setting
@@ -400,8 +440,8 @@ public class Story_Data
     public int Select_Index;
     public int BG;
     public int Next_Index;
-    public int Appear_Production;
-    public float Appear_Production_Time;
+    public List<int> Appear_Production = new List<int>();
+    public List<float> Appear_Production_Time = new List<float>();
     public bool Auto_Next;
     public bool My_Name;
 }
