@@ -3,12 +3,14 @@ using DiveCat.God.UI.Popups;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class Popup_Log : PopupBase
 {
     [SerializeField] Button CloseBtn;
     [SerializeField] GameObject ItemObj;
     [SerializeField] ScrollRect Scroll;
+    [SerializeField] TextMeshProUGUI MapName;
 
     List<Popup_Log_Item> _itemList = new List<Popup_Log_Item>();
 
@@ -22,6 +24,7 @@ public class Popup_Log : PopupBase
         ResetItems();
 
         var target = Data_Manager.Instance.GetLogData(currentIndex);
+        MapName.text = LanguageManager.Instance.GetText($"BG_Title_{target[0].BG}");
         for (int i = 0; i < target.Count; i++)
         {
             GetItem().SetItem(target[i]);

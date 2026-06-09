@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 9042323631174379322}
   - component: {fileID: 8845680318447573915}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MapName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -793,6 +793,7 @@ MonoBehaviour:
   CloseBtn: {fileID: 427799422199964932}
   ItemObj: {fileID: 6215403977563348957, guid: 1c3cad065c61e2a4cbd01eb88397e84d, type: 3}
   Scroll: {fileID: 2174471437195043359}
+  MapName: {fileID: 8845680318447573915}
 --- !u!1 &2968454187005265348
 GameObject:
   m_ObjectHideFlags: 0
