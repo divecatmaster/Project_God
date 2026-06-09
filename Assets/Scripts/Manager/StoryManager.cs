@@ -13,11 +13,15 @@ public class StoryManager : MonoBehaviour
     public Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
-    [SerializeField] Image BG;
+    [SerializeField] Image CurrentBG;
+    [SerializeField] Image FadeBG;
+    [SerializeField] CanvasGroup CharacterGroup;
     [SerializeField] Image Body_Img;
+    [SerializeField] Image Body_FadeImg;
     [SerializeField] Image Face_Img;
+    [SerializeField] Image Face_FadeImg;
     [SerializeField] CanvasGroup NameDeco;
-    
+
     [Header("Default")]
     [SerializeField] GameObject Default_Obj;
 
@@ -42,6 +46,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
+    int _currentBgIndex;
     bool _isHide = false;
     bool _isAuto = false;
 
@@ -84,11 +89,12 @@ public class StoryManager : MonoBehaviour
                 _currentStory = target;
             }
         }
+        Set_BG(true);
         SetStory();
     }
 
     float _currentAutoTime = 0f;
-    private void Update() 
+    private void Update()
     {
         if (IsActivePopup())
         {
@@ -113,7 +119,7 @@ public class StoryManager : MonoBehaviour
                 }
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (_currentStory != null && !_isAuto)
@@ -178,6 +184,7 @@ public class StoryManager : MonoBehaviour
             _currentStory = target;
         }
         Data_Manager.Instance.StartTimer(saveData.PlayTime);
+        Set_BG(true);
         SetStory();
         endCallback.Invoke();
     }
@@ -191,7 +198,7 @@ public class StoryManager : MonoBehaviour
             Set_Character();
             if (_currentStory.Select_Index == 0)
             {
-                Play_Typewriter();    
+                Play_Typewriter();
             }
             else
             {
@@ -225,7 +232,7 @@ public class StoryManager : MonoBehaviour
     {
         if (!_isAuto)
         {
-            GetNextStory();    
+            GetNextStory();
         }
     }
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -267,7 +274,7 @@ public class StoryManager : MonoBehaviour
         Context.ForceMeshUpdate();
 
         int totalVisibleCharacters = Context.textInfo.characterCount;
-        
+
         float waitTime = Mathf.Lerp(0.12f, 0.001f, Data_Manager.Instance.TextSpeed / 100f);
 
         if (Data_Manager.Instance.TextSpeed >= 100)
@@ -387,7 +394,7 @@ public class StoryManager : MonoBehaviour
                 NameDeco.gameObject.SetActive(true);
                 NameDeco.alpha = 0f;
                 NameDeco.DOFade(1f, 0.5f);
-                
+
                 Name_Text.DOFade(1f, 0.5f);
             }
         }
@@ -397,48 +404,183 @@ public class StoryManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(_currentStory.Body))
         {
-            Body_Img.gameObject.SetActive(false);
-            _currentBody = "";
+            HideCharacter();
+            return;
         }
-        else
-        {
-            if (_currentBody != _currentStory.Body)
-            {
-                var target = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
-                if (target != null)
-                {
-                    Body_Img.sprite = target;
-                    Body_Img.gameObject.SetActive(true);
-                    _currentBody = _currentStory.Body;
-                }
-                else
-                {
-                    Body_Img.gameObject.SetActive(false);
-                    _currentBody = "";
-                }
-            }
 
-            if (_currentFace != _currentStory.Face)
+        var bodySprite = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
+
+        if (bodySprite == null)
+        {
+            HideCharacter();
+            return;
+        }
+
+        bool wasHidden = !CharacterGroup.gameObject.activeSelf || CharacterGroup.alpha <= 0f;
+
+        if (_currentBody != _currentStory.Body)
+        {
+            Body_Img.sprite = bodySprite;
+            _currentBody = _currentStory.Body;
+        }
+
+        if (!string.IsNullOrEmpty(_currentStory.Face) && _currentFace != _currentStory.Face)
+        {
+            var faceSprite = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
+
+            if (faceSprite != null)
             {
-                var target = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
-                if (target != null)
+                if (wasHidden)
                 {
-                    Face_Img.sprite = target;
+                    Face_Img.DOKill();
                     Face_Img.gameObject.SetActive(true);
-                    _currentFace = _currentStory.Face;
+                    Face_Img.sprite = faceSprite;
+                    Face_Img.color = Color.white;
                 }
                 else
                 {
-                    Face_Img.gameObject.SetActive(false);
-                    _currentFace = "";
+                    ChangeFaceFade(faceSprite);    
                 }
+                _currentFace = _currentStory.Face;
             }
+            else
+            {
+                Face_Img.gameObject.SetActive(false);
+                Face_FadeImg.gameObject.SetActive(false);
+                _currentFace = "";
+            }
+        }
+
+        if (wasHidden)
+        {
+            ShowCharacter();
         }
     }
 
-    void Set_BG()
+    void ShowCharacter()
     {
-        BG.sprite = Resource_Manager.Instance.Get_BG(_currentStory.BG);
+        CharacterGroup.DOKill();
+
+        CharacterGroup.gameObject.SetActive(true);
+        CharacterGroup.alpha = 0f;
+
+        CharacterGroup.DOFade(1f, 0.5f);
+    }
+
+    void HideCharacter()
+    {
+        CharacterGroup.DOKill();
+
+        CharacterGroup.DOFade(0f, 0.5f)
+            .OnComplete(() =>
+            {
+                CharacterGroup.gameObject.SetActive(false);
+                _currentBody = "";
+                _currentFace = "";
+            });
+    }
+
+    void ChangeFaceFade(Sprite nextSprite)
+    {
+        Face_Img.DOKill();
+        Face_FadeImg.DOKill();
+
+        Face_Img.gameObject.SetActive(true);
+        Face_FadeImg.gameObject.SetActive(true);
+
+        Face_FadeImg.sprite = nextSprite;
+        Face_FadeImg.color = UIUtility.Common_Off_Color;
+
+        Face_FadeImg.DOFade(1f, 0.5f)
+            .OnComplete(() =>
+            {
+                Face_Img.sprite = nextSprite;
+                Face_Img.color = Color.white;
+
+                Face_FadeImg.color = UIUtility.Common_Off_Color;
+                Face_FadeImg.gameObject.SetActive(false);
+            });
+    }
+
+    // if (string.IsNullOrEmpty(_currentStory.Body))
+    //     {
+    //         Body_Img.gameObject.SetActive(false);
+    //         _currentBody = "";
+    //     }
+    //     else
+    //     {
+    //         if (_currentBody != _currentStory.Body)
+    //         {
+    //             var target = Resource_Manager.Instance.Get_Body_Image(_currentStory.Body);
+    //             if (target != null)
+    //             {
+    //                 Body_Img.sprite = target;
+    //                 Body_Img.gameObject.SetActive(true);
+    //                 _currentBody = _currentStory.Body;
+    //             }
+    //             else
+    //             {
+    //                 Body_Img.gameObject.SetActive(false);
+    //                 _currentBody = "";
+    //             }
+    //         }
+
+    //         if (_currentFace != _currentStory.Face)
+    //         {
+    //             var target = Resource_Manager.Instance.Get_Face_Image(_currentStory.Face);
+    //             if (target != null)
+    //             {
+    //                 Face_Img.sprite = target;
+    //                 Face_Img.gameObject.SetActive(true);
+    //                 _currentFace = _currentStory.Face;
+    //             }
+    //             else
+    //             {
+    //                 Face_Img.gameObject.SetActive(false);
+    //                 _currentFace = "";
+    //             }
+    //         }
+    //     }
+
+    void Set_BG(bool isForce = false)
+    {
+        if (isForce)
+        {
+            CurrentBG.sprite = Resource_Manager.Instance.Get_BG(_currentStory.BG);
+            FadeBG.color = UIUtility.Common_Off_Color;
+            _currentBgIndex = _currentStory.BG;
+            return;
+        }
+
+        if (_currentBgIndex != _currentStory.BG)
+        {
+            ChangeBG(Resource_Manager.Instance.Get_BG(_currentStory.BG));
+            _currentBgIndex = _currentStory.BG;
+        }
+    }
+
+    public void ChangeBG(Sprite sprite)
+    {
+        FadeBG.sprite = sprite;
+        FadeBG.color = UIUtility.Common_Off_Color;
+
+        // 살짝 확대된 상태로 시작
+        FadeBG.rectTransform.localScale = Vector3.one * 1.05f;
+
+        FadeBG.DOFade(1f, 0.5f);
+
+        FadeBG.rectTransform
+            .DOScale(1f, 0.5f)
+            .SetEase(Ease.OutQuad);
+
+        FadeBG.DOFade(1f, 0.5f)
+            .OnComplete(() =>
+            {
+                CurrentBG.sprite = sprite;
+
+                FadeBG.color = UIUtility.Common_Off_Color;
+                FadeBG.rectTransform.localScale = Vector3.one;
+            });
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -485,7 +627,7 @@ public class StoryManager : MonoBehaviour
         _popup_Save.Open();
     }
     #endregion
-//------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Menu
     Popup_Menu _popup_Menu;
     public void OnClickMenu()
@@ -578,7 +720,7 @@ public class StoryManager : MonoBehaviour
             }
             else
             {
-                _popup_Log.SetItems(_currentStory.Index);    
+                _popup_Log.SetItems(_currentStory.Index);
             }
         }
         else
