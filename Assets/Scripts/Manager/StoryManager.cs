@@ -372,32 +372,67 @@ public class StoryManager : MonoBehaviour
     #region Resource_Setting
     void Set_Name()
     {
-        var name = _currentStory.Name;
+        int name = _currentStory.Name;
+
+        NameDeco.DOKill();
+        Name_Text.DOKill();
+
         if (name == 0)
         {
-            if (NameDeco.gameObject.activeSelf)
-            {
-                NameDeco.DOKill();
-                Name_Text.DOKill();
-                NameDeco.DOFade(0f, 0.5f).OnComplete(() => NameDeco.gameObject.SetActive(false));
-                Name_Text.DOFade(0f, 0.5f).OnComplete(() => Name_Text.text = "");
-            }
-        }
-        else
-        {
-            Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
-            Name_Text.color = Data_Manager.Instance.GetNameColor(name);
-            if (!NameDeco.gameObject.activeSelf)
-            {
-                NameDeco.DOKill();
-                Name_Text.DOKill();
-                NameDeco.gameObject.SetActive(true);
-                NameDeco.alpha = 0f;
-                NameDeco.DOFade(1f, 0.5f);
+            NameDeco.DOFade(0f, 0.5f)
+                .OnComplete(() =>
+                {
+                    NameDeco.gameObject.SetActive(false);
+                    NameDeco.alpha = 0f;
+                });
 
-                Name_Text.DOFade(1f, 0.5f);
-            }
+            Name_Text.DOFade(0f, 0.5f)
+                .OnComplete(() =>
+                {
+                    Name_Text.text = "";
+                    Name_Text.alpha = 0f;
+                });
+
+            return;
         }
+
+        string nextName = LanguageManager.Instance.GetText($"Name_{name}");
+        Color nextColor = Data_Manager.Instance.GetNameColor(name);
+
+        NameDeco.gameObject.SetActive(true);
+
+        Name_Text.text = nextName;
+        Name_Text.color = nextColor;
+
+        NameDeco.alpha = 1f;
+        Name_Text.alpha = 1f;
+
+        // var name = _currentStory.Name;
+        // if (name == 0)
+        // {
+        //     if (NameDeco.gameObject.activeSelf)
+        //     {
+        //         NameDeco.DOKill();
+        //         Name_Text.DOKill();
+        //         NameDeco.DOFade(0f, 0.5f).OnComplete(() => NameDeco.gameObject.SetActive(false));
+        //         Name_Text.DOFade(0f, 0.5f).OnComplete(() => Name_Text.text = "");
+        //     }
+        // }
+        // else
+        // {
+        //     Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
+        //     Name_Text.color = Data_Manager.Instance.GetNameColor(name);
+        //     if (!NameDeco.gameObject.activeSelf)
+        //     {
+        //         NameDeco.DOKill();
+        //         Name_Text.DOKill();
+        //         NameDeco.gameObject.SetActive(true);
+        //         NameDeco.alpha = 0f;
+        //         NameDeco.DOFade(1f, 0.5f);
+
+        //         Name_Text.DOFade(1f, 0.5f);
+        //     }
+        // }
     }
 
     void Set_Character()
