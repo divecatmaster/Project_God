@@ -727,10 +727,10 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2567,story_734,다르다.,,,,,,8,2568,,,FALSE,FALSE
 2568,story_735,"그 온화한 신과 닮아 있으면서도,",,,,,,8,2569,,,FALSE,FALSE
 2569,story_736,지금보다 더 빛에 가까운 존재처럼 느껴졌다.,,,,,,8,2570,,,FALSE,FALSE
-2570,story_737,“......!”,,3,Character_Main_1,Character_Main_1_3,,8,2571,,,FALSE,FALSE
-2571,story_738,“너는...”,,3,Character_Main_1,Character_Main_1_3,,8,2572,,,FALSE,FALSE
+2570,story_737,“......!”,,8,Character_Main_1,Character_Main_1_3,,8,2571,,,FALSE,FALSE
+2571,story_738,“너는...”,,8,Character_Main_1,Character_Main_1_3,,8,2572,,,FALSE,FALSE
 2572,story_739,그가 말끝을 흐렸다.,,,Character_Main_1,Character_Main_1_3,,8,2573,,,FALSE,FALSE
-2573,story_740,“정녕... 이 아이를...”,,3,Character_Main_1,Character_Main_1_4,,8,2574,,,FALSE,FALSE
+2573,story_740,“정녕... 이 아이를...”,,8,Character_Main_1,Character_Main_1_4,,8,2574,,,FALSE,FALSE
 2574,story_741,그의 숨이 거칠게 흔들린다.,,,Character_Main_1,Character_Main_1_4,,8,2575,,,FALSE,FALSE
 2575,story_742,시선 끝에는,,,Character_Main_1,Character_Main_1_4,,8,2576,,,FALSE,FALSE
 2576,story_743,"바닥에 쓰러진 채, 고통에 몸부림치는 어린 시절의 나.",,,Character_Main_1,Character_Main_1_4,,8,2577,,,FALSE,FALSE
@@ -738,7 +738,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2578,story_745,떨리는 목소리.,,,Character_Main_1,Character_Main_1_4,,8,2579,,,FALSE,FALSE
 2579,story_746,"숨조차 제대로 쉬지 못한 채,",,,Character_Main_1,Character_Main_1_4,,8,2580,,,FALSE,FALSE
 2580,story_747,그저 처량하게 그를 올려다보고 있었다.,,,Character_Main_1,Character_Main_1_4,,8,2581,,,FALSE,FALSE
-2581,story_748,“......”,,3,Character_Main_1,Character_Main_1_4,,8,2582,,,FALSE,FALSE
+2581,story_748,“......”,,8,Character_Main_1,Character_Main_1_4,,8,2582,,,FALSE,FALSE
 2582,story_749,그가 나를 내려다보며 망설이는 순간—,,,Character_Main_1,Character_Main_1_4,,8,2583,,,FALSE,FALSE
 2583,story_750,금빛의 새가 하늘을 가르며 내려왔다.,,,,,,8,2584,,,FALSE,FALSE
 2584,story_751,"""...그 아이는 이미 죽었어야 했다.""",,7,Character_3,,,8,2585,,,FALSE,FALSE
@@ -746,9 +746,9 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2586,story_753,"""신의 힘이 인간의 몸에 스며든 결과...""",,7,Character_3,,,8,2587,,,FALSE,FALSE
 2587,story_754,"""그 아이는 더 이상 인간도, 신도 아니다.""",,7,Character_3,,,8,2588,,,FALSE,FALSE
 2588,story_755,"""반신 반인.""",,7,Character_3,,,8,2589,,,FALSE,FALSE
-2589,story_756,"""누군가의 대가 위에서만 살아갈 수 있는 존재다.""",,7,Character_3,,,8,2590,,,FALSE,FALSE
+2589,story_756,"""본인의 죽음, 또는 누군가의 대가 위에서만 살아갈 수 있는 존재다.""",,7,Character_3,,,8,2590,,,FALSE,FALSE
 2590,story_757,"""제거하거라.""",,7,Character_3,,,8,2591,,,FALSE,FALSE
-2591,story_758,“......”,,3,Character_Main_1,Character_Main_1_4,,8,2592,,,FALSE,FALSE
+2591,story_758,“......”,,8,Character_Main_1,Character_Main_1_4,,8,2592,,,FALSE,FALSE
 2592,story_759,"그의 눈이, 아주 잠깐 크게 흔들렸다.",,,Character_Main_1,Character_Main_1_4,,8,2593,,,FALSE,FALSE
 2593,story_760,그 순간 낯선 기억들이 나에게로 흘러 들어왔다.,,,,,,8,2594,,,FALSE,FALSE
 2594,story_761,기존의 격을 넘어선 신력.,,,,,,8,2595,,,FALSE,FALSE
@@ -757,12 +757,12 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2597,story_764,"갑작스럽게 쏟아진 힘을 감당하지 못한 채,",,,,,,8,2598,,,FALSE,FALSE
 2598,story_765,그가 고통에 몸부림치며 신력을 제어하지 못하고,,,,,,8,2599,,,FALSE,FALSE
 2599,story_766,하늘에서 인간계로 떨어졌던 순간까지.,,,,,,8,2600,,,FALSE,FALSE
-2600,story_767,“...이 아이는...”,,3,, ,,108,2601,,,FALSE,FALSE
+2600,story_767,“...이 아이는...”,,8,, ,,108,2601,,,FALSE,FALSE
 2601,story_768,"그의 손이, 미세하게 떨렸다.",,,,,,108,2602,,,FALSE,FALSE
 2602,story_769,마치 익숙한 온기를 다시 떠올린 것처럼.,,,,,,108,2603,,,FALSE,FALSE
 2603,story_770,"그는 아무것도 하지 못한 채,",,,,,,108,2604,,,FALSE,FALSE
 2604,story_771,그저 나를 바라보고 있었다.,,,,,,108,2605,,,FALSE,FALSE
-2605,story_772,“......”,,3,,,,108,2606,,,FALSE,FALSE
+2605,story_772,“......”,,8,,,,108,2606,,,FALSE,FALSE
 2606,story_773,“신 님... 신 님이지요...?”,,6,,,,108,2607,,,FALSE,FALSE
 2607,story_774,“...제가 벌을 받는 건가요...?”,,6,,,,108,2608,,,FALSE,FALSE
 2608,story_775,“무엇이든... 제가 잘못했어요...제발...”,,6,,,,108,2609,,,FALSE,FALSE
@@ -774,10 +774,10 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2614,story_781,연민.,,,,,,108,2615,,,FALSE,FALSE
 2615,story_782,"그리고,",,,,,,108,2616,,,FALSE,FALSE
 2616,story_783,견딜 수 없는 죄책감.,,,,,,108,2617,,,FALSE,FALSE
-2617,story_784,“천제님... 저는...”,,3,,,,109,2618,,,FALSE,FALSE
-2618,story_785,“...도저히... 도저히 이 아이를 죽일 수 없습니다...”,,3,,,,109,2619,,,FALSE,FALSE
-2619,story_786,“저에게 이 아이는... 은인 입니다...”,,3,,,,109,2620,,,FALSE,FALSE
-2620,story_787,“어찌...제가...”,,3,,,,109,2621,,,FALSE,FALSE
+2617,story_784,“천제님... 저는...”,,8,,,,109,2618,,,FALSE,FALSE
+2618,story_785,“...도저히... 도저히 이 아이를 죽일 수 없습니다...”,,8,,,,109,2619,,,FALSE,FALSE
+2619,story_786,“저에게 이 아이는... 은인 입니다...”,,8,,,,109,2620,,,FALSE,FALSE
+2620,story_787,“어찌...제가...”,,8,,,,109,2621,,,FALSE,FALSE
 2621,story_788,"그의 목소리는, 이미 무너져 있었다.",,,,,,109,2622,,,FALSE,FALSE
 2622,story_789,어린 나를 위해 그가 울고 있다.,,,,,,109,2623,,,FALSE,FALSE
 2623,story_790,"그 사실이, 가슴 깊이 파고들었다.",,,,,,109,2624,,,FALSE,FALSE
@@ -787,9 +787,9 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2627,story_794,“정말 이 선택을 하겠느냐.”,,7,,,,109,2628,,,FALSE,FALSE
 2628,story_795,"그 말에는 분명,",,,,,,109,2629,,,FALSE,FALSE
 2629,story_796,진심 어린 걱정이 담겨 있었다.,,,,,,109,2630,,,FALSE,FALSE
-2630,story_797,“이 아이가...”,,3,,,,109,2631,,,FALSE,FALSE
-2631,story_798,“목숨으로 대가를 치러야 한다면...”,,3,,,,109,2632,,,FALSE,FALSE
-2632,story_799,“제가 대신 받겠습니다.”,,3,,,,109,2633,,,FALSE,FALSE
+2630,story_797,“이 아이가...”,,8,,,,109,2631,,,FALSE,FALSE
+2631,story_798,“목숨으로 대가를 치러야 한다면...”,,8,,,,109,2632,,,FALSE,FALSE
+2632,story_799,“제가 대신 받겠습니다.”,,8,,,,109,2633,,,FALSE,FALSE
 2633,story_800,"고통에 몸부림치는 나의 앞에서,",,,,,,109,2634,,,FALSE,FALSE
 2634,story_801,무너지듯 무릎을 꿇고 눈물을 흘리며,,,,,,109,2635,,,FALSE,FALSE
 2635,story_802,그는 그렇게 말했다.,,,,,,109,2636,,,FALSE,FALSE
@@ -1152,8 +1152,8 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3805,story_1158,빛이—,,,,,,10,3806,,,FALSE,FALSE
 3806,story_1159,"조각처럼 갈라져,",,,,,,10,3807,,,FALSE,FALSE
 3807,story_1160,우리에게 스며들었다.,,,,,,10,3808,,,FALSE,FALSE
-3808,story_1161,“정녕... 이 아이를...”,,3,,,,108,3809,,,FALSE,FALSE
-3809,story_1162,“...저는...”,,3,,,,108,3810,,,FALSE,FALSE
+3808,story_1161,“정녕... 이 아이를...”,,8,,,,108,3809,,,FALSE,FALSE
+3809,story_1162,“...저는...”,,8,,,,108,3810,,,FALSE,FALSE
 3810,story_1163,바닥에 쓰러져있는 어린시절의 나.,,,,,,108,3811,,,FALSE,FALSE
 3811,story_1164,숨이 가쁘다.,,,,,,108,3812,,,FALSE,FALSE
 3812,story_1165,“...살려주세요...”,,6,,,,108,3813,,,FALSE,FALSE
@@ -1166,15 +1166,15 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3819,story_1172,그런데—,,,,,,8,3820,,,FALSE,FALSE
 3820,story_1173,"감정이,",,,,,,8,3821,,,FALSE,FALSE
 3821,story_1174,비어 있다.,,,,,,8,3822,,,FALSE,FALSE
-3822,story_1175,“...도저히...”,,3,,,,109,3823,,,FALSE,FALSE
-3823,story_1176,“...죽일 수 없습니다...”,,3,,,,109,3824,,,FALSE,FALSE
+3822,story_1175,“...도저히...”,,8,,,,109,3823,,,FALSE,FALSE
+3823,story_1176,“...죽일 수 없습니다...”,,8,,,,109,3824,,,FALSE,FALSE
 3824,story_1177,그는 분명 괴로워하고 있는데—,,,,,,109,3825,,,FALSE,FALSE
 3825,story_1178,"그 이유가,",,,,,,109,3826,,,FALSE,FALSE
 3826,story_1179,전해지지 않는다.,,,,,,109,3827,,,FALSE,FALSE
 3827,story_1180,“...이상해...”,,2,,,,109,3828,,,FALSE,FALSE
 3828,story_1181,“...왜...”,,2,,,,109,3829,,,FALSE,FALSE
 3829,story_1182,그의 선택이 보인다.,,,,,,109,3830,,,FALSE,FALSE
-3830,story_1183,“...제가 대신 받겠습니다.”,,3,,,,109,3831,,,FALSE,FALSE
+3830,story_1183,“...제가 대신 받겠습니다.”,,8,,,,109,3831,,,FALSE,FALSE
 3831,story_1184,하지만—,,,,,,109,3832,,,FALSE,FALSE
 3832,story_1185,그 순간.,,,,,,109,3833,,,FALSE,FALSE
 3833,story_1186,"뚝,",,,,,,8,3834,,,FALSE,FALSE
@@ -1199,7 +1199,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3852,story_1205,"완전하지 않은 기억이,",,,,,,10,3853,,,FALSE,FALSE
 3853,story_1206,오히려 더 오래 남은듯하다.,,,,,,10,3854,,,FALSE,FALSE
 3854,story_1207,기억의 조각은—,,,,,,10,3855,,,FALSE,FALSE
-3855,story_1208,끝내 완전히 이어지지 않았다.,,,,,,10,3856,,,FALSE,FALSE
+3855,story_1208,끝내 이어지지 않았다.,,,,,,10,3856,,,FALSE,FALSE
 3856,story_1209,"하지만, 충분했다.",,,,,,10,3857,,,FALSE,FALSE
 3857,story_1210,“이제...알아요.”,,2,Character_Main_0,Character_Main_0_7,,10,3858,,,FALSE,FALSE
 3858,story_1211,“전부는 아니어도...”,,2,Character_Main_0,Character_Main_0_7,,10,3859,,,FALSE,FALSE

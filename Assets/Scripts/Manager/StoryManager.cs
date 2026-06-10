@@ -47,6 +47,7 @@ public class StoryManager : MonoBehaviour
     string _currentBody;
     string _currentFace;
     int _currentBgIndex;
+    int _currentName = -1;
     bool _isHide = false;
     bool _isAuto = false;
 
@@ -72,6 +73,7 @@ public class StoryManager : MonoBehaviour
 
     private void Start()
     {
+        ResetCharacterImmediately();
         if (Data_Manager.Instance.IsNewGame)
         {
             var target = Data_Manager.Instance.GetStoryData(1);
@@ -220,6 +222,7 @@ public class StoryManager : MonoBehaviour
 
         _currentBody = "";
         _currentFace = "";
+        _currentName = -1;
     }
 
     void SetStory()
@@ -410,21 +413,27 @@ public class StoryManager : MonoBehaviour
         NameDeco.DOKill();
         Name_Text.DOKill();
 
+        // 이름 없음
         if (name == 0)
         {
-            NameDeco.DOFade(0f, 0.5f)
-                .OnComplete(() =>
-                {
-                    NameDeco.gameObject.SetActive(false);
-                    NameDeco.alpha = 0f;
-                });
+            _currentName = 0;
 
-            Name_Text.DOFade(0f, 0.5f)
-                .OnComplete(() =>
-                {
-                    Name_Text.text = "";
-                    Name_Text.alpha = 0f;
-                });
+            if (NameDeco.gameObject.activeSelf)
+            {
+                NameDeco.DOFade(0f, 0.5f).SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        NameDeco.gameObject.SetActive(false);
+                        NameDeco.alpha = 0f;
+                    });
+
+                Name_Text.DOFade(0f, 0.5f).SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        Name_Text.text = "";
+                        Name_Text.alpha = 0f;
+                    });
+            }
 
             return;
         }
@@ -432,40 +441,40 @@ public class StoryManager : MonoBehaviour
         string nextName = LanguageManager.Instance.GetText($"Name_{name}");
         Color nextColor = Data_Manager.Instance.GetNameColor(name);
 
-        NameDeco.gameObject.SetActive(true);
+        // 이름창이 꺼져있음 → 페이드인
+        if (!NameDeco.gameObject.activeSelf)
+        {
+            NameDeco.gameObject.SetActive(true);
 
+            NameDeco.alpha = 0f;
+            Name_Text.alpha = 0f;
+
+            Name_Text.text = nextName;
+            Name_Text.color = nextColor;
+
+            NameDeco.DOFade(1f, 0.5f).SetEase(Ease.Linear);
+            Name_Text.DOFade(1f, 0.5f).SetEase(Ease.Linear);
+
+            _currentName = name;
+            return;
+        }
+
+        // 같은 이름
+        if (_currentName == name)
+        {
+            NameDeco.alpha = 1f;
+            Name_Text.alpha = 1f;
+            return;
+        }
+
+        // 이름만 변경
         Name_Text.text = nextName;
         Name_Text.color = nextColor;
 
         NameDeco.alpha = 1f;
         Name_Text.alpha = 1f;
 
-        // var name = _currentStory.Name;
-        // if (name == 0)
-        // {
-        //     if (NameDeco.gameObject.activeSelf)
-        //     {
-        //         NameDeco.DOKill();
-        //         Name_Text.DOKill();
-        //         NameDeco.DOFade(0f, 0.5f).OnComplete(() => NameDeco.gameObject.SetActive(false));
-        //         Name_Text.DOFade(0f, 0.5f).OnComplete(() => Name_Text.text = "");
-        //     }
-        // }
-        // else
-        // {
-        //     Name_Text.text = LanguageManager.Instance.GetText($"Name_{name}");
-        //     Name_Text.color = Data_Manager.Instance.GetNameColor(name);
-        //     if (!NameDeco.gameObject.activeSelf)
-        //     {
-        //         NameDeco.DOKill();
-        //         Name_Text.DOKill();
-        //         NameDeco.gameObject.SetActive(true);
-        //         NameDeco.alpha = 0f;
-        //         NameDeco.DOFade(1f, 0.5f);
-
-        //         Name_Text.DOFade(1f, 0.5f);
-        //     }
-        // }
+        _currentName = name;
     }
 
     void Set_Character()
