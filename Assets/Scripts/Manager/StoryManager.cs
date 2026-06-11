@@ -13,14 +13,19 @@ public class StoryManager : MonoBehaviour
     public Transform Popup_Trans;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
-    [SerializeField] Image CurrentBG;
-    [SerializeField] Image FadeBG;
     [SerializeField] CanvasGroup CharacterGroup;
     [SerializeField] Image Body_Img;
     [SerializeField] Image Body_FadeImg;
     [SerializeField] Image Face_Img;
     [SerializeField] Image Face_FadeImg;
     [SerializeField] CanvasGroup NameDeco;
+
+    [Header("BG")]
+    [SerializeField] Image CurrentBG;
+    [SerializeField] Image FadeBG;
+    [SerializeField] Material[] BG_Fade_Material;
+    Material _bgFade_Ver;
+    Material _bgFade_Hor;
 
     [Header("Default")]
     [SerializeField] GameObject Default_Obj;
@@ -759,7 +764,10 @@ public class StoryManager : MonoBehaviour
 
     public void ChangeBG(Story_Data data)
     {
-        var sprite = Resource_Manager.Instance.Get_BG(_currentStory.BG);
+        var sprite = Resource_Manager.Instance.Get_BG(data.BG);
+
+        if (sprite == null)
+            return;
 
         FadeBG.DOKill();
         FadeBG.rectTransform.DOKill();
@@ -768,10 +776,11 @@ public class StoryManager : MonoBehaviour
         FadeBG.color = UIUtility.Common_Off_Color;
         FadeBG.rectTransform.localScale = Vector3.one;
 
-        int productionIndex = data.Appear_Production.IndexOf(3);
-
-        if (productionIndex >= 0)
+        int productionIndex = data.Appear_Production.IndexOf(3);//띠용
+        if (productionIndex >= 0 && productionIndex < data.Appear_Production_Time.Count)
         {
+            FadeBG.sprite = sprite;
+
             float duration = data.Appear_Production_Time[productionIndex];
 
             FadeBG.rectTransform.localScale = Vector3.one * 1.05f;
@@ -781,14 +790,105 @@ public class StoryManager : MonoBehaviour
                 .SetEase(Ease.OutQuad);
         }
 
-        FadeBG.DOFade(1f, 0.5f)
-            .OnComplete(() =>
-            {
-                CurrentBG.sprite = sprite;
+        int leftIndex = data.Appear_Production.IndexOf(4);
+        int rightIndex = data.Appear_Production.IndexOf(5);
+        int upIndex = data.Appear_Production.IndexOf(6);
+        int downIndex = data.Appear_Production.IndexOf(7);
 
+        if (leftIndex >= 0 && leftIndex < data.Appear_Production_Time.Count)
+        {
+            FadeBG.sprite = CurrentBG.sprite;
+            CurrentBG.sprite = sprite;
+            if (_bgFade_Hor == null)
+            {
+                _bgFade_Hor = Instantiate(BG_Fade_Material[1]);
+            }
+            FadeBG.color = UIUtility.Common_On_Color;
+            FadeBG.material = _bgFade_Hor;
+            _bgFade_Hor.SetFloat("_FadeProgress", 0f);
+            _bgFade_Hor.DisableKeyword("REVERSE_DIRECTION");
+
+            DOTween.To(() => _bgFade_Hor.GetFloat("_FadeProgress"),
+            x => _bgFade_Hor.SetFloat("_FadeProgress", x), 1f, data.Appear_Production_Time[leftIndex]).SetEase(Ease.Linear).OnComplete(() =>
+            {
                 FadeBG.color = UIUtility.Common_Off_Color;
                 FadeBG.rectTransform.localScale = Vector3.one;
             });
+        }
+        else if (rightIndex >= 0 && rightIndex < data.Appear_Production_Time.Count)
+        {
+            FadeBG.sprite = CurrentBG.sprite;
+            CurrentBG.sprite = sprite;
+            if (_bgFade_Hor == null)
+            {
+                _bgFade_Hor = Instantiate(BG_Fade_Material[1]);
+            }
+            FadeBG.color = UIUtility.Common_On_Color;
+            FadeBG.material = _bgFade_Hor;
+            _bgFade_Hor.SetFloat("_FadeProgress", 0f);
+            _bgFade_Hor.EnableKeyword("REVERSE_DIRECTION");
+
+            DOTween.To(() => _bgFade_Hor.GetFloat("_FadeProgress"),
+            x => _bgFade_Hor.SetFloat("_FadeProgress", x), 1f, data.Appear_Production_Time[rightIndex]).SetEase(Ease.Linear).OnComplete(()=>
+            {
+                FadeBG.color = UIUtility.Common_Off_Color;
+                FadeBG.rectTransform.localScale = Vector3.one;
+            });
+        }
+        else if (upIndex >= 0 && upIndex < data.Appear_Production_Time.Count)
+        {
+            FadeBG.sprite = CurrentBG.sprite;
+            CurrentBG.sprite = sprite;
+            if (_bgFade_Ver == null)
+            {
+                _bgFade_Ver = Instantiate(BG_Fade_Material[0]);
+            }
+
+            FadeBG.color = UIUtility.Common_On_Color;
+            FadeBG.material = _bgFade_Ver;
+            _bgFade_Ver.SetFloat("_FadeProgress", 0f);
+            _bgFade_Ver.EnableKeyword("REVERSE_DIRECTION");
+            
+
+            DOTween.To(() => _bgFade_Ver.GetFloat("_FadeProgress"),
+            x => _bgFade_Ver.SetFloat("_FadeProgress", x), 1f, data.Appear_Production_Time[upIndex]).SetEase(Ease.Linear).OnComplete(()=>
+            {
+                FadeBG.color = UIUtility.Common_Off_Color;
+                FadeBG.rectTransform.localScale = Vector3.one;
+            });
+        }
+        else if (downIndex >= 0 && downIndex < data.Appear_Production_Time.Count)
+        {
+            FadeBG.sprite = CurrentBG.sprite;
+            CurrentBG.sprite = sprite;
+            if (_bgFade_Ver == null)
+            {
+                _bgFade_Ver = Instantiate(BG_Fade_Material[0]);
+            }
+            
+            FadeBG.color = UIUtility.Common_On_Color;
+            FadeBG.material = _bgFade_Ver;
+            _bgFade_Ver.SetFloat("_FadeProgress", 0f);
+            _bgFade_Ver.DisableKeyword("REVERSE_DIRECTION");
+
+            DOTween.To(() => _bgFade_Ver.GetFloat("_FadeProgress"),
+            x => _bgFade_Ver.SetFloat("_FadeProgress", x), 1f, data.Appear_Production_Time[downIndex]).SetEase(Ease.Linear).OnComplete(()=>
+            {
+                FadeBG.color = UIUtility.Common_Off_Color;
+                FadeBG.rectTransform.localScale = Vector3.one;
+            });
+        }
+        else
+        {
+            FadeBG.material = null;
+            FadeBG.DOFade(1f, 0.5f)
+            .OnComplete(() =>
+            {
+                CurrentBG.sprite = sprite;
+                FadeBG.color = UIUtility.Common_Off_Color;
+                FadeBG.rectTransform.localScale = Vector3.one;
+            });
+        }
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
