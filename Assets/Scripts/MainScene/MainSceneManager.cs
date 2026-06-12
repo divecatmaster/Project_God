@@ -90,4 +90,19 @@ public class MainSceneManager : MonoBehaviour
         }
         _popup_Setting.Open();
     }
+
+    Popup_Gallery _popup_Gallery;
+    public void OnClickGallery()
+    {
+        if (_popup_Gallery == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Gallery");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Gallery = item.GetComponent<Popup_Gallery>();
+            }
+        }
+        _popup_Gallery.Open();
+    }
 }

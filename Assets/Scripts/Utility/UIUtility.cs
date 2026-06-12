@@ -57,5 +57,8 @@ static public class UIUtility
     static public Color Option_On_BG_Color = new Color(0.5764706f, 0.6666667f, 0.8235294f, 0.1f);
     static public Color Slider_On_Star_Color = new Color(0.8745098f, 0.9137255f, 1f, 1f);
     static public Color Slider_Off_Star_Color = new Color(0.5333334f, 0.6196079f, 0.8196079f, 1f);
+    static public Color Gallery_Lock_Glow_Color = new Color(0.7647059f, 0.8117647f, 0.9960784f, 0.6f);
+    static public Color Gallery_Lock_Text_Color = new Color(0.8627451f, 0.8941177f, 0.9647059f, 1f);
+    
     #endregion
 }

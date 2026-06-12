@@ -27,6 +27,7 @@ public class Data_Manager : MonoBehaviour
         LoadSelectData();
         LoadSaveData();
         InitNameColor();
+        InitGallery();
     }
 
     float _playTimer;
@@ -278,6 +279,49 @@ public class Data_Manager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Gallery
+    Dictionary<int, Gallery_Data> Gallery_Dic = new Dictionary<int, Gallery_Data>();
+    List<int> Gallery_OpenData = new List<int>();
+    void InitGallery()
+    {
+        Gallery_Dic = new Dictionary<int, Gallery_Data>();
+        Gallery_OpenData = new List<int>();
+
+        var data = CSVReader.ReadOriginal("Gallery");
+        for (int i = 0; i < data.Count; i++)
+        {
+            var newData = new Gallery_Data();
+            newData.Index = (int)data[i]["index"];
+            newData.BG = (int)data[i]["bg"];
+            newData.TextKey = data[i]["text"].ToString();
+
+            Gallery_Dic.Add(newData.Index, newData);
+        }
+
+        var savedData = PlayerPrefs.GetString("Gallery", "");
+        if (!string.IsNullOrEmpty(savedData))
+        {
+            var split = savedData.Split('/');
+            for (int i = 0; i < split.Length; i++)
+            {
+                Gallery_OpenData.Add(UIUtility.StringToInt(split[i]));
+            }
+        }
+    }
+
+    public List<Gallery_Data> GetGalleryData()
+    {
+        return Gallery_Dic.Values
+            .OrderBy(x => x.Index)
+            .ToList();
+    }
+
+    public bool IsOpenGallery(int idx)
+    {
+        return Gallery_OpenData.Contains(idx);
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region CSV_Util
     int CSV_Int_Checker(object obj)
     {
@@ -472,4 +516,11 @@ public class Save_Data
         get => PlayTimeTicks <= 0 ? TimeSpan.Zero : new TimeSpan(PlayTimeTicks);
         set => PlayTimeTicks = value.Ticks;
     }
+}
+
+public class Gallery_Data
+{
+    public int Index;
+    public int BG;
+    public string TextKey;
 }
