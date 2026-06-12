@@ -8,6 +8,10 @@ public class Popup_Gallery : PopupBase
     [SerializeField] Button CloseBtn;
     [SerializeField] Transform ItemTrans;
     [SerializeField] GameObject Item_Obj;
+    [SerializeField] Button Arrow_Left;
+    [SerializeField] Button Arrow_Right;
+    [SerializeField] Image Dot_1;
+    [SerializeField] Image Dot_2;
 
     List<Popup_Gallery_Item> _itemList = new List<Popup_Gallery_Item>();
     List<Gallery_Data> _galleryData = new List<Gallery_Data>();
@@ -17,16 +21,25 @@ public class Popup_Gallery : PopupBase
     protected override void Awake()
     {
         CloseBtn.onClick.AddListener(OnClickExit);
+        Arrow_Left.onClick.AddListener(OnClickLeft);
+        Arrow_Right.onClick.AddListener(OnClickRight);
         base.Awake();
+    }
+
+    void OnEnable()
+    {
         InitData();
     }
 
     void InitData()
     {
-        _galleryData = Data_Manager.Instance.GetGalleryData();
+        if (_galleryData.Count <= 0)
+        {
+            _galleryData = Data_Manager.Instance.GetGalleryGroupData();    
+        }
         _totalCount = _galleryData.Count;
-        _totalPage = Mathf.CeilToInt(_galleryData.Count / 9);
-        _currentPage = 1;
+        _totalPage = Mathf.CeilToInt((float)_galleryData.Count / 9f);
+        _currentPage = 0;
         SetPage();
     }
 
@@ -45,6 +58,28 @@ public class Popup_Gallery : PopupBase
             {
                 GetItem().SetItem(i, _galleryData[idx - 1], OnClickItem);
             }
+        }
+
+        SetArrow();
+    }
+
+    void SetArrow()
+    {
+        if (_currentPage == 0)
+        {
+            Arrow_Left.gameObject.SetActive(false);
+            Arrow_Right.gameObject.SetActive(true);
+
+            Dot_1.color = UIUtility.Gallery_Dot_On_Color;
+            Dot_2.color = UIUtility.Gallery_Dot_Off_Color;
+        }
+        else
+        {
+            Arrow_Left.gameObject.SetActive(true);
+            Arrow_Right.gameObject.SetActive(false);
+
+            Dot_1.color = UIUtility.Gallery_Dot_Off_Color;
+            Dot_2.color = UIUtility.Gallery_Dot_On_Color;
         }
     }
 
@@ -77,6 +112,28 @@ public class Popup_Gallery : PopupBase
     void OnClickItem(int idx)
     {
         
+    }
+
+    void OnClickLeft()
+    {
+        _currentPage--;
+        if (_currentPage < 0)
+        {
+            _currentPage = 0;
+        }
+
+        SetPage();
+    }
+
+    void OnClickRight()
+    {
+        _currentPage++;
+        if (_currentPage >= 2)
+        {
+            _currentPage = 1;
+        }
+
+        SetPage();
     }
 
     void OnClickExit()

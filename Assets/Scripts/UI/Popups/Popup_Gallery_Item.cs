@@ -47,12 +47,16 @@ public class Popup_Gallery_Item : MonoBehaviour, IPointerEnterHandler, IPointerE
             Active.SetActive(true);
             Lock.SetActive(false);
             Title.text = LanguageManager.Instance.GetText(data.TextKey);
+            Title.color = UIUtility.Gallery_Lock_Text_Color;
             NumText.text = data.Index.ToString("00");
+            NumText.color = UIUtility.Gallery_Lock_Text_Color;
             BG.sprite = Resource_Manager.Instance.Get_BG(data.BG);
             Deco_Bot_1.SetActive(true);
             Deco_Bot_2.gameObject.SetActive(true);
             Deco_Bot_2.color = UIUtility.Common_Off_Color;
             Star.gameObject.SetActive(true);
+            Star.color = UIUtility.Gallery_Star_Off_Color;
+            BG_Glow.color = UIUtility.Common_Off_Color;
         }
         else
         {
@@ -72,20 +76,27 @@ public class Popup_Gallery_Item : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         Lock_Glow.DOKill();
         Lock_Text.DOKill();
+        Title.DOKill();
+        BG_Glow.DOKill();
+        Deco_Bot_2.DOKill();
+        NumText.DOKill();
+        Star.DOKill();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         KillTweens();
 
-        Title.DOColor(UIUtility.Gallery_Lock_Text_Color, 0.7f);
         if (_isOpen)
         {
-            
+            Title.DOColor(UIUtility.Gallery_Text_On_Color, 0.7f);
+            BG_Glow.DOColor(UIUtility.Gallery_BG_Glow_Color,0.7f);
+            Deco_Bot_2.DOColor(UIUtility.Common_On_Color,0.7f);
+            NumText.DOColor(UIUtility.Gallery_Text_On_Color,0.7f);
+            Star.DOColor(UIUtility.Save_On_Star_Color,0.7f);
         }
         else
         {
-            
             Lock_Glow.DOColor(UIUtility.Gallery_Lock_Glow_Color, 0.7f);
             Lock_Text.DOColor(UIUtility.Gallery_Lock_Text_Color, 0.7f);
         }
@@ -97,11 +108,14 @@ public class Popup_Gallery_Item : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         if (_isOpen)
         {
-            
+            Title.DOColor(UIUtility.Gallery_Lock_Text_Color, 0.7f);
+            BG_Glow.DOColor(UIUtility.Common_Off_Color,0.7f);
+            Deco_Bot_2.DOColor(UIUtility.Common_Off_Color,0.7f);
+            NumText.DOColor(UIUtility.Gallery_Lock_Text_Color,0.7f);
+            Star.DOColor(UIUtility.Gallery_Star_Off_Color,0.7f);
         }
         else
         {
-            Title.DOColor(UIUtility.Gallery_Lock_Text_Color, 0.7f);
             Lock_Glow.DOColor(UIUtility.Common_Off_Color, 0.7f);
             Lock_Text.DOColor(UIUtility.Common_Off_Color, 0.7f);
         }

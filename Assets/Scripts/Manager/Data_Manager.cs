@@ -88,6 +88,7 @@ public class Data_Manager : MonoBehaviour
             
             newData.Auto_Next = data[i]["auto_next"].ToString() == "FALSE" ? false : true;
             newData.My_Name = data[i]["my_name"].ToString() == "FALSE" ? false : true;
+            newData.Gallery = CSV_Int_Checker(data[i]["gallery"]);
             Story_Dic.Add(newData.Index, newData);
         }
     }
@@ -292,6 +293,7 @@ public class Data_Manager : MonoBehaviour
         {
             var newData = new Gallery_Data();
             newData.Index = (int)data[i]["index"];
+            newData.Group = (int)data[i]["group"];
             newData.BG = (int)data[i]["bg"];
             newData.TextKey = data[i]["text"].ToString();
 
@@ -316,9 +318,42 @@ public class Data_Manager : MonoBehaviour
             .ToList();
     }
 
+    public List<Gallery_Data> GetGalleryGroupData()
+    {
+        return Gallery_Dic.Values
+            .GroupBy(x => x.Group)
+            .Select(g => g.OrderBy(x => x.Index).First())
+            .OrderBy(x => x.Index)
+            .ToList();
+    }
+
     public bool IsOpenGallery(int idx)
     {
         return Gallery_OpenData.Contains(idx);
+    }
+
+    public void AddGallery(int idx)
+    {
+        if (idx == 0) return;
+        
+        if (!Gallery_OpenData.Contains(idx))
+        {
+            Gallery_OpenData.Add(idx);
+            string str = "";
+            for (int i = 0; i < Gallery_OpenData.Count; i++)
+            {
+                str += Gallery_OpenData[i];
+                if (i + 1 >= Gallery_OpenData.Count)
+                {
+                    
+                }
+                else
+                {
+                    str += "/";
+                }
+            }
+            PlayerPrefs.SetString("Gallery", str);
+        }
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -488,6 +523,7 @@ public class Story_Data
     public List<float> Appear_Production_Time = new List<float>();
     public bool Auto_Next;
     public bool My_Name;
+    public int Gallery;
 }
 
 public class Select_Data
@@ -521,6 +557,7 @@ public class Save_Data
 public class Gallery_Data
 {
     public int Index;
+    public int Group;
     public int BG;
     public string TextKey;
 }

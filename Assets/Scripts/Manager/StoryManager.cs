@@ -246,6 +246,7 @@ public class StoryManager : MonoBehaviour
                 SetSelect();
             }
             Data_Manager.Instance.SetSaveStory_Index(_currentStory.Index);
+            CheckGallery();
         }
     }
 
@@ -1291,6 +1292,16 @@ public class StoryManager : MonoBehaviour
         else
         {
             _popup_Log.SetItems(_currentStory.Index);
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Gallery
+    void CheckGallery()
+    {
+        if (_currentStory.Gallery != 0)
+        {
+            Data_Manager.Instance.AddGallery(_currentStory.Gallery);
         }
     }
     #endregion
