@@ -1729,6 +1729,15 @@ MonoBehaviour:
   BG: {fileID: 8973795273678122189}
   IndexText: {fileID: 7941711139342841256}
   TitleText: {fileID: 9093063384262411154}
+  HideObjects:
+  - {fileID: 7951181162777542367}
+  - {fileID: 8323085059583715537}
+  - {fileID: 7951603915450742653}
+  - {fileID: 4002456753277287648}
+  - {fileID: 5364530198066433699}
+  - {fileID: 3248807892046899262}
+  - {fileID: 6526675225931415517}
+  - {fileID: 7596309423675171215}
   Scroll: {fileID: 3627676410978091497}
   Context_Obj: {fileID: 3959710219886614933, guid: b7772ab1c2b4b4c4bbeb81fed6c4f99a, type: 3}
   HideBtn: {fileID: 3080625153382912563}
@@ -4099,6 +4108,7 @@ GameObject:
   - component: {fileID: 5909709644918592903}
   - component: {fileID: 5299306489599616556}
   - component: {fileID: 3080625153382912563}
+  - component: {fileID: 3611846563118586432}
   m_Layer: 5
   m_Name: HideBtn
   m_TagString: Untagged
@@ -4209,6 +4219,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3611846563118586432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595155666279561833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181666f47907c274983ab1675c598847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ingame_Button_Hover
+  type: 6
+  glow: {fileID: 1514960332814686785}
+  text: {fileID: 7107043440212871641}
+  buttonBG: {fileID: 0}
+  buttonOutline: {fileID: 0}
+  buttonOutlineSprites: []
+  Star: {fileID: 0}
+  Remove_Btn: {fileID: 0}
+  tweenDuration: 0.7
 --- !u!1 &6757334018926490988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,6 +4252,7 @@ GameObject:
   - component: {fileID: 1500987924761427635}
   - component: {fileID: 4146653351434224266}
   - component: {fileID: 7110053870952398099}
+  - component: {fileID: 9015574395623585578}
   m_Layer: 5
   m_Name: ShowBtn
   m_TagString: Untagged
@@ -4332,6 +4364,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9015574395623585578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757334018926490988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181666f47907c274983ab1675c598847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ingame_Button_Hover
+  type: 6
+  glow: {fileID: 8749122552657156520}
+  text: {fileID: 1223949797187417094}
+  buttonBG: {fileID: 0}
+  buttonOutline: {fileID: 0}
+  buttonOutlineSprites: []
+  Star: {fileID: 0}
+  Remove_Btn: {fileID: 0}
+  tweenDuration: 0.7
 --- !u!1 &6809611724532443425
 GameObject:
   m_ObjectHideFlags: 0

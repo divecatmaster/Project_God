@@ -64,6 +64,7 @@ static public class UIUtility
     static public Color Gallery_Star_Off_Color = new Color(0.6039216f, 0.654902f, 0.7764706f, 1f);//9AA7C6
     static public Color Gallery_Dot_On_Color = new Color(0.5960785f, 0.6352941f, 0.7215686f, 1f);//98A2B8
     static public Color Gallery_Dot_Off_Color = new Color(0.1333333f, 0.1607843f, 0.2392157f, 1f);//22293D
+    static public Color Gallery_Hide_Glow_Color = new Color(0.7137255f, 0.7803922f, 0.8509804f, 0.4f);//B6C7D9
     
     #endregion
 }

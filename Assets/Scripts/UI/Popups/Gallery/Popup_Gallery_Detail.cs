@@ -5,12 +5,14 @@ using DG.Tweening;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 public class Popup_Gallery_Detail : PopupBase
 {
     [SerializeField] Image BG;
     [SerializeField] TextMeshProUGUI IndexText;
     [SerializeField] TextMeshProUGUI TitleText;
+    [SerializeField] GameObject[] HideObjects;
     
 
     [Header("Context")]
@@ -36,6 +38,8 @@ public class Popup_Gallery_Detail : PopupBase
         ExitBtn.onClick.AddListener(() => Close());
         RightBtn.onClick.AddListener(OnClickNextPage);
         LeftBtn.onClick.AddListener(OnClickBeforePage);
+        HideBtn.onClick.AddListener(OnClickHide);
+        ShowBtn.onClick.AddListener(OnClickShow);
         base.Awake();
     }
 
@@ -83,7 +87,7 @@ public class Popup_Gallery_Detail : PopupBase
 
         SetContext(targetData.Start, targetData.End);
         SetPage();
-        Show();
+        OnClickShow();
     }
 
     void SetContext(int start, int end)
@@ -124,19 +128,6 @@ public class Popup_Gallery_Detail : PopupBase
         }
     }
 
-    void Show()
-    {
-        HideBtn.gameObject.SetActive(true);
-        ShowBtn.gameObject.SetActive(false);
-    }
-
-    void Hide()
-    {
-        
-    }
-
-    
-
     void ResetItems()
     {
         for (int i = 0; i < Context_Items.Count; i++)
@@ -162,11 +153,38 @@ public class Popup_Gallery_Detail : PopupBase
 
         return script;
     }
+
+    IEnumerator TakeScreenshotRoutine()
+    {
+        OnClickHide();
+        HideBtn.gameObject.SetActive(false);
+        ShowBtn.gameObject.SetActive(false);
+
+        yield return new WaitForEndOfFrame();
+
+        string fileName = $"Screenshot_{System.DateTime.Now:yyyyMMdd_HHmmss}.png";
+        string path = System.IO.Path.Combine(Application.persistentDataPath, fileName);
+
+        ScreenCapture.CaptureScreenshot(path);
+
+        yield return new WaitForEndOfFrame();
+
+        OnClickShow();
+
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        if (popup != null)
+        {
+            //정환 로컬라이즈
+            popup.Open();
+            popup.SetPopup_One($"{path}에 이미지가 저장되었습니다.", () => popup.Close());
+        }
+        //Debug.Log($"스크린샷 저장 완료: {path}");
+    }
 //-------------------------------------------------------------------------------------------------------------------------------------
     #region ButtonAction
     void OnClickImageSave()
     {
-        
+        StartCoroutine(TakeScreenshotRoutine());
     }
 
     void OnClickMusic()
@@ -193,6 +211,26 @@ public class Popup_Gallery_Detail : PopupBase
             _currentPage = 0;
         }
         SetUI();
+    }
+
+    void OnClickShow()
+    {
+        HideBtn.gameObject.SetActive(true);
+        ShowBtn.gameObject.SetActive(false);
+        for (int i = 0; i < HideObjects.Length; i++)
+        {
+            HideObjects[i].gameObject.SetActive(true);
+        }
+    }
+
+    void OnClickHide()
+    {
+        HideBtn.gameObject.SetActive(false);
+        ShowBtn.gameObject.SetActive(true);
+        for (int i = 0; i < HideObjects.Length; i++)
+        {
+            HideObjects[i].gameObject.SetActive(false);
+        }
     }
     #endregion
 }

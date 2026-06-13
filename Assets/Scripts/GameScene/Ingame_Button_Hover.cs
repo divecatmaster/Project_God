@@ -51,6 +51,7 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
         switch (type)
         {
             case Hover_Type.Button:
+            case Hover_Type.Gallery_Hide:
                 if (text != null)
                     text.color = UIUtility.Common_Off_Color;
 
@@ -140,6 +141,12 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
                     text.DOColor(UIUtility.YesOrNo_On_Text_Color, tweenDuration);
                 }
                 break;
+            case Hover_Type.Gallery_Hide:
+                {
+                    text?.DOColor(UIUtility.Common_On_Color, tweenDuration);
+                    glow?.DOColor(UIUtility.Gallery_Hide_Glow_Color, tweenDuration);
+                }
+                break;
         }
     }
 
@@ -150,6 +157,7 @@ public class Ingame_Button_Hover : MonoBehaviour, IPointerEnterHandler, IPointer
         switch (type)
         {
             case Hover_Type.Button:
+            case Hover_Type.Gallery_Hide:
                 {
                     text?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
                     glow?.DOColor(UIUtility.Common_Off_Color, tweenDuration);
@@ -199,5 +207,6 @@ public enum Hover_Type
     Select,
     Save,
     YesOrNo,
-    Option
+    Option,
+    Gallery_Hide
 }
