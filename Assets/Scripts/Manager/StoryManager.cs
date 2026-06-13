@@ -452,7 +452,17 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
-        string nextName = LanguageManager.Instance.GetText($"Name_{name}");
+        string nextName = "";
+        if (name == 9)
+        {
+            //정환 여기 수정 필요
+            nextName = "닉네임";
+        }
+        else
+        {
+            nextName = LanguageManager.Instance.GetText($"Name_{name}");    
+        }
+        
         Color nextColor = Data_Manager.Instance.GetNameColor(name);
 
         // 이름창이 꺼져있음 → 페이드인

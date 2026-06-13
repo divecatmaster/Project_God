@@ -102,6 +102,21 @@ public class Data_Manager : MonoBehaviour
         return null;
     }
 
+    public List<Story_Data> GetStoryData(int start, int end)
+    {
+        if (start > end)
+        {
+            int temp = start;
+            start = end;
+            end = temp;
+        }
+
+        return Story_Dic.Values
+            .Where(x => x.Index >= start && x.Index <= end)
+            .OrderBy(x => x.Index)
+            .ToList();
+    }
+
     public void SetNewGame(bool isNew = false)
     {
         IsNewGame = isNew;
@@ -296,6 +311,9 @@ public class Data_Manager : MonoBehaviour
             newData.Group = (int)data[i]["group"];
             newData.BG = (int)data[i]["bg"];
             newData.TextKey = data[i]["text"].ToString();
+            newData.Music = data[i]["music"].ToString();
+            newData.Start = CSV_Int_Checker(data[i]["start"]);
+            newData.End = CSV_Int_Checker(data[i]["end"]);
 
             Gallery_Dic.Add(newData.Index, newData);
         }
@@ -323,6 +341,14 @@ public class Data_Manager : MonoBehaviour
         return Gallery_Dic.Values
             .GroupBy(x => x.Group)
             .Select(g => g.OrderBy(x => x.Index).First())
+            .OrderBy(x => x.Index)
+            .ToList();
+    }
+
+    public List<Gallery_Data> GetGalleryGroupData(int group)
+    {
+        return Gallery_Dic.Values
+            .Where(x => x.Group == group)
             .OrderBy(x => x.Index)
             .ToList();
     }
@@ -560,4 +586,7 @@ public class Gallery_Data
     public int Group;
     public int BG;
     public string TextKey;
+    public string Music;
+    public int Start;
+    public int End;
 }

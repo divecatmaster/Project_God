@@ -12,6 +12,7 @@ public class Popup_Gallery : PopupBase
     [SerializeField] Button Arrow_Right;
     [SerializeField] Image Dot_1;
     [SerializeField] Image Dot_2;
+    [SerializeField] Popup_Gallery_Detail Detail_Popup;
 
     List<Popup_Gallery_Item> _itemList = new List<Popup_Gallery_Item>();
     List<Gallery_Data> _galleryData = new List<Gallery_Data>();
@@ -111,7 +112,10 @@ public class Popup_Gallery : PopupBase
 
     void OnClickItem(int idx)
     {
-        
+        var targetData = _galleryData[idx + (_currentPage * 9)];
+        Detail_Popup.SetPopup(targetData.Group);
+        Detail_Popup.gameObject.SetActive(true);
+        Detail_Popup.Open();
     }
 
     void OnClickLeft()
