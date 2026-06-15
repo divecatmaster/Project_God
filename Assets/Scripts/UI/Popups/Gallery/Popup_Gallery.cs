@@ -113,9 +113,13 @@ public class Popup_Gallery : PopupBase
     void OnClickItem(int idx)
     {
         var targetData = _galleryData[idx + (_currentPage * 9)];
-        Detail_Popup.SetPopup(targetData.Group);
-        Detail_Popup.gameObject.SetActive(true);
-        Detail_Popup.Open();
+
+        if (Data_Manager.Instance.IsOpenGallery(targetData.Index))
+        {
+            Detail_Popup.SetPopup(targetData.Group);
+            Detail_Popup.gameObject.SetActive(true);
+            Detail_Popup.Open();
+        }
     }
 
     void OnClickLeft()
