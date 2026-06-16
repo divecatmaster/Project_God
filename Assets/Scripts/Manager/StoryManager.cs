@@ -178,8 +178,12 @@ public class StoryManager : MonoBehaviour
             OnClickLog();
         }
 
-        float wheel = Input.mouseScrollDelta.y;
+        if (Input.GetKeyDown(KeyCode.T))//Test
+        {
+            OpenTestTool();    
+        }
 
+        float wheel = Input.mouseScrollDelta.y;
     }
 
     public void LoadGame(Action endCallback)
@@ -1341,6 +1345,27 @@ public class StoryManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetTest(Story_Data data)
+    {
+        _currentStory = data;
+        SetStory();
+    }
+
+    TestTool _testTool;
+    void OpenTestTool()
+    {
+        if (_testTool == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Test");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _testTool = item.GetComponent<TestTool>();
+            }
+        }
+        _testTool.Open();
     }
     #endregion
 }
