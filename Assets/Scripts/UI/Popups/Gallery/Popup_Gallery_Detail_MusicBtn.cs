@@ -13,6 +13,7 @@ public class Popup_Gallery_Detail_MusicBtn : MonoBehaviour, IPointerEnterHandler
     [SerializeField] Sprite[] PlaySprites;
     [SerializeField] UI_MusicEqualizer MusicAnimation;
     [SerializeField] TextMeshProUGUI MusicName;
+    [SerializeField] CanvasGroup Fly;
 
 
     Color _glowOnColor = new Color(1f, 1f, 1f, 0.3f);
@@ -28,20 +29,28 @@ public class Popup_Gallery_Detail_MusicBtn : MonoBehaviour, IPointerEnterHandler
         _callback = callback;
         Glow.color = UIUtility.Common_Off_Color;
         MusicName.text = musicName;
-        SetPlay(false);
+        SetPlay(false, true);
     }
 
-    public void SetPlay(bool isPlay)
+    public void SetPlay(bool isPlay, bool isInit = false)
     {
+        if (isInit)
+        {
+            Fly.alpha = 0f;    
+        }
+        
+        Fly.DOKill();
         if (isPlay)
         {
             PlayImg.sprite = PlaySprites[1];
             MusicAnimation.Play();
+            Fly.DOFade(1f, 0.5f);
         }
         else
         {
             PlayImg.sprite = PlaySprites[0];
             MusicAnimation.Stop();
+            Fly.DOFade(0f, 0.5f);
         }
     }
 
