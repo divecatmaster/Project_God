@@ -201,7 +201,7 @@ public class Data_Manager : MonoBehaviour
     {
         for (int i = 0; i < 20; i++)
         {
-            SaveManager.Instance.Load(i);
+            SaveManager.Instance.Load(i + 1);
         }
     }
 
