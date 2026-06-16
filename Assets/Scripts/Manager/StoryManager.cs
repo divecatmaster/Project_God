@@ -514,6 +514,7 @@ public class StoryManager : MonoBehaviour
     private bool _isFaceChanging;
     private bool _isFaceHiding;
     private bool _isCharacterHiding;
+    private bool _isCharacterShowing;
 
     private Sprite _pendingFaceOnlySprite;
     private string _pendingFaceOnlyKey;
@@ -522,6 +523,7 @@ public class StoryManager : MonoBehaviour
     Tween _faceDelayTween;
     Tween _hideFaceDelayTween;
     Tween _hideCharacterDelayTween;
+    Tween _showCharacterDelayTween;
 
     void Set_Character()
     {
@@ -790,6 +792,7 @@ public class StoryManager : MonoBehaviour
     {
         KillCharacterTweenOnly();
 
+        _isCharacterShowing = false;
         _isCharacterChanging = false;
         _isFaceChanging = false;
         _isFaceHiding = false;
@@ -800,10 +803,29 @@ public class StoryManager : MonoBehaviour
     {
         CharacterGroup.DOKill();
 
+        _showCharacterDelayTween?.Kill();
+        _showCharacterDelayTween = null;
+
+        _isCharacterShowing = true;
+
         CharacterGroup.gameObject.SetActive(true);
         CharacterGroup.alpha = 0f;
 
-        CharacterGroup.DOFade(1f, 0.5f);
+        CharacterGroup.DOFade(1f, 0.5f).SetEase(Ease.Linear);
+
+        _showCharacterDelayTween = DOVirtual.DelayedCall(0.5f, CompleteShowCharacter);
+    }
+
+    void CompleteShowCharacter()
+    {
+        if (!_isCharacterShowing)
+            return;
+
+        CharacterGroup.gameObject.SetActive(true);
+        CharacterGroup.alpha = 1f;
+
+        _showCharacterDelayTween = null;
+        _isCharacterShowing = false;
     }
 
     void HideCharacter()
@@ -1106,15 +1128,21 @@ public class StoryManager : MonoBehaviour
     void ForceCompleteCharacterTween()
     {
         bool hadPending =
-            _isCharacterChanging ||
-            _isFaceChanging ||
-            _isFaceHiding ||
-            _isCharacterHiding;
+        _isCharacterShowing ||
+        _isCharacterChanging ||
+        _isFaceChanging ||
+        _isFaceHiding ||
+        _isCharacterHiding;
 
         if (!hadPending)
             return;
 
         KillCharacterTweenOnly();
+
+        if (_isCharacterShowing)
+        {
+            CompleteShowCharacter();
+        }
 
         if (_isCharacterChanging)
         {
@@ -1141,6 +1169,9 @@ public class StoryManager : MonoBehaviour
 
     void KillCharacterTweenOnly()
     {
+        _showCharacterDelayTween?.Kill();
+        _showCharacterDelayTween = null;
+
         _characterDelayTween?.Kill();
         _characterDelayTween = null;
 
