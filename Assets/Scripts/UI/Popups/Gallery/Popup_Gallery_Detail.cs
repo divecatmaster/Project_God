@@ -134,6 +134,7 @@ public class Popup_Gallery_Detail : PopupBase
         {
             Context_Items[i].gameObject.SetActive(false);
         }
+        Scroll.verticalNormalizedPosition = 1f;
     }
 
     Popup_Gallery_Detail_ContextItem GetItem()
