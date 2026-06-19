@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Popup_Setting_System : MonoBehaviour
 {
@@ -146,28 +148,29 @@ public class Popup_Setting_System : MonoBehaviour
         Language_Dropdown.ClearOptions();
 
         var list = new List<string>();
-        for (int i = 0; i < (int)LanguageType.MAX; i++)
+        for (int i = 0; i < (int)LanguageType.MAX - 1; i++)
         {
-            list.Add(LanguageManager.Instance.GetText($"Language_{(LanguageType)i}"));
+            list.Add(LanguageManager.Instance.GetText($"Language_{(LanguageType)i + 1}"));
         }
         Language_Dropdown.AddOptions(list);
-        
-        Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage());
+
+        Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage() - 1);
         Language_Dropdown.RefreshShownValue();
     }
 
     void OnValueChange_Language(int index)
     {
-        if ((int)LanguageManager.Instance.GetCurrentLanguage() == index)
+        if ((int)LanguageManager.Instance.GetCurrentLanguage() == (index + 1))
             return;
 
         var popup = Resource_Manager.Instance.Get_Yes_Or_No();
         popup.Open();
         popup.SetPopup(LanguageManager.Instance.GetText("Language_Warning"), () =>
         {
+            LanguageManager.Instance.ChangeLanguage((LanguageType)(index + 1));
             this.gameObject.SetActive(false);
             popup.Close();
-            LanguageManager.Instance.SetLanguage((LanguageType)index);
+            //LanguageManager.Instance.SetLanguage((LanguageType)(index + 1));
         },
         () =>
         {
@@ -176,4 +179,6 @@ public class Popup_Setting_System : MonoBehaviour
             popup.Close();
         });
     }
+
+    
 }

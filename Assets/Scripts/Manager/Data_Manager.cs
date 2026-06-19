@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Globalization;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Data_Manager : MonoBehaviour
 {
@@ -22,12 +23,19 @@ public class Data_Manager : MonoBehaviour
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        SetLanguage();
         InitSettingValue();
         LoadStoryData();
         LoadSelectData();
         LoadSaveData();
         InitNameColor();
         InitGallery();
+        SceneManager.LoadScene("MainScene");
     }
 
     float _playTimer;
@@ -44,6 +52,51 @@ public class Data_Manager : MonoBehaviour
             _playTimer = 0f;
         }
     }
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Language
+    void SetLanguage()
+    {        
+        LanguageManager.Instance.SetLanguage(GetLanguageType());
+    }
+
+    LanguageType GetLanguageType()
+    {
+        LanguageType type = LanguageType.EN;
+
+        var _save = PlayerPrefs.GetInt("SavedLanguage", 0);
+        if (_save == 0)
+        {
+            SystemLanguage language = Application.systemLanguage;
+            switch (language)
+            {
+                case SystemLanguage.Korean: type = LanguageType.KR; break;
+                case SystemLanguage.English: type = LanguageType.EN; break;
+                case SystemLanguage.Japanese: type = LanguageType.JA; break;
+                case SystemLanguage.ChineseSimplified:
+                    Debug.Log("중국어 간체");
+                    break;
+
+                case SystemLanguage.ChineseTraditional:
+                    Debug.Log("중국어 번체");
+                    break;
+
+                default: type = LanguageType.KR; break;
+            }
+            SaveLanguage(type);
+        }
+        else
+        {
+            type = (LanguageType)_save;
+        }
+        
+        return type;
+    }
+
+    public void SaveLanguage(LanguageType type)
+    {
+        PlayerPrefs.SetInt("SavedLanguage", (int)type);
+    }
+    #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Story
     Dictionary<int, Story_Data> Story_Dic = new Dictionary<int, Story_Data>();

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LanguageManager : MonoBehaviour
 {
     public static LanguageManager Instance;
 
-    [SerializeField] LanguageType _currentLanguage = LanguageType.KR;
+    [SerializeField] LanguageType _currentLanguage = LanguageType.None;
     Dictionary<string, string> _languageData = new Dictionary<string, string>();
 
     private void Awake()
@@ -25,7 +27,7 @@ public class LanguageManager : MonoBehaviour
 
     private void Start()
     {
-        InitLanguage();
+        //InitLanguage();
     }
 
     void InitLanguage()
@@ -62,11 +64,37 @@ public class LanguageManager : MonoBehaviour
         _currentLanguage = language;
         InitLanguage();
     }
+
+    public void ChangeLanguage(LanguageType language)
+    {
+        Data_Manager.Instance.SaveLanguage(language);
+        StartCoroutine(LoadSceneProcess());
+    }
+
+    IEnumerator LoadSceneProcess()
+    {
+        SceneManager.sceneLoaded += OnStartSceneLoaded;
+
+        SceneManager.LoadSceneAsync("StartScene");
+
+        yield break;
+    }
+
+    void OnStartSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != "StartScene")
+            return;
+
+        SceneManager.sceneLoaded -= OnStartSceneLoaded;
+
+        Data_Manager.Instance.Init();
+    }
 }
 
 public enum LanguageType
 {
-    EN = 0,
+    None = 0,
+    EN,
     KR,
     JA,
     MAX
