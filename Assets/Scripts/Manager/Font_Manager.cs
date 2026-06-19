@@ -7,7 +7,7 @@ public class Font_Manager : MonoBehaviour
 
     [SerializeField] TMP_FontAsset Number_Font;
     [SerializeField] TMP_FontAsset Korean_Font;
-    [SerializeField] TMP_FontAsset English_Font;
+    [SerializeField] TMP_FontAsset Korean_Font_Regular;
     [SerializeField] TMP_FontAsset Japanese_Font;
 
     private void Awake()
@@ -22,15 +22,36 @@ public class Font_Manager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public TMP_FontAsset GetFont(LanguageType language)
+    public TMP_FontAsset GetFont(bool IsRegular = false)
     {
+        LanguageType language = LanguageManager.Instance.GetCurrentLanguage();
         switch (language)
         {
-            case LanguageType.KR: return Korean_Font;
-            case LanguageType.EN: return English_Font;
+            case LanguageType.KR:
+            case LanguageType.EN:
+                {
+                    if (IsRegular)
+                    {
+                        return Korean_Font_Regular;
+                    }
+                    else
+                    {
+                        return Korean_Font;
+                    }
+                }
             case LanguageType.JA: return Japanese_Font;
             case LanguageType.MAX: return Number_Font;
-            default: return English_Font;
+            default: 
+            {
+                if (IsRegular)
+                    {
+                        return Korean_Font_Regular;
+                    }
+                    else
+                    {
+                        return Korean_Font;
+                    }
+            }
         }
     }
 }

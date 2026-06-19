@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Resoultion
+  IsRegularFont: 0
 --- !u!1 &141015453905804144
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_1
+  IsRegularFont: 0
 --- !u!1 &195843488359535428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_EffectSound
+  IsRegularFont: 0
 --- !u!1 &520709194436718284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,6 +1391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_7
+  IsRegularFont: 0
 --- !u!1 &665179817833191682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,8 +1459,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
-  m_sharedMaterial: {fileID: 1030912958990861715, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
+  m_sharedMaterial: {fileID: 1030912958990861715, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1676,6 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_BGM
+  IsRegularFont: 0
 --- !u!1 &737126584447227640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,6 +2175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_AutoSpeed
+  IsRegularFont: 0
 --- !u!1 &1115278380097928151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_6
+  IsRegularFont: 0
 --- !u!1 &1129641760331948129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3896,6 +3903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_UISound
+  IsRegularFont: 0
 --- !u!1 &2745086217086610560
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,6 +5380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_5
+  IsRegularFont: 0
 --- !u!1 &3358304898004511825
 GameObject:
   m_ObjectHideFlags: 0
@@ -6106,6 +6115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_On
+  IsRegularFont: 0
 --- !u!1 &3681493477215681934
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,6 +6506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Off
+  IsRegularFont: 0
 --- !u!1 &3815029707442223636
 GameObject:
   m_ObjectHideFlags: 0
@@ -6777,6 +6788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Effect
+  IsRegularFont: 0
 --- !u!1 &3969530788264696447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7114,6 +7126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Language
+  IsRegularFont: 0
 --- !u!1 &4135399619664030589
 GameObject:
   m_ObjectHideFlags: 0
@@ -7541,6 +7554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_3
+  IsRegularFont: 0
 --- !u!1 &4451463959354847099
 GameObject:
   m_ObjectHideFlags: 0
@@ -7767,6 +7781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Preview
+  IsRegularFont: 0
 --- !u!1 &4476958938360860359
 GameObject:
   m_ObjectHideFlags: 0
@@ -8151,6 +8166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Sound
+  IsRegularFont: 0
 --- !u!1 &4872330737152705371
 GameObject:
   m_ObjectHideFlags: 0
@@ -9016,6 +9032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: System
+  IsRegularFont: 0
 --- !u!1 &5104709684079692724
 GameObject:
   m_ObjectHideFlags: 0
@@ -9592,6 +9609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting
+  IsRegularFont: 0
 --- !u!1 &5253636300661648074
 GameObject:
   m_ObjectHideFlags: 0
@@ -10335,6 +10353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Mode
+  IsRegularFont: 0
 --- !u!1 &5566107316646945270
 GameObject:
   m_ObjectHideFlags: 0
@@ -11623,6 +11642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Game
+  IsRegularFont: 0
 --- !u!1 &6704120583222623295
 GameObject:
   m_ObjectHideFlags: 0
@@ -11774,6 +11794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_TextSpeed
+  IsRegularFont: 0
 --- !u!1 &6771402724155317630
 GameObject:
   m_ObjectHideFlags: 0
@@ -13566,6 +13587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key
+  IsRegularFont: 0
 --- !u!1 &7610390905211639773
 GameObject:
   m_ObjectHideFlags: 0
@@ -13633,7 +13655,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uCC3D\uBAA8\uB4DC"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
   m_sharedMaterial: {fileID: 1030912958990861715, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13700,7 +13722,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7615045111751740513
@@ -14252,6 +14274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_8
+  IsRegularFont: 0
 --- !u!1 &8046621227453114530
 GameObject:
   m_ObjectHideFlags: 0
@@ -15269,7 +15292,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uCC3D\uBAA8\uB4DC"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
   m_sharedMaterial: {fileID: 1030912958990861715, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -15336,7 +15359,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8607374253995020606
@@ -15528,6 +15551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_2
+  IsRegularFont: 0
 --- !u!1 &8682703261672783271
 GameObject:
   m_ObjectHideFlags: 0
@@ -16028,6 +16052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_4
+  IsRegularFont: 0
 --- !u!1 &8798365463140929611
 GameObject:
   m_ObjectHideFlags: 0
@@ -16215,8 +16240,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
-  m_sharedMaterial: {fileID: 1030912958990861715, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
+  m_sharedMaterial: {fileID: 1030912958990861715, guid: 6d2bb0daa14ef0d4c9628a9c31239bad, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

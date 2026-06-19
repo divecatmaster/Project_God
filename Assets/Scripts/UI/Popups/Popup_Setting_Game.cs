@@ -152,6 +152,7 @@ public class Popup_Setting_Game : MonoBehaviour
         while (true)
         {
             ExampleText.text = LanguageManager.Instance.GetText($"Sample_Text_{idx}");
+            ExampleText.font = Font_Manager.Instance.GetFont();
             ExampleText.maxVisibleCharacters = 0;
             ExampleText.ForceMeshUpdate();
 

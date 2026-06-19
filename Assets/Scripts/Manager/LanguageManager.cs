@@ -97,5 +97,6 @@ public enum LanguageType
     EN,
     KR,
     JA,
+    CN,
     MAX
 }

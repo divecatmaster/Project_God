@@ -396,8 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Font_Manager
   Number_Font: {fileID: 11400000, guid: 645d21c0426c03046b6cf1129b169eee, type: 2}
   Korean_Font: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
-  English_Font: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
-  Japanese_Font: {fileID: 0}
+  Korean_Font_Regular: {fileID: 11400000, guid: 0285f8aa0a826e64ab1b75439ae07fdd, type: 2}
+  Japanese_Font: {fileID: 11400000, guid: eb8ebcc177a38b049a66399bb670da42, type: 2}
 --- !u!1 &634624476
 GameObject:
   m_ObjectHideFlags: 0

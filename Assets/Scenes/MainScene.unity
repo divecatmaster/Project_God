@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Gallery
+  IsRegularFont: 0
 --- !u!1 &34716277
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Load_Game
+  IsRegularFont: 0
 --- !u!1 &40460263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting
+  IsRegularFont: 0
 --- !u!1 &461665989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: New_Game
+  IsRegularFont: 0
 --- !u!1 &688569686
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,6 +3772,7 @@ GameObject:
   - component: {fileID: 1456999866}
   - component: {fileID: 1456999868}
   - component: {fileID: 1456999867}
+  - component: {fileID: 1456999869}
   m_Layer: 5
   m_Name: MainTitle
   m_TagString: Untagged
@@ -3791,8 +3796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 34, y: 334}
-  m_SizeDelta: {x: 512, y: 512}
+  m_AnchoredPosition: {x: -182.1, y: 338.2}
+  m_SizeDelta: {x: 1024, y: 512}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1456999867
 MonoBehaviour:
@@ -3814,9 +3819,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc1cf16551419a34bb6016944820aa9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5df94e2893feb049b7fcfc0909c097b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3832,6 +3837,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456999865}
   m_CullTransparentMesh: 1
+--- !u!114 &1456999869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456999865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6bc1ad85afda941a46aa48efff4a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Language_Image
+  Img: {fileID: 1456999867}
+  Default: {fileID: 21300000, guid: 81d9daac849dbae42aa50c5796715432, type: 3}
+  KR: {fileID: 21300000, guid: c5df94e2893feb049b7fcfc0909c097b, type: 3}
+  JA: {fileID: 21300000, guid: 926bbcb7e241ffb4c863cf54b9fa2051, type: 3}
+  CN: {fileID: 21300000, guid: 8d459ac7288769945a9eecf538788d81, type: 3}
 --- !u!1 &1602932857
 GameObject:
   m_ObjectHideFlags: 0
@@ -4673,6 +4695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: EndGame_TItle
+  IsRegularFont: 0
 --- !u!1 &2015346616
 GameObject:
   m_ObjectHideFlags: 0
