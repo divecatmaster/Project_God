@@ -13,6 +13,7 @@ public class Popup_Gallery_Detail : PopupBase
     [SerializeField] TextMeshProUGUI IndexText;
     [SerializeField] TextMeshProUGUI TitleText;
     [SerializeField] GameObject[] HideObjects;
+    [SerializeField] Image[] Dots;
     
 
     [Header("Context")]
@@ -90,6 +91,35 @@ public class Popup_Gallery_Detail : PopupBase
         OnClickShow();
     }
 
+    void SetDots(int totalCount, int currentIdx)
+    {
+        if (totalCount == 1)
+        {
+            for (int i = 0; i < Dots.Length; i++)
+            {
+                Dots[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < Dots.Length; i++)
+            {
+                Dots[i].gameObject.SetActive(true);
+            }
+
+            if (currentIdx == 0)
+            {
+                Dots[0].color = UIUtility.HexToColor("b8c4e0");
+                Dots[1].color = UIUtility.HexToColor("374160");
+            }
+            else
+            {
+                Dots[0].color = UIUtility.HexToColor("374160");
+                Dots[1].color = UIUtility.HexToColor("b8c4e0");
+            }
+        }
+    }
+
     void SetContext(int start, int end)
     {
         ResetItems();
@@ -126,6 +156,7 @@ public class Popup_Gallery_Detail : PopupBase
             LeftBtn.gameObject.SetActive(false);
             RightBtn.gameObject.SetActive(false);
         }
+        SetDots(_gallery_Datas.Count, _currentPage);
     }
 
     void ResetItems()
