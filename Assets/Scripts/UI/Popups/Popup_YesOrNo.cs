@@ -24,7 +24,7 @@ public class Popup_YesOrNo : PopupBase
         YesBtn.onClick.AddListener(OnClickYes);
         NoBtn.onClick.AddListener(OnClickNo);
         Confirm_Btn.onClick.AddListener(OnClickConfirm);
-
+        Title.font = Font_Manager.Instance.GetFont();
     }
 
     public override void Open(Action onComplete = null)

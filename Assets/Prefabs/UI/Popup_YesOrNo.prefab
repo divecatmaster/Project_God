@@ -778,6 +778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Popup_Yes
   IsRegularFont: 0
+  IsEnableUpdate: 1
 --- !u!1 &3947714414486142038
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,6 +931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Confirm
   IsRegularFont: 0
+  IsEnableUpdate: 1
 --- !u!1 &4425669572877595053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Popup_No
   IsRegularFont: 0
+  IsEnableUpdate: 1
 --- !u!1 &8649160003417210262
 GameObject:
   m_ObjectHideFlags: 0

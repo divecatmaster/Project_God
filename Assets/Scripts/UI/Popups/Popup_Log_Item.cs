@@ -8,6 +8,12 @@ public class Popup_Log_Item : MonoBehaviour
     [SerializeField] GameObject Select;
     [SerializeField] TextMeshProUGUI Context;
 
+    private void Start() 
+    {
+        Name.font = Font_Manager.Instance.GetFont();
+        Context.font = Font_Manager.Instance.GetFont();
+    }
+
     public void SetItem(Story_Data story)
     {
         if (story.Name == 0)

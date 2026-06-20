@@ -75,13 +75,19 @@ namespace DiveCat.God.UI.Popups
 
             State = PopupState.Closed;
 
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0f;
+            if (canvasGroup != null)
+            {
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.alpha = 0f;
+            }
 
             if (useScaleAnimation)
             {
-                contentRoot.localScale = startScale;
+                if (contentRoot != null)
+                {
+                    contentRoot.localScale = startScale;
+                }
             }
 
             gameObject.SetActive(false);

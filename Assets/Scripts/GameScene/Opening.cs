@@ -62,6 +62,7 @@ public class Opening : MonoBehaviour
                 popup.Open();
                 popup.SetPopup(LanguageManager.Instance.GetText("Opening_Skip_Title"), ()=>
                 {
+                        StoryManager.Instance.IsOpening = false;
                         DOTween.Kill(OpeningTweenId);
                         this.gameObject.SetActive(false);
                 },
@@ -98,15 +99,34 @@ public class Opening : MonoBehaviour
                 }
         }
 
+        void SetFont()
+        {
+                Main_Text.font = Font_Manager.Instance.GetFont(true);
+                Main_Text_Sub.font = Font_Manager.Instance.GetFont(true);
+                if (LanguageManager.Instance.GetCurrentLanguage() == LanguageType.KR || LanguageManager.Instance.GetCurrentLanguage() == LanguageType.EN)
+                {
+                        Main_Text.fontSharedMaterial = Font_Manager.Instance.GetFontMaterial(1);
+                        Main_Text_Sub.fontSharedMaterial = Font_Manager.Instance.GetFontMaterial(1);
+                }
+                else
+                {
+                        Main_Text.fontSharedMaterial = Font_Manager.Instance.GetFontMaterial(4);
+                        Main_Text_Sub.fontSharedMaterial = Font_Manager.Instance.GetFontMaterial(4);
+                }
+        }
+
         IEnumerator StartProduction()
         {
+                StoryManager.Instance.IsOpening = true;
+                SetFont();
+                //정환 키보드로 마우스 휠업 등등 막기
                 typing_speed_1 = 0.05f;
                 Main_Text.text = "";
                 Main_Text_Sub.text = "";
                 Sub_Text_1.text = "";
                 Sub_Text_2.text = "";
 
-                Main_Text.fontMaterial = new Material(Main_Text.fontMaterial);
+                //Main_Text.fontMaterial = new Material(Main_Text.fontMaterial);
                 yield return WaitPauseable(1f);
 
                 //20살 생일.
@@ -319,6 +339,7 @@ public class Opening : MonoBehaviour
                 Main_Text.DOFade(0, 2f).SetId(OpeningTweenId);
                 yield return WaitPauseable(2f);
                 Main_Text.text = "";
+                StoryManager.Instance.IsOpening = false;
                 CanvasGroup.DOFade(0, 1f).SetId(OpeningTweenId).OnComplete(() => this.gameObject.SetActive(false));
         }
 

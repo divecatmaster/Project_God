@@ -398,6 +398,11 @@ MonoBehaviour:
   Korean_Font: {fileID: 11400000, guid: 3fff94ab7ccd72e409fc8d633c5ddb18, type: 2}
   Korean_Font_Regular: {fileID: 11400000, guid: 0285f8aa0a826e64ab1b75439ae07fdd, type: 2}
   Japanese_Font: {fileID: 11400000, guid: eb8ebcc177a38b049a66399bb670da42, type: 2}
+  Korean_Default: {fileID: 6979258454703941035, guid: 0285f8aa0a826e64ab1b75439ae07fdd, type: 2}
+  Korean_Blur: {fileID: 2100000, guid: 9b4330d8456e1e247abde8f6d34657de, type: 2}
+  Korean_Shadow: {fileID: 2100000, guid: af4ae27e689418d4abbd37a2dae16f64, type: 2}
+  Other_Default: {fileID: -1304957710274900223, guid: eb8ebcc177a38b049a66399bb670da42, type: 2}
+  Other_Blur: {fileID: 2100000, guid: ae4961c193608ad4a833f4cd5f17fb10, type: 2}
 --- !u!1 &634624476
 GameObject:
   m_ObjectHideFlags: 0

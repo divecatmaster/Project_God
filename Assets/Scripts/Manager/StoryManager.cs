@@ -11,6 +11,7 @@ public class StoryManager : MonoBehaviour
 {
     public static StoryManager Instance;
     public Transform Popup_Trans;
+    public bool IsOpening;
     [SerializeField] TextMeshProUGUI Context;
     [SerializeField] TextMeshProUGUI Name_Text;
     [SerializeField] CanvasGroup CharacterGroup;
@@ -78,6 +79,12 @@ public class StoryManager : MonoBehaviour
 
     private void Start()
     {
+        Context.font = Font_Manager.Instance.GetFont();
+        for (int i = 0; i < Select_Texts.Length; i++)
+        {
+            Select_Texts[i].font = Font_Manager.Instance.GetFont();
+        }
+        
         ResetCharacterImmediately();
         if (Data_Manager.Instance.IsNewGame)
         {
@@ -103,7 +110,7 @@ public class StoryManager : MonoBehaviour
     float _currentAutoTime = 0f;
     private void Update()
     {
-        if (IsActivePopup())
+        if (IsActivePopup() || IsOpening)
         {
             return;
         }
