@@ -491,6 +491,11 @@ public class StoryManager : MonoBehaviour
         {
             nextName = Data_Manager.Instance.MyName;
         }
+        else if (name == 6)
+        {
+            var str = LanguageManager.Instance.GetText($"Name_{name}");
+            nextName = string.Format(str, Data_Manager.Instance.MyName);
+        }
         else
         {
             nextName = LanguageManager.Instance.GetText($"Name_{name}");    

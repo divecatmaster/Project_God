@@ -8,6 +8,7 @@ namespace DiveCat.God.UI.Popups
     public abstract class PopupBase : MonoBehaviour, IPopup
     {
         [Header("Animation Settings")]
+        [SerializeField] protected Popup_Animation_Type AnimationType = Popup_Animation_Type.Default;
         [SerializeField] protected float fadeDuration = 0.25f;
         [SerializeField] protected bool useScaleAnimation = true;
         [SerializeField] protected float scaleDuration = 0.25f;
@@ -104,54 +105,74 @@ namespace DiveCat.God.UI.Popups
 
         protected virtual async Awaitable AnimateOpen()
         {
-            float elapsed = 0;
-            Vector3 targetScale = Vector3.one;
-            
-            while (elapsed < fadeDuration || (useScaleAnimation && elapsed < scaleDuration))
+            if (AnimationType == Popup_Animation_Type.Default)
             {
-                elapsed += Time.unscaledDeltaTime;
-                float tFade = Mathf.Clamp01(elapsed / fadeDuration);
-                float tScale = Mathf.Clamp01(elapsed / scaleDuration);
-                
-                canvasGroup.alpha = animationCurve.Evaluate(tFade);
-                
-                if (useScaleAnimation)
-                {
-                    contentRoot.localScale = Vector3.LerpUnclamped(startScale, targetScale, animationCurve.Evaluate(tScale));
-                }
-                
-                await Awaitable.NextFrameAsync();
-            }
+                float elapsed = 0;
+                Vector3 targetScale = Vector3.one;
 
-            canvasGroup.alpha = 1;
-            if (useScaleAnimation) contentRoot.localScale = targetScale;
+                while (elapsed < fadeDuration || (useScaleAnimation && elapsed < scaleDuration))
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    float tFade = Mathf.Clamp01(elapsed / fadeDuration);
+                    float tScale = Mathf.Clamp01(elapsed / scaleDuration);
+
+                    canvasGroup.alpha = animationCurve.Evaluate(tFade);
+
+                    if (useScaleAnimation)
+                    {
+                        contentRoot.localScale = Vector3.LerpUnclamped(startScale, targetScale, animationCurve.Evaluate(tScale));
+                    }
+
+                    await Awaitable.NextFrameAsync();
+                }
+
+                canvasGroup.alpha = 1;
+                if (useScaleAnimation) contentRoot.localScale = targetScale;
+            }
+            else if (AnimationType == Popup_Animation_Type.Slide)
+            {
+                
+            }
         }
 
         protected virtual async Awaitable AnimateClose()
         {
-            float elapsed = 0;
-            float duration = Mathf.Max(fadeDuration, useScaleAnimation ? scaleDuration : 0);
-            Vector3 targetScale = startScale;
-            Vector3 currentScale = contentRoot.localScale;
-
-            while (elapsed < duration)
+            if (AnimationType == Popup_Animation_Type.Default)
             {
-                elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
-                float evaluatedT = animationCurve.Evaluate(1 - t);
-                
-                canvasGroup.alpha = evaluatedT;
-                
-                if (useScaleAnimation)
-                {
-                    contentRoot.localScale = Vector3.LerpUnclamped(targetScale, currentScale, evaluatedT);
-                }
-                
-                await Awaitable.NextFrameAsync();
-            }
+                float elapsed = 0;
+                float duration = Mathf.Max(fadeDuration, useScaleAnimation ? scaleDuration : 0);
+                Vector3 targetScale = startScale;
+                Vector3 currentScale = contentRoot.localScale;
 
-            canvasGroup.alpha = 0;
-            if (useScaleAnimation) contentRoot.localScale = targetScale;
+                while (elapsed < duration)
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    float t = Mathf.Clamp01(elapsed / duration);
+                    float evaluatedT = animationCurve.Evaluate(1 - t);
+
+                    canvasGroup.alpha = evaluatedT;
+
+                    if (useScaleAnimation)
+                    {
+                        contentRoot.localScale = Vector3.LerpUnclamped(targetScale, currentScale, evaluatedT);
+                    }
+
+                    await Awaitable.NextFrameAsync();
+                }
+
+                canvasGroup.alpha = 0;
+                if (useScaleAnimation) contentRoot.localScale = targetScale;
+            }
+            else if (AnimationType == Popup_Animation_Type.Slide)
+            {
+
+            }
         }
+    }
+
+    public enum Popup_Animation_Type
+    {
+        Default,
+        Slide,
     }
 }

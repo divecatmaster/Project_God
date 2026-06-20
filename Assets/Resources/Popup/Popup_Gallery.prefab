@@ -1717,6 +1717,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3452801484857098855}
+  - {fileID: 175531952633841632}
   - {fileID: 3055863569541304243}
   - {fileID: 6915284898825927711}
   - {fileID: 4517775375348718946}
@@ -1757,8 +1758,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: -1548825754, guid: 2fcf384f1f7288445b38877e51e0309f, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1791,6 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9bc7b6f5d810ed429fd78ab5d140a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Gallery_Detail
+  AnimationType: 0
   fadeDuration: 0.25
   useScaleAnimation: 0
   scaleDuration: 0.25
@@ -1822,6 +1824,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 8824026177992561484}
   contentRoot: {fileID: 4517775375348718946}
   BG: {fileID: 8973795273678122189}
+  FadeBG: {fileID: 5360050869882745077}
   IndexText: {fileID: 7941711139342841256}
   TitleText: {fileID: 9093063384262411154}
   HideObjects:
@@ -1836,6 +1839,9 @@ MonoBehaviour:
   Dots:
   - {fileID: 8592478825603589038}
   - {fileID: 4181206915477694352}
+  BG_Fade_Material:
+  - {fileID: 2100000, guid: 9a3bce42bb33d1b44a2e54f4659f19a2, type: 2}
+  - {fileID: 2100000, guid: 7c3c4097bc39ce54089bd1aed8a39104, type: 2}
   Scroll: {fileID: 3627676410978091497}
   Context_Obj: {fileID: 3959710219886614933, guid: b7772ab1c2b4b4c4bbeb81fed6c4f99a, type: 3}
   HideBtn: {fileID: 3080625153382912563}
@@ -3131,6 +3137,100 @@ MonoBehaviour:
   m_Spacing: {x: 80, y: 88}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!1 &5028632184594924928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175531952633841632}
+  - component: {fileID: 895343524950093497}
+  - component: {fileID: 5360050869882745077}
+  - component: {fileID: 7373591085987710227}
+  m_Layer: 5
+  m_Name: Fade_BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &175531952633841632
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028632184594924928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7734868780039813245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2560, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &895343524950093497
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028632184594924928}
+  m_CullTransparentMesh: 1
+--- !u!114 &5360050869882745077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028632184594924928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 2100000, guid: 7c3c4097bc39ce54089bd1aed8a39104, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 67b4415d02229eb4a80fecc237cdff39, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7373591085987710227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028632184594924928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b26fb383ac3a84d9604f5148a12224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::God.UI.UIImageAspectFitter
+  m_FitMode: 4
+  m_Image: {fileID: 5360050869882745077}
+  m_UsePadding: 0
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_ApplyOnStart: 1
+  m_AutoCenter: 1
 --- !u!1 &5041397662942693261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,7 +4771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7c3c4097bc39ce54089bd1aed8a39104, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -6203,6 +6303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd5a12794a35be44b5b88522d889c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Gallery
+  AnimationType: 0
   fadeDuration: 0.25
   useScaleAnimation: 1
   scaleDuration: 0.25
