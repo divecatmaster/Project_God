@@ -1412,8 +1412,8 @@ Name_5,명왕,,
 Name_6,나 (어린시절),,
 Name_7,천제의 전령,,
 Name_8,운 하연 (과거),,
-Save_Title,저장하기,,
-Load_Title,불러오기,,
+Save_Title,저장하기,Save Game,セーブ
+Load_Title,불러오기,Load Game,ロード
 BG_Title_1,달무리 숲 - 밤,,
 BG_Title_2,달무리 숲,,
 BG_Title_3,청연당,,
@@ -1489,7 +1489,7 @@ New_Game,새 이야기,New Story,新しい物語
 Load_Game,불러오기,Load,ロード
 Gallery,추억,Memories,思い出
 Setting,설정,Settings,設定
-EndGame_TItle,게임종료,Quit Game,ゲーム終了
+EndGame_TItle,게임 종료,Quit Game,ゲーム終了
 Sound,사운드,Sound,サウンド
 Game,게임,Game,ゲーム
 System,시스템,System,システム
@@ -1514,3 +1514,24 @@ Setting_Key_6,UI 숨기기,Hide UI,UI非表示
 Setting_Key_7,메뉴 열기,Open Menu,メニューを開く
 Setting_Key_8,기록,Log,ログ
 Setting_Preview,미리보기,Preview,プレビュー
+Save_And_Load,저장 및 불러오기,Save & Load,セーブ＆ロード
+PlayTime,플레이 시간,Play Time,プレイ時間
+New_Memory,새로운 기억,New Memory,新しい記憶
+Empty_Slot,빈 슬롯,Empty Slot,空きスロット
+No_Save,저장된 데이터가 없습니다.,No saved data.,セーブデータがありません。
+Confirm,확인,Confirm,確認
+Popup_Yes,예,Yes,はい
+Popup_No,아니오,No,いいえ
+Collection,수집,Collection,収集
+Collection_Lock,숨겨진 기억,Hidden Memory,隠された記憶
+UI_Off,UI 끄기,Hide UI,UIを非表示
+UI_On,UI 켜기,Show UI,UIを表示
+Remember,회상하기,Replay Scene,シーン回想
+Save_Image,이미지 저장,Save Image,画像保存
+Auto,자동,Auto,オート
+Log,로그,Log,ログ
+Menu,메뉴,Menu,メニュー
+Hide,숨김,Hide,非表示
+UnHide,펼치기,Show,表示
+Continue,계속하기,Continue,続ける
+GoMain,메인 화면으로,Return to Title,タイトルへ

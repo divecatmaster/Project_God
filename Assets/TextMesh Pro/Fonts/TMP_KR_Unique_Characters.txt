@@ -1513,4 +1513,4 @@ UI 효과
 UI 숨기기
 메뉴 열기
 기록
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz:

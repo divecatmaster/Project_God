@@ -174,7 +174,7 @@ public class Popup_Setting_System : MonoBehaviour
         },
         () =>
         {
-            Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage());
+            Language_Dropdown.SetValueWithoutNotify((int)LanguageManager.Instance.GetCurrentLanguage() - 1);
             Language_Dropdown.RefreshShownValue();
             popup.Close();
         });
