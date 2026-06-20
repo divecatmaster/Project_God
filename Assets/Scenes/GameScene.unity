@@ -1151,6 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Log
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &431213164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,6 +1580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryManager
   Popup_Trans: {fileID: 1856786139}
+  IsOpening: 0
   Context: {fileID: 793907103}
   Name_Text: {fileID: 1026455382}
   CharacterGroup: {fileID: 1428391648}
@@ -2993,6 +2995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Auto
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1104532496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,6 +3223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_2
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1134344556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,6 +3814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Menu
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1291205661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4037,6 +4042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Hide
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1331017918
 GameObject:
   m_ObjectHideFlags: 0
@@ -4651,6 +4657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_4
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1519421608
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,14 +5181,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.41960785}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7921569}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f11830db0dc514e46ac086342c7dc9b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca027e6c9a655fe4e894b6df5876f75d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5742,6 +5749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: UnHide
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &1802958460
 GameObject:
   m_ObjectHideFlags: 0

@@ -382,6 +382,17 @@ public class Data_Manager : MonoBehaviour
         }
     }
 
+    public int GetGalleryPercent()
+    {
+        if (Gallery_Dic == null || Gallery_Dic.Count == 0)
+            return 0;
+
+        int totalCount = Gallery_Dic.Count;
+        int openCount = Gallery_OpenData.Count;
+
+        return Mathf.RoundToInt((float)openCount / totalCount * 100f);
+    }
+
     public List<Gallery_Data> GetGalleryData()
     {
         return Gallery_Dic.Values
@@ -504,6 +515,7 @@ public class Data_Manager : MonoBehaviour
     public int ScreenMode { get; private set; } = 2;
     public int Screen_Width { get; private set; } = 1920;
     public int Screen_Height { get; private set; } = 1080;
+    public string MyName { get; private set; } = "";
 
     void InitSettingValue()
     {
@@ -516,6 +528,7 @@ public class Data_Manager : MonoBehaviour
         ScreenMode = PlayerPrefs.GetInt("ScreenMode", 0);
         Screen_Width = PlayerPrefs.GetInt("Screen_Width", 1920);
         Screen_Height = PlayerPrefs.GetInt("Screen_Height", 1080);
+        MyName = PlayerPrefs.GetString("MyName", "");
     }
 
     public void SetSound_BG(int value)
@@ -582,6 +595,14 @@ public class Data_Manager : MonoBehaviour
         Screen_Height = height;
         PlayerPrefs.SetInt("Screen_Width", width);
         PlayerPrefs.SetInt("Screen_Height", height);
+    }
+
+    public void SetMyName(string name)
+    {
+        if (MyName == name) return;
+
+        MyName = name;
+        PlayerPrefs.SetString("MyName", name);
     }
     #endregion
 }

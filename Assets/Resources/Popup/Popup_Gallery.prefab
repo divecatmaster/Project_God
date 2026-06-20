@@ -451,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Remember
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &849920746769437841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2949,6 +2950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: UI_Off
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &4645732739201649049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,6 +3283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Collection
   IsRegularFont: 1
+  IsEnableUpdate: 0
 --- !u!1 &5084415592037152581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,6 +3473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Gallery
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &5319668410601508943
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,6 +4996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Save_Image
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &7400687049548302097
 GameObject:
   m_ObjectHideFlags: 0
@@ -5283,6 +5288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: UI_On
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &7573045839536209232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6235,6 +6241,7 @@ MonoBehaviour:
   Dot_1: {fileID: 5963230359467148973}
   Dot_2: {fileID: 3254804684404476039}
   Detail_Popup: {fileID: 8514723213890574351}
+  Percent: {fileID: 3634888517903473552}
 --- !u!1 &9132455762731343924
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,5 +181,10 @@ namespace DiveCat.God.UI.Popups
             color.a = end;
             backgroundDimImage.color = color;
         }
+
+        public void ActiveESC(bool isActive)
+        {
+            closeTopOnEscape = isActive;
+        }
     }
 }

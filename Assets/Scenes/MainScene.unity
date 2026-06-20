@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Gallery
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &34716277
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Load_Game
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &40460263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &461665989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: New_Game
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &688569686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4696,6 +4700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: EndGame_TItle
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &2015346616
 GameObject:
   m_ObjectHideFlags: 0

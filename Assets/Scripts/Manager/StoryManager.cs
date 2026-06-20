@@ -110,7 +110,7 @@ public class StoryManager : MonoBehaviour
     float _currentAutoTime = 0f;
     private void Update()
     {
-        if (IsActivePopup() || IsOpening)
+        if (IsActivePopup() || IsOpening || IsSetName)
         {
             return;
         }
@@ -258,9 +258,17 @@ public class StoryManager : MonoBehaviour
             }
             Data_Manager.Instance.SetSaveStory_Index(_currentStory.Index);
             CheckGallery();
+
+            if (_currentStory.Index == 845)
+            {
+                if (string.IsNullOrEmpty(Data_Manager.Instance.MyName))
+                {
+                    IsSetName = true;    
+                }
+            }
         }
     }
-
+    
     void GetNextStory()
     {
         ForceCompleteCharacterTween();
@@ -271,14 +279,21 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
-        if (_currentStory != null)
+        if (IsSetName)
         {
-            var nextIndex = _currentStory.Next_Index;
-            var target = Data_Manager.Instance.GetStoryData(nextIndex);
-            if (target != null)
+            OpenNamePopup();
+        }
+        else
+        {
+            if (_currentStory != null)
             {
-                _currentStory = target;
-                SetStory();
+                var nextIndex = _currentStory.Next_Index;
+                var target = Data_Manager.Instance.GetStoryData(nextIndex);
+                if (target != null)
+                {
+                    _currentStory = target;
+                    SetStory();
+                }
             }
         }
     }
@@ -300,7 +315,15 @@ public class StoryManager : MonoBehaviour
         Select_Obj.gameObject.SetActive(false);
         Select_Obj.alpha = 0f;
         Stop_Typewriter();
-        Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+        if (_currentStory.My_Name)
+        {
+            var str = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+            Context.text = string.Format(str, Data_Manager.Instance.MyName);
+        }
+        else
+        {
+            Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);    
+        }
         Context.maxVisibleCharacters = 0;
         _typeRoutine = StartCoroutine(TypeRoutine());
     }
@@ -466,8 +489,7 @@ public class StoryManager : MonoBehaviour
         string nextName = "";
         if (name == 9)
         {
-            //정환 여기 수정 필요
-            nextName = "닉네임";
+            nextName = Data_Manager.Instance.MyName;
         }
         else
         {
@@ -1280,11 +1302,19 @@ public class StoryManager : MonoBehaviour
     #region Skip
     void OnClickSkip()
     {
-        if (_currentStory.Select_Index == 0)
+        if (_currentStory.Select_Index == 0 && !IsSetName)
         {
             var target = Data_Manager.Instance.GetNextSelect(_currentStory.Index);
             if (target != null)
             {
+                if (_currentStory.Index < 845 && target.Index > 845)
+                {
+                    if (string.IsNullOrEmpty(Data_Manager.Instance.MyName))
+                    {
+                        target = Data_Manager.Instance.GetStoryData(845);    
+                    }
+                }
+                
                 var popup = Resource_Manager.Instance.Get_Yes_Or_No();
                 popup.Open();
                 popup.SetPopup(LanguageManager.Instance.GetText("Skip_Warning_1"), () =>
@@ -1358,6 +1388,31 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Name
+    bool IsSetName;
+    Popup_Name _popup_Name;
+    public void OpenNamePopup()
+    {
+        if (_popup_Name == null)
+        {
+            var target = Resources.Load<GameObject>("Popup/Popup_Name");
+            if (target != null)
+            {
+                var item = Instantiate(target, Popup_Trans);
+                _popup_Name = item.GetComponent<Popup_Name>();
+            }
+        }
+        _popup_Name.Open();
+        _popup_Name.SetPopup(NameCallback);
+    }
+
+    void NameCallback()
+    {
+        IsSetName = false;
+        GetNextStory();
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
 
     #region Utility
     public bool IsActivePopup()
@@ -1373,6 +1428,11 @@ public class StoryManager : MonoBehaviour
         }
 
         if (_popup_Log != null && _popup_Log.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (_popup_Name != null && _popup_Name.gameObject.activeSelf)
         {
             return true;
         }

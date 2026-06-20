@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Text;
 
 public class Popup_Setting_Game : MonoBehaviour
 {
@@ -25,6 +26,13 @@ public class Popup_Setting_Game : MonoBehaviour
     [Header("Example")]
     [SerializeField] TextMeshProUGUI ExampleText;
 
+    [Header("Name")]
+    [SerializeField] int maxByte = 21;
+    [SerializeField] int maxLength = 12;
+    [SerializeField] GameObject NameObj;
+    [SerializeField] Button ChangeNameBtn;
+    [SerializeField] TMP_InputField NameInput;
+
     int _textSpeedValue;
     float _autoSpeedValue;
     int _productionValue;
@@ -35,6 +43,13 @@ public class Popup_Setting_Game : MonoBehaviour
         TextSpeed_Slider.onValueChanged.AddListener(TextSpeed_Value_Change);
         AutoSpeed_Slider.onValueChanged.AddListener(AutoSpeed_Value_Change);
         Production_Btn.onClick.AddListener(OnClickProduction);
+        ChangeNameBtn.onClick.AddListener(OnClickNameChange);
+        NameInput.onValueChanged.AddListener(OnValueChanged);
+    }
+
+    void OnDestroy()
+    {
+        NameInput.onValueChanged.RemoveListener(OnValueChanged);
     }
 
     private void OnEnable() 
@@ -48,6 +63,7 @@ public class Popup_Setting_Game : MonoBehaviour
             _typeRoutine = null;
         }
         _typeRoutine = StartCoroutine(SetExample());
+        SetName();
     }
 
     void OnDisable()
@@ -183,5 +199,117 @@ public class Popup_Setting_Game : MonoBehaviour
             }
             yield return new WaitForSeconds(_autoSpeedValue);
         }
+    }
+
+    void SetName()
+    {
+        var name = Data_Manager.Instance.MyName;
+        if (string.IsNullOrEmpty(name))
+        {
+            NameObj.SetActive(false);
+        }
+        else
+        {
+            NameObj.SetActive(true);
+            NameInput.text = name;
+        }
+    }
+
+    void OnClickNameChange()
+    {
+        var str = NameInput.text;
+        if (string.IsNullOrEmpty(str))
+        {
+            var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+            popup.Open();
+            popup.SetPopup_One(LanguageManager.Instance.GetText("Name_Warning_1"), () =>
+            {
+                popup.Close();
+            });
+            return;
+        }
+        else if(IsOverLimit(str))
+        {
+            var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+            popup.Open();
+            popup.SetPopup_One(LanguageManager.Instance.GetText("Name_Warning_2"), () =>
+            {
+                popup.Close();
+            });
+            return;
+        }
+        else if (NameInput.text == Data_Manager.Instance.MyName)
+        {
+            var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+            popup.Open();
+            popup.SetPopup_One(LanguageManager.Instance.GetText("Name_Warning_3"), () =>
+            {
+                popup.Close();
+            });
+            return;
+        }
+        else
+        {
+            var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+            popup.Open();
+            popup.SetPopup_One(LanguageManager.Instance.GetText("Name_Warning_4"), () =>
+            {
+                Data_Manager.Instance.SetMyName(str);
+                popup.Close();
+            });
+        }
+    }
+
+    private bool _isChanging;
+
+    void OnValueChanged(string value)
+    {
+        if (_isChanging)
+            return;
+
+        if (Encoding.UTF8.GetByteCount(value) <= maxByte)
+            return;
+
+        _isChanging = true;
+
+        NameInput.text = CutByLimit(value);
+        NameInput.caretPosition = NameInput.text.Length;
+
+        _isChanging = false;
+    }
+
+    string CutByLimit(string text)
+    {
+        StringBuilder result = new StringBuilder();
+
+        int currentByte = 0;
+        int currentLength = 0;
+
+        foreach (char c in text)
+        {
+            int charByte = Encoding.UTF8.GetByteCount(c.ToString());
+
+            if (currentByte + charByte > maxByte)
+                break;
+
+            if (currentLength + 1 > maxLength)
+                break;
+
+            result.Append(c);
+
+            currentByte += charByte;
+            currentLength++;
+        }
+
+        return result.ToString();
+    }
+
+    bool IsOverLimit(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return false;
+
+        return text.Length > maxLength ||
+               Encoding.UTF8.GetByteCount(text) > maxByte;
     }
 }

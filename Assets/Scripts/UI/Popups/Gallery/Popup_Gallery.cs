@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using DiveCat.God.UI.Popups;
+using TMPro;
 
 public class Popup_Gallery : PopupBase
 {
@@ -13,6 +14,7 @@ public class Popup_Gallery : PopupBase
     [SerializeField] Image Dot_1;
     [SerializeField] Image Dot_2;
     [SerializeField] Popup_Gallery_Detail Detail_Popup;
+    [SerializeField] TextMeshProUGUI Percent;
 
     List<Popup_Gallery_Item> _itemList = new List<Popup_Gallery_Item>();
     List<Gallery_Data> _galleryData = new List<Gallery_Data>();
@@ -41,6 +43,7 @@ public class Popup_Gallery : PopupBase
         _totalCount = _galleryData.Count;
         _totalPage = Mathf.CeilToInt((float)_galleryData.Count / 9f);
         _currentPage = 0;
+        Percent.text = $"{Data_Manager.Instance.GetGalleryPercent()}<size=30>%</size>";
         SetPage();
     }
 
