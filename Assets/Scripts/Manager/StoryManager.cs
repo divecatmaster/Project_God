@@ -879,25 +879,26 @@ public class StoryManager : MonoBehaviour
         if (eyeCloseIndex >= 0 && eyeCloseIndex < _currentStory.Appear_Production_Time.Count)
         {
             float time = _currentStory.Appear_Production_Time[eyeCloseIndex];
-            
+            float blinkProgress = _currentStory.Appear_Production_Value[eyeCloseIndex];
             if (!Blink.gameObject.activeSelf)
             {
                 Blink.gameObject.SetActive(true);
                 Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
             }
-            CloseEye(time);
+            CloseEye(time, blinkProgress);
         }
 
         if (eyeOpenIndex >= 0 && eyeOpenIndex < _currentStory.Appear_Production_Time.Count)
         {
             float time = _currentStory.Appear_Production_Time[eyeOpenIndex];
+            float blinkProgress = _currentStory.Appear_Production_Value[eyeOpenIndex];
             
             if (!Blink.gameObject.activeSelf)
             {
                 Blink.gameObject.SetActive(true);
                 Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
             }
-            OpenEye(time);
+            OpenEye(time, blinkProgress);
         }
 
         if (blurIndex >= 0 && blurIndex < _currentStory.Appear_Production_Time.Count)
@@ -1385,7 +1386,10 @@ public class StoryManager : MonoBehaviour
         }
         _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
         _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
-        _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);
+        if (_runtimeBlinkMaterial.GetFloat(BlinkProgressID) != 1f)
+        {
+            _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);    
+        }
 
         Sequence seq = DOTween.Sequence();
 
@@ -1420,23 +1424,47 @@ public class StoryManager : MonoBehaviour
         //Blink.gameObject.SetActive(false);
     }
 
-    void CloseEye(float duration)
+    void CloseEye(float duration, float value)
     {
         KillBlinkProduction();
 
-        _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
-        _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
+        if (_runtimeBlinkMaterial == null)
+        {
+            _runtimeBlinkMaterial = Instantiate(BlinkMaterial);
+            Blink.material = _runtimeBlinkMaterial;
+        }
 
-        _blinkTween = DOTween.To(
+        _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
+        if (value == 0)
+        {
+            _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
+
+            _blinkTween = DOTween.To(
                 () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
                 x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
                 1f,
                 duration)
             .SetEase(Ease.InOutSine).OnComplete(CheckAutoNext);
+        }
+        else
+        {
+            _blinkTween = DOTween.To(
+                () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
+                x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
+                value,
+                duration)
+            .SetEase(Ease.InOutSine).OnComplete(CheckAutoNext);
+        }
     }
 
-    void OpenEye(float duration)
+    void OpenEye(float duration, float value)
     {
+        if (_runtimeBlinkMaterial == null)
+        {
+            _runtimeBlinkMaterial = Instantiate(BlinkMaterial);
+            Blink.material = _runtimeBlinkMaterial;
+        }
+
         KillBlinkProduction();
 
         _blinkTween = DOTween.To(
