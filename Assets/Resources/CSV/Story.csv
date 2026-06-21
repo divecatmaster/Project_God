@@ -45,7 +45,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 45,story_45,“...왜 이런 짓을 하는지.”,,1,Character_Main_0,Character_Main_0_6,,2,46,,,,FALSE,FALSE,
 46,story_46,“...하...”,,2,Character_Main_0,Character_Main_0_6,,2,47,,,,FALSE,FALSE,
 47,story_47,"숨이 점점 가빠지고,",,,Character_Main_0,Character_Main_0_6,,2,48,,,,FALSE,FALSE,
-48,story_48,시야가 흔들려왔다.,,,Character_Main_0,Character_Main_0_6,,2,49,,,,FALSE,FALSE,
+48,story_48,시야가 흔들려왔다.,,,Character_Main_0,Character_Main_0_6,,2,49,14/20,0/0,5/5,FALSE,FALSE,
 49,story_49,(아직 전부 흡수하지 못했는데...),,2,Character_Main_0,Character_Main_0_6,,2,50,,,,FALSE,FALSE,
 50,story_50,“...안 그러면... 죽어...”,,2,Character_Main_0,Character_Main_0_6,,2,51,,,,FALSE,FALSE,
 51,story_51,그 말을 끝으로 몸에서 힘이 풀리며 그대로 쓰러졌다.,,,Character_Main_0,Character_Main_0_6,,2,52,,,,FALSE,FALSE,
@@ -270,7 +270,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1409,story_281,그가 밤하늘을 올려다보며 말했다.,,,,,,1,1410,,,,FALSE,FALSE,
 1410,story_282,“이곳에서 천계로 가는 길이 열리는 건 한 달에 한 번뿐이란다.”,,3,Character_Main_0,Character_Main_0_1,,1,1411,,,,FALSE,FALSE,
 1411,story_283,"“보름달이 뜨는, 바로 오늘 같은 날이지.”",,3,Character_Main_0,Character_Main_0_1,,1,1412,,,,FALSE,FALSE,
-1412,story_284,연한 하늘빛의 머리카락이,,,,,,1,1413,,,,FALSE,FALSE,
+1412,story_284,연한 하늘빛의 머리카락이,,,,,,101,1413,,,,FALSE,FALSE,
 1413,story_285,달빛을 머금어 은은하게 빛났다.,,,,,,101,1414,5,2,0,FALSE,FALSE,1
 1414,story_286,보름달과 그의 미소가 퍽 잘 어울려 이상하리 만큼 눈을 뗄 수 없었다.,,,,,,101,1415,,,,FALSE,FALSE,
 1415,story_287,그 모습을 보자 심장이 다시 두근거렸다.,,,,,,101,1416,,,,FALSE,FALSE,

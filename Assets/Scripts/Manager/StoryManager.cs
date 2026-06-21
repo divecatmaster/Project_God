@@ -79,6 +79,9 @@ public class StoryManager : MonoBehaviour
         AutoBtn.onClick.AddListener(OnClickAuto);
         SkipBtn.onClick.AddListener(OnClickSkip);
         LogBtn.onClick.AddListener(OnClickLog);
+
+        _bgOriginPos = CurrentBG.rectTransform.anchoredPosition;
+        _textOriginPos = Context.rectTransform.anchoredPosition;
     }
 
     private void Start()
@@ -220,6 +223,7 @@ public class StoryManager : MonoBehaviour
     void ResetCharacterImmediately()
     {
         CurrentBG.material = null;
+        CurrentBG.rectTransform.localScale = Vector3.one;
         CharacterGroup.DOKill();
 
         Body_Img.DOKill();
@@ -838,8 +842,26 @@ public class StoryManager : MonoBehaviour
         int blinkIndex = _currentStory.Appear_Production.IndexOf(9);
         int blurIndex = _currentStory.Appear_Production.IndexOf(10);
 
+        int bgLoopShakeXIndex = _currentStory.Appear_Production.IndexOf(12);
+        int bgLoopShakeYIndex = _currentStory.Appear_Production.IndexOf(13);
+        int bgLoopShakeXYIndex = _currentStory.Appear_Production.IndexOf(14);
+
+        int bgOnceShakeXIndex = _currentStory.Appear_Production.IndexOf(15);
+        int bgOnceShakeYIndex = _currentStory.Appear_Production.IndexOf(16);
+        int bgOnceShakeXYIndex = _currentStory.Appear_Production.IndexOf(17);
+
+        int textLoopShakeXIndex = _currentStory.Appear_Production.IndexOf(18);
+        int textLoopShakeYIndex = _currentStory.Appear_Production.IndexOf(19);
+        int textLoopShakeXYIndex = _currentStory.Appear_Production.IndexOf(20);
+
+        int textOnceShakeXIndex = _currentStory.Appear_Production.IndexOf(21);
+        int textOnceShakeYIndex = _currentStory.Appear_Production.IndexOf(22);
+        int textOnceShakeXYIndex = _currentStory.Appear_Production.IndexOf(23);
+
         bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
         bool hasBlurProduction = blurIndex >= 0;
+        bool hasBGShake = bgLoopShakeXIndex >= 0 || bgLoopShakeYIndex >= 0 || bgLoopShakeXYIndex >= 0 || bgOnceShakeXIndex >= 0 || bgOnceShakeYIndex >= 0 || bgOnceShakeXYIndex >= 0;
+        bool hasTextShake = textLoopShakeXIndex >= 0 || textLoopShakeYIndex >= 0 || textLoopShakeXYIndex >= 0 || textOnceShakeXIndex >= 0 || textOnceShakeYIndex >= 0 || textOnceShakeXYIndex >= 0;
 
         if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
         {
@@ -896,6 +918,85 @@ public class StoryManager : MonoBehaviour
             BlinkBlur(time, blinkProgress);
         }
 
+        if (bgLoopShakeXIndex >= 0 && bgLoopShakeXIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[bgLoopShakeXIndex];
+
+            ShakeBGLoop(20f, value, Vector2.right);
+        }
+        else if (bgLoopShakeYIndex >= 0 && bgLoopShakeYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[bgLoopShakeYIndex];
+
+            ShakeBGLoop(20f, value, Vector2.up);
+        }
+        else if (bgLoopShakeXYIndex >= 0 && bgLoopShakeXYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[bgLoopShakeXYIndex];
+
+            ShakeBGLoop(20f, value, Vector2.one);
+        }
+        else if (bgOnceShakeXIndex >= 0 && bgOnceShakeXIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bgOnceShakeXIndex];
+            float value = _currentStory.Appear_Production_Value[bgOnceShakeXIndex];
+
+            ShakeBGOnce(time, value, Vector2.right);
+        }
+        else if (bgOnceShakeYIndex >= 0 && bgOnceShakeYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bgOnceShakeYIndex];
+            float value = _currentStory.Appear_Production_Value[bgOnceShakeYIndex];
+
+            ShakeBGOnce(time, value, Vector2.up);
+        }
+        else if (bgOnceShakeXYIndex >= 0 && bgOnceShakeXYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bgOnceShakeXYIndex];
+            float value = _currentStory.Appear_Production_Value[bgOnceShakeXYIndex];
+
+            ShakeBGOnce(time, value, Vector2.one);
+        }
+        if (textLoopShakeXIndex >= 0 && textLoopShakeXIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[textLoopShakeXIndex];
+
+            ShakeTextLoop(20f, value, Vector2.right);
+        }
+        else if (textLoopShakeYIndex >= 0 && textLoopShakeYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[textLoopShakeYIndex];
+
+            ShakeTextLoop(20f, value, Vector2.up);
+        }
+        else if (textLoopShakeXYIndex >= 0 && textLoopShakeXYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float value = _currentStory.Appear_Production_Value[textLoopShakeXYIndex];
+
+            ShakeTextLoop(20f, value, Vector2.one);
+        }
+        else if (textOnceShakeXIndex >= 0 && textOnceShakeXIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[textOnceShakeXIndex];
+            float value = _currentStory.Appear_Production_Value[textOnceShakeXIndex];
+
+            ShakeTextOnce(time, value, Vector2.right);
+        }
+        else if (textOnceShakeYIndex >= 0 && textOnceShakeYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[textOnceShakeYIndex];
+            float value = _currentStory.Appear_Production_Value[textOnceShakeYIndex];
+
+            ShakeTextOnce(time, value, Vector2.up);
+        }
+        else if (textOnceShakeXYIndex >= 0 && textOnceShakeXYIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[textOnceShakeXYIndex];
+            float value = _currentStory.Appear_Production_Value[textOnceShakeXYIndex];
+
+            ShakeTextOnce(time, value, Vector2.one);
+        }
+        //------------------------------초기화 부분--------------------------------
         if (Blink.gameObject.activeSelf && !hasBlinkProduction)
         {
             Blink.DOKill();
@@ -908,6 +1009,16 @@ public class StoryManager : MonoBehaviour
         if (CurrentBG.material != null && !hasBlurProduction)
         {
             ResetBlur();
+        }
+
+        if (!hasBGShake)
+        {
+            ResetBGShake();
+        }
+
+        if (!hasTextShake)
+        {
+            ResetTextShake();
         }
     }
 
@@ -1493,6 +1604,222 @@ public class StoryManager : MonoBehaviour
             _runtimeBlurMaterial.SetFloat(BlurSizeID, 0f);
 
         CurrentBG.material = null;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Shake
+    Tween _bgShakeTween;
+    Vector2 _bgOriginPos;
+    float _bgShakeTimer;
+    float _currentBGShakeSpeed = -1f;
+    float _currentBGShakeStrength = -1f;
+    Vector2 _currentBGShakeDirection = Vector2.zero;
+    bool _isBGShaking;
+
+    Tween _textShakeTween;
+    Vector2 _textOriginPos;
+    float _textShakeTimer;
+    float _currentTextShakeSpeed = -1f;
+    float _currentTextShakeStrength = -1f;
+    Vector2 _currentTextShakeDirection = Vector2.zero;
+    bool _isTextShaking;
+
+    Tween _bgScaleTween;
+    void ResetBGShake()
+    {
+        if (_bgShakeTween == null) return;
+
+        _bgShakeTween?.Kill();
+        _bgShakeTween = null;
+
+        CurrentBG.rectTransform.anchoredPosition = _bgOriginPos;
+
+        ResetCurrentBGScale();
+
+        _isBGShaking = false;
+        _currentBGShakeSpeed = -1f;
+        _currentBGShakeStrength = -1f;
+        _currentBGShakeDirection = Vector2.zero;
+        _bgShakeTimer = 0f;
+    }
+
+    void ResetTextShake()
+    {
+        if (_textShakeTween == null) return;
+
+        _textShakeTween?.Kill();
+        _textShakeTween = null;
+
+        Context.rectTransform.anchoredPosition = _textOriginPos;
+
+        _isTextShaking = false;
+        _currentTextShakeSpeed = -1f;
+        _currentTextShakeStrength = -1f;
+        _currentTextShakeDirection = Vector2.zero;
+        _textShakeTimer = 0f;
+    }
+
+    void ResetCurrentBGScale()
+    {
+        _bgScaleTween?.Kill();
+        _bgScaleTween = CurrentBG.rectTransform
+            .DOScale(Vector3.one, 0.2f)
+            .SetEase(Ease.OutQuad);
+    }
+
+    void SetCurrentBGShakeScale()
+    {
+        Vector3 targetScale = new Vector3(1.03f, 1.03f, 1.03f);
+
+        _bgScaleTween?.Kill();
+        _bgScaleTween = CurrentBG.rectTransform
+            .DOScale(targetScale, 0.15f)
+            .SetEase(Ease.OutQuad);
+    }
+
+    void ShakeBGLoop(float speed, float strength, Vector2 direction)
+    {
+        RectTransform rect = CurrentBG.rectTransform;
+
+        if (_isBGShaking &&
+            Mathf.Approximately(_currentBGShakeSpeed, speed) &&
+            Mathf.Approximately(_currentBGShakeStrength, strength) &&
+            _currentBGShakeDirection == direction)
+        {
+            return;
+        }
+
+        _bgShakeTween?.Kill();
+        _bgShakeTween = null;
+
+        _isBGShaking = true;
+        _currentBGShakeSpeed = speed;
+        _currentBGShakeStrength = strength;
+        _currentBGShakeDirection = direction;
+        SetCurrentBGShakeScale();
+
+        _bgShakeTween = DOVirtual.Float(0f, 1f, 1f, value =>
+            {
+                _bgShakeTimer += Time.deltaTime;
+
+                float noiseX = Mathf.PerlinNoise(_bgShakeTimer * speed, 0f) * 2f - 1f;
+                float noiseY = Mathf.PerlinNoise(0f, _bgShakeTimer * speed) * 2f - 1f;
+
+                Vector2 offset = Vector2.zero;
+
+                if (direction.x != 0)
+                    offset.x = noiseX * strength;
+
+                if (direction.y != 0)
+                    offset.y = noiseY * strength;
+
+                rect.anchoredPosition = _bgOriginPos + offset;
+            })
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    void ShakeBGOnce(float duration, float strength, Vector2 direction)
+    {
+        _bgShakeTween?.Kill();
+        _bgShakeTween = null;
+
+        RectTransform rect = CurrentBG.rectTransform;
+        rect.anchoredPosition = _bgOriginPos;
+        SetCurrentBGShakeScale();
+
+        Vector3 shakeStrength = new Vector3(
+            strength * direction.x,
+            strength * direction.y,
+            0f
+        );
+
+        _bgShakeTween = rect.DOShakeAnchorPos(
+                duration,
+                shakeStrength,
+                20,
+                90f,
+                false,
+                true)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                rect.anchoredPosition = _bgOriginPos;
+                ResetCurrentBGScale();
+                _bgShakeTween = null;
+            });
+    }
+
+    void ShakeTextLoop(float speed, float strength, Vector2 direction)
+    {
+        RectTransform rect = Context.rectTransform;
+
+        if (_isTextShaking &&
+            Mathf.Approximately(_currentTextShakeSpeed, speed) &&
+            Mathf.Approximately(_currentTextShakeStrength, strength) &&
+            _currentTextShakeDirection == direction)
+        {
+            return;
+        }
+
+        _textShakeTween?.Kill();
+        _textShakeTween = null;
+
+        _isTextShaking = true;
+        _currentTextShakeSpeed = speed;
+        _currentTextShakeStrength = strength;
+        _currentTextShakeDirection = direction;
+
+        _textShakeTween = DOVirtual.Float(0f, 1f, 1f, value =>
+            {
+                _textShakeTimer += Time.deltaTime;
+
+                float noiseX = Mathf.PerlinNoise(_textShakeTimer * speed, 10f) * 2f - 1f;
+                float noiseY = Mathf.PerlinNoise(10f, _textShakeTimer * speed) * 2f - 1f;
+
+                Vector2 offset = Vector2.zero;
+
+                if (direction.x != 0)
+                    offset.x = noiseX * strength;
+
+                if (direction.y != 0)
+                    offset.y = noiseY * strength;
+
+                rect.anchoredPosition = _textOriginPos + offset;
+            })
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    void ShakeTextOnce(float duration, float strength, Vector2 direction)
+    {
+        _textShakeTween?.Kill();
+        _textShakeTween = null;
+
+        _isTextShaking = false;
+
+        RectTransform rect = Context.rectTransform;
+        rect.anchoredPosition = _textOriginPos;
+
+        Vector3 shakeStrength = new Vector3(
+            strength * direction.x,
+            strength * direction.y,
+            0f
+        );
+
+        _textShakeTween = rect.DOShakeAnchorPos(
+                duration,
+                shakeStrength,
+                20,
+                90f,
+                false,
+                true)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                rect.anchoredPosition = _textOriginPos;
+                _textShakeTween = null;
+            });
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
