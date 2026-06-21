@@ -27,6 +27,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Material[] BG_Fade_Material;
     [SerializeField] Image Blink;
     [SerializeField] Material BlinkMaterial;
+    [SerializeField] Material BlurMaterial;
     Material _bgFade_Ver;
     Material _bgFade_Hor;
 
@@ -218,6 +219,7 @@ public class StoryManager : MonoBehaviour
 
     void ResetCharacterImmediately()
     {
+        CurrentBG.material = null;
         CharacterGroup.DOKill();
 
         Body_Img.DOKill();
@@ -834,17 +836,22 @@ public class StoryManager : MonoBehaviour
         int eyeCloseIndex = _currentStory.Appear_Production.IndexOf(1);
         int eyeOpenIndex = _currentStory.Appear_Production.IndexOf(2);
         int blinkIndex = _currentStory.Appear_Production.IndexOf(9);
+        int blurIndex = _currentStory.Appear_Production.IndexOf(10);
+
+        bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
+        bool hasBlurProduction = blurIndex >= 0;
 
         if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
         {
-            float blinkProgress = _currentStory.Appear_Production_Time[blinkIndex];
+            float blinkProgress = _currentStory.Appear_Production_Value[blinkIndex];
+            float blinkTime = _currentStory.Appear_Production_Time[blinkIndex];
             
             if (!Blink.gameObject.activeSelf)
             {
                 Blink.gameObject.SetActive(true);
                 Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
             }
-            PlayBlink(1f, 0f, 1f, blinkProgress);
+            PlayBlink(blinkTime, 0f, blinkTime, blinkProgress);
         }
 
         if (eyeCloseIndex >= 0 && eyeCloseIndex < _currentStory.Appear_Production_Time.Count)
@@ -871,16 +878,36 @@ public class StoryManager : MonoBehaviour
             OpenEye(time);
         }
 
-        if (Blink.gameObject.activeSelf)
+        if (blurIndex >= 0 && blurIndex < _currentStory.Appear_Production_Time.Count)
         {
-            if (blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0)
+            float time = _currentStory.Appear_Production_Time[blurIndex];
+            float blinkProgress = _currentStory.Appear_Production_Value[blurIndex];
+            
+            if (CurrentBG.material == null)
             {
-                
+                if (_runtimeBlurMaterial == null)
+                {
+                    _runtimeBlurMaterial = Instantiate(BlurMaterial);
+                }
+
+                CurrentBG.material = _runtimeBlurMaterial;
+                _runtimeBlurMaterial.SetFloat("_BlurSize", 0f);
             }
-            else
-            {
-                Blink.DOFade(0f, 0.2f).SetEase(Ease.Linear).OnComplete(() => Blink.gameObject.SetActive(false));
-            }
+            BlinkBlur(time, blinkProgress);
+        }
+
+        if (Blink.gameObject.activeSelf && !hasBlinkProduction)
+        {
+            Blink.DOKill();
+            Blink.DOFade(0f, 0.2f).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    Blink.gameObject.SetActive(false);
+                });
+        }
+
+        if (CurrentBG.material != null && !hasBlurProduction)
+        {
+            ResetBlur();
         }
     }
 
@@ -1230,7 +1257,7 @@ public class StoryManager : MonoBehaviour
     float feather = 0.2f;
     float ovalPower = 1f;
 
-    void KillProduction()
+    void KillBlinkProduction()
     {
         _blinkTween?.Kill();
         _blinkTween = null;
@@ -1238,7 +1265,7 @@ public class StoryManager : MonoBehaviour
 
     public void PlayBlink(float closeTime, float holdTime, float openTime, float progress)
     {
-        KillProduction();
+        KillBlinkProduction();
 
         if (_runtimeBlinkMaterial == null)
         {
@@ -1274,7 +1301,7 @@ public class StoryManager : MonoBehaviour
 
     void SetOpenImmediate()
     {
-        KillProduction();
+        KillBlinkProduction();
 
         if (_runtimeBlinkMaterial != null)
             _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);
@@ -1284,7 +1311,7 @@ public class StoryManager : MonoBehaviour
 
     void CloseEye(float duration)
     {
-        KillProduction();
+        KillBlinkProduction();
 
         _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
         _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
@@ -1299,7 +1326,7 @@ public class StoryManager : MonoBehaviour
 
     void OpenEye(float duration)
     {
-        KillProduction();
+        KillBlinkProduction();
 
         _blinkTween = DOTween.To(
                 () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
@@ -1318,7 +1345,7 @@ public class StoryManager : MonoBehaviour
     {
         if (_isAutoNext)
         {
-            if (_currentStory.Index ==800)
+            if (_currentStory.Index == 800)
             {
                 Invoke("GetNextStory", 1f);
             }
@@ -1330,8 +1357,148 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Blur
+    Material _runtimeBlurMaterial;
+    Tween _blurTween;
+    float _currentBlurTime = -1f;
+    float _currentBlurValue = -1f;
+
+    void BlinkBlur(float totalTime, float value)
+    {
+        if (_runtimeBlurMaterial == null)
+        {
+            _runtimeBlurMaterial = Instantiate(BlurMaterial);
+        }
+
+        CurrentBG.material = _runtimeBlurMaterial;
+
+        // 이미 같은 설정으로 블러가 돌고 있으면 다시 만들지 않음
+        if (_blurTween != null && Mathf.Approximately(_currentBlurTime, totalTime) && Mathf.Approximately(_currentBlurValue, value))
+        {
+            return;
+        }
+
+        float currentBlur = _runtimeBlurMaterial.GetFloat(BlurSizeID);
+
+        KillBlurTween();
+
+        _currentBlurTime = totalTime;
+        _currentBlurValue = value;
+
+        float halfTime = totalTime * 0.5f;
+
+        Sequence seq = DOTween.Sequence();
+
+        // 현재 BlurSize에서 새 목표 value까지 자연스럽게 이동
+        float firstDuration = halfTime;
+
+        if (value > 0.001f)
+        {
+            float distanceRate = Mathf.Abs(value - currentBlur) / value;
+            firstDuration = Mathf.Max(0.01f, halfTime * distanceRate);
+        }
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                value,
+                firstDuration)
+            .SetEase(Ease.Linear));
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                0f,
+                halfTime)
+            .SetEase(Ease.Linear));
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                value,
+                halfTime)
+            .SetEase(Ease.Linear));
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                0f,
+                halfTime)
+            .SetEase(Ease.Linear));
+
+        seq.SetLoops(-1, LoopType.Restart);
+
+        _blurTween = seq;
+    }
+
+    void BlinkBlurOnce(float totalTime, float value)
+    {
+        KillBlurTween();
+
+        if (_runtimeBlurMaterial == null)
+        {
+            _runtimeBlurMaterial = Instantiate(BlurMaterial);
+        }
+
+        CurrentBG.material = _runtimeBlurMaterial;
+
+        _runtimeBlurMaterial.SetFloat(BlurSizeID, 0f);
+
+        float halfTime = totalTime * 0.5f;
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                value,
+                halfTime)
+            .SetEase(Ease.Linear));
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlurMaterial.GetFloat(BlurSizeID),
+                x => _runtimeBlurMaterial.SetFloat(BlurSizeID, x),
+                0f,
+                halfTime)
+            .SetEase(Ease.Linear));
+
+        seq.OnComplete(() =>
+        {
+            _blurTween = null;
+
+            _runtimeBlurMaterial.SetFloat(BlurSizeID, 0f);
+            CurrentBG.material = null;
+        });
+
+        _blurTween = seq;
+    }
+
+    void KillBlurTween()
+    {
+        _blurTween?.Kill();
+        _blurTween = null;
+    }
+
+    void ResetBlur()
+    {
+        if (CurrentBG.material == null)
+        {
+            return;
+        }
+
+        _currentBlurTime = -1f;
+        _currentBlurValue = -1f;
+
+        if (_runtimeBlurMaterial != null)
+            _runtimeBlurMaterial.SetFloat(BlurSizeID, 0f);
+
+        CurrentBG.material = null;
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Save
     Popup_Save _popup_Save;
+    static readonly int BlurSizeID = Shader.PropertyToID("_BlurSize");
     public void OnClickSave()
     {
         if (_popup_Save != null && _popup_Save.gameObject.activeSelf)

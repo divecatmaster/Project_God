@@ -1597,6 +1597,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7c3c4097bc39ce54089bd1aed8a39104, type: 2}
   Blink: {fileID: 1351958798}
   BlinkMaterial: {fileID: 2100000, guid: 33fcf3088e9599a4898ac80f90c93cae, type: 2}
+  BlurMaterial: {fileID: 2100000, guid: 37a05a0034b9c3c43b1a3e1c736e9bec, type: 2}
   Default_Obj: {fileID: 1780429851}
   Select_Obj: {fileID: 2069450688}
   Select_Buttons:
@@ -1634,6 +1635,7 @@ MonoBehaviour:
     Next_Index: 0
     Appear_Production: 
     Appear_Production_Time: []
+    Appear_Production_Value: []
     Auto_Next: 0
     My_Name: 0
     Gallery: 0

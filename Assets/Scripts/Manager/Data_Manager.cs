@@ -138,6 +138,16 @@ public class Data_Manager : MonoBehaviour
                     newData.Appear_Production_Time.Add(CSV_float_Checker(splitProductionTime[a]));
                 }
             }
+
+            var tempProductionValue = data[i]["appear_production_value"].ToString();
+            if (!string.IsNullOrEmpty(tempProductionValue))
+            {
+                var splitProductionTime = tempProductionValue.Split('/');
+                for (int a = 0; a < splitProductionTime.Length; a++)
+                {
+                    newData.Appear_Production_Value.Add(CSV_float_Checker(splitProductionTime[a]));
+                }
+            }
             
             newData.Auto_Next = data[i]["auto_next"].ToString() == "FALSE" ? false : true;
             newData.My_Name = data[i]["my_name"].ToString() == "FALSE" ? false : true;
@@ -621,6 +631,7 @@ public class Story_Data
     public int Next_Index;
     public List<int> Appear_Production = new List<int>();
     public List<float> Appear_Production_Time = new List<float>();
+    public List<float> Appear_Production_Value = new List<float>();
     public bool Auto_Next;
     public bool My_Name;
     public int Gallery;
