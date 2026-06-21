@@ -25,6 +25,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Image CurrentBG;
     [SerializeField] Image FadeBG;
     [SerializeField] Material[] BG_Fade_Material;
+    [SerializeField] Image Blink;
+    [SerializeField] Material BlinkMaterial;
     Material _bgFade_Ver;
     Material _bgFade_Hor;
 
@@ -56,6 +58,7 @@ public class StoryManager : MonoBehaviour
     int _currentName = -1;
     bool _isHide = false;
     bool _isAuto = false;
+    bool _isAutoNext = false;
 
     private void Awake()
     {
@@ -110,7 +113,7 @@ public class StoryManager : MonoBehaviour
     float _currentAutoTime = 0f;
     private void Update()
     {
-        if (IsActivePopup() || IsOpening || IsSetName)
+        if (IsActivePopup() || IsOpening || IsSetName || _isAutoNext)
         {
             return;
         }
@@ -245,6 +248,7 @@ public class StoryManager : MonoBehaviour
     {
         if (_currentStory != null)
         {
+            _isAutoNext = _currentStory.Auto_Next;
             Set_BG();
             Set_Name();
             Set_Character();
@@ -268,6 +272,8 @@ public class StoryManager : MonoBehaviour
             }
         }
     }
+
+
     
     void GetNextStory()
     {
@@ -300,7 +306,7 @@ public class StoryManager : MonoBehaviour
 
     void OnClickNext()
     {
-        if (!_isAuto)
+        if (!_isAuto && !_isAutoNext)
         {
             GetNextStory();
         }
@@ -742,84 +748,6 @@ public class StoryManager : MonoBehaviour
         }
 
         _characterDelayTween = DOVirtual.DelayedCall(0.5f, CompleteCharacterChange);
-
-        // KillCharacterTweens();
-
-        // Body_Img.gameObject.SetActive(true);
-        // Body_FadeImg.gameObject.SetActive(true);
-
-        // Body_Img.color = Color.white;
-
-        // Body_FadeImg.sprite = bodySprite;
-        // Body_FadeImg.color = UIUtility.Common_Off_Color;
-
-        // Body_Img.DOFade(0f, 0.5f);
-        // Body_FadeImg.DOFade(1f, 0.5f);
-
-        // if (faceSprite != null)
-        // {
-        //     Face_Img.gameObject.SetActive(true);
-        //     Face_FadeImg.gameObject.SetActive(true);
-
-        //     Face_FadeImg.sprite = faceSprite;
-        //     Face_FadeImg.color = UIUtility.Common_Off_Color;
-
-        //     // 이전 얼굴이 있었음
-        //     if (!string.IsNullOrEmpty(_currentFace))
-        //     {
-        //         Face_Img.color = Color.white;
-
-        //         Face_Img.DOFade(0f, 0.5f);
-        //         Face_FadeImg.DOFade(1f, 0.5f);
-        //     }
-        //     // 이전 얼굴이 없었음
-        //     else
-        //     {
-        //         Face_Img.gameObject.SetActive(false);
-
-        //         Face_FadeImg.DOFade(1f, 0.5f);
-        //     }
-        // }
-        // else
-        // {
-        //     Face_FadeImg.gameObject.SetActive(false);
-        //     Face_Img.DOFade(0f, 0.5f);
-        // }
-
-        // _characterDelayTween = DOVirtual.DelayedCall(0.5f, () =>
-        // {
-        //     Body_Img.sprite = bodySprite;
-        //     Body_Img.color = Color.white;
-        //     Body_Img.gameObject.SetActive(true);
-
-        //     Body_FadeImg.color = UIUtility.Common_Off_Color;
-        //     Body_FadeImg.gameObject.SetActive(false);
-
-        //     if (faceSprite != null)
-        //     {
-        //         Face_Img.sprite = faceSprite;
-        //         Face_Img.color = Color.white;
-        //         Face_Img.gameObject.SetActive(true);
-
-        //         Face_FadeImg.color = UIUtility.Common_Off_Color;
-        //         Face_FadeImg.gameObject.SetActive(false);
-
-        //         _currentFace = faceKey;
-        //     }
-        //     else
-        //     {
-        //         Face_Img.gameObject.SetActive(false);
-        //         Face_Img.color = Color.white;
-
-        //         Face_FadeImg.color = UIUtility.Common_Off_Color;
-        //         Face_FadeImg.gameObject.SetActive(false);
-
-        //         _currentFace = "";
-        //     }
-
-        //     _currentBody = bodyKey;
-        //     _characterDelayTween = null;
-        // });
     }
 
     void KillCharacterTweens()
@@ -896,6 +824,64 @@ public class StoryManager : MonoBehaviour
             ChangeBG(_currentStory);
             _currentBgIndex = _currentStory.BG;
         }
+
+        CheckProduction();
+    }
+
+    
+    void CheckProduction()
+    {
+        int eyeCloseIndex = _currentStory.Appear_Production.IndexOf(1);
+        int eyeOpenIndex = _currentStory.Appear_Production.IndexOf(2);
+        int blinkIndex = _currentStory.Appear_Production.IndexOf(9);
+
+        if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float blinkProgress = _currentStory.Appear_Production_Time[blinkIndex];
+            
+            if (!Blink.gameObject.activeSelf)
+            {
+                Blink.gameObject.SetActive(true);
+                Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
+            }
+            PlayBlink(1f, 0f, 1f, blinkProgress);
+        }
+
+        if (eyeCloseIndex >= 0 && eyeCloseIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[eyeCloseIndex];
+            
+            if (!Blink.gameObject.activeSelf)
+            {
+                Blink.gameObject.SetActive(true);
+                Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
+            }
+            CloseEye(time);
+        }
+
+        if (eyeOpenIndex >= 0 && eyeOpenIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[eyeOpenIndex];
+            
+            if (!Blink.gameObject.activeSelf)
+            {
+                Blink.gameObject.SetActive(true);
+                Blink.DOFade(1f, 0.2f).SetEase(Ease.Linear);
+            }
+            OpenEye(time);
+        }
+
+        if (Blink.gameObject.activeSelf)
+        {
+            if (blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0)
+            {
+                
+            }
+            else
+            {
+                Blink.DOFade(0f, 0.2f).SetEase(Ease.Linear).OnComplete(() => Blink.gameObject.SetActive(false));
+            }
+        }
     }
 
     Tween _bgFadeTween;
@@ -914,12 +900,16 @@ public class StoryManager : MonoBehaviour
         FadeBG.color = UIUtility.Common_Off_Color;
         FadeBG.rectTransform.localScale = Vector3.one;
 
+        
         int zoomIndex = data.Appear_Production.IndexOf(3);
         int leftIndex = data.Appear_Production.IndexOf(4);
         int rightIndex = data.Appear_Production.IndexOf(5);
         int upIndex = data.Appear_Production.IndexOf(6);
         int downIndex = data.Appear_Production.IndexOf(7);
         int normalIndex = data.Appear_Production.IndexOf(8);
+        
+
+        
 
         if (zoomIndex >= 0 && zoomIndex < data.Appear_Production_Time.Count)
         {
@@ -989,6 +979,10 @@ public class StoryManager : MonoBehaviour
         
         PlayNormalBGFade(sprite);
     }
+
+    
+
+    
 
     void PlayDirectionalBGFade(Sprite nextSprite, ref Material fadeMaterial, Material originalMaterial, bool reverse, float duration)
     {
@@ -1224,6 +1218,115 @@ public class StoryManager : MonoBehaviour
         Face_Img.DOKill();
         Body_FadeImg.DOKill();
         Face_FadeImg.DOKill();
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Blink
+    Tween _blinkTween;
+    Material _runtimeBlinkMaterial;
+    private static readonly int BlinkProgressID = Shader.PropertyToID("_BlinkProgress");
+    private static readonly int FeatherID = Shader.PropertyToID("_Feather");
+    private static readonly int OvalPowerID = Shader.PropertyToID("_OvalPower");
+    float feather = 0.2f;
+    float ovalPower = 1f;
+
+    void KillProduction()
+    {
+        _blinkTween?.Kill();
+        _blinkTween = null;
+    }
+
+    public void PlayBlink(float closeTime, float holdTime, float openTime, float progress)
+    {
+        KillProduction();
+
+        if (_runtimeBlinkMaterial == null)
+        {
+            _runtimeBlinkMaterial = Instantiate(BlinkMaterial);
+            Blink.material = _runtimeBlinkMaterial;
+        }
+        _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
+        _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
+        _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
+                x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
+                progress,
+                closeTime)
+            .SetEase(Ease.InOutSine));
+
+        seq.AppendInterval(holdTime);
+
+        seq.Append(DOTween.To(
+                () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
+                x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
+                0f,
+                openTime)
+            .SetEase(Ease.InOutSine));
+
+        seq.OnComplete(SetOpenImmediate);
+
+        _blinkTween = seq;
+    }
+
+    void SetOpenImmediate()
+    {
+        KillProduction();
+
+        if (_runtimeBlinkMaterial != null)
+            _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);
+
+        //Blink.gameObject.SetActive(false);
+    }
+
+    void CloseEye(float duration)
+    {
+        KillProduction();
+
+        _runtimeBlinkMaterial.SetFloat(FeatherID, feather);
+        _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
+
+        _blinkTween = DOTween.To(
+                () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
+                x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
+                1f,
+                duration)
+            .SetEase(Ease.InOutSine).OnComplete(CheckAutoNext);
+    }
+
+    void OpenEye(float duration)
+    {
+        KillProduction();
+
+        _blinkTween = DOTween.To(
+                () => _runtimeBlinkMaterial.GetFloat(BlinkProgressID),
+                x => _runtimeBlinkMaterial.SetFloat(BlinkProgressID, x),
+                0f,
+                duration)
+            .SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                SetOpenImmediate();
+                CheckAutoNext();
+            });
+    }
+
+    void CheckAutoNext()
+    {
+        if (_isAutoNext)
+        {
+            if (_currentStory.Index ==800)
+            {
+                Invoke("GetNextStory", 1f);
+            }
+            else
+            {
+                GetNextStory();    
+            }
+        }   
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
