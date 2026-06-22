@@ -1565,7 +1565,7 @@ public class StoryManager : MonoBehaviour
                 halfTime)
             .SetEase(Ease.Linear));
 
-        seq.SetLoops(-1, LoopType.Restart);
+        seq.SetLoops(-1, LoopType.Yoyo);
 
         _blurTween = seq;
     }
