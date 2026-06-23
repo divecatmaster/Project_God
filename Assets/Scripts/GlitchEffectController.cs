@@ -286,35 +286,54 @@ public class GlitchEffectController : MonoBehaviour
 
     private void UpdateTextGlitches()
     {
-        if (glitchyTexts == null || originalTextValues == null) return;
+        if (glitchyTexts == null) return;
+        
+        if (originalTextValues == null || originalTextValues.Length != glitchyTexts.Length)
+        {
+            originalTextValues = new string[glitchyTexts.Length];
+        }
         
         for (int i = 0; i < glitchyTexts.Length; i++)
         {
             if (glitchyTexts[i] == null) continue;
             
-            string original = originalTextValues[i];
-            
-            if (currentIntensity > 0.15f && Random.value < textGlitchChance)
+            if (currentIntensity > 0.15f)
             {
-                char[] chars = original.ToCharArray();
-                int replacementsCount = Mathf.RoundToInt(chars.Length * currentIntensity * 0.8f);
-                
-                for (int j = 0; j < replacementsCount; j++)
+                // We are in a glitch state.
+                // If we haven't cached the original text yet (start of a burst), cache it now.
+                if (string.IsNullOrEmpty(originalTextValues[i]))
                 {
-                    int indexToReplace = Random.Range(0, chars.Length);
-                    if (chars[indexToReplace] != ' ' && chars[indexToReplace] != '\n')
-                    {
-                        chars[indexToReplace] = GlitchChars[Random.Range(0, GlitchChars.Length)];
-                    }
+                    originalTextValues[i] = glitchyTexts[i].text;
                 }
                 
-                glitchyTexts[i].text = new string(chars);
+                string original = originalTextValues[i];
+                if (string.IsNullOrEmpty(original)) continue;
+
+                if (Random.value < textGlitchChance)
+                {
+                    char[] chars = original.ToCharArray();
+                    int replacementsCount = Mathf.RoundToInt(chars.Length * currentIntensity * 0.8f);
+                    
+                    for (int j = 0; j < replacementsCount; j++)
+                    {
+                        int indexToReplace = Random.Range(0, chars.Length);
+                        if (chars[indexToReplace] != ' ' && chars[indexToReplace] != '\n')
+                        {
+                            chars[indexToReplace] = GlitchChars[Random.Range(0, GlitchChars.Length)];
+                        }
+                    }
+                    
+                    glitchyTexts[i].text = new string(chars);
+                }
             }
             else
             {
-                if (glitchyTexts[i].text != original)
+                // No glitch state (normal gameplay).
+                // If we have a cached original text, restore it first.
+                if (!string.IsNullOrEmpty(originalTextValues[i]))
                 {
-                    glitchyTexts[i].text = original;
+                    glitchyTexts[i].text = originalTextValues[i];
+                    originalTextValues[i] = null; // Clear cache to allow external scripts (Typewriter, Dialogue managers) to update the text freely.
                 }
             }
         }
@@ -322,6 +341,14 @@ public class GlitchEffectController : MonoBehaviour
 
     void OnDestroy()
     {
+        if (renderCamera != null)
+        {
+            renderCamera.targetTexture = null;
+        }
+        if (displayImage != null)
+        {
+            displayImage.texture = null;
+        }
         if (rt != null)
         {
             rt.Release();
