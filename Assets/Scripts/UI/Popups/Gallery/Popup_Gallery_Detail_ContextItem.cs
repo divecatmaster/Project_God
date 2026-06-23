@@ -13,7 +13,17 @@ public class Popup_Gallery_Detail_ContextItem : MonoBehaviour
             if (data.Name == 9)
             {
                 //정환 여기 수정 필요
-                str += "닉네임";
+                var name = Data_Manager.Instance.MyName;
+                var color = UIUtility.ColorToHex(Data_Manager.Instance.GetNameColor(data.Name));
+                var result = $"<color=#{color}>{name}</color> : ";
+                str += result;
+            }
+            else if (data.Name == 6)
+            {
+                var name = LanguageManager.Instance.GetText($"Name_{data.Name}");
+                var color = UIUtility.ColorToHex(Data_Manager.Instance.GetNameColor(data.Name));
+                var result = $"<color=#{color}>{string.Format(name, Data_Manager.Instance.MyName)}</color> : ";
+                str += result;
             }
             else
             {
@@ -24,7 +34,15 @@ public class Popup_Gallery_Detail_ContextItem : MonoBehaviour
             }
         }
 
-        str += LanguageManager.Instance.GetText(data.Language_Key);
+        if (data.My_Name)
+        {
+            var temp = string.Format(LanguageManager.Instance.GetText(data.Language_Key), Data_Manager.Instance.MyName);
+            str += temp;
+        }
+        else
+        {
+            str += LanguageManager.Instance.GetText(data.Language_Key);
+        }
         Text.text = str;
     }
 }
