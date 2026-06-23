@@ -316,7 +316,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 1455,story_327,“...와...”,,9,,,,6,1456,,,,FALSE,FALSE,
 1456,story_328,나도 모르게 감탄이 새어 나왔다.,,,,,,6,1457,,,,FALSE,FALSE,
 1457,story_329,"두리번거리며 그를 따라 커다란 궁궐 안으로 들어가자,",,,,,,6,1458,,,,FALSE,FALSE,
-1458,story_330,높은 자리에 앉아 있는 한 존재가 눈에 들어왔다.,,,Character_2,,,7,1459,8,2,0,FALSE,FALSE,
+1458,story_330,높은 자리에 앉아 있는 한 존재가 눈에 들어왔다.,,,Character_2,,,7,1459,8,1.5,0,FALSE,FALSE,
 1459,story_331,"어린 모습이었지만,",,,Character_2,,,7,1460,,,,FALSE,FALSE,
 1460,story_332,그 눈빛만은 가볍게 넘길 수 없는 무게를 지니고 있었다.,,,Character_2,,,7,1461,,,,FALSE,FALSE,
 1461,story_333,“...오랜만이구나.”,,4,Character_2,,,7,1462,,,,FALSE,FALSE,
@@ -684,11 +684,11 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2525,story_692,몸 곳곳이 찢어진 상처로 가득했다.,,,,,,9,2526,,,,FALSE,FALSE,
 2526,story_693,“작은... 짐승...?”,,6,,,,9,2527,,,,FALSE,FALSE,
 2527,story_694,“도마뱀...인가...?”,,6,,,,9,2528,,,,FALSE,FALSE,
-2528,story_695,“너는 누구니...?”,,6,,,,107,2529,8,2,0,FALSE,FALSE,7
+2528,story_695,“너는 누구니...?”,,6,,,,107,2529,8,1.5,0,FALSE,FALSE,7
 2529,story_696,나는 조심스럽게 그 작은 짐승을 들어 올렸다.,,,,,,107,2530,,,,FALSE,FALSE,
 2530,story_697,“...다쳤구나...”,,6,,,,107,2531,,,,FALSE,FALSE,
 2531,story_698,"두 손으로 감싸듯 안아, 신당 앞에 내려놓았다.",,,,,,107,2532,,,,FALSE,FALSE,
-2532,story_699,"깨끗한 물을 떠와 상처를 닦아주고,",,,,,,9,2533,8,2,0,FALSE,FALSE,
+2532,story_699,"깨끗한 물을 떠와 상처를 닦아주고,",,,,,,9,2533,8,1.5,0,FALSE,FALSE,
 2533,story_700,작은 열매를 주워 조심스레 앞에 놓아주었다.,,,,,,9,2534,,,,FALSE,FALSE,
 2534,story_701,“...이런 걸 먹을지는 모르겠지만...”,,6,,,,9,2535,,,,FALSE,FALSE,
 2535,story_702,"작은 짐승의 머리를 조심스럽게 쓰다듬자,",,,,,,9,2536,,,,FALSE,FALSE,
@@ -773,7 +773,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 2614,story_781,연민.,,,,,,108,2615,,,,FALSE,FALSE,
 2615,story_782,"그리고,",,,,,,108,2616,,,,FALSE,FALSE,
 2616,story_783,견딜 수 없는 죄책감.,,,,,,108,2617,,,,FALSE,FALSE,
-2617,story_784,“천제님... 저는...”,,8,,,,109,2618,8/20,2/0,0/2,FALSE,FALSE,9
+2617,story_784,“천제님... 저는...”,,8,,,,109,2618,8/20,1/0,0/2,FALSE,FALSE,9
 2618,story_785,“...도저히... 도저히 이 아이를 죽일 수 없습니다...”,,8,,,,109,2619,20,0,2,FALSE,FALSE,
 2619,story_786,“저에게 이 아이는... 은인입니다...”,,8,,,,109,2620,20,0,2.5,FALSE,FALSE,
 2620,story_787,“어찌... 제가...”,,8,,,,109,2621,20,0,2.5,FALSE,FALSE,
@@ -947,7 +947,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3118,story_954,내 눈동자와 머리칼이 천천히 그와 같은 색으로 물들었다.,,,,,,111,3119,,,,FALSE,FALSE,
 3119,story_955,“이 느낌...”,,9,,,,111,3120,,,,FALSE,FALSE,
 3120,story_956,“숨이... 전혀 힘들지 않아...”,,9,,,,111,3121,,,,FALSE,FALSE,
-3121,story_957,“성립되었다.”,,4,Character_2,,,7,3122,8,2,0,FALSE,FALSE,
+3121,story_957,“성립되었다.”,,4,Character_2,,,7,3122,8,1,0,FALSE,FALSE,
 3122,story_958,"“이제, 너희는 하나의 균형이다.”",,4,Character_2,,,7,3123,,,,FALSE,FALSE,
 3123,story_959,“하나의...”,,3,,,,7,3124,,,,FALSE,FALSE,
 3124,story_960,“균형...”,,9,,,,7,3125,,,,FALSE,FALSE,
@@ -1002,7 +1002,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3173,story_1009,“...!”,,9,Character_Main_0,Character_Main_0_5,,12,3174,23,1,5,FALSE,FALSE,
 3174,story_1010,내 심장이 크게 뛴다.,,,Character_Main_0,Character_Main_0_5,,12,3175,,,,FALSE,FALSE,
 3175,story_1011,서로의 숨이 가까워졌다.,,,Character_Main_0,Character_Main_0_5,,12,3176,,,,FALSE,FALSE,
-3176,story_1012,"“...이미, 네가 선택했으니까.”",,3,,,,112,3177,8,2,0,FALSE,FALSE,12
+3176,story_1012,"“...이미, 네가 선택했으니까.”",,3,,,,112,3177,8,1.5,0,FALSE,FALSE,12
 3177,story_1013,더 이상 망설임 없이—,,,,,,112,3178,,,,FALSE,FALSE,
 3178,story_1014,그의 입술이 닿는다.,,,,,,112,3179,,,,FALSE,FALSE,
 3179,story_1015,부드럽게.,,,,,,112,3180,,,,FALSE,FALSE,
@@ -1104,20 +1104,20 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3574,story_1111,그의 손을—,,,Character_Main_0,Character_Main_0_13,,10,3575,,,,FALSE,FALSE,
 3575,story_1112,다시 한번 천천히 떼어냈다.,,,Character_Main_0,Character_Main_0_13,,10,3576,,,,FALSE,FALSE,
 3576,story_1113,"내 주변의 빛이, 천천히 흩어졌다.",,,Character_Main_0,Character_Main_0_13,,10,3577,,,,FALSE,FALSE,
-3577,story_1114,“...{0}...!”,,3,,,,113,3578,3/23/11,0.5/1/3,0/7/3,FALSE,TRUE,13
-3578,story_1115,"그가 손을 뻗으며,",,,,,,113,3579,11,4,3,FALSE,FALSE,
-3579,story_1116,붙잡으려 하지만 늦었다.,,,,,,113,3580,11,4,3,FALSE,FALSE,
-3580,story_1117,빛이 나를 삼키고,,,,,,113,3581,11,4,3,FALSE,FALSE,
-3581,story_1118,그의 목소리가 멀어졌다.,,,,,,113,3582,11,4,3,FALSE,FALSE,
-3582,story_1119,마지막으로 보인 것은,,,,,,113,3583,11,4,3,FALSE,FALSE,
-3583,story_1120,"무너진 표정으로,",,,,,,113,3584,11,4,3,FALSE,FALSE,
-3584,story_1121,울고 있는 그의 얼굴.,,,,,,113,3585,11,4,3,FALSE,FALSE,
-3585,story_1122,그리고,,,,,,113,3586,11,4,3,FALSE,FALSE,
-3586,story_1123,"천천히, 본래의 신의 모습으로 돌아가는 그의 형상.",,,,,,114,3587,6/11,4/4,0/3,FALSE,FALSE,14
-3587,story_1124,(...내가 대가를 치렀기 때문이겠지.),,9,,,,114,3588,11,4,3,FALSE,FALSE,
-3588,story_1125,"(부디,)",,9,,,,114,3589,11,4,3.5,FALSE,FALSE,
-3589,story_1126,(너무 많이 울지 않기를.),,9,,,,114,3590,11,4,4,FALSE,FALSE,
-3590,story_1127,조용한 신당.,,,,,,115,3591,8,2,0,FALSE,FALSE,15
+3577,story_1114,“...{0}...!”,,3,,,,113,3578,3/23/11,0.5/1/3,0/7/1,FALSE,TRUE,13
+3578,story_1115,"그가 손을 뻗으며,",,,,,,113,3579,,,,FALSE,FALSE,
+3579,story_1116,붙잡으려 하지만 늦었다.,,,,,,113,3580,11,3,1,FALSE,FALSE,
+3580,story_1117,빛이 나를 삼키고,,,,,,113,3581,,,,FALSE,FALSE,
+3581,story_1118,그의 목소리가 멀어졌다.,,,,,,113,3582,11,3,2,FALSE,FALSE,
+3582,story_1119,마지막으로 보인 것은,,,,,,113,3583,,,,FALSE,FALSE,
+3583,story_1120,"무너진 표정으로,",,,,,,113,3584,11,3,2,FALSE,FALSE,
+3584,story_1121,울고 있는 그의 얼굴.,,,,,,113,3585,,,,FALSE,FALSE,
+3585,story_1122,그리고,,,,,,113,3586,11,3,3,FALSE,FALSE,
+3586,story_1123,"천천히, 본래의 신의 모습으로 돌아가는 그의 형상.",,,,,,114,3587,6,4,0,FALSE,FALSE,14
+3587,story_1124,(...내가 대가를 치렀기 때문이겠지.),,9,,,,114,3588,11/1,3/1.5,3/0.3,FALSE,FALSE,
+3588,story_1125,"(부디,)",,9,,,,114,3589,11/1,3/1.5,3.5/0.5,FALSE,FALSE,
+3589,story_1126,(너무 많이 울지 않기를.),,9,,,,114,3590,11/1,3/1.5,3.5/0.7,FALSE,FALSE,
+3590,story_1127,조용한 신당.,,,,,,115,3591,8,1.5,0,FALSE,FALSE,15
 3591,story_1128,그는 여전히 그 자리에 남아 있다.,,,,,,115,3592,,,,FALSE,FALSE,
 3592,story_1129,하지만 이전과는 달랐다.,,,,,,115,3593,,,,FALSE,FALSE,
 3593,story_1130,“...{0}...”,,3,,,,115,3594,,,,FALSE,TRUE,
@@ -1134,7 +1134,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3604,story_1141,그는 그 빛을 붙잡으려는 듯 손을 말아 쥐었다.,,,,,,116,3605,,,,FALSE,FALSE,
 3605,story_1142,“...기다리마.”,,3,,,,116,3606,,,,FALSE,FALSE,
 3606,story_1143,"“설령, 다시는 돌아오지 않는다 해도.”",,3,,,,116,3607,,,,FALSE,FALSE,
-3607,story_1144,그날 이후—,,,,,,11,3608,8,2,0,FALSE,FALSE,
+3607,story_1144,그날 이후—,,,,,,11,3608,8,1.5,0,FALSE,FALSE,
 3608,story_1145,그는 신당을 떠나지 않았다.,,,,,,11,3609,,,,FALSE,FALSE,
 3609,story_1146,"신으로서가 아니라,",,,,,,11,3610,,,,FALSE,FALSE,
 3610,story_1147,남겨진 자리를 지키는 이로서.,,,,,,11,3611,,,,FALSE,FALSE,
@@ -1254,7 +1254,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 3908,story_1261,“좋다.”,,4,Character_2,,,7,3909,,,,FALSE,FALSE,
 3909,story_1262,“대가는 성립되었다.”,,4,Character_2,,,7,3910,,,,FALSE,FALSE,
 3910,story_1263,빛이 조용히 내려왔다.,,,,,,7,3911,,,,FALSE,FALSE,
-3911,story_1264,나는 그의 손을 맞잡으며 바라보았다.,,,,,,117,3912,8,2,0,FALSE,FALSE,17
+3911,story_1264,나는 그의 손을 맞잡으며 바라보았다.,,,,,,117,3912,8,1,0,FALSE,FALSE,17
 3912,story_1265,"빛이 서서히 스며 들자,",,,,,,117,3913,,,,FALSE,FALSE,
 3913,story_1266,몸이 무거워지며 신력이 빠져나간다.,,,,,,117,3914,,,,FALSE,FALSE,
 3914,story_1267,잠시후,,,,,,117,3915,,,,FALSE,FALSE,
@@ -1358,7 +1358,7 @@ index,language_key,language_sample,language_production,name,body,face,select_ind
 4012,story_1362,이번엔—,,,,,,119,4013,,,,FALSE,FALSE,
 4013,story_1363,"조금 더 자연스럽게,",,,,,,119,4014,,,,FALSE,FALSE,
 4014,story_1364,다시 입술이 닿는다.,,,,,,119,4015,,,,FALSE,FALSE,
-4015,story_1365,"햇살 아래,",,,,,,9,4016,8,2,0,FALSE,FALSE,
+4015,story_1365,"햇살 아래,",,,,,,9,4016,8,1.5,0,FALSE,FALSE,
 4016,story_1366,그와 나의 그림자가 조용히 겹쳐진다.,,,,,,9,4017,,,,FALSE,FALSE,
 4017,story_1367,영원은 없다.,,,,,,9,4018,,,,FALSE,FALSE,
 4018,story_1368,완전한 기억도 없다.,,,,,,9,4019,,,,FALSE,FALSE,

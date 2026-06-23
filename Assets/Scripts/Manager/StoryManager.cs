@@ -886,12 +886,14 @@ public class StoryManager : MonoBehaviour
 
         int bg_FadeIn_Index = _currentStory.Appear_Production.IndexOf(24);
         int bg_FadeOut_Index = _currentStory.Appear_Production.IndexOf(25);
+        int bg_WhiteIn_Index = _currentStory.Appear_Production.IndexOf(26);
+        int bg_WhiteOut_Index = _currentStory.Appear_Production.IndexOf(27);
 
         bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
         bool hasBlurProduction = blurIndex >= 0 || blurOnceIndex >= 0;
         bool hasBGShake = bgLoopShakeXIndex >= 0 || bgLoopShakeYIndex >= 0 || bgLoopShakeXYIndex >= 0 || bgOnceShakeXIndex >= 0 || bgOnceShakeYIndex >= 0 || bgOnceShakeXYIndex >= 0;
         bool hasTextShake = textLoopShakeXIndex >= 0 || textLoopShakeYIndex >= 0 || textLoopShakeXYIndex >= 0 || textOnceShakeXIndex >= 0 || textOnceShakeYIndex >= 0 || textOnceShakeXYIndex >= 0;
-        bool hasBGFade = bg_FadeIn_Index >= 0 || bg_FadeOut_Index >= 0;
+        bool hasBGFade = bg_FadeIn_Index >= 0 || bg_FadeOut_Index >= 0 || bg_WhiteIn_Index >= 0 || bg_WhiteOut_Index >= 0;
 
         if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
         {
@@ -1050,13 +1052,25 @@ public class StoryManager : MonoBehaviour
             float time = _currentStory.Appear_Production_Time[bg_FadeIn_Index];
             float value = _currentStory.Appear_Production_Value[bg_FadeIn_Index];
 
-            FadeIn(time, value);
+            FadeIn(new Color(0f, 0f, 0f, BG_Dim.color.a), time, value);
         }
         else if (bg_FadeOut_Index >= 0 && bg_FadeOut_Index < _currentStory.Appear_Production_Time.Count)
         {
             float time = _currentStory.Appear_Production_Time[bg_FadeOut_Index];
             float value = _currentStory.Appear_Production_Value[bg_FadeOut_Index];
-            FadeOut(time, value);
+            FadeOut(new Color(0f, 0f, 0f, BG_Dim.color.a), time, value);
+        }
+        else if (bg_WhiteIn_Index >= 0 && bg_WhiteIn_Index < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bg_WhiteIn_Index];
+            float value = _currentStory.Appear_Production_Value[bg_WhiteIn_Index];
+            FadeIn(new Color(1f, 1f, 1f, BG_Dim.color.a), time, value);
+        }
+        else if (bg_WhiteOut_Index >= 0 && bg_WhiteOut_Index < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bg_WhiteOut_Index];
+            float value = _currentStory.Appear_Production_Value[bg_WhiteOut_Index];
+            FadeOut(new Color(1f, 1f, 1f, BG_Dim.color.a), time, value);
         }
         //------------------------------초기화 부분--------------------------------
         if (Blink.gameObject.activeSelf && !hasBlinkProduction)
@@ -1919,11 +1933,12 @@ public class StoryManager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Fade
     Tween _fadeTween;
-    void FadeIn(float duration, float value)
+    void FadeIn(Color _color, float duration, float value)
     {
         _fadeTween?.Kill();
         _fadeTween = null;
 
+        BG_Dim.color = _color;
         BG_Dim.gameObject.SetActive(true);
 
         _fadeTween = BG_Dim
@@ -1935,11 +1950,12 @@ public class StoryManager : MonoBehaviour
             });
     }
 
-    void FadeOut(float duration, float value)
+    void FadeOut(Color _color, float duration, float value)
     {
         _fadeTween?.Kill();
         _fadeTween = null;
 
+        BG_Dim.color = _color;
         BG_Dim.gameObject.SetActive(true);
 
         _fadeTween = BG_Dim
