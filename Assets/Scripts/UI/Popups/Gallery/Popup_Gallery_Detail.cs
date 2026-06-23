@@ -155,14 +155,16 @@ public class Popup_Gallery_Detail : PopupBase
 
     void ChangeBG(Story_Data data)
     {
-        var sprite = Resource_Manager.Instance.Get_BG(data.BG);
+        KillBGTweens();
+        var targetData = _gallery_Datas[_currentPage];
+        var sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
 
-        if (sprite == null)
-        {
-            var targetData = _gallery_Datas[_currentPage];
-            BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
-            return;
-        }
+        // if (sprite == null)
+        // {
+        //     var targetData = _gallery_Datas[_currentPage];
+        //     BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
+        //     return;
+        // }
 
         FadeBG.material = null;
         FadeBG.sprite = sprite;
