@@ -141,7 +141,7 @@ public class Popup_Gallery_Detail : PopupBase
             BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
         }
 
-        IndexText.text = targetData.Index.ToString("00");
+        IndexText.text = targetData.Group.ToString("00");
         TitleText.text = LanguageManager.Instance.GetText(targetData.TextKey);
 
         ImageSaveBtn.SetButton(OnClickImageSave);

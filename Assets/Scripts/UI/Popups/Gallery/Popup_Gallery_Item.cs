@@ -48,7 +48,7 @@ public class Popup_Gallery_Item : MonoBehaviour, IPointerEnterHandler, IPointerE
             Lock.SetActive(false);
             Title.text = LanguageManager.Instance.GetText(data.TextKey);
             Title.color = UIUtility.Gallery_Lock_Text_Color;
-            NumText.text = data.Index.ToString("00");
+            NumText.text = data.Group.ToString("00");
             NumText.color = UIUtility.Gallery_Lock_Text_Color;
             BG.sprite = Resource_Manager.Instance.Get_BG(data.BG);
             Deco_Bot_1.SetActive(true);
