@@ -258,7 +258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -61.7, y: -10.9}
+  m_AnchoredPosition: {x: -61.69995, y: -10.900002}
   m_SizeDelta: {x: 227.09998, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &4432248311187192567
@@ -1821,6 +1821,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startScale: {x: 0.8, y: 0.8, z: 0.8}
+  revealMaskRoot: {fileID: 0}
+  SlideMask: {fileID: 0}
+  revealDuration: 0.25
   canvasGroup: {fileID: 8824026177992561484}
   contentRoot: {fileID: 4517775375348718946}
   BG: {fileID: 8973795273678122189}
@@ -6207,6 +6210,7 @@ GameObject:
   - component: {fileID: 2564279528109804867}
   - component: {fileID: 3369715797212790958}
   - component: {fileID: 8403073783706242233}
+  - component: {fileID: 5504052129841138651}
   m_Layer: 5
   m_Name: Popup_Gallery
   m_TagString: Untagged
@@ -6263,7 +6267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6305,8 +6309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Gallery
   AnimationType: 0
-  fadeDuration: 0.25
-  useScaleAnimation: 1
+  fadeDuration: 0.3
+  useScaleAnimation: 0
   scaleDuration: 0.25
   animationCurve:
     serializedVersion: 2
@@ -6333,6 +6337,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startScale: {x: 0.8, y: 0.8, z: 0.8}
+  revealMaskRoot: {fileID: 8900949481088659789}
+  SlideMask: {fileID: 5504052129841138651}
+  revealDuration: 0.25
   canvasGroup: {fileID: 3369715797212790958}
   contentRoot: {fileID: 8900949481088659789}
   CloseBtn: {fileID: 4368601510611735499}
@@ -6344,6 +6351,20 @@ MonoBehaviour:
   Dot_2: {fileID: 3254804684404476039}
   Detail_Popup: {fileID: 8514723213890574351}
   Percent: {fileID: 3634888517903473552}
+--- !u!114 &5504052129841138651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334084311183296883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
+  m_Padding: {x: -20, y: 0, z: -20, w: 0}
+  m_Softness: {x: 20, y: 0}
 --- !u!1 &9132455762731343924
 GameObject:
   m_ObjectHideFlags: 0
