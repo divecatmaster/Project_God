@@ -24,6 +24,7 @@ public class StoryManager : MonoBehaviour
     [Header("BG")]
     [SerializeField] Image CurrentBG;
     [SerializeField] Image FadeBG;
+    [SerializeField] Image BG_Dim;
     [SerializeField] Material[] BG_Fade_Material;
     [SerializeField] Image Blink;
     [SerializeField] Material BlinkMaterial;
@@ -859,10 +860,14 @@ public class StoryManager : MonoBehaviour
         int textOnceShakeYIndex = _currentStory.Appear_Production.IndexOf(22);
         int textOnceShakeXYIndex = _currentStory.Appear_Production.IndexOf(23);
 
+        int bg_FadeIn_Index = _currentStory.Appear_Production.IndexOf(24);
+        int bg_FadeOut_Index = _currentStory.Appear_Production.IndexOf(25);
+
         bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
         bool hasBlurProduction = blurIndex >= 0 || blurOnceIndex >= 0;
         bool hasBGShake = bgLoopShakeXIndex >= 0 || bgLoopShakeYIndex >= 0 || bgLoopShakeXYIndex >= 0 || bgOnceShakeXIndex >= 0 || bgOnceShakeYIndex >= 0 || bgOnceShakeXYIndex >= 0;
         bool hasTextShake = textLoopShakeXIndex >= 0 || textLoopShakeYIndex >= 0 || textLoopShakeXYIndex >= 0 || textOnceShakeXIndex >= 0 || textOnceShakeYIndex >= 0 || textOnceShakeXYIndex >= 0;
+        bool hasBGFade = bg_FadeIn_Index >= 0 || bg_FadeOut_Index >= 0;
 
         if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
         {
@@ -1016,6 +1021,19 @@ public class StoryManager : MonoBehaviour
 
             ShakeTextOnce(time, value, Vector2.one);
         }
+        else if (bg_FadeIn_Index >= 0 && bg_FadeIn_Index < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bg_FadeIn_Index];
+            float value = _currentStory.Appear_Production_Value[bg_FadeIn_Index];
+
+            FadeIn(time, value);
+        }
+        else if (bg_FadeOut_Index >= 0 && bg_FadeOut_Index < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[bg_FadeOut_Index];
+            float value = _currentStory.Appear_Production_Value[bg_FadeOut_Index];
+            FadeOut(time, value);
+        }
         //------------------------------초기화 부분--------------------------------
         if (Blink.gameObject.activeSelf && !hasBlinkProduction)
         {
@@ -1039,6 +1057,11 @@ public class StoryManager : MonoBehaviour
         if (!hasTextShake)
         {
             ResetTextShake();
+        }
+
+        if (!hasBGFade)
+        {
+            ResetFade();
         }
     }
 
@@ -1867,6 +1890,62 @@ public class StoryManager : MonoBehaviour
                 rect.anchoredPosition = _textOriginPos;
                 _textShakeTween = null;
             });
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region Fade
+    Tween _fadeTween;
+    void FadeIn(float duration, float value)
+    {
+        _fadeTween?.Kill();
+        _fadeTween = null;
+
+        BG_Dim.gameObject.SetActive(true);
+
+        _fadeTween = BG_Dim
+            .DOFade(value, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                _fadeTween = null;
+            });
+    }
+
+    void FadeOut(float duration, float value)
+    {
+        _fadeTween?.Kill();
+        _fadeTween = null;
+
+        BG_Dim.gameObject.SetActive(true);
+
+        _fadeTween = BG_Dim
+            .DOFade(value, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                _fadeTween = null;
+
+                if (value <= 0.001f)
+                {
+                    Color color = BG_Dim.color;
+                    color.a = 0f;
+                    BG_Dim.color = color;
+                    
+                    BG_Dim.gameObject.SetActive(false);
+                }
+            });
+    }
+
+    void ResetFade()
+    {
+        _fadeTween?.Kill();
+        _fadeTween = null;
+
+        Color color = BG_Dim.color;
+        color.a = 0f;
+        BG_Dim.color = color;
+        
+        BG_Dim.gameObject.SetActive(false);
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
