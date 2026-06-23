@@ -21,6 +21,19 @@ public class Popup_Log_Item : MonoBehaviour
             Name.text = "";
             Line.SetActive(false);
         }
+        else if (story.Name == 9)
+        {
+            Name.text = Data_Manager.Instance.MyName;
+            Name.color = Data_Manager.Instance.GetNameColor(story.Name);
+            Line.SetActive(true);
+        }
+        else if (story.Name == 6)
+        {
+            var name = Data_Manager.Instance.MyName;
+            Name.text = string.Format(LanguageManager.Instance.GetText($"Name_{story.Name}"), name);
+            Name.color = Data_Manager.Instance.GetNameColor(story.Name);
+            Line.SetActive(true);
+        }
         else
         {
             Name.text = LanguageManager.Instance.GetText($"Name_{story.Name}");

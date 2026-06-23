@@ -12,7 +12,6 @@ public class Popup_Gallery_Detail_ContextItem : MonoBehaviour
         {
             if (data.Name == 9)
             {
-                //정환 여기 수정 필요
                 var name = Data_Manager.Instance.MyName;
                 var color = UIUtility.ColorToHex(Data_Manager.Instance.GetNameColor(data.Name));
                 var result = $"<color=#{color}>{name}</color> : ";

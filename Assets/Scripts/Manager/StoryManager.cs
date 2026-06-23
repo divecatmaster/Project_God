@@ -841,6 +841,7 @@ public class StoryManager : MonoBehaviour
         int eyeOpenIndex = _currentStory.Appear_Production.IndexOf(2);
         int blinkIndex = _currentStory.Appear_Production.IndexOf(9);
         int blurIndex = _currentStory.Appear_Production.IndexOf(10);
+        int blurOnceIndex = _currentStory.Appear_Production.IndexOf(11);
 
         int bgLoopShakeXIndex = _currentStory.Appear_Production.IndexOf(12);
         int bgLoopShakeYIndex = _currentStory.Appear_Production.IndexOf(13);
@@ -859,7 +860,7 @@ public class StoryManager : MonoBehaviour
         int textOnceShakeXYIndex = _currentStory.Appear_Production.IndexOf(23);
 
         bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
-        bool hasBlurProduction = blurIndex >= 0;
+        bool hasBlurProduction = blurIndex >= 0 || blurOnceIndex >= 0;
         bool hasBGShake = bgLoopShakeXIndex >= 0 || bgLoopShakeYIndex >= 0 || bgLoopShakeXYIndex >= 0 || bgOnceShakeXIndex >= 0 || bgOnceShakeYIndex >= 0 || bgOnceShakeXYIndex >= 0;
         bool hasTextShake = textLoopShakeXIndex >= 0 || textLoopShakeYIndex >= 0 || textLoopShakeXYIndex >= 0 || textOnceShakeXIndex >= 0 || textOnceShakeYIndex >= 0 || textOnceShakeXYIndex >= 0;
 
@@ -917,6 +918,24 @@ public class StoryManager : MonoBehaviour
                 _runtimeBlurMaterial.SetFloat("_BlurSize", 0f);
             }
             BlinkBlur(time, blinkProgress);
+        }
+
+        if (blurOnceIndex >= 0 && blurOnceIndex < _currentStory.Appear_Production_Time.Count)
+        {
+            float time = _currentStory.Appear_Production_Time[blurOnceIndex];
+            float blinkProgress = _currentStory.Appear_Production_Value[blurOnceIndex];
+            
+            if (CurrentBG.material == null)
+            {
+                if (_runtimeBlurMaterial == null)
+                {
+                    _runtimeBlurMaterial = Instantiate(BlurMaterial);
+                }
+
+                CurrentBG.material = _runtimeBlurMaterial;
+                _runtimeBlurMaterial.SetFloat("_BlurSize", 0f);
+            }
+            BlinkBlurOnce(time, blinkProgress);
         }
 
         if (bgLoopShakeXIndex >= 0 && bgLoopShakeXIndex < _currentStory.Appear_Production_Time.Count)

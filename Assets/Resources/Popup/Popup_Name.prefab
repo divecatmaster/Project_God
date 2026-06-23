@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d826eb8d2772540a3ba986eff9eb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Name
+  AnimationType: 0
   fadeDuration: 0.25
   useScaleAnimation: 1
   scaleDuration: 0.25
@@ -135,6 +136,7 @@ MonoBehaviour:
   ConfirmBtn: {fileID: 205407210725859916}
   Input: {fileID: 5842713674518792458}
   maxByte: 21
+  maxLength: 12
 --- !u!1 &1733475951987909540
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.69803923, g: 0.7529412, b: 0.8980392, a: 0.2}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
