@@ -377,6 +377,7 @@ public class Data_Manager : MonoBehaviour
             newData.Music = data[i]["music"].ToString();
             newData.Start = CSV_Int_Checker(data[i]["start"]);
             newData.End = CSV_Int_Checker(data[i]["end"]);
+            newData.Production = CSV_Int_Checker(data[i]["production"]);
 
             Gallery_Dic.Add(newData.Index, newData);
         }
@@ -674,4 +675,5 @@ public class Gallery_Data
     public string Music;
     public int Start;
     public int End;
+    public int Production;
 }

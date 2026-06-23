@@ -126,7 +126,7 @@ public class Popup_Gallery_Detail : PopupBase
         var targetData = _gallery_Datas[_currentPage];
         if (!isInit)
         {
-            var targetStory = Data_Manager.Instance.GetStoryData(targetData.Start);
+            var targetStory = Data_Manager.Instance.GetStoryData(targetData.Production);
             if (targetStory != null)
             {
                 ChangeBG(targetStory);
