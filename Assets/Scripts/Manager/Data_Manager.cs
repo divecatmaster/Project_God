@@ -615,6 +615,25 @@ public class Data_Manager : MonoBehaviour
         MyName = name;
         PlayerPrefs.SetString("MyName", name);
     }
+
+    public bool HasFinalConsonant(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return false;
+
+        char lastChar = text[text.Length - 1];
+
+        // 한글 완성형 범위: 가 ~ 힣
+        if (lastChar < '가' || lastChar > '힣')
+            return false;
+
+        int unicode = lastChar - '가';
+
+        // 종성 인덱스
+        int jongseong = unicode % 28;
+
+        return jongseong != 0;
+    }
     #endregion
 }
 

@@ -330,8 +330,32 @@ public class StoryManager : MonoBehaviour
         Stop_Typewriter();
         if (_currentStory.My_Name)
         {
-            var str = LanguageManager.Instance.GetText(_currentStory.Language_Key);
-            Context.text = string.Format(str, Data_Manager.Instance.MyName);
+            if (LanguageManager.Instance.GetCurrentLanguage() == LanguageType.KR)
+            {
+                if (!Data_Manager.Instance.HasFinalConsonant(Data_Manager.Instance.MyName))
+                {
+                    var str = LanguageManager.Instance.GetText($"{_currentStory.Language_Key}_1");
+                    if (str == $"{_currentStory.Language_Key}_1")
+                    {
+                        str = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+                        Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                    }
+                    else
+                    {
+                        Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                    }
+                }
+                else
+                {
+                    var str = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+                    Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                }
+            }
+            else
+            {
+                var str = LanguageManager.Instance.GetText(_currentStory.Language_Key);
+                Context.text = string.Format(str, Data_Manager.Instance.MyName);
+            }
         }
         else
         {
