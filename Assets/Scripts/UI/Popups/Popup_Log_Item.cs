@@ -59,4 +59,13 @@ public class Popup_Log_Item : MonoBehaviour
             Context.text = LanguageManager.Instance.GetText(story.Language_Key);
         }
     }
+
+    public void SetItemBG(Story_Data story)
+    {
+        Name.text = LanguageManager.Instance.GetText($"BG_Title_{story.BG}");
+        Name.color = Color.white;
+        Line.SetActive(false);
+        Select.SetActive(false);
+        Context.text = "";
+    }
 }
