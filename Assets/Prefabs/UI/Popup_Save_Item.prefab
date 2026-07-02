@@ -439,6 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: No_Save
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &2277015786750548970
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 38.5, y: -5.800003}
-  m_SizeDelta: {x: 302.8, y: 50}
+  m_SizeDelta: {x: 550, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5448916271712301066
 CanvasRenderer:
@@ -1304,6 +1305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: PlayTime
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &3555064176318198897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,6 +1901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: New_Memory
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &4806639291790341723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,6 +2440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Empty_Slot
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &6795467017857067031
 GameObject:
   m_ObjectHideFlags: 0
