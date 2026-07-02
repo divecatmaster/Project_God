@@ -1445,30 +1445,10 @@ Language_EN,English,English,English,English
 Language_KR,한국어,한국어,한국어,한국어
 Language_JA,日本語,日本語,日本語,日本語
 Language_CN,简体中文,简体中文,简体中文,简体中文
-Language_Warning,언어를 변경하기 위해서@n게임을 재시작 합니다.,The game will restart to apply the language change.,言語変更を適用するため、ゲームを再起動します。,为应用语言更改，游戏将重新启动。
+Language_Warning,언어를 변경하기 위해서@n게임을 재시작 합니다.,The game will restart to apply@nthe language change.,言語変更を適用するため、@nゲームを再起動します。,为应用语言更改，@n游戏将重新启动。
 EndGame,게임을 종료하시겠습니까?,Quit the game?,ゲームを終了しますか？,要退出游戏吗？
 Skip_Warning_1,다음 선택지까지 이동하시겠습니까?,Jump to the next choice?,次の選択肢まで移動しますか？,要跳转到下一个选项吗？
 Skip_Warning_2,다음 선택지가 없어서 스킵할 수 없습니다.,There are no more choices ahead to skip to.,この先に選択肢がないため、スキップできません。,后续没有可跳转的选项，无法跳过。
-Gallery_Title_1,깊어지는 연결,,,
-Gallery_Title_2,겹쳐진 온기,,,
-Gallery_Title_3,겹쳐진 온기,,,
-Gallery_Title_4,붙잡은 손끝,,,
-Gallery_Title_5,같은 심장,,,
-Gallery_Title_6,침묵의 끝,,,
-Gallery_Title_7,인연의 시작,,,
-Gallery_Title_8,기억 속 온기,,,
-Gallery_Title_9,기억 속 온기,,,
-Gallery_Title_10,연신,,,
-Gallery_Title_11,연신,,,
-Gallery_Title_12,영원을 나눈 밤,,,
-Gallery_Title_13,끝내 붙잡지 못한,,,
-Gallery_Title_14,끝내 붙잡지 못한,,,
-Gallery_Title_15,너를 잃은 밤,,,
-Gallery_Title_16,너를 잃은 밤,,,
-Gallery_Title_17,영원보다 너를,,,
-Gallery_Title_18,영원보다 너를,,,
-Gallery_Title_19,평범한 나날,,,
-Gallery_Title_20,깊어지는 연결,,,
 CG_Music_1,브금1,,,
 CG_Music_2,브금2,,,
 CG_Music_3,브금3,,,
@@ -1559,7 +1539,7 @@ BG_Title_108,기억 속 온기,Warmth in Memory,記憶のぬくもり,记忆中�
 BG_Title_109,기억 속 온기,Warmth in Memory,記憶のぬくもり,记忆中的温暖
 BG_Title_110,연신,Twin Divinity,聯神,联神
 BG_Title_111,연신,Twin Divinity,聯神,联神
-BG_Title_112,영원을 나눈 밤,The Night We Shared Eternity,永遠を分け合った夜,共分永恒之夜
+BG_Title_112,영원을 나눈 밤,Shared Eternity,永遠を分け合った夜,共分永恒之夜
 BG_Title_113,끝내 붙잡지 못한,Never Able to Hold On,ついに掴めなかった,始终未能挽留
 BG_Title_114,끝내 붙잡지 못한,Never Able to Hold On,ついに掴めなかった,始终未能挽留
 BG_Title_115,너를 잃은 밤,The Night I Lost You,君を失った夜,失去你的夜晚
