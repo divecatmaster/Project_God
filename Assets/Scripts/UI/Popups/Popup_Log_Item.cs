@@ -50,6 +50,13 @@ public class Popup_Log_Item : MonoBehaviour
             Select.SetActive(true);
         }
 
-        Context.text = LanguageManager.Instance.GetText(story.Language_Key);
+        if (story.My_Name)
+        {
+            Context.text = string.Format(LanguageManager.Instance.GetText(story.Language_Key), Data_Manager.Instance.MyName);
+        }
+        else
+        {
+            Context.text = LanguageManager.Instance.GetText(story.Language_Key);
+        }
     }
 }
