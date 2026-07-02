@@ -30,17 +30,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlockScale: 15
-    - _BlockWeight: 0
-    - _ColorSpikeWeight: 0
-    - _GlitchIntensity: 0.08986318
+    - _BlockWeight: 1
+    - _ColorSpikeWeight: 1
+    - _GlitchIntensity: 0
     - _HorizontalDistortion: 0.08
     - _NoiseSpeed: 12
-    - _NoiseWeight: 0
+    - _NoiseWeight: 1
     - _RGBSplit: 0.015
     - _RGBSplitWeight: 1
     - _ScanlineCount: 400
     - _ScanlineIntensity: 0.25
-    - _ScanlineWeight: 0.2
+    - _ScanlineWeight: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
