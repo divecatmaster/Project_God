@@ -1445,7 +1445,7 @@ Language_EN,English,English,English,English
 Language_KR,한국어,한국어,한국어,한국어
 Language_JA,日本語,日本語,日本語,日本語
 Language_CN,简体中文,简体中文,简体中文,简体中文
-Language_Warning,언어를 변경하기 위해서 게임을 재시작 합니다.,The game will restart to apply the language change.,言語変更を適用するため、ゲームを再起動します。,为应用语言更改，游戏将重新启动。
+Language_Warning,언어를 변경하기 위해서@n게임을 재시작 합니다.,The game will restart to apply the language change.,言語変更を適用するため、ゲームを再起動します。,为应用语言更改，游戏将重新启动。
 EndGame,게임을 종료하시겠습니까?,Quit the game?,ゲームを終了しますか？,要退出游戏吗？
 Skip_Warning_1,다음 선택지까지 이동하시겠습니까?,Jump to the next choice?,次の選択肢まで移動しますか？,要跳转到下一个选项吗？
 Skip_Warning_2,다음 선택지가 없어서 스킵할 수 없습니다.,There are no more choices ahead to skip to.,この先に選択肢がないため、スキップできません。,后续没有可跳转的选项，无法跳过。
@@ -1569,3 +1569,4 @@ BG_Title_118,영원보다 너를,You Over Eternity,永遠より君を,比起永�
 BG_Title_119,평범한 나날,Ordinary Days,何気ない日々,平凡的日子
 BG_Title_120,깊어지는 연결,A Deepening Bond,深まる繋がり,渐深的联系
 story_1500_1,“{0}....에요...”,,,
+Log_Select,(선택),(Choice),（選択）,（选择）
