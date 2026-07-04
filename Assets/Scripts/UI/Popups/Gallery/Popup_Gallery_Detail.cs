@@ -145,7 +145,16 @@ public class Popup_Gallery_Detail : PopupBase
         TitleText.text = LanguageManager.Instance.GetText(targetData.TextKey);
 
         ImageSaveBtn.SetButton(OnClickImageSave);
-        MusicBtn.SetButton(LanguageManager.Instance.GetText(targetData.Music), OnClickMusic);
+        if (string.IsNullOrEmpty(targetData.Music))
+        {
+            MusicBtn.gameObject.SetActive(false);
+        }
+        else
+        {
+            MusicBtn.gameObject.SetActive(true);
+            MusicBtn.SetButton(LanguageManager.Instance.GetText(targetData.Music), OnClickMusic);    
+        }
+        
         _isPlayMusic = false;
 
         SetContext(targetData.Start, targetData.End);

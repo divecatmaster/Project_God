@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Resources;
 using System;
 using DG.Tweening;
+using God.Audio;
 
 public class StoryManager : MonoBehaviour
 {
@@ -277,6 +278,7 @@ public class StoryManager : MonoBehaviour
                     IsSetName = true;    
                 }
             }
+            CheckBGM();
         }
     }
 
@@ -2178,6 +2180,38 @@ public class StoryManager : MonoBehaviour
     {
         IsSetName = false;
         GetNextStory();
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+    #region BGM
+    string _currentBGM = "";
+    void CheckBGM()
+    {
+        if (string.IsNullOrEmpty(_currentBGM))//브금 꺼져있음
+        {
+            if (!string.IsNullOrEmpty(_currentStory.BGM))
+            {
+                SoundManager.Instance.PlayBGM(_currentStory.BGM, _currentStory.BGM_Fade_Time);
+                _currentBGM = _currentStory.BGM;
+            }
+        }
+        else//브금 틀어져있음
+        {
+            if (string.IsNullOrEmpty(_currentStory.BGM))
+            {
+                SoundManager.Instance.StopBGM();
+                _currentBGM = "";
+            }
+            else
+            {
+                if (_currentStory.BGM != _currentBGM)
+                {
+                    SoundManager.Instance.PlayBGM(_currentStory.BGM, _currentStory.BGM_Fade_Time);
+                    _currentBGM = _currentStory.BGM;
+                }
+            }
+        }
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------

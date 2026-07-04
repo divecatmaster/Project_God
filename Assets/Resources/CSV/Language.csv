@@ -1449,26 +1449,15 @@ Language_Warning,언어를 변경하기 위해서@n게임을 재시작 합니다
 EndGame,게임을 종료하시겠습니까?,Quit the game?,ゲームを終了しますか？,要退出游戏吗？
 Skip_Warning_1,다음 선택지까지 이동하시겠습니까?,Jump to the next choice?,次の選択肢まで移動しますか？,要跳转到下一个选项吗？
 Skip_Warning_2,다음 선택지가 없어서 스킵할 수 없습니다.,There are no more choices ahead to skip to.,この先に選択肢がないため、スキップできません。,后续没有可跳转的选项，无法跳过。
-CG_Music_1,브금1,,,
-CG_Music_2,브금2,,,
-CG_Music_3,브금3,,,
-CG_Music_4,브금4,,,
-CG_Music_5,브금5,,,
-CG_Music_6,브금6,,,
-CG_Music_7,브금7,,,
-CG_Music_8,브금8,,,
-CG_Music_9,브금9,,,
-CG_Music_10,브금10,,,
-CG_Music_11,브금11,,,
-CG_Music_12,브금12,,,
-CG_Music_13,브금13,,,
-CG_Music_14,브금14,,,
-CG_Music_15,브금15,,,
-CG_Music_16,브금16,,,
-CG_Music_17,브금17,,,
-CG_Music_18,브금18,,,
-CG_Music_19,브금19,,,
-CG_Music_20,브금20,,,
+CG_Music_1,빛으로 맺어진 마음,Hearts Bound by Light,光で結ばれた想い,光所连结的心意
+CG_Music_2,달빛 아래 약속,A Promise Beneath the Moonlight,月明かりの下の約束,月光下的约定
+CG_Music_3,다시 시작된 봄,Spring Begins Again,再び始まる春,再次到来的春天
+CG_Music_4,햇살이 머무는 하루,A Day Bathed in Sunlight,陽だまりの一日,阳光停留的一天
+CG_Music_5,차가워진 손끝,Cold Fingertips,冷たくなった指先,冰冷的指尖
+CG_Music_6,텅 빈 새벽,An Empty Dawn,空っぽの夜明け,空荡的黎明
+CG_Music_7,처음 머문 온기,The First Warmth,初めて宿ったぬくもり,最初停留的温暖
+CG_Music_8,잊히지 않은 다정함,A Kindness Never Forgotten,忘れられない優しさ,未曾遗忘的温柔
+CG_Music_9,조용히 닿은 순간,The Quiet Moment We Met,静かに触れた瞬間,悄然触及的瞬间
 New_Game,새 이야기,New Story,新しい物語,新的故事
 Load_Game,불러오기,Load,ロード,读取
 Gallery,추억,Memories,思い出,记忆

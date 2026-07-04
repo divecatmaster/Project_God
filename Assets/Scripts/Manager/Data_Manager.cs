@@ -154,6 +154,20 @@ public class Data_Manager : MonoBehaviour
             newData.Auto_Next = data[i]["auto_next"].ToString() == "FALSE" ? false : true;
             newData.My_Name = data[i]["my_name"].ToString() == "FALSE" ? false : true;
             newData.Gallery = CSV_Int_Checker(data[i]["gallery"]);
+
+            newData.BGM = data[i]["bgm"].ToString();
+            newData.BGM_Fade_Time = CSV_float_Checker(data[i]["bgm_fade_time"].ToString());
+            
+            var tempSFX = data[i]["sfx"].ToString();
+            if (!string.IsNullOrEmpty(tempSFX))
+            {
+                var splitProduction = tempSFX.Split('/');
+                for (int a = 0; a < splitProduction.Length; a++)
+                {
+                    newData.SFX.Add(splitProduction[a]);
+                }
+            }
+            
             Story_Dic.Add(newData.Index, newData);
         }
     }
@@ -657,6 +671,9 @@ public class Story_Data
     public bool Auto_Next;
     public bool My_Name;
     public int Gallery;
+    public string BGM;
+    public float BGM_Fade_Time;
+    public List<string> SFX = new List<string>(); 
 }
 
 public class Select_Data
