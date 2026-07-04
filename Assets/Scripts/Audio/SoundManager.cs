@@ -39,9 +39,9 @@ namespace God.Audio
         private Coroutine _openingFadeCoroutine;
 
         private const string MasterVolParam = "MasterVol";
-        private const string BGMVolParam = "BGMVol";
-        private const string SFXVolParam = "SFXVol";
-        private const string UIVolParam = "UIVol";
+        private const string BGMVolParam = "Sound_BG";
+        private const string SFXVolParam = "Sound_Effect";
+        private const string UIVolParam = "Sound_UI";
         private const string OpeningVolParam = "OpeningVol";
 
         private void Awake()
@@ -466,9 +466,18 @@ namespace God.Audio
             float dB = volume > 0.0001f ? Mathf.Log10(volume) * 20f : -80f;
 
             if (audioMixer != null)
-                audioMixer.SetFloat(param, dB);
+            {
+                bool result = audioMixer.SetFloat(param, dB);
 
-            PlayerPrefs.SetFloat(param, volume);
+#if UNITY_EDITOR
+                if (!result)
+                {
+                    Debug.LogError($"AudioMixer Exposed Parameter를 찾을 수 없습니다. Param: {param}");
+                }
+#endif
+            }
+
+            //PlayerPrefs.SetInt(param, Mathf.RoundToInt(volume * 100f));
         }
 
         public float GetVolume(SoundCategory category)
@@ -488,11 +497,11 @@ namespace God.Audio
 
         public void LoadVolumeSettings()
         {
-            SetVolume(SoundCategory.Master, PlayerPrefs.GetFloat(MasterVolParam, 0.75f));
-            SetVolume(SoundCategory.BGM, PlayerPrefs.GetFloat(BGMVolParam, 0.75f));
-            SetVolume(SoundCategory.SFX, PlayerPrefs.GetFloat(SFXVolParam, 0.75f));
-            SetVolume(SoundCategory.UI, PlayerPrefs.GetFloat(UIVolParam, 0.75f));
-            SetVolume(SoundCategory.Opening, PlayerPrefs.GetFloat(OpeningVolParam, 0.75f));
+            //SetVolume(SoundCategory.Master, PlayerPrefs.GetFloat(MasterVolParam, 0.75f));
+            SetVolume(SoundCategory.BGM, Data_Manager.Instance.Sound_BG * 0.01f);
+            SetVolume(SoundCategory.SFX, Data_Manager.Instance.Sound_Effect * 0.01f);
+            SetVolume(SoundCategory.UI, Data_Manager.Instance.Sound_UI * 0.01f);
+            //SetVolume(SoundCategory.Opening, PlayerPrefs.GetFloat(OpeningVolParam, 0.75f));
         }
 
         public void Mute(bool isMuted)

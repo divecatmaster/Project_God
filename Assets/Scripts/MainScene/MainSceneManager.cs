@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 using DiveCat.God.UI.Popups;
+using God.Audio;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class MainSceneManager : MonoBehaviour
     void OnEnable()
     {
         EndLoading();
+        SoundManager.Instance.PlayBGM("The Shade of a Tree", 1);
     }
 
     void EndLoading()
@@ -39,6 +41,7 @@ public class MainSceneManager : MonoBehaviour
     public void OnClickNewGame()
     {
         Data_Manager.Instance.SetNewGame(true);
+        SoundManager.Instance.StopBGM(2f);
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
@@ -51,6 +54,7 @@ public class MainSceneManager : MonoBehaviour
     public void OnClickGame()
     {
         Data_Manager.Instance.SetNewGame(false);
+        SoundManager.Instance.StopBGM(2f);
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {

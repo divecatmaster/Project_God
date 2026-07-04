@@ -4,6 +4,7 @@ using System.Globalization;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using God.Audio;
 
 public class Data_Manager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Data_Manager : MonoBehaviour
     {
         SetLanguage();
         InitSettingValue();
+        SoundManager.Instance.LoadVolumeSettings();
         LoadStoryData();
         LoadSelectData();
         LoadSaveData();

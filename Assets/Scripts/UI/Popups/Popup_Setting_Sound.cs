@@ -1,3 +1,4 @@
+using God.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,6 +68,7 @@ public class Popup_Setting_Sound : MonoBehaviour
             Background_StarGlow.SetActive(false);
         }
         Background_Amount.text = _backgroundValue.ToString();
+        SoundManager.Instance.SetVolume(SoundCategory.BGM, (_backgroundValue * 0.01f));
     }
 
     void Set_Effect()
@@ -89,6 +91,7 @@ public class Popup_Setting_Sound : MonoBehaviour
             Effect_StarGlow.SetActive(false);
         }
         Effect_Amount.text = _effectValue.ToString();
+        SoundManager.Instance.SetVolume(SoundCategory.SFX, (_effectValue * 0.01f));
     }
 
     void Set_UI()
@@ -111,5 +114,6 @@ public class Popup_Setting_Sound : MonoBehaviour
             UI_StarGlow.SetActive(false);
         }
         UI_Amount.text = _uiValue.ToString();
+        SoundManager.Instance.SetVolume(SoundCategory.UI, (_uiValue * 0.01f));
     }
 }
