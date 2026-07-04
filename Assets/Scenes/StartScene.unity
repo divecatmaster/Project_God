@@ -295,6 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Resource_Manager
   Common_Canvas: {fileID: 992751685}
   Yes_Or_No_Obj: {fileID: 6247709412676987323, guid: 8b391227761a6ee4187437fc8601a767, type: 3}
+  CursorTexture: {fileID: 2800000, guid: 3498baaa9215bec4084ad421e1e90915, type: 3}
+  hotSpot: {x: 28, y: 10}
 --- !u!114 &624330176
 MonoBehaviour:
   m_ObjectHideFlags: 0
