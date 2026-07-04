@@ -3,6 +3,7 @@ using DiveCat.God.UI.Popups;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using God.Audio;
 
 public class Popup_Save : PopupBase
 {
@@ -23,6 +24,7 @@ public class Popup_Save : PopupBase
 
     public override void Open(Action onComplete = null)
     {
+        SoundManager.Instance.PlayUI("Popup_Open");
         base.Open(onComplete);
     }
 
@@ -156,6 +158,7 @@ public class Popup_Save : PopupBase
                         Data_Manager.Instance.Set_TempIndex(slotIdx);
                         Data_Manager.Instance.StopTimer();
                         GameSceneManager.Instance.StartLoading();
+                        SoundManager.Instance.PlayUI("GameStart");
                     }
                 });
             }

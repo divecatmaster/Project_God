@@ -6,6 +6,7 @@ using TMPro;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using God.Audio;
 
 public class Popup_Gallery_Detail : PopupBase
 {
@@ -77,6 +78,8 @@ public class Popup_Gallery_Detail : PopupBase
                 0.25f)
             .SetEase(Ease.Linear);
 
+        _isPlayMusic = false;
+        SoundManager.Instance.StopBGM();
         base.Close(onComplete);
     }
     public void SetPopup(int group)
@@ -123,6 +126,7 @@ public class Popup_Gallery_Detail : PopupBase
 
     void SetUI(bool isInit = false)
     {
+        SoundManager.Instance.PlayUI("Paper");
         var targetData = _gallery_Datas[_currentPage];
         if (!isInit)
         {
@@ -133,7 +137,8 @@ public class Popup_Gallery_Detail : PopupBase
             }
             else
             {
-                BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
+                PlayNormalBGFade(Resource_Manager.Instance.Get_BG(targetData.BG));
+                //BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
             }
         }
         else
@@ -152,10 +157,11 @@ public class Popup_Gallery_Detail : PopupBase
         else
         {
             MusicBtn.gameObject.SetActive(true);
-            MusicBtn.SetButton(LanguageManager.Instance.GetText(targetData.Music), OnClickMusic);    
+            MusicBtn.SetButton(LanguageManager.Instance.GetText(targetData.Music), OnClickMusic);
+            MusicBtn.SetPlay(_isPlayMusic);
         }
         
-        _isPlayMusic = false;
+        
 
         SetContext(targetData.Start, targetData.End);
         SetPage();
@@ -459,6 +465,15 @@ public class Popup_Gallery_Detail : PopupBase
 
     void OnClickMusic()
     {
+        if (_isPlayMusic)
+        {
+            SoundManager.Instance.StopBGM();
+        }
+        else
+        {
+            var targetData = _gallery_Datas[_currentPage];
+            SoundManager.Instance.PlayBGM(targetData.Music);
+        }
         _isPlayMusic = !_isPlayMusic;
         MusicBtn.SetPlay(_isPlayMusic);
     }

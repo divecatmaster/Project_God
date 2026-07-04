@@ -2,6 +2,7 @@ using God.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Popup_Setting_Sound : MonoBehaviour
 {
@@ -27,14 +28,16 @@ public class Popup_Setting_Sound : MonoBehaviour
     int _effectValue;
     int _uiValue;
 
-    private void Awake() 
+    private void Awake()
     {
         Background_Slider.onValueChanged.AddListener(Background_Value_Change);
         Effect_Slider.onValueChanged.AddListener(Effect_Value_Change);
         UI_Slider.onValueChanged.AddListener(UI_Value_Change);
+
+        AddSliderPointerUpEvent(UI_Slider, OnUISliderPointerUp);
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         Set_Background();
         Set_Effect();
@@ -102,7 +105,7 @@ public class Popup_Setting_Sound : MonoBehaviour
     public void UI_Value_Change(float value)
     {
         _uiValue = Mathf.RoundToInt(value);
-        UI_Slider.value = _uiValue;
+        UI_Slider.SetValueWithoutNotify(_uiValue);
         if (_uiValue > 0)
         {
             UI_Star.color = UIUtility.Slider_On_Star_Color;
@@ -114,6 +117,25 @@ public class Popup_Setting_Sound : MonoBehaviour
             UI_StarGlow.SetActive(false);
         }
         UI_Amount.text = _uiValue.ToString();
-        SoundManager.Instance.SetVolume(SoundCategory.UI, (_uiValue * 0.01f));
+    }
+
+    void AddSliderPointerUpEvent(Slider slider, UnityEngine.Events.UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = slider.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = slider.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerUp;
+        entry.callback.AddListener(action);
+
+        trigger.triggers.Add(entry);
+    }
+
+    void OnUISliderPointerUp(BaseEventData eventData)
+    {
+        SoundManager.Instance.SetVolume(SoundCategory.UI, _uiValue * 0.01f);
+        SoundManager.Instance.PlayUI("Popup_Open");
     }
 }

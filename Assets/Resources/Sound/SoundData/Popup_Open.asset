@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baf0b00b0f32a1438b77c013a2715d3, type: 3}
+  m_Name: Popup_Open
+  m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
+  soundID: Popup_Open
+  category: 3
+  clip: {fileID: 8300000, guid: 1b34b3e5c316ad14692b5226ac30d2b3, type: 3}
+  volume: 1
+  pitch: 1
+  volumeRandomization: 0
+  pitchRandomization: 0
+  spatialBlend: 0

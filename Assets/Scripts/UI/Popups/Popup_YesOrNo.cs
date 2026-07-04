@@ -3,6 +3,7 @@ using DiveCat.God.UI.Popups;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using God.Audio;
 
 public class Popup_YesOrNo : PopupBase
 {
@@ -30,6 +31,7 @@ public class Popup_YesOrNo : PopupBase
     public override void Open(Action onComplete = null)
     {
         base.Open(onComplete);
+        SoundManager.Instance.PlayUI("Popup_Open");
     }
 
     public void SetPopup(string title, Action yesCallback, Action noCallback)

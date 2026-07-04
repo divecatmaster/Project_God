@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baf0b00b0f32a1438b77c013a2715d3, type: 3}
   m_Name: CG_Music_8
   m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
-  soundID: The Shade of a Tree
+  soundID: CG_Music_8
   category: 1
-  clip: {fileID: 8300000, guid: ef5149ea06ea1d74fbeca2f20ac1544e, type: 3}
+  clip: {fileID: 8300000, guid: 8216f51edc40823469f8c020d4d65574, type: 3}
   volume: 1
   pitch: 1
   volumeRandomization: 0

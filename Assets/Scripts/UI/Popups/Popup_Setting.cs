@@ -1,5 +1,6 @@
 using System;
 using DiveCat.God.UI.Popups;
+using God.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class Popup_Setting : PopupBase
 
     public override void Open(Action onComplete = null)
     {
+        SoundManager.Instance.PlayUI("Popup_Open");
         SetGroups();
         base.Open(onComplete);
     }

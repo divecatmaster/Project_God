@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using DiveCat.God.UI.Popups;
 using TMPro;
+using System;
+using God.Audio;
 
 public class Popup_Gallery : PopupBase
 {
@@ -27,6 +29,25 @@ public class Popup_Gallery : PopupBase
         Arrow_Left.onClick.AddListener(OnClickLeft);
         Arrow_Right.onClick.AddListener(OnClickRight);
         base.Awake();
+    }
+
+    public override void Open(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayUI("Popup_Open");
+        SoundManager.Instance.StopBGM();
+        base.Open(onComplete);
+    }
+
+    public override void Close(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayBGM("The Shade of a Tree");
+        base.Close(onComplete);
+    }
+
+    public override void CloseFast(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayBGM("The Shade of a Tree");
+        base.CloseFast(onComplete);
     }
 
     void OnEnable()

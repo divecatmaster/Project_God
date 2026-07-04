@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
 using System;
+using God.Audio;
 
 public class Popup_Name : PopupBase
 {
@@ -23,6 +24,7 @@ public class Popup_Name : PopupBase
     public override void Open(Action onComplete = null)
     {
         base.Open(onComplete);
+        SoundManager.Instance.PlayUI("Popup_Open");
         PopupManager.Instance.ActiveESC(false);
     }
 

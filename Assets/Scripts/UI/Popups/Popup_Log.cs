@@ -4,6 +4,7 @@ using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using God.Audio;
 
 public class Popup_Log : PopupBase
 {
@@ -17,6 +18,12 @@ public class Popup_Log : PopupBase
     protected override void Awake()
     {
         CloseBtn.onClick.AddListener(OnClickClose);
+    }
+
+    public override void Open(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayUI("Popup_Open");
+        base.Open(onComplete);
     }
 
     public void SetItems(int currentIndex)

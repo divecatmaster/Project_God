@@ -42,6 +42,7 @@ public class MainSceneManager : MonoBehaviour
     {
         Data_Manager.Instance.SetNewGame(true);
         SoundManager.Instance.StopBGM(2f);
+        SoundManager.Instance.PlayUI("GameStart");
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
@@ -55,6 +56,7 @@ public class MainSceneManager : MonoBehaviour
     {
         Data_Manager.Instance.SetNewGame(false);
         SoundManager.Instance.StopBGM(2f);
+        SoundManager.Instance.PlayUI("GameStart");
         LoadingDim.raycastTarget = true;
         LoadingDim.DOFade(1f, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
