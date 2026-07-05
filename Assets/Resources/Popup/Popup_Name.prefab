@@ -131,8 +131,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startScale: {x: 0.8, y: 0.8, z: 0.8}
+  revealMaskRoot: {fileID: 0}
+  SlideMask: {fileID: 0}
+  revealDuration: 0.25
   canvasGroup: {fileID: 2220613225856162529}
   contentRoot: {fileID: 7230174049838563365}
+  CloseSound: 1
   ConfirmBtn: {fileID: 205407210725859916}
   Input: {fileID: 5842713674518792458}
   maxByte: 21
@@ -871,7 +875,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 922, y: 342.7}
+  m_SizeDelta: {x: 977, y: 399.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4436265391763337601
 CanvasRenderer:
@@ -945,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.7000122, y: -3.199997}
+  m_AnchoredPosition: {x: 30.9, y: -31.4}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &9113655888709849806
@@ -1295,7 +1299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.2}
+  m_AnchoredPosition: {x: 0, y: -65.1}
   m_SizeDelta: {x: 528, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8598828417215745283
