@@ -80,6 +80,7 @@ public class Popup_Gallery_Detail : PopupBase
 
         _isPlayMusic = false;
         SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
     }
     public void SetPopup(int group)

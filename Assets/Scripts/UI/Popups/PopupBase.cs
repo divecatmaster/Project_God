@@ -28,6 +28,7 @@ namespace DiveCat.God.UI.Popups
         [SerializeField] protected RectTransform contentRoot;
 
         public PopupState State { get; protected set; } = PopupState.Closed;
+        public bool CloseSound = true;
 
         private int _animationVersion;
         private bool _isDestroyed;

@@ -41,12 +41,14 @@ public class Popup_Gallery : PopupBase
     public override void Close(Action onComplete = null)
     {
         SoundManager.Instance.PlayBGM("The Shade of a Tree");
+        SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
     }
 
     public override void CloseFast(Action onComplete = null)
     {
         SoundManager.Instance.PlayBGM("The Shade of a Tree");
+        SoundManager.Instance.PlayUI("Click");
         base.CloseFast(onComplete);
     }
 

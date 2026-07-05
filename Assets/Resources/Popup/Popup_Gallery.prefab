@@ -4358,6 +4358,7 @@ GameObject:
   - component: {fileID: 5299306489599616556}
   - component: {fileID: 3080625153382912563}
   - component: {fileID: 3611846563118586432}
+  - component: {fileID: 8479956774077716243}
   m_Layer: 5
   m_Name: HideBtn
   m_TagString: Untagged
@@ -4489,6 +4490,20 @@ MonoBehaviour:
   Star: {fileID: 0}
   Remove_Btn: {fileID: 0}
   tweenDuration: 0.7
+--- !u!114 &8479956774077716243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595155666279561833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &6757334018926490988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4502,6 +4517,7 @@ GameObject:
   - component: {fileID: 4146653351434224266}
   - component: {fileID: 7110053870952398099}
   - component: {fileID: 9015574395623585578}
+  - component: {fileID: 4021776721703154128}
   m_Layer: 5
   m_Name: ShowBtn
   m_TagString: Untagged
@@ -4634,6 +4650,20 @@ MonoBehaviour:
   Star: {fileID: 0}
   Remove_Btn: {fileID: 0}
   tweenDuration: 0.7
+--- !u!114 &4021776721703154128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757334018926490988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &6809611724532443425
 GameObject:
   m_ObjectHideFlags: 0

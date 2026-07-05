@@ -30,6 +30,7 @@ public class Popup_Save : PopupBase
 
     public override void Close(Action onComplete = null)
     {
+        SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
         _currentGroup = -1;
     }
@@ -147,6 +148,7 @@ public class Popup_Save : PopupBase
                 popup.Open();
                 popup.SetPopup(string.Format(LanguageManager.Instance.GetText("Save_Warning_5"), slotIdx), () =>
                 {
+                    popup.CloseSound = false;
                     if (_openType == 0)//메인화면
                     {
                         Data_Manager.Instance.SetSaveStory_Index(target.StoryIndex);

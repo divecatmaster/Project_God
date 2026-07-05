@@ -31,6 +31,12 @@ public class Popup_Menu : PopupBase
         base.Open(onComplete);
     }
 
+    public override void Close(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayUI("Click");
+        base.Close(onComplete);
+    }
+
     void OnClickContinue()
     {
         Close();

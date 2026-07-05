@@ -31,6 +31,7 @@ public class Popup_YesOrNo : PopupBase
     public override void Open(Action onComplete = null)
     {
         base.Open(onComplete);
+        CloseSound = true;
         SoundManager.Instance.PlayUI("Popup_Open");
     }
 
@@ -69,6 +70,10 @@ public class Popup_YesOrNo : PopupBase
         _yesCallback = null;
         _noCallback = null;
         _confirmCallback = null;
+        if (CloseSound)
+        {
+            SoundManager.Instance.PlayUI("Click");    
+        }
 
         base.Close(onComplete);
     }

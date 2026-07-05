@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using God.Audio;
+using UnityEngine.EventSystems;
 
 public class Popup_Setting_System : MonoBehaviour
 {
@@ -21,6 +23,9 @@ public class Popup_Setting_System : MonoBehaviour
         ScreenMode_Dropdown.onValueChanged.AddListener(OnValueChange_ScreenMode);
         Resolution_Dropdown.onValueChanged.AddListener(OnValueChange_Resolution);
         Language_Dropdown.onValueChanged.AddListener(OnValueChange_Language);
+        AddDropdownClickSound(ScreenMode_Dropdown);
+        AddDropdownClickSound(Resolution_Dropdown);
+        AddDropdownClickSound(Language_Dropdown);
     }
 
     void OnEnable()
@@ -28,6 +33,23 @@ public class Popup_Setting_System : MonoBehaviour
         SetScreenMode();
         SetResolutionDropdown();
         SetLanguage();
+    }
+
+    void AddDropdownClickSound(TMP_Dropdown dropdown)
+    {
+        EventTrigger trigger = dropdown.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = dropdown.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) =>
+        {
+            SoundManager.Instance.PlayUI("Click");
+        });
+
+        trigger.triggers.Add(entry);
     }
 
     void SetScreenMode()

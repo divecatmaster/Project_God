@@ -4662,6 +4662,7 @@ GameObject:
   - component: {fileID: 3106066789451097060}
   - component: {fileID: 7802818586928888959}
   - component: {fileID: 1507085878769303077}
+  - component: {fileID: 4952113787235029411}
   m_Layer: 5
   m_Name: Group_Game
   m_TagString: Untagged
@@ -4788,6 +4789,20 @@ MonoBehaviour:
   TextTrans: {fileID: 9113212472606656470}
   Text: {fileID: 2888249623519097561}
   Line: {fileID: 2466791473146004095}
+--- !u!114 &4952113787235029411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871911652369531257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &2891067391739070416
 GameObject:
   m_ObjectHideFlags: 0
@@ -8305,6 +8320,7 @@ GameObject:
   - component: {fileID: 7560725740953536428}
   - component: {fileID: 6665348278532947898}
   - component: {fileID: 6816920845187182716}
+  - component: {fileID: 4729763457026652700}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -8415,6 +8431,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4729763457026652700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476958938360860359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &4582427984743945728
 GameObject:
   m_ObjectHideFlags: 0
@@ -9807,6 +9837,7 @@ GameObject:
   - component: {fileID: 5115986436722680743}
   - component: {fileID: 2863204820254577854}
   - component: {fileID: 983450669510114916}
+  - component: {fileID: 8819161467497733446}
   m_Layer: 5
   m_Name: Group_System
   m_TagString: Untagged
@@ -9933,6 +9964,20 @@ MonoBehaviour:
   TextTrans: {fileID: 9001036484630938601}
   Text: {fileID: 313718659062373212}
   Line: {fileID: 863066904988406387}
+--- !u!114 &8819161467497733446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108532676522755283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &5123502148734826045
 GameObject:
   m_ObjectHideFlags: 0
@@ -12733,6 +12778,7 @@ GameObject:
   - component: {fileID: 2320235396472109728}
   - component: {fileID: 7937286402772461377}
   - component: {fileID: 4345440881820508838}
+  - component: {fileID: 3412116855160230897}
   m_Layer: 5
   m_Name: Group_Sound
   m_TagString: Untagged
@@ -12859,6 +12905,20 @@ MonoBehaviour:
   TextTrans: {fileID: 4082852535973425050}
   Text: {fileID: 2332749470611373990}
   Line: {fileID: 8309555012982573279}
+--- !u!114 &3412116855160230897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6834812464658277387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &6864982381175793048
 GameObject:
   m_ObjectHideFlags: 0
@@ -17662,6 +17722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81d7bd25bbb74744a065b5a74d2cbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Setting
+  AnimationType: 0
   fadeDuration: 0.25
   useScaleAnimation: 1
   scaleDuration: 0.25
@@ -17690,6 +17751,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startScale: {x: 0.8, y: 0.8, z: 0.8}
+  revealMaskRoot: {fileID: 0}
+  SlideMask: {fileID: 0}
+  revealDuration: 0.25
   canvasGroup: {fileID: 3696868963271550704}
   contentRoot: {fileID: 7967984412114288135}
   ExitBtn: {fileID: 5467061150661269810}

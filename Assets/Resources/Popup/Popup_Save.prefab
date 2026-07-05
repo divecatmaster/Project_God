@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_4
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &413499741882001646
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_4
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &2041187882198426215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_5
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &2199214929153491158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,6 +1236,7 @@ GameObject:
   - component: {fileID: 5491335090837217638}
   - component: {fileID: 3118102369591662281}
   - component: {fileID: 8023499943336201681}
+  - component: {fileID: 7477480232932222192}
   m_Layer: 5
   m_Name: Group_Save
   m_TagString: Untagged
@@ -1360,6 +1364,20 @@ MonoBehaviour:
   TextTrans: {fileID: 2136040614585871098}
   Text: {fileID: 4191114439274253477}
   Line: {fileID: 3612791358207677485}
+--- !u!114 &7477480232932222192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973587817911711591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &3027492670589281881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7510df7d62b50b47b8f51db7cc051e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup_Save
+  AnimationType: 0
   fadeDuration: 0.25
   useScaleAnimation: 1
   scaleDuration: 0.25
@@ -1478,6 +1497,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startScale: {x: 0.8, y: 0.8, z: 0.8}
+  revealMaskRoot: {fileID: 0}
+  SlideMask: {fileID: 0}
+  revealDuration: 0.25
   canvasGroup: {fileID: 1228463176677416955}
   contentRoot: {fileID: 7104513118760187941}
   CloseBtn: {fileID: 5394833776186331990}
@@ -1533,7 +1555,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000020294545}
-  m_SizeDelta: {x: 0, y: 22}
+  m_SizeDelta: {x: 0, y: 32}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1013527331615687912
 MonoBehaviour:
@@ -1551,7 +1573,7 @@ MonoBehaviour:
     m_Left: 7
     m_Right: 0
     m_Top: 2
-    m_Bottom: 20
+    m_Bottom: 30
   m_ChildAlignment: 0
   m_Spacing: 19.1
   m_ChildForceExpandWidth: 1
@@ -1970,6 +1992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Setting_Key_5
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &5399667469006728330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,6 +2301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Language_UI
   Language_Key: Save_And_Load
   IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &7092342346011612865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2315,7 @@ GameObject:
   - component: {fileID: 5422679068620925643}
   - component: {fileID: 841633564870400887}
   - component: {fileID: 2391664412773173451}
+  - component: {fileID: 594556115997347393}
   m_Layer: 5
   m_Name: Group_Load
   m_TagString: Untagged
@@ -2418,6 +2443,20 @@ MonoBehaviour:
   TextTrans: {fileID: 1349753757385690251}
   Text: {fileID: 3738058215698358151}
   Line: {fileID: 1845582912618316909}
+--- !u!114 &594556115997347393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092342346011612865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdc332fe2a3b94f9f6966d8c3181fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickSound
+  Category: 3
+  SoundName: Click
 --- !u!1 &7275657791344227750
 GameObject:
   m_ObjectHideFlags: 0

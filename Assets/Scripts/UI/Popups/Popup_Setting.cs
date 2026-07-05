@@ -29,6 +29,7 @@ public class Popup_Setting : PopupBase
 
     public override void Close(Action onComplete = null)
     {
+        SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
     }
 

@@ -26,6 +26,12 @@ public class Popup_Log : PopupBase
         base.Open(onComplete);
     }
 
+    public override void Close(Action onComplete = null)
+    {
+        SoundManager.Instance.PlayUI("Click");
+        base.Close(onComplete);
+    }
+
     public void SetItems(int currentIndex)
     {
         ResetItems();
