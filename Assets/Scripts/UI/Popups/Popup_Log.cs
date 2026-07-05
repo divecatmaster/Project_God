@@ -37,14 +37,17 @@ public class Popup_Log : PopupBase
         ResetItems();
 
         var target = Data_Manager.Instance.GetLogData(currentIndex);
-        MapName.text = LanguageManager.Instance.GetText($"BG_Title_{target[0].BG}");
+        MapName.text = $"[{LanguageManager.Instance.GetText($"BG_Title_{target[0].BG}")}]";
 
         int _tempBG = -1;
         for (int i = 0; i < target.Count; i++)
         {
             if (_tempBG != -1 && _tempBG != target[i].BG)
             {
-                GetItem().SetItemBG(target[i]);
+                if (target[i].BG < 100)
+                {
+                    GetItem().SetItemBG(target[i]);
+                }
             }
 
             _tempBG = target[i].BG;
