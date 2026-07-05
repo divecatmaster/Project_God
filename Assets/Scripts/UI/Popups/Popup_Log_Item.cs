@@ -41,15 +41,6 @@ public class Popup_Log_Item : MonoBehaviour
             Line.SetActive(true);
         }
 
-        if (story.Select_Index == 0)
-        {
-            Select.SetActive(false);
-        }
-        else
-        {
-            Select.SetActive(true);
-        }
-
         if (story.My_Name)
         {
             Context.text = string.Format(LanguageManager.Instance.GetText(story.Language_Key), Data_Manager.Instance.MyName);
@@ -57,6 +48,17 @@ public class Popup_Log_Item : MonoBehaviour
         else
         {
             Context.text = LanguageManager.Instance.GetText(story.Language_Key);
+        }
+
+        if (story.Select_Index == 0)
+        {
+            Select.SetActive(false);
+        }
+        else
+        {
+            var selected = Data_Manager.Instance.GetSavedSelectData(story.Select_Index);
+            Context.text = LanguageManager.Instance.GetText($"select_{story.Select_Index}_{selected + 1}");
+            Select.SetActive(true);
         }
     }
 

@@ -152,12 +152,14 @@ public class Popup_Save : PopupBase
                     if (_openType == 0)//메인화면
                     {
                         Data_Manager.Instance.SetSaveStory_Index(target.StoryIndex);
+                        Data_Manager.Instance.SetSelectData(target.SelectIndex);
                         MainSceneManager.Instance.OnClickGame();
                         Data_Manager.Instance.StartTimer(target.PlayTime);
                     }
                     else//인게임
                     {
                         Data_Manager.Instance.Set_TempIndex(slotIdx);
+                        Data_Manager.Instance.SetSelectData(target.SelectIndex);
                         Data_Manager.Instance.StopTimer();
                         GameSceneManager.Instance.StartLoading();
                         SoundManager.Instance.PlayUI("GameStart");

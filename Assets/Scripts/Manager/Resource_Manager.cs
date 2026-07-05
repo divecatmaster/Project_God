@@ -38,6 +38,18 @@ public class Resource_Manager : MonoBehaviour
         return _YesOrNo;
     }
 
+    public bool Get_Yes_Or_No_Active()
+    {
+        if (_YesOrNo == null)
+        {
+            return false;
+        }
+        else
+        {
+            return _YesOrNo.gameObject.activeSelf;
+        }
+    }
+
     Dictionary<string, Sprite> _body_dic = new Dictionary<string, Sprite>();
     Dictionary<string, Sprite> _face_dic = new Dictionary<string, Sprite>();
     Dictionary<int, Sprite> _bg_dic = new Dictionary<int, Sprite>();

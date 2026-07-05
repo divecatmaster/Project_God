@@ -456,6 +456,7 @@ public class StoryManager : MonoBehaviour
         var target = Data_Manager.Instance.GetStoryData(_tempSelectIndex[idx]);
         if (target != null)
         {
+            Data_Manager.Instance.AddSelect(_currentStory.Select_Index - 1, idx);
             _currentStory = target;
             SetStory();
         }
@@ -2239,7 +2240,7 @@ public class StoryManager : MonoBehaviour
             return true;
         }
 
-        if (Resource_Manager.Instance.Get_Yes_Or_No().gameObject.activeSelf)
+        if (Resource_Manager.Instance.Get_Yes_Or_No_Active())
         {
             return true;
         }

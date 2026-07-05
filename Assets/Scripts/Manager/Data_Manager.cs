@@ -199,6 +199,10 @@ public class Data_Manager : MonoBehaviour
     public void SetNewGame(bool isNew = false)
     {
         IsNewGame = isNew;
+        if (isNew)
+        {
+            _tempSelectIndex = Enumerable.Repeat(-1, 9).ToArray();
+        }
     }
 
     public void SetSaveStory_Index(int index)
@@ -216,19 +220,116 @@ public class Data_Manager : MonoBehaviour
 
     public List<Story_Data> GetLogData(int currentIndex)
     {
+        List<Story_Data> result = new List<Story_Data>();
+
         // 현재 인덱스 이전/현재 데이터 중 가장 가까운 선택지 찾기
         Story_Data prevSelect = Story_Dic.Values
             .Where(x => x.Index <= currentIndex && x.Select_Index != 0)
             .OrderByDescending(x => x.Index)
             .FirstOrDefault();
 
-        int startIndex = prevSelect != null ? prevSelect.Index : 0;
+        // 이전 선택지가 없으면 처음부터 현재 인덱스까지 순서대로 반환
+        if (prevSelect == null)
+        {
+            return Story_Dic.Values
+                .Where(x => x.Index <= currentIndex)
+                .OrderBy(x => x.Index)
+                .ToList();
+        }
 
-        // 가장 가까운 선택지부터 현재 인덱스까지 가져오기
-        return Story_Dic.Values
-            .Where(x => x.Index >= startIndex && x.Index <= currentIndex)
-            .OrderBy(x => x.Index)
-            .ToList();
+        int startIndex = prevSelect.Index;
+        int selectIndex = prevSelect.Select_Index;
+
+        // 선택지 문장 자체 추가
+        if (Story_Dic.ContainsKey(startIndex))
+        {
+            result.Add(Story_Dic[startIndex]);
+        }
+
+        // currentIndex가 선택지 문장 자체면 여기서 끝
+        if (startIndex >= currentIndex)
+        {
+            return result;
+        }
+
+        Select_Data selectData = GetSelectData(selectIndex);
+
+        if (selectData == null)
+        {
+            return result;
+        }
+
+        int savedSelectIndex = GetSavedSelectData(selectIndex);
+
+        // 아직 선택 저장값이 없거나 잘못된 경우
+        if (savedSelectIndex < 0 || savedSelectIndex >= selectData.Next_Index.Count)
+        {
+            return result;
+        }
+
+        int nextIndex = selectData.Next_Index[savedSelectIndex];
+
+        HashSet<int> visited = new HashSet<int>();
+
+        while (true)
+        {
+            if (nextIndex <= 0)
+                break;
+
+            if (!Story_Dic.ContainsKey(nextIndex))
+                break;
+
+            // 무한루프 방지
+            if (visited.Contains(nextIndex))
+                break;
+
+            visited.Add(nextIndex);
+
+            Story_Data data = Story_Dic[nextIndex];
+            result.Add(data);
+
+            if (nextIndex >= currentIndex)
+                break;
+
+            nextIndex = data.Next_Index;
+        }
+
+        return result;
+        // // 현재 인덱스 이전/현재 데이터 중 가장 가까운 선택지 찾기
+        // Story_Data prevSelect = Story_Dic.Values
+        //     .Where(x => x.Index <= currentIndex && x.Select_Index != 0)
+        //     .OrderByDescending(x => x.Index)
+        //     .FirstOrDefault();
+
+        // int startIndex = prevSelect != null ? prevSelect.Index : 0;
+
+
+        // List<Story_Data> result = new List<Story_Data>();
+        // int _selectIndex = GetStoryData(startIndex).Select_Index;
+        // if (_selectIndex != 0)
+        // {
+        //     result.Add(Story_Dic[startIndex]);
+        //     var newStartIndex = GetSelectData(_selectIndex).Next_Index[GetSavedSelectData(_selectIndex)];
+
+        //     while (true)
+        //     {
+        //         result.Add(Story_Dic[newStartIndex]);
+        //         newStartIndex = Story_Dic[newStartIndex].Next_Index;
+        //         if (newStartIndex >= currentIndex)
+        //         {
+        //             break;
+        //         }
+        //     }
+        //     return result; 
+        // }
+        // else
+        // {
+        //     // 가장 가까운 선택지부터 현재 인덱스까지 가져오기
+        //     return Story_Dic.Values
+        //         .Where(x => x.Index >= startIndex && x.Index <= currentIndex)
+        //         .OrderBy(x => x.Index)
+        //         .ToList();
+        // }
     }
 
     public Story_Data GetBeforeStory(int currentIndex)
@@ -273,6 +374,7 @@ public class Data_Manager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region SaveData
     Dictionary<int, Save_Data> SaveData_Dic = new Dictionary<int, Save_Data>();
+    int[] _tempSelectIndex = Enumerable.Repeat(-1, 9).ToArray();
     bool _startGame;
     long _currentPlayTime;
     int _tempLoadIndex;
@@ -305,7 +407,9 @@ public class Data_Manager : MonoBehaviour
 
     public void SetSaveData(Save_Data data)
     {
-        SaveData_Dic[data.SlotIndex] = data;
+        var tempData = data;
+        tempData.SelectIndex = _tempSelectIndex.ToArray();
+        SaveData_Dic[data.SlotIndex] = tempData;
         SaveManager.Instance.Save(data.SlotIndex);
     }
 
@@ -345,6 +449,21 @@ public class Data_Manager : MonoBehaviour
             return SaveData_Dic[_tempLoadIndex];
         }
         return null;
+    }
+
+    public void AddSelect(int idx, int num)
+    {
+        _tempSelectIndex[idx] = num;
+    }
+
+    public void SetSelectData(int[] data)
+    {
+        _tempSelectIndex = data.ToArray();
+    }
+
+    public int GetSavedSelectData(int idx)
+    {
+        return _tempSelectIndex[idx - 1];
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -690,6 +809,8 @@ public class Save_Data
 
     public long SaveDateTicks;
     public long PlayTimeTicks;
+
+    public int[] SelectIndex = Enumerable.Repeat(-1, 9).ToArray();
 
     public DateTime SaveDate
     {
