@@ -8,8 +8,8 @@ public class Resource_Manager : MonoBehaviour
     [SerializeField] Transform Common_Canvas;
     [SerializeField] GameObject Yes_Or_No_Obj;
 
-    [SerializeField] Texture2D CursorTexture;
-    [SerializeField] Vector2 hotSpot = Vector2.zero;
+    // [SerializeField] Texture2D CursorTexture;
+    // [SerializeField] Vector2 hotSpot = Vector2.zero;
 
     Popup_YesOrNo _YesOrNo;
 
@@ -24,7 +24,7 @@ public class Resource_Manager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        Cursor.SetCursor(CursorTexture, hotSpot, CursorMode.Auto);
+        //Cursor.SetCursor(CursorTexture, hotSpot, CursorMode.Auto);
     }
 
     public Popup_YesOrNo Get_Yes_Or_No()

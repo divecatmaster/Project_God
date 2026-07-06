@@ -111,4 +111,14 @@ public class MainSceneManager : MonoBehaviour
         }
         _popup_Gallery.Open();
     }
+
+    public void OnClickEndGame()
+    {
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        popup.Open();
+        popup.SetPopup(LanguageManager.Instance.GetText("EndGame"), () =>
+        {
+            Application.Quit();
+        });
+    }
 }
