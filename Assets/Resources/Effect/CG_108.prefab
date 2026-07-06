@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4985250682610432238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4035559288167267926}
+  - component: {fileID: 3276114637537691247}
+  m_Layer: 0
+  m_Name: CG_108
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4035559288167267926
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985250682610432238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3276114637537691247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985250682610432238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9990a34f8bc32e44b8158449512b612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::God.UI.UILeafEffectManager
+  m_Settings:
+    LeafSprites:
+    - {fileID: 21300000, guid: e065ebe556dd7cf4aab0adc8d792c7c6, type: 3}
+    - {fileID: 21300000, guid: 2d3f0633effc7f740ac3616752feff8f, type: 3}
+    Colors:
+    - {r: 0.84705883, g: 0.33333334, b: 0.16470589, a: 1}
+    - {r: 0.8117647, g: 0.45490196, b: 0.12156863, a: 1}
+    InitialPoolSize: 5
+    SizeRange: {x: 30, y: 60}
+    FallSpeedRange: {x: 100, y: 200}
+    HorizontalSpeedRange: {x: 100, y: 250}
+    RotationSpeedRange: {x: 30, y: 150}
+    HorizontalDriftRange: {x: 20, y: 50}
+    SpawnInterval: 0.25
+  m_BoundArea: {fileID: 0}
