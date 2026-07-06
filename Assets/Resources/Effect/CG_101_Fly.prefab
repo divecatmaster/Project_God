@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7064858007604853870}
   - component: {fileID: 1448444659582367701}
   m_Layer: 0
-  m_Name: UIFireflyEffect
+  m_Name: CG_101_Fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,12 +52,14 @@ MonoBehaviour:
     Type: 0
     Count: 20
     GlowSprite: {fileID: 21300000, guid: e45315d0c2655e442a2a8320fe26d658, type: 3}
-    Color: {r: 1, g: 1, b: 1, a: 1}
+    Color: {r: 0.7294118, g: 0.99215686, b: 1, a: 1}
     SizeRange: {x: 16, y: 32}
     SpeedRange: {x: 30, y: 80}
     BlinkSpeedRange: {x: 0.5, y: 2}
     MinAlpha: 0.2
     MaxAlpha: 1
     Smoothness: 0.5
+    FadeInOnEnable: 1
+    FadeInDuration: 2
   m_BoundArea: {fileID: 0}
   m_IsPaused: 0

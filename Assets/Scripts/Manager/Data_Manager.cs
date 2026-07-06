@@ -168,6 +168,16 @@ public class Data_Manager : MonoBehaviour
                 }
             }
             
+            var temp_cg_production = data[i]["cg_production"].ToString();
+            if (!string.IsNullOrEmpty(temp_cg_production))
+            {
+                var splitProduction = temp_cg_production.Split('/');
+                for (int a = 0; a < splitProduction.Length; a++)
+                {
+                    newData.cg_production.Add(splitProduction[a]);
+                }
+            }
+            
             Story_Dic.Add(newData.Index, newData);
         }
     }
@@ -818,6 +828,7 @@ public class Story_Data
     public string BGM;
     public float BGM_Fade_Time;
     public List<string> SFX = new List<string>(); 
+    public List<string> cg_production = new List<string>(); 
 }
 
 public class Select_Data

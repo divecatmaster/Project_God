@@ -2983,46 +2983,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 688569690}
     m_Modifications:
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.Count
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.GlowSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e45315d0c2655e442a2a8320fe26d658, type: 3}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.SizeRange.x
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.SizeRange.y
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.SpeedRange.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448444659582367701, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
-      propertyPath: m_Settings.SpeedRange.y
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 3179657138745652284, guid: e7fab43274184c84eb30bb9d3e2cc70e, type: 3}
       propertyPath: m_Name
       value: UIFireflyEffect

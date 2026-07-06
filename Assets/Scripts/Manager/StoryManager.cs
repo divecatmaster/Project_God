@@ -279,6 +279,7 @@ public class StoryManager : MonoBehaviour
                 }
             }
             CheckBGM();
+            Check_CG_Effect();
         }
     }
 
@@ -2212,6 +2213,23 @@ public class StoryManager : MonoBehaviour
                     _currentBGM = _currentStory.BGM;
                 }
             }
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region CG_Effect
+    void Check_CG_Effect()
+    {
+        if (CG_Effect_Manager.Instance == null)
+            return;
+
+        if (_currentStory.cg_production == null || _currentStory.cg_production.Count <= 0)
+        {
+            CG_Effect_Manager.Instance.OffEffects();
+        }
+        else
+        {
+            CG_Effect_Manager.Instance.SetEffect(_currentStory.cg_production);
         }
     }
     #endregion

@@ -31,6 +31,10 @@ namespace God.UI
             [Range(0, 1)] public float MinAlpha;
             [Range(0, 1)] public float MaxAlpha;
             public float Smoothness;
+
+            [Header("Fade")]
+            public bool FadeInOnEnable;
+            public float FadeInDuration;
         }
 
         [Header("Configuration")]
@@ -44,7 +48,10 @@ namespace God.UI
             BlinkSpeedRange = new Vector2(0.5f, 2.0f),
             MinAlpha = 0.2f,
             MaxAlpha = 1.0f,
-            Smoothness = 0.5f
+            Smoothness = 0.5f,
+
+            FadeInOnEnable = false,
+            FadeInDuration = 1.0f
         };
 
         [Header("Area")]
@@ -56,6 +63,8 @@ namespace God.UI
         private List<FireflyData> m_Fireflies = new List<FireflyData>();
         private Stack<Image> m_Pool = new Stack<Image>();
         private RectTransform m_ManagerRect;
+        private float m_FadeAlpha = 1f;
+        private float m_FadeTimer = 0f;
 
         private class FireflyData
         {
@@ -79,6 +88,17 @@ namespace God.UI
 
         private void OnEnable()
         {
+            if (m_Settings.FadeInOnEnable)
+            {
+                m_FadeAlpha = 0f;
+                m_FadeTimer = 0f;
+            }
+            else
+            {
+                m_FadeAlpha = 1f;
+                m_FadeTimer = 0f;
+            }
+
             InitializeFireflies();
         }
 
@@ -92,6 +112,19 @@ namespace God.UI
             if (m_IsPaused) return;
 
             float dt = Time.deltaTime;
+            if (m_Settings.FadeInOnEnable && m_FadeAlpha < 1f)
+            {
+                if (m_Settings.FadeInDuration <= 0f)
+                {
+                    m_FadeAlpha = 1f;
+                }
+                else
+                {
+                    m_FadeTimer += dt;
+                    m_FadeAlpha = Mathf.Clamp01(m_FadeTimer / m_Settings.FadeInDuration);
+                }
+            }
+
             Rect bounds = m_BoundArea.rect;
 
             foreach (var firefly in m_Fireflies)
@@ -144,7 +177,7 @@ namespace God.UI
                 // 4. Apply to UI
                 firefly.Rect.anchoredPosition = firefly.Position;
                 Color c = m_Settings.Color;
-                c.a *= alpha;
+                c.a *= alpha * m_FadeAlpha;
                 firefly.Image.color = c;
             }
         }
@@ -165,6 +198,7 @@ namespace God.UI
             {
                 Image img = GetOrCreateImage();
                 img.sprite = m_Settings.GlowSprite;
+                img.enabled = m_Settings.GlowSprite != null;
                 img.raycastTarget = false;
                 
                 RectTransform rt = img.rectTransform;
@@ -185,6 +219,10 @@ namespace God.UI
                     Speed = Random.Range(m_Settings.SpeedRange.x, m_Settings.SpeedRange.y)
                 };
 
+                Color startColor = m_Settings.Color;
+                startColor.a = m_Settings.FadeInOnEnable ? 0f : m_Settings.Color.a;
+                img.color = startColor;
+
                 m_Fireflies.Add(data);
                 img.gameObject.SetActive(true);
             }
@@ -200,11 +238,21 @@ namespace God.UI
 
         private void ClearFireflies()
         {
-            foreach (var f in m_Fireflies)
+            for (int i = 0; i < m_Fireflies.Count; i++)
             {
+                var f = m_Fireflies[i];
+
+                if (f == null || f.Image == null)
+                    continue;
+
+                Color c = f.Image.color;
+                c.a = 0f;
+                f.Image.color = c;
+
                 f.Image.gameObject.SetActive(false);
                 m_Pool.Push(f.Image);
             }
+
             m_Fireflies.Clear();
         }
 
