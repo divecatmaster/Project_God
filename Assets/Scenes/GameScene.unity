@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &121745070
 Camera:
   m_ObjectHideFlags: 0
@@ -924,7 +924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &344168715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1905,6 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d0a9f04e3294c4489392c47b42caf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlitchEffectController
+  isEffectActive: 0
   renderCamera: {fileID: 666426887}
   outputCamera: {fileID: 121745070}
   displayImage: {fileID: 344168715}

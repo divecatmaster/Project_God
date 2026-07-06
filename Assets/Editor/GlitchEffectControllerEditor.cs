@@ -20,10 +20,31 @@ public class GlitchEffectControllerEditor : Editor
         GUIStyle headerStyle = new GUIStyle(EditorStyles.boldLabel);
         headerStyle.fontSize = 14;
         headerStyle.alignment = TextAnchor.MiddleCenter;
-        headerStyle.normal.textColor = new Color(0.0f, 0.9f, 0.9f); // Cyan cyan
+        headerStyle.normal.textColor = new Color(0.0f, 0.9f, 0.9f); // Cyan
         EditorGUILayout.LabelField("⚡ CYBER GLITCH CONTROLLER ⚡", headerStyle);
         EditorGUILayout.EndVertical();
         GUILayout.Space(5);
+
+        // --- MASTER TOGGLE ---
+        EditorGUILayout.BeginVertical("box");
+        GUIStyle toggleHeader = new GUIStyle(EditorStyles.boldLabel);
+        toggleHeader.fontSize = 12;
+        toggleHeader.normal.textColor = controller.isEffectActive ? new Color(1f, 0.2f, 0.6f) : Color.gray;
+        
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField(controller.isEffectActive ? "SYSTEM STATUS: [GLITCH MODE ACTIVE]" : "SYSTEM STATUS: [NORMAL RENDERING]", toggleHeader);
+        
+        GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+        buttonStyle.fontStyle = FontStyle.Bold;
+        if (GUILayout.Button(controller.isEffectActive ? "TURN OFF GLITCH" : "TURN ON GLITCH", GUILayout.Width(150), GUILayout.Height(25)))
+        {
+            controller.SetGlitchActive(!controller.isEffectActive);
+            EditorUtility.SetDirty(controller);
+        }
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
+        
+        GUILayout.Space(10);
 
         // Draw Default Fields
         DrawDefaultInspector();
@@ -33,6 +54,13 @@ public class GlitchEffectControllerEditor : Editor
         // --- RUNTIME TESTING TOOLS (ONLY VISIBLE IN PLAY MODE) ---
         if (Application.isPlaying)
         {
+            if (!controller.isEffectActive)
+            {
+                EditorGUILayout.HelpBox("Master Glitch is OFF. Turn it ON to test bursts and sliders.", MessageType.Warning);
+            }
+
+            EditorGUI.BeginDisabledGroup(!controller.isEffectActive);
+            
             EditorGUILayout.BeginVertical("box");
             
             GUIStyle sectionHeader = new GUIStyle(EditorStyles.boldLabel);
@@ -116,6 +144,7 @@ public class GlitchEffectControllerEditor : Editor
             }
 
             EditorGUILayout.EndVertical();
+            EditorGUI.EndDisabledGroup();
         }
         else
         {

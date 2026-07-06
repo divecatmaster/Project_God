@@ -22,6 +22,11 @@ public class GlitchEffectController : MonoBehaviour
         ManualOnly          // Only triggers when requested via TriggerGlitch() code or Inspector button
     }
 
+    [Header("Master Toggle")]
+    [Tooltip("Enable or disable the entire glitch system. When disabled, the camera returns to normal rendering.")]
+    public bool isEffectActive = true;
+    private bool lastEffectActiveState = true;
+
     [Header("References")]
     public Camera renderCamera;
     public Camera outputCamera;
@@ -68,6 +73,8 @@ public class GlitchEffectController : MonoBehaviour
 
     void Awake()
     {
+        lastEffectActiveState = isEffectActive;
+        
         // Setup initial texture state
         UpdateRenderTexture();
         
@@ -91,10 +98,22 @@ public class GlitchEffectController : MonoBehaviour
         {
             activeGlitchCoroutine = StartCoroutine(PeriodicGlitchRoutine());
         }
+        
+        // Initial sync
+        SyncEffectState();
     }
 
     void Update()
     {
+        // Detect toggle changes in inspector
+        if (isEffectActive != lastEffectActiveState)
+        {
+            SyncEffectState();
+            lastEffectActiveState = isEffectActive;
+        }
+
+        if (!isEffectActive) return;
+
         // Monitor resolution changes
         if (Screen.width != lastWidth || Screen.height != lastHeight)
         {
@@ -123,8 +142,45 @@ public class GlitchEffectController : MonoBehaviour
         UpdateTextGlitches();
     }
 
+    public void SetGlitchActive(bool active)
+    {
+        isEffectActive = active;
+        SyncEffectState();
+    }
+
+    private void SyncEffectState()
+    {
+        if (renderCamera == null) return;
+
+        if (isEffectActive)
+        {
+            // Glitch Mode: Render to texture, show output camera
+            if (rt == null) UpdateRenderTexture();
+            renderCamera.targetTexture = rt;
+            
+            if (outputCamera != null) outputCamera.gameObject.SetActive(true);
+            if (displayImage != null) displayImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            // Normal Mode: Render to screen, hide output camera
+            renderCamera.targetTexture = null;
+            currentIntensity = 0f;
+            
+            if (outputCamera != null) outputCamera.gameObject.SetActive(false);
+            if (displayImage != null) displayImage.gameObject.SetActive(false);
+            
+            // Clean up text if it was glitched
+            UpdateTextGlitches();
+        }
+        
+        if (audioSynth != null) audioSynth.audioIntensity = isEffectActive ? currentIntensity : 0f;
+    }
+
     void UpdateRenderTexture()
     {
+        if (!isEffectActive) return;
+
         lastWidth = Screen.width;
         lastHeight = Screen.height;
         
