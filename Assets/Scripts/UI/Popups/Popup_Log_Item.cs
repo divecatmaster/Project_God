@@ -4,6 +4,7 @@ using UnityEngine;
 public class Popup_Log_Item : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI Name;
+    [SerializeField] TextMeshProUGUI MapName;
     [SerializeField] GameObject Line;
     [SerializeField] GameObject Select;
     [SerializeField] TextMeshProUGUI Context;
@@ -16,6 +17,9 @@ public class Popup_Log_Item : MonoBehaviour
 
     public void SetItem(Story_Data story)
     {
+        MapName.gameObject.SetActive(false);
+        Name.gameObject.SetActive(true);
+
         if (story.Name == 0)
         {
             Name.text = "";
@@ -64,8 +68,11 @@ public class Popup_Log_Item : MonoBehaviour
 
     public void SetItemBG(Story_Data story)
     {
-        Name.text = $"[{LanguageManager.Instance.GetText($"BG_Title_{story.BG}")}]";
-        Name.color = Color.white;
+        MapName.gameObject.SetActive(true);
+        Name.gameObject.SetActive(false);
+
+        MapName.text = $"[{LanguageManager.Instance.GetText($"BG_Title_{story.BG}")}]";
+        
         Line.SetActive(false);
         Select.SetActive(false);
         Context.text = "";
