@@ -222,11 +222,8 @@ public class Data_Manager : MonoBehaviour
     {
         List<Story_Data> result = new List<Story_Data>();
 
-        // 현재 인덱스 이전/현재 데이터 중 가장 가까운 선택지 찾기
-        Story_Data prevSelect = Story_Dic.Values
-            .Where(x => x.Index <= currentIndex && x.Select_Index != 0)
-            .OrderByDescending(x => x.Index)
-            .FirstOrDefault();
+        // currentIndex에서 Next_Index를 거꾸로 추적해서 실제 루트상 가장 가까운 선택지 찾기
+        Story_Data prevSelect = GetPrevSelectDataByReverseTrace(currentIndex);
 
         // 이전 선택지가 없으면 처음부터 현재 인덱스까지 순서대로 반환
         if (prevSelect == null)
@@ -295,41 +292,69 @@ public class Data_Manager : MonoBehaviour
         }
 
         return result;
-        // // 현재 인덱스 이전/현재 데이터 중 가장 가까운 선택지 찾기
-        // Story_Data prevSelect = Story_Dic.Values
-        //     .Where(x => x.Index <= currentIndex && x.Select_Index != 0)
-        //     .OrderByDescending(x => x.Index)
-        //     .FirstOrDefault();
+    }
 
-        // int startIndex = prevSelect != null ? prevSelect.Index : 0;
+    Story_Data GetPrevSelectDataByReverseTrace(int currentIndex)
+    {
+        if (!Story_Dic.ContainsKey(currentIndex))
+            return null;
 
+        Story_Data currentData = Story_Dic[currentIndex];
 
-        // List<Story_Data> result = new List<Story_Data>();
-        // int _selectIndex = GetStoryData(startIndex).Select_Index;
-        // if (_selectIndex != 0)
-        // {
-        //     result.Add(Story_Dic[startIndex]);
-        //     var newStartIndex = GetSelectData(_selectIndex).Next_Index[GetSavedSelectData(_selectIndex)];
+        // 현재 데이터 자체가 선택지면 바로 반환
+        if (currentData.Select_Index != 0)
+            return currentData;
 
-        //     while (true)
-        //     {
-        //         result.Add(Story_Dic[newStartIndex]);
-        //         newStartIndex = Story_Dic[newStartIndex].Next_Index;
-        //         if (newStartIndex >= currentIndex)
-        //         {
-        //             break;
-        //         }
-        //     }
-        //     return result; 
-        // }
-        // else
-        // {
-        //     // 가장 가까운 선택지부터 현재 인덱스까지 가져오기
-        //     return Story_Dic.Values
-        //         .Where(x => x.Index >= startIndex && x.Index <= currentIndex)
-        //         .OrderBy(x => x.Index)
-        //         .ToList();
-        // }
+        int traceIndex = currentIndex;
+        HashSet<int> visited = new HashSet<int>();
+
+        while (true)
+        {
+            if (traceIndex <= 0)
+                break;
+
+            if (visited.Contains(traceIndex))
+                break;
+
+            visited.Add(traceIndex);
+
+            // 선택지 데이터 중에서 저장된 선택 루트가 현재 traceIndex로 이어지는 것 찾기
+            Story_Data prevSelect = Story_Dic.Values
+                .Where(x => x.Select_Index != 0 && IsSelectedNextIndex(x.Select_Index, traceIndex))
+                .OrderByDescending(x => x.Index)
+                .FirstOrDefault();
+
+            if (prevSelect != null)
+                return prevSelect;
+
+            // 일반 Story_Data의 Next_Index가 현재 traceIndex인 이전 데이터 찾기
+            Story_Data prevStory = Story_Dic.Values
+                .Where(x => x.Next_Index == traceIndex)
+                .OrderByDescending(x => x.Index)
+                .FirstOrDefault();
+
+            if (prevStory == null)
+                break;
+
+            traceIndex = prevStory.Index;
+        }
+
+        return null;
+    }
+
+    bool IsSelectedNextIndex(int selectIndex, int targetIndex)
+    {
+        Select_Data selectData = GetSelectData(selectIndex);
+
+        if (selectData == null)
+            return false;
+
+        int savedSelectIndex = GetSavedSelectData(selectIndex);
+
+        if (savedSelectIndex < 0 || savedSelectIndex >= selectData.Next_Index.Count)
+            return false;
+
+        return selectData.Next_Index[savedSelectIndex] == targetIndex;
     }
 
     public Story_Data GetBeforeStory(int currentIndex)
