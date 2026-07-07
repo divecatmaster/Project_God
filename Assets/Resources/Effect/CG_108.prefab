@@ -54,19 +54,20 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e065ebe556dd7cf4aab0adc8d792c7c6, type: 3}
     - {fileID: 21300000, guid: 2d3f0633effc7f740ac3616752feff8f, type: 3}
     Colors:
-    - {r: 0.84705883, g: 0.33333334, b: 0.16470589, a: 1}
-    - {r: 0.8117647, g: 0.45490196, b: 0.12156863, a: 1}
+    - {r: 0.84705883, g: 0.33333334, b: 0.16470589, a: 0.54901963}
+    - {r: 0.8117647, g: 0.45490196, b: 0.12156863, a: 0.54901963}
     InitialPoolSize: 20
-    SizeRange: {x: 30, y: 60}
-    FallSpeedRange: {x: 100, y: 200}
-    HorizontalSpeedRange: {x: 100, y: 250}
-    RotationSpeedRange: {x: 30, y: 150}
-    HorizontalDriftRange: {x: 20, y: 50}
+    SizeRange: {x: 20, y: 45}
+    FallSpeedRange: {x: 60, y: 120}
+    HorizontalSpeedRange: {x: 40, y: 120}
+    RotationSpeedRange: {x: 10, y: 60}
+    HorizontalDriftRange: {x: 10, y: 30}
     SpawnInterval: 1
   m_BoundArea: {fileID: 0}
   m_FadeAreas:
   - {fileID: 5909861601234470693}
   m_FadeAreaAlpha: 0
+  m_FadeAreaFadeSpeed: 2.5
 --- !u!1 &8774740796888394018
 GameObject:
   m_ObjectHideFlags: 0
