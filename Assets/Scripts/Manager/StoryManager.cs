@@ -807,11 +807,18 @@ public class StoryManager : MonoBehaviour
         _isCharacterShowing = true;
 
         CharacterGroup.gameObject.SetActive(true);
-        CharacterGroup.alpha = 0f;
 
-        CharacterGroup.DOFade(1f, 0.5f).SetEase(Ease.Linear);
-
-        _showCharacterDelayTween = DOVirtual.DelayedCall(0.5f, CompleteShowCharacter);
+        if (_currentStory.Index == 3036)
+        {
+            CharacterGroup.alpha = 1f;
+            CompleteShowCharacter();
+        }
+        else
+        {
+            CharacterGroup.alpha = 0f;
+            CharacterGroup.DOFade(1f, 0.5f).SetEase(Ease.Linear);
+            _showCharacterDelayTween = DOVirtual.DelayedCall(0.5f, CompleteShowCharacter);
+        }
     }
 
     void CompleteShowCharacter()

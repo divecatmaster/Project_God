@@ -1965,6 +1965,7 @@ MonoBehaviour:
     BGM: 
     BGM_Fade_Time: 0
     SFX: []
+    SFX_Type: 
     cg_production: []
 --- !u!4 &580768660
 Transform:
@@ -5313,7 +5314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 13, y: 0}
+  m_AnchoredPosition: {x: 12.6, y: -0.5}
   m_SizeDelta: {x: 1078, y: 1078}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1428391647
