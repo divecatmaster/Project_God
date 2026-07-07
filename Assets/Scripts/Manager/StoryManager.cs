@@ -280,6 +280,7 @@ public class StoryManager : MonoBehaviour
             }
             CheckBGM();
             Check_CG_Effect();
+            Check_SFX();
         }
     }
 
@@ -2230,6 +2231,20 @@ public class StoryManager : MonoBehaviour
         else
         {
             CG_Effect_Manager.Instance.SetEffect(_currentStory.cg_production);
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    #region SFX
+    void Check_SFX()
+    {
+        if (_currentStory.SFX == null || _currentStory.SFX.Count <= 0)
+        {
+            SoundManager.Instance.StopSFX();
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(_currentStory.SFX, _currentStory.SFX_Type);
         }
     }
     #endregion

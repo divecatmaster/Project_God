@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5baf0b00b0f32a1438b77c013a2715d3, type: 3}
-  m_Name: Sfx_Opening_2
+  m_Name: Tinnitus
   m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
-  soundID: Sfx_Opening_2
-  category: 4
-  clip: {fileID: 8300000, guid: ca210f8ba3110924d822307f9a311ea8, type: 3}
+  soundID: Tinnitus
+  category: 2
+  clip: {fileID: 8300000, guid: 85cab2f2ba4707d419af5051eff9f719, type: 3}
   volume: 1
   pitch: 1
   volumeRandomization: 0

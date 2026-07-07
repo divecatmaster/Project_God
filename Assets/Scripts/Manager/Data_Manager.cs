@@ -167,6 +167,16 @@ public class Data_Manager : MonoBehaviour
                     newData.SFX.Add(splitProduction[a]);
                 }
             }
+
+            var tempSFX_Type = data[i]["sfx_type"].ToString();
+            if (!string.IsNullOrEmpty(tempSFX_Type))
+            {
+                var splitProduction = tempSFX_Type.Split('/');
+                for (int a = 0; a < splitProduction.Length; a++)
+                {
+                    newData.SFX_Type.Add(CSV_Int_Checker(splitProduction[a]));
+                }
+            }
             
             var temp_cg_production = data[i]["cg_production"].ToString();
             if (!string.IsNullOrEmpty(temp_cg_production))
@@ -828,6 +838,7 @@ public class Story_Data
     public string BGM;
     public float BGM_Fade_Time;
     public List<string> SFX = new List<string>(); 
+    public List<int> SFX_Type = new List<int>(); 
     public List<string> cg_production = new List<string>(); 
 }
 

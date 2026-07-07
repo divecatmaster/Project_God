@@ -357,6 +357,9 @@ namespace God.Audio
 
         #region SFX & UI Management
 
+        private readonly Dictionary<string, AudioSource> _activeStorySfxDic = new();
+        private readonly Dictionary<string, Coroutine> _storySfxCoroutineDic = new();
+
         public void PlaySFX(string soundID, Vector3? position = null)
         {
             if (library == null)
@@ -445,6 +448,225 @@ namespace God.Audio
             return null;
         }
 
+        public void StopSFX()
+        {
+            foreach (var pair in _storySfxCoroutineDic)
+            {
+                if (pair.Value != null)
+                    StopCoroutine(pair.Value);
+            }
+
+            _storySfxCoroutineDic.Clear();
+
+            foreach (var pair in _activeStorySfxDic)
+            {
+                AudioSource source = pair.Value;
+
+                if (source == null)
+                    continue;
+
+                source.Stop();
+                source.clip = null;
+                source.loop = false;
+                source.volume = 1f;
+                source.pitch = 1f;
+            }
+
+            _activeStorySfxDic.Clear();
+        }
+
+        public void PlaySFX(List<string> soundID, List<int> count)
+        {
+            if (library == null)
+            {
+                Debug.LogError("SoundLibrary is not assigned.");
+                return;
+            }
+
+            if (soundID == null || soundID.Count <= 0)
+            {
+                StopSFX();
+                return;
+            }
+
+            HashSet<string> nextSfxSet = new HashSet<string>();
+
+            for (int i = 0; i < soundID.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(soundID[i]))
+                    nextSfxSet.Add(soundID[i]);
+            }
+
+            // 이번 스토리에 없는 기존 SFX만 정지
+            StopUnusedStorySFX(nextSfxSet);
+
+            for (int i = 0; i < soundID.Count; i++)
+            {
+                string id = soundID[i];
+
+                if (string.IsNullOrEmpty(id))
+                    continue;
+
+                int playCount = 1;
+
+                if (count != null && i < count.Count)
+                    playCount = count[i];
+
+                // 이미 같은 SFX가 재생 중이면 유지
+                if (_activeStorySfxDic.ContainsKey(id))
+                {
+                    AudioSource activeSource = _activeStorySfxDic[id];
+
+                    if (activeSource != null && activeSource.isPlaying)
+                    {
+                        continue;
+                    }
+                }
+
+                SoundData data = library.GetSound(id);
+
+                if (data == null || data.clip == null)
+                    continue;
+
+                AudioSource source = GetAvailableSource(_sfxPool);
+
+                if (source == null)
+                {
+                    Debug.LogWarning($"No available SFX AudioSource. SoundID: {id}");
+                    continue;
+                }
+
+                _activeStorySfxDic[id] = source;
+
+                if (playCount == -1)
+                {
+                    PlayLoopSFX(source, data);
+                }
+                else
+                {
+                    Coroutine coroutine = StartCoroutine(PlaySFXCountRoutine(id, source, data, playCount));
+                    _storySfxCoroutineDic[id] = coroutine;
+                }
+            }
+        }
+
+        private void StopUnusedStorySFX(HashSet<string> nextSfxSet)
+        {
+            List<string> removeList = new List<string>();
+
+            foreach (var pair in _activeStorySfxDic)
+            {
+                string id = pair.Key;
+
+                if (nextSfxSet.Contains(id))
+                    continue;
+
+                AudioSource source = pair.Value;
+
+                if (_storySfxCoroutineDic.ContainsKey(id))
+                {
+                    if (_storySfxCoroutineDic[id] != null)
+                        StopCoroutine(_storySfxCoroutineDic[id]);
+
+                    _storySfxCoroutineDic.Remove(id);
+                }
+
+                if (source != null)
+                {
+                    source.Stop();
+                    source.clip = null;
+                    source.loop = false;
+                    source.volume = 1f;
+                    source.pitch = 1f;
+                }
+
+                removeList.Add(id);
+            }
+
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                _activeStorySfxDic.Remove(removeList[i]);
+            }
+        }
+
+        private void PlayLoopSFX(AudioSource source, SoundData data)
+        {
+            if (source == null || data == null || data.clip == null)
+                return;
+
+            source.Stop();
+
+            source.clip = data.clip;
+            source.volume = data.GetRandomVolume();
+            source.pitch = data.GetRandomPitch();
+            source.spatialBlend = data.spatialBlend;
+            source.loop = true;
+            source.Play();
+        }
+
+        private IEnumerator PlaySFXCountRoutine(string id, AudioSource source, SoundData data, int count)
+        {
+            if (source == null || data == null || data.clip == null)
+                yield break;
+
+            if (count <= 0)
+            {
+                ReleaseStorySFXSource(id, source);
+                yield break;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                if (source == null)
+                    yield break;
+
+                source.Stop();
+
+                source.clip = data.clip;
+                source.volume = data.GetRandomVolume();
+                source.pitch = data.GetRandomPitch();
+                source.spatialBlend = data.spatialBlend;
+                source.loop = false;
+                source.Play();
+
+                float pitch = Mathf.Abs(source.pitch);
+                if (pitch <= 0.001f)
+                    pitch = 1f;
+
+                float waitTime = data.clip.length / pitch;
+
+                float elapsed = 0f;
+
+                while (elapsed < waitTime)
+                {
+                    if (source == null)
+                        yield break;
+
+                    elapsed += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+
+            ReleaseStorySFXSource(id, source);
+        }
+
+        private void ReleaseStorySFXSource(string id, AudioSource source)
+        {
+            if (source != null)
+            {
+                source.Stop();
+                source.clip = null;
+                source.loop = false;
+                source.volume = 1f;
+                source.pitch = 1f;
+            }
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                _activeStorySfxDic.Remove(id);
+                _storySfxCoroutineDic.Remove(id);
+            }
+        }
         #endregion
 
         #region Volume Control

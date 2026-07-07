@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sfx_Opening_3
   m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
   soundID: Sfx_Opening_3
-  category: 2
+  category: 4
   clip: {fileID: 8300000, guid: 625c478a810a7544d8cfd9334ff6be2a, type: 3}
   volume: 1
   pitch: 1
