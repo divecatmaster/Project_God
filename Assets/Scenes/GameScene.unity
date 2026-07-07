@@ -3271,7 +3271,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2560, y: 1080}
+  m_SizeDelta: {x: 2579.9998, y: 1088.4374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1001597371
 MonoBehaviour:
@@ -7242,7 +7242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2560, y: 1080}
+  m_SizeDelta: {x: 2579.9998, y: 1088.4374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1945137386
 MonoBehaviour:
@@ -7844,14 +7844,6 @@ PrefabInstance:
       propertyPath: m_BoundArea
       value: 
       objectReference: {fileID: 1069790078}
-    - target: {fileID: 3276114637537691247, guid: 956fd94d0b0c62d48af6c4f0b8d26775, type: 3}
-      propertyPath: m_Settings.SpawnInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3276114637537691247, guid: 956fd94d0b0c62d48af6c4f0b8d26775, type: 3}
-      propertyPath: m_Settings.InitialPoolSize
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4035559288167267926, guid: 956fd94d0b0c62d48af6c4f0b8d26775, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
