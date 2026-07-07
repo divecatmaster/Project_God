@@ -844,7 +844,7 @@ MonoBehaviour:
   Canvas: {fileID: 1442581770}
   CursorRect: {fileID: 1720537899}
   CursorImage: {fileID: 1720537897}
-  HotSpotOffset: {x: 10, y: -38}
+  HotSpotOffset: {x: 10, y: -28}
   CursorSize: 128
 --- !u!114 &1442581768
 MonoBehaviour:
