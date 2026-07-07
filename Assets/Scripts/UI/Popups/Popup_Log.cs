@@ -45,7 +45,7 @@ public class Popup_Log : PopupBase
         {
             if (_tempBG != -1 && _tempBG != target[i].BG)
             {
-                if (target[i].BG < 100)
+                if (target[i].BG < 100 && _tempBG < 100)
                 {
                     GetItem().SetItemBG(target[i]);
                 }
