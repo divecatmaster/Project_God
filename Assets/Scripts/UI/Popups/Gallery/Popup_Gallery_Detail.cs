@@ -135,6 +135,7 @@ public class Popup_Gallery_Detail : PopupBase
             if (targetStory != null)
             {
                 ChangeBG(targetStory);
+                Check_CG_Effect(targetStory);
             }
             else
             {
@@ -145,6 +146,11 @@ public class Popup_Gallery_Detail : PopupBase
         else
         {
             BG.sprite = Resource_Manager.Instance.Get_BG(targetData.BG);
+            var targetStory = Data_Manager.Instance.GetStoryData(targetData.Production);
+            if (targetStory != null)
+            {
+                Check_CG_Effect(targetStory);    
+            }
         }
 
         IndexText.text = targetData.Group.ToString("00");
@@ -456,6 +462,21 @@ public class Popup_Gallery_Detail : PopupBase
             popup.SetPopup_One($"{path}에 이미지가 저장되었습니다.", () => popup.Close());
         }
         //Debug.Log($"스크린샷 저장 완료: {path}");
+    }
+
+    void Check_CG_Effect(Story_Data data)
+    {
+        if (CG_Effect_Manager.Instance == null)
+            return;
+
+        if (data.cg_production == null || data.cg_production.Count <= 0)
+        {
+            CG_Effect_Manager.Instance.OffEffects();
+        }
+        else
+        {
+            CG_Effect_Manager.Instance.SetEffect(data.cg_production);
+        }
     }
 //-------------------------------------------------------------------------------------------------------------------------------------
     #region ButtonAction
