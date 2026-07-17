@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 624330177}
   - component: {fileID: 624330176}
   - component: {fileID: 624330175}
+  - component: {fileID: 624330182}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -403,6 +404,18 @@ MonoBehaviour:
   Korean_Shadow: {fileID: 2100000, guid: af4ae27e689418d4abbd37a2dae16f64, type: 2}
   Other_Default: {fileID: -1304957710274900223, guid: eb8ebcc177a38b049a66399bb670da42, type: 2}
   Other_Blur: {fileID: 2100000, guid: ae4961c193608ad4a833f4cd5f17fb10, type: 2}
+--- !u!114 &624330182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624330173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4ca79d5831e2146a47d7a8f5de03be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SteamManager
 --- !u!1 &634624476
 GameObject:
   m_ObjectHideFlags: 0

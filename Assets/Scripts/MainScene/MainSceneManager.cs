@@ -22,6 +22,8 @@ public class MainSceneManager : MonoBehaviour
         Instance = this;
         LoadingDim.raycastTarget = true;
         LoadingDim.color = Color.black;
+
+        Debug.Log(Application.persistentDataPath);
     }
 
     void OnEnable()
