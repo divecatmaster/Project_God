@@ -702,7 +702,7 @@ public class Data_Manager : MonoBehaviour
     public int Sound_UI { get; private set; } = 100;
     public int TextSpeed { get; private set; } = 50;
     public float AutoSpeed { get; private set; } = 3f;
-    public int Production_Effect { get; private set; } = 1;
+    //public int Production_Effect { get; private set; } = 1;
     public int ScreenMode { get; private set; } = 2;
     public int Screen_Width { get; private set; } = 1920;
     public int Screen_Height { get; private set; } = 1080;
@@ -712,7 +712,7 @@ public class Data_Manager : MonoBehaviour
     {
         TextSpeed = PlayerPrefs.GetInt("TextSpeed", 50);
         AutoSpeed = PlayerPrefs.GetFloat("AutoSpeed", 3f);
-        Production_Effect = PlayerPrefs.GetInt("Production_Effect", 1);
+        //Production_Effect = PlayerPrefs.GetInt("Production_Effect", 1);
         Sound_BG = PlayerPrefs.GetInt("Sound_BG", 100);
         Sound_Effect = PlayerPrefs.GetInt("Sound_Effect", 100);
         Sound_UI = PlayerPrefs.GetInt("Sound_UI", 100);
@@ -762,13 +762,13 @@ public class Data_Manager : MonoBehaviour
         PlayerPrefs.SetFloat("AutoSpeed", value);
     }
 
-    public void SetProduction_Effect(int value)
-    {
-        if (Production_Effect == value) return;
+    // public void SetProduction_Effect(int value)
+    // {
+    //     if (Production_Effect == value) return;
 
-        Production_Effect = value;
-        PlayerPrefs.SetInt("Production_Effect", value);
-    }
+    //     Production_Effect = value;
+    //     PlayerPrefs.SetInt("Production_Effect", value);
+    // }
 
     public void SetScreenMode(int value)
     {
@@ -813,6 +813,21 @@ public class Data_Manager : MonoBehaviour
         int jongseong = unicode % 28;
 
         return jongseong != 0;
+    }
+    #endregion
+
+    #region Reset
+    public void ResetData()
+    {
+        PlayerPrefs.SetString("Gallery", "");
+        Gallery_OpenData = new List<int>();
+
+        SaveData_Dic = new Dictionary<int, Save_Data>();
+        for (int i = 1; i < 21; i++)
+        {
+            SaveManager.Instance.Delete(i);
+        }
+        LoadSaveData();
     }
     #endregion
 }

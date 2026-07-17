@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using God.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Popup_Setting_System : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Popup_Setting_System : MonoBehaviour
     [Header("Language")]
     [SerializeField] TMP_Dropdown Language_Dropdown;
 
+    [Header("Reset")]
+    [SerializeField] Button ResetBtn;
+
     private void Awake()
     {
         ScreenMode_Dropdown.onValueChanged.AddListener(OnValueChange_ScreenMode);
@@ -26,6 +30,7 @@ public class Popup_Setting_System : MonoBehaviour
         AddDropdownClickSound(ScreenMode_Dropdown);
         AddDropdownClickSound(Resolution_Dropdown);
         AddDropdownClickSound(Language_Dropdown);
+        ResetBtn.onClick.AddListener(OnClickReset);
     }
 
     void OnEnable()
@@ -202,5 +207,20 @@ public class Popup_Setting_System : MonoBehaviour
         });
     }
 
-    
+    void OnClickReset()
+    {
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        popup.Open();
+        popup.SetPopup(LanguageManager.Instance.GetText("Reset_Expl"), () =>
+        {
+            //save data 초기화
+            //갤러리 초기화
+            Data_Manager.Instance.ResetData();
+            popup.Close();
+        },
+        () =>
+        {
+            popup.Close();
+        });
+    }
 }

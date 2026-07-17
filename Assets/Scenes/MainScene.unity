@@ -3179,7 +3179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3296,7 +3296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3388,14 +3388,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 00cfa1552491d204496ebf2d9a0f0a5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4071c753ebad6c4fa7265e162e2cf7e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

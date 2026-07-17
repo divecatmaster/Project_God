@@ -18,10 +18,10 @@ public class Popup_Setting_Game : MonoBehaviour
     [SerializeField] GameObject AutoSpeed_StarGlow;
     [SerializeField] TextMeshProUGUI AutoSpeed_Amount;
 
-    [Header("Production_Effect")]
-    [SerializeField] Button Production_Btn;
-    [SerializeField] GameObject Production_On;
-    [SerializeField] GameObject Production_Off;
+    // [Header("Production_Effect")]
+    // [SerializeField] Button Production_Btn;
+    // [SerializeField] GameObject Production_On;
+    // [SerializeField] GameObject Production_Off;
 
     [Header("Example")]
     [SerializeField] TextMeshProUGUI ExampleText;
@@ -42,7 +42,7 @@ public class Popup_Setting_Game : MonoBehaviour
     {
         TextSpeed_Slider.onValueChanged.AddListener(TextSpeed_Value_Change);
         AutoSpeed_Slider.onValueChanged.AddListener(AutoSpeed_Value_Change);
-        Production_Btn.onClick.AddListener(OnClickProduction);
+        //Production_Btn.onClick.AddListener(OnClickProduction);
         ChangeNameBtn.onClick.AddListener(OnClickNameChange);
         NameInput.onValueChanged.AddListener(OnValueChanged);
     }
@@ -56,7 +56,7 @@ public class Popup_Setting_Game : MonoBehaviour
     {
         Set_TextSpeed();
         Set_AutoSpeed();
-        Set_Production();
+        //Set_Production();
         if (_typeRoutine != null)
         {
             StopCoroutine(_typeRoutine);
@@ -76,7 +76,7 @@ public class Popup_Setting_Game : MonoBehaviour
 
         Data_Manager.Instance.SetTextSpeed(_textSpeedValue);
         Data_Manager.Instance.SetAutoSpeed(_autoSpeedValue);
-        Data_Manager.Instance.SetProduction_Effect(_productionValue);
+        //Data_Manager.Instance.SetProduction_Effect(_productionValue);
     }
 
     void Set_TextSpeed()
@@ -123,44 +123,44 @@ public class Popup_Setting_Game : MonoBehaviour
         AutoSpeed_Amount.text = $"{_autoSpeedValue}s";
     }
 
-    void Set_Production()
-    {
-        _productionValue = Data_Manager.Instance.Production_Effect;
+    // void Set_Production()
+    // {
+    //     _productionValue = Data_Manager.Instance.Production_Effect;
 
-        if (_productionValue == 1)
-        {
-            Production_On.SetActive(true);
-            Production_Off.SetActive(false);
-        }
-        else
-        {
-            Production_On.SetActive(false);
-            Production_Off.SetActive(true);
-        }
-    }
+    //     if (_productionValue == 1)
+    //     {
+    //         Production_On.SetActive(true);
+    //         Production_Off.SetActive(false);
+    //     }
+    //     else
+    //     {
+    //         Production_On.SetActive(false);
+    //         Production_Off.SetActive(true);
+    //     }
+    // }
 
-    void OnClickProduction()
-    {
-        if (_productionValue == 1)
-        {
-            _productionValue = 0;
-        }
-        else
-        {
-            _productionValue = 1;
-        }
+    // void OnClickProduction()
+    // {
+    //     if (_productionValue == 1)
+    //     {
+    //         _productionValue = 0;
+    //     }
+    //     else
+    //     {
+    //         _productionValue = 1;
+    //     }
 
-        if (_productionValue == 1)
-        {
-            Production_On.SetActive(true);
-            Production_Off.SetActive(false);
-        }
-        else
-        {
-            Production_On.SetActive(false);
-            Production_Off.SetActive(true);
-        }
-    }
+    //     if (_productionValue == 1)
+    //     {
+    //         Production_On.SetActive(true);
+    //         Production_Off.SetActive(false);
+    //     }
+    //     else
+    //     {
+    //         Production_On.SetActive(false);
+    //         Production_Off.SetActive(true);
+    //     }
+    // }
 
     private IEnumerator SetExample()
     {
