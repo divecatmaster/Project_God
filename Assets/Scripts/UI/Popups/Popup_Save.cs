@@ -33,6 +33,9 @@ public class Popup_Save : PopupBase
         SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
         _currentGroup = -1;
+
+        SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, false);
     }
 
     public void SetPopup(int type, int group = 0)
@@ -52,6 +55,9 @@ public class Popup_Save : PopupBase
         }
         else
         {
+            SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+            SoundManager.Instance.SetMute(SoundCategory.BGM, true);
+
             Groups[0].gameObject.SetActive(true);
             Groups[1].gameObject.SetActive(true);
             OnClickGroup(group);
@@ -163,6 +169,11 @@ public class Popup_Save : PopupBase
                         Data_Manager.Instance.StopTimer();
                         GameSceneManager.Instance.StartLoading();
                         SoundManager.Instance.PlayUI("GameStart");
+
+                        SoundManager.Instance.StopBGM();
+                        SoundManager.Instance.StopSFX();
+                        SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+                        SoundManager.Instance.SetMute(SoundCategory.BGM, false);
                     }
                 });
             }

@@ -43,6 +43,7 @@ namespace God.Audio
         private const string SFXVolParam = "Sound_Effect";
         private const string UIVolParam = "Sound_UI";
         private const string OpeningVolParam = "OpeningVol";
+        private readonly Dictionary<SoundCategory, bool> _muteDic = new();
 
         private void Awake()
         {
@@ -675,66 +676,147 @@ namespace God.Audio
         {
             volume = Mathf.Clamp01(volume);
 
-            string param = category switch
-            {
-                SoundCategory.Master => MasterVolParam,
-                SoundCategory.BGM => BGMVolParam,
-                SoundCategory.SFX => SFXVolParam,
-                SoundCategory.UI => UIVolParam,
-                SoundCategory.Opening => OpeningVolParam,
-                _ => MasterVolParam
-            };
+            string param = GetVolumeParam(category);
+            bool isMuted = IsMuted(category);
 
-            float dB = volume > 0.0001f ? Mathf.Log10(volume) * 20f : -80f;
+            float dB = isMuted ? -80f : VolumeToDb(volume);
 
-            if (audioMixer != null)
-            {
-                bool result = audioMixer.SetFloat(param, dB);
+            SetMixerFloat(param, dB);
 
-#if UNITY_EDITOR
-                if (!result)
-                {
-                    Debug.LogError($"AudioMixer Exposed Parameter를 찾을 수 없습니다. Param: {param}");
-                }
-#endif
-            }
-
-            //PlayerPrefs.SetInt(param, Mathf.RoundToInt(volume * 100f));
+            // PlayerPrefs 저장은 현재 Data_Manager에서 따로 하는 구조라면 여기서는 안 해도 됨
+            // PlayerPrefs.SetInt(param, Mathf.RoundToInt(volume * 100f));
         }
 
-        public float GetVolume(SoundCategory category)
+        public void SetMute(SoundCategory category, bool isMuted)
         {
-            string param = category switch
-            {
-                SoundCategory.Master => MasterVolParam,
-                SoundCategory.BGM => BGMVolParam,
-                SoundCategory.SFX => SFXVolParam,
-                SoundCategory.UI => UIVolParam,
-                SoundCategory.Opening => OpeningVolParam,
-                _ => MasterVolParam
-            };
+            if (_muteDic.ContainsKey(category))
+                _muteDic[category] = isMuted;
+            else
+                _muteDic.Add(category, isMuted);
 
-            return PlayerPrefs.GetFloat(param, 0.75f);
+            ApplyCategoryVolume(category);
         }
 
-        public void LoadVolumeSettings()
+        public void ToggleMute(SoundCategory category)
         {
-            //SetVolume(SoundCategory.Master, PlayerPrefs.GetFloat(MasterVolParam, 0.75f));
-            SetVolume(SoundCategory.BGM, Data_Manager.Instance.Sound_BG * 0.01f);
-            SetVolume(SoundCategory.SFX, Data_Manager.Instance.Sound_Effect * 0.01f);
-            SetVolume(SoundCategory.UI, Data_Manager.Instance.Sound_UI * 0.01f);
-            //SetVolume(SoundCategory.Opening, PlayerPrefs.GetFloat(OpeningVolParam, 0.75f));
+            SetMute(category, !IsMuted(category));
         }
 
-        public void Mute(bool isMuted)
+        public bool IsMuted(SoundCategory category)
+        {
+            return _muteDic.ContainsKey(category) && _muteDic[category];
+        }
+
+        public void SetMute_BGM(bool isMuted)
+        {
+            SetMute(SoundCategory.BGM, isMuted);
+        }
+
+        public void SetMute_SFX(bool isMuted)
+        {
+            SetMute(SoundCategory.SFX, isMuted);
+        }
+
+        public void SetMute_UI(bool isMuted)
+        {
+            SetMute(SoundCategory.UI, isMuted);
+        }
+
+        public void SetMute_Opening(bool isMuted)
+        {
+            SetMute(SoundCategory.Opening, isMuted);
+        }
+
+        public void SetMute_Master(bool isMuted)
+        {
+            SetMute(SoundCategory.Master, isMuted);
+        }
+
+        void ApplyCategoryVolume(SoundCategory category)
+        {
+            float volume = GetSavedVolume01(category);
+            string param = GetVolumeParam(category);
+
+            float dB = IsMuted(category) ? -80f : VolumeToDb(volume);
+
+            SetMixerFloat(param, dB);
+        }
+
+        void SetMixerFloat(string param, float dB)
         {
             if (audioMixer == null)
                 return;
 
-            float volume = GetVolume(SoundCategory.Master);
-            float dB = volume > 0.0001f ? Mathf.Log10(volume) * 20f : -80f;
+            bool result = audioMixer.SetFloat(param, dB);
 
-            audioMixer.SetFloat(MasterVolParam, isMuted ? -80f : dB);
+#if UNITY_EDITOR
+            if (!result)
+            {
+                Debug.LogError($"AudioMixer Exposed Parameter를 찾을 수 없습니다. Param: {param}");
+            }
+#endif
+        }
+
+        string GetVolumeParam(SoundCategory category)
+        {
+            return category switch
+            {
+                SoundCategory.Master => MasterVolParam,
+                SoundCategory.BGM => BGMVolParam,
+                SoundCategory.SFX => SFXVolParam,
+                SoundCategory.UI => UIVolParam,
+                SoundCategory.Opening => OpeningVolParam,
+                _ => MasterVolParam
+            };
+        }
+
+        float GetSavedVolume01(SoundCategory category)
+        {
+            switch (category)
+            {
+                case SoundCategory.BGM:
+                    return Data_Manager.Instance.Sound_BG * 0.01f;
+
+                case SoundCategory.SFX:
+                    return Data_Manager.Instance.Sound_Effect * 0.01f;
+
+                case SoundCategory.UI:
+                    return Data_Manager.Instance.Sound_UI * 0.01f;
+
+                case SoundCategory.Master:
+                    return PlayerPrefs.GetFloat(MasterVolParam, 1f);
+
+                case SoundCategory.Opening:
+                    return PlayerPrefs.GetFloat(OpeningVolParam, 1f);
+
+                default:
+                    return 1f;
+            }
+        }
+
+        float VolumeToDb(float volume)
+        {
+            volume = Mathf.Clamp01(volume);
+            return volume > 0.0001f ? Mathf.Log10(volume) * 20f : -80f;
+        }
+
+        public float GetVolume(SoundCategory category)
+        {
+            return GetSavedVolume01(category);
+        }
+
+        public void LoadVolumeSettings()
+        {
+            ApplyCategoryVolume(SoundCategory.BGM);
+            ApplyCategoryVolume(SoundCategory.SFX);
+            ApplyCategoryVolume(SoundCategory.UI);
+            ApplyCategoryVolume(SoundCategory.Master);
+            ApplyCategoryVolume(SoundCategory.Opening);
+        }
+
+        public void Mute(bool isMuted)
+        {
+            SetMute(SoundCategory.Master, isMuted);
         }
 
         #endregion

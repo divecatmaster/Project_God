@@ -63,6 +63,7 @@ public class Opening : MonoBehaviour
                 popup.SetPopup(LanguageManager.Instance.GetText("Opening_Skip_Title"), ()=>
                 {
                         StoryManager.Instance.IsOpening = false;
+                        StoryManager.Instance.EndOpening();
                         DOTween.Kill(OpeningTweenId);
                         this.gameObject.SetActive(false);
                 },
@@ -340,7 +341,11 @@ public class Opening : MonoBehaviour
                 yield return WaitPauseable(2f);
                 Main_Text.text = "";
                 StoryManager.Instance.IsOpening = false;
-                CanvasGroup.DOFade(0, 1f).SetId(OpeningTweenId).OnComplete(() => this.gameObject.SetActive(false));
+                CanvasGroup.DOFade(0, 1f).SetId(OpeningTweenId).OnComplete(() =>
+                {
+                        this.gameObject.SetActive(false);
+                        StoryManager.Instance.EndOpening();
+                });
         }
 
         #region Utility

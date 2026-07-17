@@ -23,12 +23,16 @@ public class Popup_Log : PopupBase
     public override void Open(Action onComplete = null)
     {
         SoundManager.Instance.PlayUI("Popup_Open");
+        SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, true);
         base.Open(onComplete);
     }
 
     public override void Close(Action onComplete = null)
     {
         SoundManager.Instance.PlayUI("Click");
+        SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, false);
         base.Close(onComplete);
     }
 

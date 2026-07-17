@@ -113,7 +113,14 @@ public class StoryManager : MonoBehaviour
             }
         }
         Set_BG(true);
-        SetStory();
+        SetStory(Data_Manager.Instance.IsNewGame);
+    }
+
+    public void EndOpening()
+    {
+        CheckBGM();
+        Check_CG_Effect();
+        Check_SFX();
     }
 
     float _currentAutoTime = 0f;
@@ -252,7 +259,7 @@ public class StoryManager : MonoBehaviour
         _currentName = -1;
     }
 
-    void SetStory()
+    void SetStory(bool newGame = false)
     {
         if (_currentStory != null)
         {
@@ -278,9 +285,13 @@ public class StoryManager : MonoBehaviour
                     IsSetName = true;    
                 }
             }
-            CheckBGM();
-            Check_CG_Effect();
-            Check_SFX();
+
+            if (!newGame)
+            {
+                CheckBGM();
+                Check_CG_Effect();
+                Check_SFX();
+            }
         }
     }
 
@@ -2084,6 +2095,8 @@ public class StoryManager : MonoBehaviour
     {
         if (_currentStory.Select_Index == 0 && !IsSetName)
         {
+            SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+            SoundManager.Instance.SetMute(SoundCategory.BGM, true);
             var target = Data_Manager.Instance.GetNextSelect(_currentStory.Index);
             if (target != null)
             {
@@ -2101,6 +2114,8 @@ public class StoryManager : MonoBehaviour
                 {
                     ForceCompleteCharacterTween();
 
+                    SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+                    SoundManager.Instance.SetMute(SoundCategory.BGM, false);
                     _currentStory = target;
                     SetStory();
                     _currentAutoTime = 0f;
@@ -2108,6 +2123,8 @@ public class StoryManager : MonoBehaviour
                 },
                 () =>
                 {
+                    SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+                    SoundManager.Instance.SetMute(SoundCategory.BGM, false);
                     popup.Close();
                 });
             }
@@ -2117,6 +2134,8 @@ public class StoryManager : MonoBehaviour
                 popup.Open();
                 popup.SetPopup_One(LanguageManager.Instance.GetText("Skip_Warning_2"), () =>
                 {
+                    SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+                    SoundManager.Instance.SetMute(SoundCategory.BGM, false);
                     popup.Close();
                 });
             }

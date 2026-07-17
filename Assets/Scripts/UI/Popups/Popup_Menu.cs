@@ -29,11 +29,15 @@ public class Popup_Menu : PopupBase
     {
         SoundManager.Instance.PlayUI("Popup_Open");
         base.Open(onComplete);
+        SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, true);
     }
 
     public override void Close(Action onComplete = null)
     {
         SoundManager.Instance.PlayUI("Click");
+        SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, false);
         base.Close(onComplete);
     }
 
@@ -68,6 +72,10 @@ public class Popup_Menu : PopupBase
         popup.Open();
         popup.SetPopup(LanguageManager.Instance.GetText("Menu_Warning_1"), ()=>
         {
+            SoundManager.Instance.StopBGM();
+            SoundManager.Instance.StopSFX();
+            SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+            SoundManager.Instance.SetMute(SoundCategory.BGM, false);
             GameSceneManager.Instance.GoToMainScene();
         });
     }
