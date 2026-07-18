@@ -54,6 +54,10 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Button SkipBtn;
     [SerializeField] Button LogBtn;
 
+    [Header("Ending")]
+    [SerializeField] Ending EndingPopup;
+    [SerializeField] CanvasGroup EndingCanvas;
+
     [SerializeField] Story_Data _currentStory;
     string _currentBody;
     string _currentFace;
@@ -315,12 +319,19 @@ public class StoryManager : MonoBehaviour
         {
             if (_currentStory != null)
             {
-                var nextIndex = _currentStory.Next_Index;
-                var target = Data_Manager.Instance.GetStoryData(nextIndex);
-                if (target != null)
+                if (_currentStory.Ending == 0)
                 {
-                    _currentStory = target;
-                    SetStory();
+                    var nextIndex = _currentStory.Next_Index;
+                    var target = Data_Manager.Instance.GetStoryData(nextIndex);
+                    if (target != null)
+                    {
+                        _currentStory = target;
+                        SetStory();
+                    }
+                }
+                else
+                {
+                    SetEnding(_currentStory.Ending);
                 }
             }
         }
@@ -2271,6 +2282,27 @@ public class StoryManager : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySFX(_currentStory.SFX, _currentStory.SFX_Type);
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+    #region Ending
+    void SetEnding(int idx)
+    {
+        EndingCanvas.alpha = 0;
+        EndingPopup.gameObject.SetActive(true);
+        EndingPopup.SetEnding(idx);
+    }
+
+    public void SetNextEnding()
+    {
+        var nextIndex = _currentStory.Next_Index;
+        var target = Data_Manager.Instance.GetStoryData(nextIndex);
+        if (target != null)
+        {
+            _currentStory = target;
+            SetStory();
         }
     }
     #endregion

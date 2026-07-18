@@ -187,6 +187,8 @@ public class Data_Manager : MonoBehaviour
                     newData.cg_production.Add(splitProduction[a]);
                 }
             }
+
+            newData.Ending = CSV_Int_Checker(data[i]["ending"]);
             
             Story_Dic.Add(newData.Index, newData);
         }
@@ -855,6 +857,7 @@ public class Story_Data
     public List<string> SFX = new List<string>(); 
     public List<int> SFX_Type = new List<int>(); 
     public List<string> cg_production = new List<string>(); 
+    public int Ending;
 }
 
 public class Select_Data
