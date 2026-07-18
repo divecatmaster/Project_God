@@ -44,6 +44,7 @@ namespace God.Audio
         private const string UIVolParam = "Sound_UI";
         private const string OpeningVolParam = "OpeningVol";
         private readonly Dictionary<SoundCategory, bool> _muteDic = new();
+        
 
         private void Awake()
         {
@@ -360,6 +361,7 @@ namespace God.Audio
 
         private readonly Dictionary<string, AudioSource> _activeStorySfxDic = new();
         private readonly Dictionary<string, Coroutine> _storySfxCoroutineDic = new();
+        private readonly Dictionary<string, int> _activeStorySfxCountDic = new();
 
         public void PlaySFX(string soundID, Vector3? position = null)
         {
@@ -474,6 +476,39 @@ namespace God.Audio
             }
 
             _activeStorySfxDic.Clear();
+            _activeStorySfxCountDic.Clear();
+        }
+
+        private void StopStorySFX(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return;
+
+            if (_storySfxCoroutineDic.ContainsKey(id))
+            {
+                if (_storySfxCoroutineDic[id] != null)
+                    StopCoroutine(_storySfxCoroutineDic[id]);
+
+                _storySfxCoroutineDic.Remove(id);
+            }
+
+            if (_activeStorySfxDic.ContainsKey(id))
+            {
+                AudioSource source = _activeStorySfxDic[id];
+
+                if (source != null)
+                {
+                    source.Stop();
+                    source.clip = null;
+                    source.loop = false;
+                    source.volume = 1f;
+                    source.pitch = 1f;
+                }
+
+                _activeStorySfxDic.Remove(id);
+            }
+
+            _activeStorySfxCountDic.Remove(id);
         }
 
         public void PlaySFX(List<string> soundID, List<int> count)
@@ -513,15 +548,23 @@ namespace God.Audio
                 if (count != null && i < count.Count)
                     playCount = count[i];
 
-                // 이미 같은 SFX가 재생 중이면 유지
+                // 이미 같은 SFX가 재생 중인 경우
                 if (_activeStorySfxDic.ContainsKey(id))
                 {
                     AudioSource activeSource = _activeStorySfxDic[id];
 
-                    if (activeSource != null && activeSource.isPlaying)
+                    int currentCount = 1;
+                    if (_activeStorySfxCountDic.ContainsKey(id))
+                        currentCount = _activeStorySfxCountDic[id];
+
+                    // count가 같고 아직 재생 중이면 유지
+                    if (activeSource != null && activeSource.isPlaying && currentCount == playCount)
                     {
                         continue;
                     }
+
+                    // 같은 SFX라도 count가 달라졌으면 다시 재생
+                    StopStorySFX(id);
                 }
 
                 SoundData data = library.GetSound(id);
@@ -538,6 +581,7 @@ namespace God.Audio
                 }
 
                 _activeStorySfxDic[id] = source;
+                _activeStorySfxCountDic[id] = playCount;
 
                 if (playCount == -1)
                 {
@@ -587,6 +631,7 @@ namespace God.Audio
             for (int i = 0; i < removeList.Count; i++)
             {
                 _activeStorySfxDic.Remove(removeList[i]);
+                _activeStorySfxCountDic.Remove(removeList[i]);
             }
         }
 
