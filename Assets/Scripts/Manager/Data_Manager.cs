@@ -742,7 +742,7 @@ public class Data_Manager : MonoBehaviour
         if (Sound_Effect == value) return;
         
         Sound_Effect = value;
-        PlayerPrefs.SetFloat("Sound_Effect", value);
+        PlayerPrefs.SetInt("Sound_Effect", value);
     }
 
     public void SetSound_UI(int value)
