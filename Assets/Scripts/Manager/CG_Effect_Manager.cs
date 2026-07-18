@@ -167,6 +167,42 @@ public class CG_Effect_Manager : MonoBehaviour
         FadeCoroutine_Dic.Add(effect, coroutine);
     }
 
+    void OffEffectImmediate(GameObject effect)
+    {
+        if (effect == null)
+            return;
+
+        // 진행 중인 Fade 코루틴이 있으면 중지
+        if (FadeCoroutine_Dic.ContainsKey(effect))
+        {
+            if (FadeCoroutine_Dic[effect] != null)
+                StopCoroutine(FadeCoroutine_Dic[effect]);
+
+            FadeCoroutine_Dic.Remove(effect);
+        }
+
+        CanvasGroup canvasGroup = effect.GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0f;
+        }
+
+        effect.SetActive(false);
+    }
+
+    public void OffEffectsImmediate()
+    {
+        for (int i = 0; i < ActiveList.Count; i++)
+        {
+            if (ActiveList[i] != null)
+            {
+                OffEffectImmediate(ActiveList[i]);
+            }
+        }
+
+        ActiveList.Clear();
+    }
+
     IEnumerator FadeOutRoutine(GameObject effect)
     {
         if (effect == null)

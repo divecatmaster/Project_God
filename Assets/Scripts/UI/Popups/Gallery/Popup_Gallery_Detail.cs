@@ -469,9 +469,10 @@ public class Popup_Gallery_Detail : PopupBase
         if (CG_Effect_Manager.Instance == null)
             return;
 
+        CG_Effect_Manager.Instance.OffEffectsImmediate();
         if (data.cg_production == null || data.cg_production.Count <= 0)
         {
-            CG_Effect_Manager.Instance.OffEffects();
+            
         }
         else
         {
