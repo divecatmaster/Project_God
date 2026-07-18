@@ -20,6 +20,7 @@ namespace God.Audio
         [SerializeField] private int sfxPoolSize = 10;
         [SerializeField] private int uiPoolSize = 5;
         [SerializeField] private bool loadSettingsOnAwake = true;
+        [SerializeField] private float sfxFadeOutDuration = 0.35f;
 
         [Header("BGM Channels")]
         [SerializeField] private AudioSource bgmSourceA;
@@ -43,8 +44,8 @@ namespace God.Audio
         private const string SFXVolParam = "Sound_Effect";
         private const string UIVolParam = "Sound_UI";
         private const string OpeningVolParam = "OpeningVol";
+
         private readonly Dictionary<SoundCategory, bool> _muteDic = new();
-        
 
         private void Awake()
         {
@@ -362,6 +363,7 @@ namespace God.Audio
         private readonly Dictionary<string, AudioSource> _activeStorySfxDic = new();
         private readonly Dictionary<string, Coroutine> _storySfxCoroutineDic = new();
         private readonly Dictionary<string, int> _activeStorySfxCountDic = new();
+        private readonly Dictionary<AudioSource, Coroutine> _sfxFadeCoroutineDic = new();
 
         public void PlaySFX(string soundID, Vector3? position = null)
         {
@@ -425,6 +427,9 @@ namespace God.Audio
             if (source == null || data == null || data.clip == null)
                 return;
 
+            StopSFXFadeCoroutine(source);
+
+            source.Stop();
             source.clip = data.clip;
             source.volume = data.GetRandomVolume();
             source.pitch = data.GetRandomPitch();
@@ -468,11 +473,7 @@ namespace God.Audio
                 if (source == null)
                     continue;
 
-                source.Stop();
-                source.clip = null;
-                source.loop = false;
-                source.volume = 1f;
-                source.pitch = 1f;
+                FadeOutSFXSource(source, sfxFadeOutDuration);
             }
 
             _activeStorySfxDic.Clear();
@@ -498,11 +499,7 @@ namespace God.Audio
 
                 if (source != null)
                 {
-                    source.Stop();
-                    source.clip = null;
-                    source.loop = false;
-                    source.volume = 1f;
-                    source.pitch = 1f;
+                    FadeOutSFXSource(source, sfxFadeOutDuration);
                 }
 
                 _activeStorySfxDic.Remove(id);
@@ -533,7 +530,6 @@ namespace God.Audio
                     nextSfxSet.Add(soundID[i]);
             }
 
-            // 이번 스토리에 없는 기존 SFX만 정지
             StopUnusedStorySFX(nextSfxSet);
 
             for (int i = 0; i < soundID.Count; i++)
@@ -548,7 +544,6 @@ namespace God.Audio
                 if (count != null && i < count.Count)
                     playCount = count[i];
 
-                // 이미 같은 SFX가 재생 중인 경우
                 if (_activeStorySfxDic.ContainsKey(id))
                 {
                     AudioSource activeSource = _activeStorySfxDic[id];
@@ -557,13 +552,11 @@ namespace God.Audio
                     if (_activeStorySfxCountDic.ContainsKey(id))
                         currentCount = _activeStorySfxCountDic[id];
 
-                    // count가 같고 아직 재생 중이면 유지
                     if (activeSource != null && activeSource.isPlaying && currentCount == playCount)
                     {
                         continue;
                     }
 
-                    // 같은 SFX라도 count가 달라졌으면 다시 재생
                     StopStorySFX(id);
                 }
 
@@ -618,11 +611,7 @@ namespace God.Audio
 
                 if (source != null)
                 {
-                    source.Stop();
-                    source.clip = null;
-                    source.loop = false;
-                    source.volume = 1f;
-                    source.pitch = 1f;
+                    FadeOutSFXSource(source, sfxFadeOutDuration);
                 }
 
                 removeList.Add(id);
@@ -640,8 +629,9 @@ namespace God.Audio
             if (source == null || data == null || data.clip == null)
                 return;
 
-            source.Stop();
+            StopSFXFadeCoroutine(source);
 
+            source.Stop();
             source.clip = data.clip;
             source.volume = data.GetRandomVolume();
             source.pitch = data.GetRandomPitch();
@@ -666,8 +656,9 @@ namespace God.Audio
                 if (source == null)
                     yield break;
 
-                source.Stop();
+                StopSFXFadeCoroutine(source);
 
+                source.Stop();
                 source.clip = data.clip;
                 source.volume = data.GetRandomVolume();
                 source.pitch = data.GetRandomPitch();
@@ -680,7 +671,6 @@ namespace God.Audio
                     pitch = 1f;
 
                 float waitTime = data.clip.length / pitch;
-
                 float elapsed = 0f;
 
                 while (elapsed < waitTime)
@@ -700,19 +690,87 @@ namespace God.Audio
         {
             if (source != null)
             {
-                source.Stop();
-                source.clip = null;
-                source.loop = false;
-                source.volume = 1f;
-                source.pitch = 1f;
+                ResetSFXSource(source);
             }
 
             if (!string.IsNullOrEmpty(id))
             {
                 _activeStorySfxDic.Remove(id);
                 _storySfxCoroutineDic.Remove(id);
+                _activeStorySfxCountDic.Remove(id);
             }
         }
+
+        private void FadeOutSFXSource(AudioSource source, float fadeDuration)
+        {
+            if (source == null)
+                return;
+
+            StopSFXFadeCoroutine(source);
+
+            Coroutine coroutine = StartCoroutine(FadeOutSFXSourceRoutine(source, fadeDuration));
+            _sfxFadeCoroutineDic.Add(source, coroutine);
+        }
+
+        private IEnumerator FadeOutSFXSourceRoutine(AudioSource source, float fadeDuration)
+        {
+            if (source == null)
+                yield break;
+
+            float startVolume = source.volume;
+
+            if (fadeDuration <= 0f)
+            {
+                ResetSFXSource(source);
+                _sfxFadeCoroutineDic.Remove(source);
+                yield break;
+            }
+
+            float elapsed = 0f;
+
+            while (elapsed < fadeDuration)
+            {
+                if (source == null)
+                    yield break;
+
+                elapsed += Time.unscaledDeltaTime;
+
+                float t = Mathf.Clamp01(elapsed / fadeDuration);
+                source.volume = Mathf.Lerp(startVolume, 0f, t);
+
+                yield return null;
+            }
+
+            ResetSFXSource(source);
+            _sfxFadeCoroutineDic.Remove(source);
+        }
+
+        private void StopSFXFadeCoroutine(AudioSource source)
+        {
+            if (source == null)
+                return;
+
+            if (_sfxFadeCoroutineDic.ContainsKey(source))
+            {
+                if (_sfxFadeCoroutineDic[source] != null)
+                    StopCoroutine(_sfxFadeCoroutineDic[source]);
+
+                _sfxFadeCoroutineDic.Remove(source);
+            }
+        }
+
+        private void ResetSFXSource(AudioSource source)
+        {
+            if (source == null)
+                return;
+
+            source.Stop();
+            source.clip = null;
+            source.loop = false;
+            source.volume = 1f;
+            source.pitch = 1f;
+        }
+
         #endregion
 
         #region Volume Control
@@ -727,9 +785,6 @@ namespace God.Audio
             float dB = isMuted ? -80f : VolumeToDb(volume);
 
             SetMixerFloat(param, dB);
-
-            // PlayerPrefs 저장은 현재 Data_Manager에서 따로 하는 구조라면 여기서는 안 해도 됨
-            // PlayerPrefs.SetInt(param, Mathf.RoundToInt(volume * 100f));
         }
 
         public void SetMute(SoundCategory category, bool isMuted)
