@@ -10,17 +10,47 @@ public class Ending : MonoBehaviour
     [SerializeField] TextMeshProUGUI EndingText;
     [SerializeField] TextMeshProUGUI Title;
     [SerializeField] CanvasGroup _CanvasGroup;
+    [SerializeField] TextMeshProUGUI NextStory;
 
     Coroutine _titleLineCoroutine;
 
     public void SetEnding(int idx)
     {
+        _CanvasGroup.DOKill();
         _CanvasGroup.alpha = 0f;
+
+        Title.DOKill();
+        EndingText.DOKill();
+        NextStory.DOKill();
+
         Title.color = UIUtility.Common_Off_Color;
         EndingText.color = UIUtility.Common_Off_Color;
+        NextStory.color = UIUtility.Common_Off_Color;
+
         EndingText.text = LanguageManager.Instance.GetText($"Ending_Title_{idx}");
-        Lines[0].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0f);
-        Lines[1].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0f);
+
+        for (int i = 0; i < Lines.Length; i++)
+        {
+            if (Lines[i] == null)
+                continue;
+
+            Lines[i].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0f);
+
+            Image lineImage = Lines[i].GetComponent<Image>();
+            if (lineImage != null)
+            {
+                Color lineColor = lineImage.color;
+                lineColor.a = 1f;
+                lineImage.color = lineColor;
+            }
+
+            CanvasGroup lineCanvasGroup = Lines[i].GetComponent<CanvasGroup>();
+            if (lineCanvasGroup != null)
+            {
+                lineCanvasGroup.DOKill();
+                lineCanvasGroup.alpha = 1f;
+            }
+        }
 
         PlayTitleLine();
     }
@@ -118,6 +148,65 @@ public class Ending : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(3f);
 
+        // Lines, EndingText, Title 전부 알파 1 -> 0, 1초
+        Sequence hideSequence = DOTween.Sequence();
+
+        if (Title != null)
+        {
+            Title.DOKill();
+            hideSequence.Join(
+                Title.DOFade(0f, 1f).SetEase(Ease.Linear)
+            );
+        }
+
+        if (EndingText != null)
+        {
+            EndingText.DOKill();
+            hideSequence.Join(
+                EndingText.DOFade(0f, 1f).SetEase(Ease.Linear)
+            );
+        }
+
+        for (int i = 0; i < Lines.Length; i++)
+        {
+            if (Lines[i] == null)
+                continue;
+
+            CanvasGroup lineCanvasGroup = GetOrAddCanvasGroup(Lines[i]);
+
+            if (lineCanvasGroup == null)
+                continue;
+
+            lineCanvasGroup.DOKill();
+
+            hideSequence.Join(
+                lineCanvasGroup.DOFade(0f, 1f).SetEase(Ease.Linear)
+            );
+        }
+
+        yield return hideSequence.WaitForCompletion();
+
+        // 1초 대기
+        yield return new WaitForSecondsRealtime(1f);
+
+        // NextStory 알파 0 -> 1, 1초
+        if (NextStory != null)
+        {
+            NextStory.DOKill();
+
+            Color nextColor = NextStory.color;
+            nextColor.a = 0f;
+            NextStory.color = nextColor;
+
+            yield return NextStory
+                .DOFade(1f, 1f)
+                .SetEase(Ease.Linear)
+                .WaitForCompletion();
+        }
+
+        // 2초 대기
+        yield return new WaitForSecondsRealtime(2f);
+
         if (_CanvasGroup != null)
         {
             _CanvasGroup.DOKill();
@@ -135,5 +224,18 @@ public class Ending : MonoBehaviour
         _titleLineCoroutine = null;
         gameObject.SetActive(false);
         StoryManager.Instance.IsOpening = false;
+    }
+
+    CanvasGroup GetOrAddCanvasGroup(RectTransform rect)
+    {
+        if (rect == null)
+            return null;
+
+        CanvasGroup canvasGroup = rect.GetComponent<CanvasGroup>();
+
+        if (canvasGroup == null)
+            canvasGroup = rect.gameObject.AddComponent<CanvasGroup>();
+
+        return canvasGroup;
     }
 }
