@@ -70,6 +70,8 @@ public class Ending : MonoBehaviour
             StopCoroutine(_titleLineCoroutine);
 
         _titleLineCoroutine = StartCoroutine(PlayRealEnding());
+
+        Data_Manager.Instance.AddEndingCount(realIdx);
     }
 
     IEnumerator PlayRealEnding()

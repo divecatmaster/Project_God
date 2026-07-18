@@ -622,6 +622,11 @@ public class Data_Manager : MonoBehaviour
         if (!Gallery_OpenData.Contains(idx))
         {
             Gallery_OpenData.Add(idx);
+            if (Gallery_OpenData.Count >= 20)
+            {
+                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement6);
+            }
+
             string str = "";
             for (int i = 0; i < Gallery_OpenData.Count; i++)
             {
@@ -830,6 +835,77 @@ public class Data_Manager : MonoBehaviour
             SaveManager.Instance.Delete(i);
         }
         LoadSaveData();
+    }
+    #endregion
+
+    #region Achieve
+    int _logCount = -1;
+    public void AddLogCount()
+    {
+        if (_logCount < 0)
+        {
+            PlayerPrefs.GetInt("LogCount", 0);
+            _logCount = 0;
+        }
+
+        _logCount++;
+        if (_logCount >= 100)
+        {
+            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement7);
+        }
+        PlayerPrefs.SetInt("LogCount", _logCount);
+    }
+
+    bool[] _ending = new bool[3] { false, false, false };
+    public void AddEndingCount(int idx)
+    {
+        var result = PlayerPrefs.GetString("Ending", "0/0/0");
+        var str = result.Split('/');
+
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (str[i] == "0")
+            {
+                _ending[i] = false;
+            }
+            else
+            {
+                _ending[i] = true;
+            }
+        }
+
+        _ending[idx - 1] = true;
+
+        // 저장
+        string saveData = "";
+
+        for (int i = 0; i < _ending.Length; i++)
+        {
+            saveData += _ending[i] ? "1" : "0";
+
+            if (i < _ending.Length - 1)
+                saveData += "/";
+        }
+
+        PlayerPrefs.SetString("Ending", saveData);
+        PlayerPrefs.Save();
+
+        // 모든 엔딩을 봤는지 체크
+        bool isAllEnding = true;
+
+        for (int i = 0; i < _ending.Length; i++)
+        {
+            if (!_ending[i])
+            {
+                isAllEnding = false;
+                break;
+            }
+        }
+
+        if (isAllEnding)
+        {
+            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement8);
+        }
     }
     #endregion
 }

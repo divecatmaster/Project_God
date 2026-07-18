@@ -25,6 +25,7 @@ public class Popup_Log : PopupBase
         SoundManager.Instance.PlayUI("Popup_Open");
         SoundManager.Instance.SetMute(SoundCategory.SFX, true);
         SoundManager.Instance.SetMute(SoundCategory.BGM, true);
+        Data_Manager.Instance.AddLogCount();
         base.Open(onComplete);
     }
 

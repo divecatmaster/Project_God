@@ -296,6 +296,7 @@ public class StoryManager : MonoBehaviour
                 Check_CG_Effect();
                 Check_SFX();
             }
+            CheckAchieve();
         }
     }
 
@@ -2300,6 +2301,25 @@ public class StoryManager : MonoBehaviour
         EndingCanvas.alpha = 0;
         EndingPopup.gameObject.SetActive(true);
         EndingPopup.SetEnding(idx);
+
+        switch (idx)
+        {
+            case 1:
+                {
+                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement3);
+                }
+                break;
+            case 2:
+                {
+                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement4);
+                }
+                break;
+            case 3:
+                {
+                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement5);
+                }
+                break;
+        }
     }
 
     public void SetNextEnding()
@@ -2314,6 +2334,26 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
+
+    #region Achieve
+    void CheckAchieve()
+    {
+        if (_currentStory != null)
+        {
+            if (_currentStory.BG == 101)
+            {
+                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement1);
+            }
+
+            if (_currentStory.BG == 104 || _currentStory.BG == 105 || _currentStory.BG == 106)
+            {
+                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement2);
+            }
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    
 
     #region Utility
     public bool IsActivePopup()
