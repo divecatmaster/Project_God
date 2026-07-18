@@ -47,4 +47,40 @@ public static class SteamAchievementManager
         Debug.Log($"Steam 업적 해금 요청 완료: {achievementId}");
         return true;
     }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    public static void ClearAchievement(string achievementId)
+    {
+        if (!SteamManager.Initialized)
+        {
+            Debug.LogWarning("Steam 초기화 안 됨");
+            return;
+        }
+
+        SteamUserStats.ClearAchievement(achievementId);
+        SteamUserStats.StoreStats();
+
+        Debug.Log($"업적 초기화 완료: {achievementId}");
+    }
+
+    public static void ClearAllAchievements()
+    {
+        if (!SteamManager.Initialized)
+        {
+            Debug.LogWarning("Steam 초기화 안 됨");
+            return;
+        }
+
+        ClearAchievement(Achievement1);
+        ClearAchievement(Achievement2);
+        ClearAchievement(Achievement3);
+        ClearAchievement(Achievement4);
+        ClearAchievement(Achievement5);
+        ClearAchievement(Achievement6);
+        ClearAchievement(Achievement7);
+        ClearAchievement(Achievement8);
+
+        Debug.Log("모든 업적 초기화 완료");
+    }
+#endif
 }

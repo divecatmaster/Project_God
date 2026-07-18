@@ -22,6 +22,10 @@ public class Popup_Setting_System : MonoBehaviour
     [Header("Reset")]
     [SerializeField] Button ResetBtn;
 
+    [Header("ResetAchieve")]
+    [SerializeField] GameObject ResetAchieve;
+    [SerializeField] Button ResetAchieveBtn;
+
     private void Awake()
     {
         ScreenMode_Dropdown.onValueChanged.AddListener(OnValueChange_ScreenMode);
@@ -31,6 +35,11 @@ public class Popup_Setting_System : MonoBehaviour
         AddDropdownClickSound(Resolution_Dropdown);
         AddDropdownClickSound(Language_Dropdown);
         ResetBtn.onClick.AddListener(OnClickReset);
+
+#if UNITY_EDITOR
+        ResetAchieve.SetActive(true);
+        ResetAchieveBtn.onClick.AddListener(OnClickAchieveReset);
+#endif
     }
 
     void OnEnable()
@@ -216,6 +225,21 @@ public class Popup_Setting_System : MonoBehaviour
             //save data 초기화
             //갤러리 초기화
             Data_Manager.Instance.ResetData();
+            popup.Close();
+        },
+        () =>
+        {
+            popup.Close();
+        });
+    }
+
+    void OnClickAchieveReset()
+    {
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        popup.Open();
+        popup.SetPopup(LanguageManager.Instance.GetText("업적 초기화"), () =>
+        {
+            SteamAchievementManager.ClearAllAchievements();
             popup.Close();
         },
         () =>
