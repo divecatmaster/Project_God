@@ -322,11 +322,18 @@ public class StoryManager : MonoBehaviour
                 if (_currentStory.Ending == 0)
                 {
                     var nextIndex = _currentStory.Next_Index;
-                    var target = Data_Manager.Instance.GetStoryData(nextIndex);
-                    if (target != null)
+                    if (nextIndex < 0)
                     {
-                        _currentStory = target;
-                        SetStory();
+                        SetEnding(nextIndex);
+                    }
+                    else
+                    {
+                        var target = Data_Manager.Instance.GetStoryData(nextIndex);
+                        if (target != null)
+                        {
+                            _currentStory = target;
+                            SetStory();
+                        }
                     }
                 }
                 else

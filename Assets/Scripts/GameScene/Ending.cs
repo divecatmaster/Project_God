@@ -27,8 +27,6 @@ public class Ending : MonoBehaviour
         EndingText.color = UIUtility.Common_Off_Color;
         NextStory.color = UIUtility.Common_Off_Color;
 
-        EndingText.text = LanguageManager.Instance.GetText($"Ending_Title_{idx}");
-
         for (int i = 0; i < Lines.Length; i++)
         {
             if (Lines[i] == null)
@@ -51,6 +49,69 @@ public class Ending : MonoBehaviour
                 lineCanvasGroup.alpha = 1f;
             }
         }
+
+        if (idx > 0)
+        {
+            SetFakeEnding(idx);
+        }
+        else
+        {
+            SetRealEnding(idx);
+        }
+    }
+
+    void SetRealEnding(int idx)
+    {
+        int realIdx = Mathf.Abs(idx);
+
+        EndingText.text = LanguageManager.Instance.GetText($"Ending_Expl_{realIdx}");
+
+        if (_titleLineCoroutine != null)
+            StopCoroutine(_titleLineCoroutine);
+
+        _titleLineCoroutine = StartCoroutine(PlayRealEnding());
+    }
+
+    IEnumerator PlayRealEnding()
+    {
+        StoryManager.Instance.IsOpening = true;
+
+        if (_CanvasGroup != null)
+        {
+            _CanvasGroup.DOKill();
+            _CanvasGroup.alpha = 0f;
+        }
+
+        if (_CanvasGroup != null)
+        {
+            _CanvasGroup.DOFade(1f, 3f).SetEase(Ease.Linear);
+        }
+
+        yield return new WaitForSecondsRealtime(3f);
+        
+
+        if (EndingText != null)
+        {
+            yield return EndingText
+                .DOFade(1f, 1f)
+                .SetEase(Ease.Linear)
+                .WaitForCompletion();
+        }
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        // EndingText.DOFade(0, 1f);
+        // yield return new WaitForSecondsRealtime(1f);
+
+        _titleLineCoroutine = null;
+        StoryManager.Instance.IsOpening = false;
+
+        GameSceneManager.Instance.GoToMainScene();
+    }
+
+    void SetFakeEnding(int idx)
+    {
+        EndingText.text = LanguageManager.Instance.GetText($"Ending_Title_{idx}");
 
         PlayTitleLine();
     }
