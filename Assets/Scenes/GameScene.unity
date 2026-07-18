@@ -2328,6 +2328,7 @@ GameObject:
   - component: {fileID: 632963592}
   - component: {fileID: 632963594}
   - component: {fileID: 632963593}
+  - component: {fileID: 632963595}
   m_Layer: 5
   m_Name: Ending_Next
   m_TagString: Untagged
@@ -2454,6 +2455,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632963591}
   m_CullTransparentMesh: 1
+--- !u!114 &632963595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632963591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ad99a2ef28edd44aa3be446c5b7c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Language_UI
+  Language_Key: Ending_Next
+  IsRegularFont: 0
+  IsEnableUpdate: 0
 --- !u!1 &638854516
 GameObject:
   m_ObjectHideFlags: 0
