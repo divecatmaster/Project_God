@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baf0b00b0f32a1438b77c013a2715d3, type: 3}
   m_Name: Clothes
   m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
-  soundID: Leaves
+  soundID: Clothes
   category: 2
-  clip: {fileID: 8300000, guid: e2498724461eb7049be47cebf1fa9ebc, type: 3}
+  clip: {fileID: 8300000, guid: 8c11de5b7202e2744b8842209bf69b85, type: 3}
   volume: 1
   pitch: 1
   volumeRandomization: 0

@@ -9,6 +9,7 @@ public class Ending : MonoBehaviour
 {
     [SerializeField] RectTransform[] Lines;
     [SerializeField] TextMeshProUGUI EndingText;
+    [SerializeField] TextMeshProUGUI RealEndingText;
     [SerializeField] TextMeshProUGUI Title;
     [SerializeField] CanvasGroup _CanvasGroup;
     [SerializeField] TextMeshProUGUI NextStory;
@@ -23,10 +24,12 @@ public class Ending : MonoBehaviour
         Title.DOKill();
         EndingText.DOKill();
         NextStory.DOKill();
+        RealEndingText.DOKill();
 
         Title.color = UIUtility.Common_Off_Color;
         EndingText.color = UIUtility.Common_Off_Color;
         NextStory.color = UIUtility.Common_Off_Color;
+        RealEndingText.color = UIUtility.Common_Off_Color;
 
         for (int i = 0; i < Lines.Length; i++)
         {
@@ -65,7 +68,7 @@ public class Ending : MonoBehaviour
     {
         int realIdx = Mathf.Abs(idx);
 
-        EndingText.text = LanguageManager.Instance.GetText($"Ending_Expl_{realIdx}");
+        RealEndingText.text = LanguageManager.Instance.GetText($"Ending_Expl_{realIdx}");
 
         if (_titleLineCoroutine != null)
             StopCoroutine(_titleLineCoroutine);
@@ -93,14 +96,15 @@ public class Ending : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         
 
-        if (EndingText != null)
+        if (RealEndingText != null)
         {
-            yield return EndingText
+            yield return RealEndingText
                 .DOFade(1f, 1f)
                 .SetEase(Ease.Linear)
                 .WaitForCompletion();
         }
 
+        SoundManager.Instance.StopBGM(2f);
         yield return new WaitForSecondsRealtime(2f);
 
         // EndingText.DOFade(0, 1f);
