@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using God.Audio;
 
 public class Ending : MonoBehaviour
 {
@@ -207,9 +208,9 @@ public class Ending : MonoBehaviour
                 .WaitForCompletion();
         }
 
-        StoryManager.Instance.SetNextEnding();
-
         yield return new WaitForSecondsRealtime(3f);
+
+        SoundManager.Instance.StopBGM();
 
         // Lines, EndingText, Title 전부 알파 1 -> 0, 1초
         Sequence hideSequence = DOTween.Sequence();
@@ -268,7 +269,10 @@ public class Ending : MonoBehaviour
         }
 
         // 2초 대기
+        StoryManager.Instance.SetNextEnding();
+
         yield return new WaitForSecondsRealtime(2f);
+        
 
         if (_CanvasGroup != null)
         {
