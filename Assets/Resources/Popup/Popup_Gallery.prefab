@@ -1847,6 +1847,7 @@ MonoBehaviour:
   BG_Fade_Material:
   - {fileID: 2100000, guid: 9a3bce42bb33d1b44a2e54f4659f19a2, type: 2}
   - {fileID: 2100000, guid: 7c3c4097bc39ce54089bd1aed8a39104, type: 2}
+  Effect_Manager: {fileID: 831260893061885154}
   Scroll: {fileID: 3627676410978091497}
   Context_Obj: {fileID: 3959710219886614933, guid: b7772ab1c2b4b4c4bbeb81fed6c4f99a, type: 3}
   HideBtn: {fileID: 3080625153382912563}

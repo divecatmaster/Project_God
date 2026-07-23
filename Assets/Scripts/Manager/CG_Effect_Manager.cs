@@ -12,6 +12,7 @@ public class CG_Effect_Manager : MonoBehaviour
     List<GameObject> ActiveList = new List<GameObject>();
 
     Dictionary<GameObject, Coroutine> FadeCoroutine_Dic = new Dictionary<GameObject, Coroutine>();
+    bool _isInit = false;
 
     private void Awake()
     {
@@ -22,7 +23,10 @@ public class CG_Effect_Manager : MonoBehaviour
         }
 
         Instance = this;
-        Init();
+        if (!_isInit)
+        {
+            Init();    
+        }
     }
 
     void Init()
@@ -52,6 +56,8 @@ public class CG_Effect_Manager : MonoBehaviour
 
             Effect_Dic.Add(target.name, effect);
         }
+
+        _isInit = true;
     }
 
     public void SetEffect(List<string> names)
@@ -60,6 +66,11 @@ public class CG_Effect_Manager : MonoBehaviour
         {
             OffEffects();
             return;
+        }
+
+        if (Effect_Dic.Count <= 0)
+        {
+            Init();
         }
 
         List<GameObject> nextActiveList = new List<GameObject>();

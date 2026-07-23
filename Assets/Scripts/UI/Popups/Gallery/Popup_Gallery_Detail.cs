@@ -17,6 +17,7 @@ public class Popup_Gallery_Detail : PopupBase
     [SerializeField] GameObject[] HideObjects;
     [SerializeField] Image[] Dots;
     [SerializeField] Material[] BG_Fade_Material;
+    [SerializeField] CG_Effect_Manager Effect_Manager;
     
 
     [Header("Context")]
@@ -466,17 +467,17 @@ public class Popup_Gallery_Detail : PopupBase
 
     void Check_CG_Effect(Story_Data data)
     {
-        if (CG_Effect_Manager.Instance == null)
+        if (Effect_Manager == null)
             return;
 
-        CG_Effect_Manager.Instance.OffEffectsImmediate();
+        Effect_Manager.OffEffectsImmediate();
         if (data.cg_production == null || data.cg_production.Count <= 0)
         {
             
         }
         else
         {
-            CG_Effect_Manager.Instance.SetEffect(data.cg_production);
+            Effect_Manager.SetEffect(data.cg_production);
         }
     }
 //-------------------------------------------------------------------------------------------------------------------------------------
