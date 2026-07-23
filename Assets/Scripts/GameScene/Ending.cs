@@ -273,9 +273,9 @@ public class Ending : MonoBehaviour
         }
 
         // 2초 대기
+        yield return new WaitForSecondsRealtime(1f);
         StoryManager.Instance.SetNextEnding();
-
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
         
 
         if (_CanvasGroup != null)

@@ -8,7 +8,7 @@ index,group,bg,text,music,start,end,production
 7,6,107,BG_Title_107,CG_Music_7,2528,2540,2528
 8,7,108,BG_Title_108,CG_Music_8,2600,2616,2601
 9,7,109,BG_Title_109,CG_Music_8,2617,2640,2617
-10,8,108,BG_Title_109_Exception,,3805,3834,2617
+10,8,108,BG_Title_109_Exception,,3805,3821,2617
 11,9,110,BG_Title_110,CG_Music_1,3102,3112,3103
 12,9,111,BG_Title_111,CG_Music_1,3113,3121,3113
 13,10,112,BG_Title_112,CG_Music_2,3177,3201,3178
@@ -20,3 +20,4 @@ index,group,bg,text,music,start,end,production
 19,13,118,BG_Title_118,CG_Music_3,3914,3933,3915
 20,14,119,BG_Title_119,CG_Music_4,3988,4025,3989
 21,1,120,BG_Title_120,,1417,1421,1417
+22,8,109,BG_Title_109_Exception,,3822,3836,2617
