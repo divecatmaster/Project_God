@@ -21,6 +21,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] Image Face_Img;
     [SerializeField] Image Face_FadeImg;
     [SerializeField] CanvasGroup NameDeco;
+    [SerializeField] GlitchEffectController Glitch;
 
     [Header("BG")]
     [SerializeField] Image CurrentBG;
@@ -931,11 +932,14 @@ public class StoryManager : MonoBehaviour
         int bg_WhiteIn_Index = _currentStory.Appear_Production.IndexOf(26);
         int bg_WhiteOut_Index = _currentStory.Appear_Production.IndexOf(27);
 
+        int bg_Glitch_Index = _currentStory.Appear_Production.IndexOf(28);
+
         bool hasBlinkProduction = blinkIndex >= 0 || eyeCloseIndex >= 0 || eyeOpenIndex >= 0;
         bool hasBlurProduction = blurIndex >= 0 || blurOnceIndex >= 0;
         bool hasBGShake = bgLoopShakeXIndex >= 0 || bgLoopShakeYIndex >= 0 || bgLoopShakeXYIndex >= 0 || bgOnceShakeXIndex >= 0 || bgOnceShakeYIndex >= 0 || bgOnceShakeXYIndex >= 0;
         bool hasTextShake = textLoopShakeXIndex >= 0 || textLoopShakeYIndex >= 0 || textLoopShakeXYIndex >= 0 || textOnceShakeXIndex >= 0 || textOnceShakeYIndex >= 0 || textOnceShakeXYIndex >= 0;
         bool hasBGFade = bg_FadeIn_Index >= 0 || bg_FadeOut_Index >= 0 || bg_WhiteIn_Index >= 0 || bg_WhiteOut_Index >= 0;
+        bool hasGlitch = bg_Glitch_Index >= 0;
 
         if (blinkIndex >= 0 && blinkIndex < _currentStory.Appear_Production_Time.Count)
         {
@@ -1114,6 +1118,19 @@ public class StoryManager : MonoBehaviour
             float value = _currentStory.Appear_Production_Value[bg_WhiteOut_Index];
             FadeOut(new Color(1f, 1f, 1f, BG_Dim.color.a), time, value);
         }
+        else if (bg_Glitch_Index >= 0 && bg_Glitch_Index < _currentStory.Appear_Production_Time.Count)
+        {
+            float glitchDuration = _currentStory.Appear_Production_Time[bg_Glitch_Index];
+            float cycleCount = _currentStory.Appear_Production_Value[bg_Glitch_Index];
+
+            StartGlitch(
+                Mathf.RoundToInt(cycleCount),
+                glitchDuration,
+                1f,
+                0.9f,
+                GlitchEffectController.GlitchType.FullChaos
+            );
+        }
         //------------------------------초기화 부분--------------------------------
         if (Blink.gameObject.activeSelf && !hasBlinkProduction)
         {
@@ -1142,6 +1159,11 @@ public class StoryManager : MonoBehaviour
         if (!hasBGFade)
         {
             ResetFade();
+        }
+
+        if (!hasGlitch)
+        {
+            StopGlitch();
         }
     }
 
@@ -2353,8 +2375,132 @@ public class StoryManager : MonoBehaviour
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    
 
+    #region Glitch
+    Coroutine _glitchCoroutine;
+    void StartGlitch(
+    int cycleCount,
+    float glitchDuration = 0.35f,
+    float restDuration = 1f,
+    float peakIntensity = 0.9f,
+    GlitchEffectController.GlitchType glitchType = GlitchEffectController.GlitchType.FullChaos
+)
+    {
+        StopGlitch();
+
+        if (Glitch == null)
+            return;
+
+        // cycleCount가 0이면 다음 대사 전까지 계속 반복
+        if (cycleCount == 0)
+        {
+            _glitchCoroutine = StartCoroutine(
+                GlitchLoopRoutine(glitchDuration, restDuration, peakIntensity, glitchType)
+            );
+        }
+        else
+        {
+            _glitchCoroutine = StartCoroutine(
+                GlitchCycleRoutine(cycleCount, glitchDuration, restDuration, peakIntensity, glitchType)
+            );
+        }
+    }
+
+    public void StartGlitchUntilNext(
+        float glitchDuration = 0.4f,
+        float restDuration = 1f,
+        float peakIntensity = 0.9f,
+        GlitchEffectController.GlitchType glitchType = GlitchEffectController.GlitchType.FullChaos
+    )
+    {
+        StopGlitch();
+
+        _glitchCoroutine = StartCoroutine(
+            GlitchLoopRoutine(
+                glitchDuration,
+                restDuration,
+                peakIntensity,
+                glitchType
+            )
+        );
+    }
+
+    public void StopGlitch()
+    {
+        if (_glitchCoroutine != null)
+        {
+            StopCoroutine(_glitchCoroutine);
+            _glitchCoroutine = null;
+        }
+
+        if (Glitch != null)
+        {
+            Glitch.currentIntensity = 0f;
+            Glitch.SetGlitchActive(false);
+        }
+    }
+
+    IEnumerator GlitchCycleRoutine(
+        int cycleCount,
+        float glitchDuration,
+        float restDuration,
+        float peakIntensity,
+        GlitchEffectController.GlitchType glitchType
+    )
+    {
+        if (Glitch == null)
+            yield break;
+
+        Glitch.playMode = GlitchEffectController.GlitchMode.ManualOnly;
+        Glitch.SetGlitchActive(true);
+
+        for (int i = 0; i < cycleCount; i++)
+        {
+            Glitch.TriggerGlitch(glitchType, glitchDuration, peakIntensity);
+
+            yield return new WaitForSecondsRealtime(glitchDuration);
+
+            Glitch.currentIntensity = 0f;
+
+            if (restDuration > 0f)
+                yield return new WaitForSecondsRealtime(restDuration);
+        }
+
+        Glitch.currentIntensity = 0f;
+        Glitch.SetGlitchActive(false);
+
+        _glitchCoroutine = null;
+    }
+
+    IEnumerator GlitchLoopRoutine(
+        float glitchDuration,
+        float restDuration,
+        float peakIntensity,
+        GlitchEffectController.GlitchType glitchType
+    )
+    {
+        if (Glitch == null)
+            yield break;
+
+        Glitch.playMode = GlitchEffectController.GlitchMode.ManualOnly;
+        Glitch.SetGlitchActive(true);
+
+        while (true)
+        {
+            Glitch.TriggerGlitch(glitchType, glitchDuration, peakIntensity);
+
+            yield return new WaitForSecondsRealtime(glitchDuration);
+
+            Glitch.currentIntensity = 0f;
+
+            if (restDuration > 0f)
+                yield return new WaitForSecondsRealtime(restDuration);
+            else
+                yield return null;
+        }
+    }
+    #endregion
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Utility
     public bool IsActivePopup()
     {
