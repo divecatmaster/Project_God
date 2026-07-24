@@ -10,6 +10,7 @@ public class Data_Manager : MonoBehaviour
 {
     public static Data_Manager Instance;
     public static string nextScene;
+    public bool IsInit = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -24,11 +25,12 @@ public class Data_Manager : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()
     {
+        IsInit = false;
         SetLanguage();
         InitSettingValue();
         SoundManager.Instance.LoadVolumeSettings();
@@ -37,7 +39,7 @@ public class Data_Manager : MonoBehaviour
         LoadSaveData();
         InitNameColor();
         InitGallery();
-        SceneManager.LoadScene("MainScene");
+        IsInit = true;
     }
 
     float _playTimer;

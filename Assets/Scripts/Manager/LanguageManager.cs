@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using God.Audio;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -86,7 +87,7 @@ public class LanguageManager : MonoBehaviour
             return;
 
         SceneManager.sceneLoaded -= OnStartSceneLoaded;
-
+        SoundManager.Instance.StopBGM();
         Data_Manager.Instance.Init();
     }
 }
