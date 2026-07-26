@@ -32,7 +32,7 @@ Material:
     - _BlockScale: 15
     - _BlockWeight: 1
     - _ColorSpikeWeight: 1
-    - _GlitchIntensity: 0
+    - _GlitchIntensity: 0.12612231
     - _HorizontalDistortion: 0.08
     - _NoiseSpeed: 12
     - _NoiseWeight: 1

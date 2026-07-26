@@ -33,7 +33,16 @@ public class Data_Manager : MonoBehaviour
         IsInit = false;
         SetLanguage();
         InitSettingValue();
-        SoundManager.Instance.LoadVolumeSettings();
+        //ScreenSettingUtility.ApplySavedScreen();
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.LoadVolumeSettings();
+        }
+        else
+        {
+            Debug.LogWarning("SoundManager.Instance가 없습니다.");
+        }
         LoadStoryData();
         LoadSelectData();
         LoadSaveData();
@@ -59,7 +68,7 @@ public class Data_Manager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
     #region Language
     void SetLanguage()
-    {        
+    {
         LanguageManager.Instance.SetLanguage(GetLanguageType());
     }
 
@@ -76,15 +85,8 @@ public class Data_Manager : MonoBehaviour
                 case SystemLanguage.Korean: type = LanguageType.KR; break;
                 case SystemLanguage.English: type = LanguageType.EN; break;
                 case SystemLanguage.Japanese: type = LanguageType.JA; break;
-                case SystemLanguage.ChineseSimplified:
-                    Debug.Log("중국어 간체");
-                    break;
-
-                case SystemLanguage.ChineseTraditional:
-                    Debug.Log("중국어 번체");
-                    break;
-
-                default: type = LanguageType.KR; break;
+                case SystemLanguage.ChineseSimplified: type = LanguageType.CN; break;
+                default: type = LanguageType.EN; break;
             }
             SaveLanguage(type);
         }
@@ -92,7 +94,7 @@ public class Data_Manager : MonoBehaviour
         {
             type = (LanguageType)_save;
         }
-        
+
         return type;
     }
 
@@ -152,14 +154,14 @@ public class Data_Manager : MonoBehaviour
                     newData.Appear_Production_Value.Add(CSV_float_Checker(splitProductionTime[a]));
                 }
             }
-            
+
             newData.Auto_Next = data[i]["auto_next"].ToString() == "FALSE" ? false : true;
             newData.My_Name = data[i]["my_name"].ToString() == "FALSE" ? false : true;
             newData.Gallery = CSV_Int_Checker(data[i]["gallery"]);
 
             newData.BGM = data[i]["bgm"].ToString();
             newData.BGM_Fade_Time = CSV_float_Checker(data[i]["bgm_fade_time"].ToString());
-            
+
             var tempSFX = data[i]["sfx"].ToString();
             if (!string.IsNullOrEmpty(tempSFX))
             {
@@ -179,7 +181,7 @@ public class Data_Manager : MonoBehaviour
                     newData.SFX_Type.Add(CSV_Int_Checker(splitProduction[a]));
                 }
             }
-            
+
             var temp_cg_production = data[i]["cg_production"].ToString();
             if (!string.IsNullOrEmpty(temp_cg_production))
             {
@@ -191,7 +193,7 @@ public class Data_Manager : MonoBehaviour
             }
 
             newData.Ending = CSV_Int_Checker(data[i]["ending"]);
-            
+
             Story_Dic.Add(newData.Index, newData);
         }
     }
@@ -429,9 +431,17 @@ public class Data_Manager : MonoBehaviour
     int _tempLoadIndex;
     void LoadSaveData()
     {
-        for (int i = 0; i < 20; i++)
+        SaveData_Dic = new Dictionary<int, Save_Data>();
+
+        if (SaveManager.Instance == null)
         {
-            SaveManager.Instance.Load(i + 1);
+            Debug.LogError("SaveManager.Instance가 없습니다.");
+            return;
+        }
+
+        for (int i = 1; i <= 20; i++)
+        {
+            SaveManager.Instance.Load(i);
         }
     }
 
@@ -536,7 +546,7 @@ public class Data_Manager : MonoBehaviour
     {
         if (NameColor_Dic.ContainsKey(idx))
         {
-            return NameColor_Dic[idx];    
+            return NameColor_Dic[idx];
         }
         return Color.white;
     }
@@ -551,6 +561,7 @@ public class Data_Manager : MonoBehaviour
         Gallery_OpenData = new List<int>();
 
         var data = CSVReader.ReadOriginal("Gallery");
+
         for (int i = 0; i < data.Count; i++)
         {
             var newData = new Gallery_Data();
@@ -566,14 +577,9 @@ public class Data_Manager : MonoBehaviour
             Gallery_Dic.Add(newData.Index, newData);
         }
 
-        var savedData = PlayerPrefs.GetString("Gallery", "");
-        if (!string.IsNullOrEmpty(savedData))
+        if (SaveManager.Instance != null)
         {
-            var split = savedData.Split('/');
-            for (int i = 0; i < split.Length; i++)
-            {
-                Gallery_OpenData.Add(UIUtility.StringToInt(split[i]));
-            }
+            Gallery_OpenData = SaveManager.Instance.GetGalleryOpenData();
         }
     }
 
@@ -619,30 +625,32 @@ public class Data_Manager : MonoBehaviour
 
     public void AddGallery(int idx)
     {
-        if (idx == 0) return;
-        
-        if (!Gallery_OpenData.Contains(idx))
-        {
-            Gallery_OpenData.Add(idx);
-            if (Gallery_OpenData.Count >= 20)
-            {
-                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement6);
-            }
+        if (idx == 0)
+            return;
 
-            string str = "";
-            for (int i = 0; i < Gallery_OpenData.Count; i++)
-            {
-                str += Gallery_OpenData[i];
-                if (i + 1 >= Gallery_OpenData.Count)
-                {
-                    
-                }
-                else
-                {
-                    str += "/";
-                }
-            }
-            PlayerPrefs.SetString("Gallery", str);
+        if (!Gallery_Dic.ContainsKey(idx))
+        {
+            Debug.LogWarning($"등록되지 않은 갤러리 idx입니다: {idx}");
+            return;
+        }
+
+        if (Gallery_OpenData.Contains(idx))
+            return;
+
+        Gallery_OpenData.Add(idx);
+
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.SetGalleryOpenData(Gallery_OpenData);
+        }
+        else
+        {
+            Debug.LogError("SaveManager.Instance가 없습니다.");
+        }
+
+        if (Gallery_OpenData.Count >= 20)
+        {
+            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement6);
         }
     }
     #endregion
@@ -721,20 +729,43 @@ public class Data_Manager : MonoBehaviour
     {
         TextSpeed = PlayerPrefs.GetInt("TextSpeed", 50);
         AutoSpeed = PlayerPrefs.GetFloat("AutoSpeed", 3f);
-        //Production_Effect = PlayerPrefs.GetInt("Production_Effect", 1);
+
         Sound_BG = PlayerPrefs.GetInt("Sound_BG", 100);
         Sound_Effect = PlayerPrefs.GetInt("Sound_Effect", 100);
         Sound_UI = PlayerPrefs.GetInt("Sound_UI", 100);
-        ScreenMode = PlayerPrefs.GetInt("ScreenMode", 0);
-        Screen_Width = PlayerPrefs.GetInt("Screen_Width", 1920);
-        Screen_Height = PlayerPrefs.GetInt("Screen_Height", 1080);
+
+        // 처음 실행이면 메인 모니터 해상도 사용
+        bool hasScreenSetting =
+            PlayerPrefs.HasKey("ScreenMode") &&
+            PlayerPrefs.HasKey("Screen_Width") &&
+            PlayerPrefs.HasKey("Screen_Height");
+
+        if (!hasScreenSetting)
+        {
+            ScreenMode = 2; // 테두리 없는 창 모드
+
+            Screen_Width = Display.main.systemWidth;
+            Screen_Height = Display.main.systemHeight;
+
+            PlayerPrefs.SetInt("ScreenMode", ScreenMode);
+            PlayerPrefs.SetInt("Screen_Width", Screen_Width);
+            PlayerPrefs.SetInt("Screen_Height", Screen_Height);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            ScreenMode = PlayerPrefs.GetInt("ScreenMode", 2);
+            Screen_Width = PlayerPrefs.GetInt("Screen_Width", Display.main.systemWidth);
+            Screen_Height = PlayerPrefs.GetInt("Screen_Height", Display.main.systemHeight);
+        }
+
         MyName = PlayerPrefs.GetString("MyName", "");
     }
 
     public void SetSound_BG(int value)
     {
         if (Sound_BG == value) return;
-        
+
         Sound_BG = value;
         PlayerPrefs.SetInt("Sound_BG", value);
     }
@@ -742,7 +773,7 @@ public class Data_Manager : MonoBehaviour
     public void SetSound_Effect(int value)
     {
         if (Sound_Effect == value) return;
-        
+
         Sound_Effect = value;
         PlayerPrefs.SetInt("Sound_Effect", value);
     }
@@ -758,15 +789,16 @@ public class Data_Manager : MonoBehaviour
     public void SetTextSpeed(int value)
     {
         if (TextSpeed == value) return;
-        
+
         TextSpeed = value;
         PlayerPrefs.SetInt("TextSpeed", value);
     }
 
     public void SetAutoSpeed(float value)
     {
-        if (TextSpeed == value) return;
-        
+        if (Mathf.Approximately(AutoSpeed, value))
+            return;
+
         AutoSpeed = value;
         PlayerPrefs.SetFloat("AutoSpeed", value);
     }
@@ -828,86 +860,108 @@ public class Data_Manager : MonoBehaviour
     #region Reset
     public void ResetData()
     {
-        PlayerPrefs.SetString("Gallery", "");
         Gallery_OpenData = new List<int>();
+        _logCount = -1;
 
-        SaveData_Dic = new Dictionary<int, Save_Data>();
-        for (int i = 1; i < 21; i++)
+        if (SaveManager.Instance != null)
         {
-            SaveManager.Instance.Delete(i);
+            SaveManager.Instance.ResetGlobalData();
+
+            SaveData_Dic = new Dictionary<int, Save_Data>();
+
+            for (int i = 1; i < 21; i++)
+            {
+                SaveManager.Instance.Delete(i);
+            }
+
+            LoadSaveData();
         }
-        LoadSaveData();
     }
     #endregion
 
     #region Achieve
     int _logCount = -1;
+
     public void AddLogCount()
     {
+        if (SaveManager.Instance == null)
+        {
+            Debug.LogError("SaveManager.Instance가 없습니다.");
+            return;
+        }
+
         if (_logCount < 0)
         {
-            PlayerPrefs.GetInt("LogCount", 0);
-            _logCount = 0;
+            _logCount = SaveManager.Instance.GetLogCount();
         }
 
         _logCount++;
+
+        SaveManager.Instance.SetLogCount(_logCount);
+
         if (_logCount >= 100)
         {
             SteamAchievementManager.Unlock(SteamAchievementManager.Achievement7);
         }
-        PlayerPrefs.SetInt("LogCount", _logCount);
     }
 
-    bool[] _ending = new bool[3] { false, false, false };
+    const int EndingCount = 3;
+
     public void AddEndingCount(int idx)
     {
-        var result = PlayerPrefs.GetString("Ending", "0/0/0");
-        var str = result.Split('/');
+        idx = Mathf.Abs(idx);
 
-        for (int i = 0; i < str.Length; i++)
+        if (idx < 1 || idx > EndingCount)
         {
-            if (str[i] == "0")
-            {
-                _ending[i] = false;
-            }
-            else
-            {
-                _ending[i] = true;
-            }
+            Debug.LogWarning($"잘못된 엔딩 idx입니다: {idx}");
+            return;
         }
 
-        _ending[idx - 1] = true;
-
-        // 저장
-        string saveData = "";
-
-        for (int i = 0; i < _ending.Length; i++)
+        if (SaveManager.Instance == null)
         {
-            saveData += _ending[i] ? "1" : "0";
-
-            if (i < _ending.Length - 1)
-                saveData += "/";
+            Debug.LogError("SaveManager.Instance가 없습니다.");
+            return;
         }
 
-        PlayerPrefs.SetString("Ending", saveData);
-        PlayerPrefs.Save();
+        int endingMask = SaveManager.Instance.GetEndingMask();
 
-        // 모든 엔딩을 봤는지 체크
-        bool isAllEnding = true;
+        // idx 1 = 001
+        // idx 2 = 010
+        // idx 3 = 100
+        endingMask |= 1 << (idx - 1);
 
-        for (int i = 0; i < _ending.Length; i++)
-        {
-            if (!_ending[i])
-            {
-                isAllEnding = false;
-                break;
-            }
-        }
+        SaveManager.Instance.SetEndingMask(endingMask);
 
-        if (isAllEnding)
+        if (IsAllEndingUnlocked(endingMask))
         {
             SteamAchievementManager.Unlock(SteamAchievementManager.Achievement8);
         }
+    }
+
+    bool IsAllEndingUnlocked(int endingMask)
+    {
+        int allEndingMask = GetAllEndingMask();
+        return (endingMask & allEndingMask) == allEndingMask;
+    }
+
+    int GetAllEndingMask()
+    {
+        return (1 << EndingCount) - 1;
+    }
+
+    public bool IsEndingUnlocked(int idx)
+    {
+        idx = Mathf.Abs(idx);
+
+        if (idx < 1 || idx > EndingCount)
+            return false;
+
+        if (SaveManager.Instance == null)
+            return false;
+
+        int endingMask = SaveManager.Instance.GetEndingMask();
+
+        return (endingMask & (1 << (idx - 1))) != 0;
     }
     #endregion
 }
@@ -932,9 +986,9 @@ public class Story_Data
     public int Gallery;
     public string BGM;
     public float BGM_Fade_Time;
-    public List<string> SFX = new List<string>(); 
-    public List<int> SFX_Type = new List<int>(); 
-    public List<string> cg_production = new List<string>(); 
+    public List<string> SFX = new List<string>();
+    public List<int> SFX_Type = new List<int>();
+    public List<string> cg_production = new List<string>();
     public int Ending;
 }
 

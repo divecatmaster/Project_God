@@ -552,6 +552,7 @@ MonoBehaviour:
   fileNamePrefix: save
   prettyPrint: 1
   autoSaveOnQuit: 0
+  globalFileName: global_save.json
 --- !u!224 &624330180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1030,7 +1031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1442581766
 MonoBehaviour:
   m_ObjectHideFlags: 0

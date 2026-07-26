@@ -23,6 +23,7 @@ public class StartSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        ScreenSettingUtility.InitAndApplyScreenSetting();
         SetLogoAlpha(0f);
     }
 

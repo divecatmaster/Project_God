@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public sealed class SaveManager : MonoBehaviour
 {
@@ -162,5 +163,184 @@ public sealed class SaveManager : MonoBehaviour
     {
         if (autoSaveOnQuit)
             Save();
+    }
+
+    [Serializable]
+    public class Global_Save_Data
+    {
+        public int EndingMask = 0;
+        public int LogCount = 0;
+        public List<int> GalleryOpenData = new List<int>();
+    }
+
+    [SerializeField] private string globalFileName = "global_save.json";
+
+    private Global_Save_Data _globalData;
+
+    private string GetGlobalSavePath()
+    {
+        return Path.Combine(
+            Application.persistentDataPath,
+            globalFileName
+        );
+    }
+
+    public Global_Save_Data LoadGlobalData()
+    {
+        string path = GetGlobalSavePath();
+
+        if (!File.Exists(path))
+        {
+            _globalData = new Global_Save_Data();
+            NormalizeGlobalData();
+            SaveGlobalData();
+            return _globalData;
+        }
+
+        try
+        {
+            string json = File.ReadAllText(path);
+
+            if (string.IsNullOrEmpty(json))
+            {
+                _globalData = new Global_Save_Data();
+                NormalizeGlobalData();
+                SaveGlobalData();
+                return _globalData;
+            }
+
+            _globalData = JsonUtility.FromJson<Global_Save_Data>(json);
+
+            if (_globalData == null)
+                _globalData = new Global_Save_Data();
+
+            NormalizeGlobalData();
+
+            return _globalData;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[SaveManager] Global data load failed: {e.Message}");
+
+            _globalData = new Global_Save_Data();
+            NormalizeGlobalData();
+
+            return _globalData;
+        }
+    }
+
+    public void SaveGlobalData()
+    {
+        if (_globalData == null)
+            _globalData = new Global_Save_Data();
+
+        string json = JsonUtility.ToJson(_globalData, prettyPrint);
+        string path = GetGlobalSavePath();
+
+        WriteFileSafe(path, json);
+
+        Debug.Log($"[SaveManager] Global data saved: {path}");
+    }
+
+    public int GetEndingMask()
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        return _globalData.EndingMask;
+    }
+
+    public void SetEndingMask(int endingMask)
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        _globalData.EndingMask = endingMask;
+        SaveGlobalData();
+    }
+
+    public int GetLogCount()
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        return _globalData.LogCount;
+    }
+
+    public void SetLogCount(int logCount)
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        _globalData.LogCount = logCount;
+        SaveGlobalData();
+    }
+
+    void NormalizeGlobalData()
+    {
+        if (_globalData == null)
+            _globalData = new Global_Save_Data();
+
+        if (_globalData.GalleryOpenData == null)
+            _globalData.GalleryOpenData = new List<int>();
+    }
+
+    public List<int> GetGalleryOpenData()
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        if (_globalData.GalleryOpenData == null)
+            _globalData.GalleryOpenData = new List<int>();
+
+        return new List<int>(_globalData.GalleryOpenData);
+    }
+
+    public void SetGalleryOpenData(List<int> galleryOpenData)
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        if (galleryOpenData == null)
+            galleryOpenData = new List<int>();
+
+        _globalData.GalleryOpenData = new List<int>(galleryOpenData);
+        SaveGlobalData();
+    }
+
+    public void AddGalleryOpenData(int idx)
+    {
+        if (idx == 0)
+            return;
+
+        if (_globalData == null)
+            LoadGlobalData();
+
+        if (_globalData.GalleryOpenData == null)
+            _globalData.GalleryOpenData = new List<int>();
+
+        if (_globalData.GalleryOpenData.Contains(idx))
+            return;
+
+        _globalData.GalleryOpenData.Add(idx);
+        SaveGlobalData();
+    }
+
+    public void ResetGlobalData(bool keepLogCount = true)
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        int logCount = 0;
+
+        if (keepLogCount && _globalData != null)
+            logCount = _globalData.LogCount;
+
+        _globalData = new Global_Save_Data();
+
+        if (keepLogCount)
+            _globalData.LogCount = logCount;
+
+        SaveGlobalData();
     }
 }

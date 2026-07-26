@@ -106,6 +106,9 @@ public class Popup_Setting_System : MonoBehaviour
         {
             Resolution resolution = resolutions[i];
 
+            if (resolution.width < resolution.height)
+                continue;
+
             string key = $"{resolution.width}x{resolution.height}";
 
             if (!added.Add(key))
@@ -114,7 +117,8 @@ public class Popup_Setting_System : MonoBehaviour
             _resolutionList.Add(resolution);
             options.Add(GetResolutionText(resolution));
 
-            if (resolution.width == Data_Manager.Instance.Screen_Width && resolution.height == Data_Manager.Instance.Screen_Height)
+            if (resolution.width == Data_Manager.Instance.Screen_Width &&
+                resolution.height == Data_Manager.Instance.Screen_Height)
             {
                 currentIndex = _resolutionList.Count - 1;
             }
@@ -131,20 +135,18 @@ public class Popup_Setting_System : MonoBehaviour
             return;
 
         Resolution resolution = _resolutionList[index];
-        
+
         Data_Manager.Instance.SetScreenResolution(resolution.width, resolution.height);
         SetScreen();
     }
 
     void SetScreen()
     {
-        FullScreenMode mode = GetScreenMode();
-
-        Screen.SetResolution(
-            Data_Manager.Instance.Screen_Width,
-            Data_Manager.Instance.Screen_Height,
-            mode
-        );
+        ScreenSettingUtility.ApplyScreen(
+        Data_Manager.Instance.Screen_Width,
+        Data_Manager.Instance.Screen_Height,
+        Data_Manager.Instance.ScreenMode
+    );
     }
 
     FullScreenMode GetScreenMode()
@@ -235,6 +237,7 @@ public class Popup_Setting_System : MonoBehaviour
 
     void OnClickAchieveReset()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         var popup = Resource_Manager.Instance.Get_Yes_Or_No();
         popup.Open();
         popup.SetPopup(LanguageManager.Instance.GetText("업적 초기화"), () =>
@@ -246,5 +249,8 @@ public class Popup_Setting_System : MonoBehaviour
         {
             popup.Close();
         });
+#else
+    Debug.LogWarning("업적 초기화는 에디터 또는 개발 빌드에서만 사용할 수 있습니다.");
+#endif
     }
 }

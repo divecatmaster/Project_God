@@ -98,7 +98,7 @@ public class StoryManager : MonoBehaviour
         {
             Select_Texts[i].font = Font_Manager.Instance.GetFont();
         }
-        
+
         ResetCharacterImmediately();
         if (Data_Manager.Instance.IsNewGame)
         {
@@ -208,7 +208,7 @@ public class StoryManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))//Test
         {
-            OpenTestTool();    
+            OpenTestTool();
         }
 
         float wheel = Input.mouseScrollDelta.y;
@@ -219,12 +219,24 @@ public class StoryManager : MonoBehaviour
         ResetCharacterImmediately();
 
         var saveData = Data_Manager.Instance.Get_TempSavedata();
+
+        if (saveData == null)
+        {
+            Debug.LogError("로드할 세이브 데이터가 없습니다.");
+            endCallback?.Invoke();
+            return;
+        }
+
         var target = Data_Manager.Instance.GetStoryData(saveData.StoryIndex);
 
-        if (target != null)
+        if (target == null)
         {
-            _currentStory = target;
+            Debug.LogError($"스토리 데이터를 찾을 수 없습니다. Index: {saveData.StoryIndex}");
+            endCallback?.Invoke();
+            return;
         }
+
+        _currentStory = target;
 
         Data_Manager.Instance.StartTimer(saveData.PlayTime);
 
@@ -287,7 +299,7 @@ public class StoryManager : MonoBehaviour
             {
                 if (string.IsNullOrEmpty(Data_Manager.Instance.MyName))
                 {
-                    IsSetName = true;    
+                    IsSetName = true;
                 }
             }
 
@@ -302,7 +314,7 @@ public class StoryManager : MonoBehaviour
     }
 
 
-    
+
     void GetNextStory()
     {
         ForceCompleteCharacterTween();
@@ -394,7 +406,7 @@ public class StoryManager : MonoBehaviour
         }
         else
         {
-            Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);    
+            Context.text = LanguageManager.Instance.GetText(_currentStory.Language_Key);
         }
         Context.maxVisibleCharacters = 0;
         _typeRoutine = StartCoroutine(TypeRoutine());
@@ -571,9 +583,9 @@ public class StoryManager : MonoBehaviour
         }
         else
         {
-            nextName = LanguageManager.Instance.GetText($"Name_{name}");    
+            nextName = LanguageManager.Instance.GetText($"Name_{name}");
         }
-        
+
         Color nextColor = Data_Manager.Instance.GetNameColor(name);
 
         // 이름창이 꺼져있음 → 페이드인
@@ -902,7 +914,7 @@ public class StoryManager : MonoBehaviour
         CheckProduction();
     }
 
-    
+
     void CheckProduction()
     {
         int eyeCloseIndex = _currentStory.Appear_Production.IndexOf(1);
@@ -945,7 +957,7 @@ public class StoryManager : MonoBehaviour
         {
             float blinkProgress = _currentStory.Appear_Production_Value[blinkIndex];
             float blinkTime = _currentStory.Appear_Production_Time[blinkIndex];
-            
+
             if (!Blink.gameObject.activeSelf)
             {
                 Blink.gameObject.SetActive(true);
@@ -970,7 +982,7 @@ public class StoryManager : MonoBehaviour
         {
             float time = _currentStory.Appear_Production_Time[eyeOpenIndex];
             float blinkProgress = _currentStory.Appear_Production_Value[eyeOpenIndex];
-            
+
             if (!Blink.gameObject.activeSelf)
             {
                 Blink.gameObject.SetActive(true);
@@ -983,7 +995,7 @@ public class StoryManager : MonoBehaviour
         {
             float time = _currentStory.Appear_Production_Time[blurIndex];
             float blinkProgress = _currentStory.Appear_Production_Value[blurIndex];
-            
+
             if (CurrentBG.material == null)
             {
                 if (_runtimeBlurMaterial == null)
@@ -1001,7 +1013,7 @@ public class StoryManager : MonoBehaviour
         {
             float time = _currentStory.Appear_Production_Time[blurOnceIndex];
             float blinkProgress = _currentStory.Appear_Production_Value[blurOnceIndex];
-            
+
             if (CurrentBG.material == null)
             {
                 if (_runtimeBlurMaterial == null)
@@ -1183,16 +1195,16 @@ public class StoryManager : MonoBehaviour
         FadeBG.color = UIUtility.Common_Off_Color;
         FadeBG.rectTransform.localScale = Vector3.one;
 
-        
+
         int zoomIndex = data.Appear_Production.IndexOf(3);
         int leftIndex = data.Appear_Production.IndexOf(4);
         int rightIndex = data.Appear_Production.IndexOf(5);
         int upIndex = data.Appear_Production.IndexOf(6);
         int downIndex = data.Appear_Production.IndexOf(7);
         int normalIndex = data.Appear_Production.IndexOf(8);
-        
 
-        
+
+
 
         if (zoomIndex >= 0 && zoomIndex < data.Appear_Production_Time.Count)
         {
@@ -1259,13 +1271,13 @@ public class StoryManager : MonoBehaviour
 
             return;
         }
-        
+
         PlayNormalBGFade(sprite);
     }
 
-    
 
-    
+
+
 
     void PlayDirectionalBGFade(Sprite nextSprite, ref Material fadeMaterial, Material originalMaterial, bool reverse, float duration)
     {
@@ -1532,7 +1544,7 @@ public class StoryManager : MonoBehaviour
         _runtimeBlinkMaterial.SetFloat(OvalPowerID, ovalPower);
         if (_runtimeBlinkMaterial.GetFloat(BlinkProgressID) != 1f)
         {
-            _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);    
+            _runtimeBlinkMaterial.SetFloat(BlinkProgressID, 0f);
         }
 
         Sequence seq = DOTween.Sequence();
@@ -1634,9 +1646,9 @@ public class StoryManager : MonoBehaviour
             }
             else
             {
-                GetNextStory();    
+                GetNextStory();
             }
-        }   
+        }
     }
     #endregion
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2034,7 +2046,7 @@ public class StoryManager : MonoBehaviour
                     Color color = BG_Dim.color;
                     color.a = 0f;
                     BG_Dim.color = color;
-                    
+
                     BG_Dim.gameObject.SetActive(false);
                 }
             });
@@ -2048,7 +2060,7 @@ public class StoryManager : MonoBehaviour
         Color color = BG_Dim.color;
         color.a = 0f;
         BG_Dim.color = color;
-        
+
         BG_Dim.gameObject.SetActive(false);
     }
     #endregion
@@ -2145,10 +2157,10 @@ public class StoryManager : MonoBehaviour
                 {
                     if (string.IsNullOrEmpty(Data_Manager.Instance.MyName))
                     {
-                        target = Data_Manager.Instance.GetStoryData(845);    
+                        target = Data_Manager.Instance.GetStoryData(845);
                     }
                 }
-                
+
                 var popup = Resource_Manager.Instance.Get_Yes_Or_No();
                 popup.Open();
                 popup.SetPopup(LanguageManager.Instance.GetText("Skip_Warning_1"), () =>
@@ -2377,6 +2389,10 @@ public class StoryManager : MonoBehaviour
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
     #region Glitch
+    bool _isGlitchPlaying;
+    int _currentGlitchCycleCount = -999;
+    float _currentGlitchDuration = -1f;
+    float _currentGlitchRestDuration = -1f;
     Coroutine _glitchCoroutine;
     void StartGlitch(
     int cycleCount,
@@ -2386,12 +2402,24 @@ public class StoryManager : MonoBehaviour
     GlitchEffectController.GlitchType glitchType = GlitchEffectController.GlitchType.FullChaos
 )
     {
+        if (_isGlitchPlaying &&
+            _currentGlitchCycleCount == cycleCount &&
+            Mathf.Approximately(_currentGlitchDuration, glitchDuration) &&
+            Mathf.Approximately(_currentGlitchRestDuration, restDuration))
+        {
+            return;
+        }
+
         StopGlitch();
 
         if (Glitch == null)
             return;
 
-        // cycleCount가 0이면 다음 대사 전까지 계속 반복
+        _isGlitchPlaying = true;
+        _currentGlitchCycleCount = cycleCount;
+        _currentGlitchDuration = glitchDuration;
+        _currentGlitchRestDuration = restDuration;
+
         if (cycleCount == 0)
         {
             _glitchCoroutine = StartCoroutine(
@@ -2427,6 +2455,11 @@ public class StoryManager : MonoBehaviour
 
     public void StopGlitch()
     {
+        _isGlitchPlaying = false;
+        _currentGlitchCycleCount = -999;
+        _currentGlitchDuration = -1f;
+        _currentGlitchRestDuration = -1f;
+
         if (_glitchCoroutine != null)
         {
             StopCoroutine(_glitchCoroutine);
