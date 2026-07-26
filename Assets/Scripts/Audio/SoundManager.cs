@@ -39,11 +39,11 @@ namespace God.Audio
         private Coroutine _bgmFadeCoroutine;
         private Coroutine _openingFadeCoroutine;
 
-        private const string MasterVolParam = "MasterVol";
+        //private const string MasterVolParam = "MasterVol";
         private const string BGMVolParam = "Sound_BG";
         private const string SFXVolParam = "Sound_Effect";
         private const string UIVolParam = "Sound_UI";
-        private const string OpeningVolParam = "OpeningVol";
+        //private const string OpeningVolParam = "OpeningVol";
 
         private readonly Dictionary<SoundCategory, bool> _muteDic = new();
 
@@ -887,8 +887,11 @@ namespace God.Audio
             volume = Mathf.Clamp01(volume);
 
             string param = GetVolumeParam(category);
-            bool isMuted = IsMuted(category);
 
+            if (string.IsNullOrEmpty(param))
+                return;
+
+            bool isMuted = IsMuted(category);
             float dB = isMuted ? -80f : VolumeToDb(volume);
 
             SetMixerFloat(param, dB);
@@ -929,21 +932,14 @@ namespace God.Audio
             SetMute(SoundCategory.UI, isMuted);
         }
 
-        public void SetMute_Opening(bool isMuted)
-        {
-            SetMute(SoundCategory.Opening, isMuted);
-        }
-
-        public void SetMute_Master(bool isMuted)
-        {
-            SetMute(SoundCategory.Master, isMuted);
-        }
-
         void ApplyCategoryVolume(SoundCategory category)
         {
-            float volume = GetSavedVolume01(category);
             string param = GetVolumeParam(category);
 
+            if (string.IsNullOrEmpty(param))
+                return;
+
+            float volume = GetSavedVolume01(category);
             float dB = IsMuted(category) ? -80f : VolumeToDb(volume);
 
             SetMixerFloat(param, dB);
@@ -968,12 +964,10 @@ namespace God.Audio
         {
             return category switch
             {
-                SoundCategory.Master => MasterVolParam,
                 SoundCategory.BGM => BGMVolParam,
                 SoundCategory.SFX => SFXVolParam,
                 SoundCategory.UI => UIVolParam,
-                SoundCategory.Opening => OpeningVolParam,
-                _ => MasterVolParam
+                _ => ""
             };
         }
 
@@ -990,11 +984,11 @@ namespace God.Audio
                 case SoundCategory.UI:
                     return Data_Manager.Instance.Sound_UI * 0.01f;
 
-                case SoundCategory.Master:
-                    return PlayerPrefs.GetFloat(MasterVolParam, 1f);
+                // case SoundCategory.Master:
+                //     return PlayerPrefs.GetFloat(MasterVolParam, 1f);
 
-                case SoundCategory.Opening:
-                    return PlayerPrefs.GetFloat(OpeningVolParam, 1f);
+                // case SoundCategory.Opening:
+                //     return PlayerPrefs.GetFloat(OpeningVolParam, 1f);
 
                 default:
                     return 1f;
@@ -1017,8 +1011,6 @@ namespace God.Audio
             ApplyCategoryVolume(SoundCategory.BGM);
             ApplyCategoryVolume(SoundCategory.SFX);
             ApplyCategoryVolume(SoundCategory.UI);
-            ApplyCategoryVolume(SoundCategory.Master);
-            ApplyCategoryVolume(SoundCategory.Opening);
         }
 
         public void Mute(bool isMuted)
