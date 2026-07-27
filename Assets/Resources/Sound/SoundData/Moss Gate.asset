@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baf0b00b0f32a1438b77c013a2715d3, type: 3}
+  m_Name: Moss Gate
+  m_EditorClassIdentifier: Assembly-CSharp::God.Audio.SoundData
+  soundID: Moss Gate
+  category: 1
+  clip: {fileID: 8300000, guid: d087b76bf1a24c64f8c957b3a845ee13, type: 3}
+  volume: 1
+  pitch: 1
+  volumeRandomization: 0
+  pitchRandomization: 0
+  spatialBlend: 0
