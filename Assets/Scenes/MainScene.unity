@@ -2156,7 +2156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 818082070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1031235611}
+        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
+        m_MethodName: OnClickMail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &818082070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3179,7 +3191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3296,7 +3308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192274190314193726, guid: 76d15adb9087d54408494a3799fe5368, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -123,4 +123,16 @@ public class MainSceneManager : MonoBehaviour
             Application.Quit();
         });
     }
+
+    public void OnClickMail()
+    {
+        GUIUtility.systemCopyBuffer = "divecatmaster@gmail.com";
+
+        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+        popup.Open();
+        popup.SetPopup_One(LanguageManager.Instance.GetText("Copy_Text"), () =>
+        {
+            
+        });
+    }
 }
