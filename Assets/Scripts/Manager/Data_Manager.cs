@@ -21,6 +21,9 @@ public class Data_Manager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     private void Start()
@@ -759,7 +762,27 @@ public class Data_Manager : MonoBehaviour
             Screen_Height = PlayerPrefs.GetInt("Screen_Height", Display.main.systemHeight);
         }
 
-        MyName = PlayerPrefs.GetString("MyName", "");
+        if (SaveManager.Instance != null)
+        {
+            MyName = SaveManager.Instance.GetMyName();
+
+            // 기존 PlayerPrefs에 이름이 남아있던 유저를 위한 마이그레이션
+            if (string.IsNullOrEmpty(MyName))
+            {
+                string oldName = PlayerPrefs.GetString("MyName", "");
+
+                if (!string.IsNullOrEmpty(oldName))
+                {
+                    MyName = oldName;
+                    SaveManager.Instance.SetMyName(MyName);
+                    PlayerPrefs.DeleteKey("MyName");
+                }
+            }
+        }
+        else
+        {
+            MyName = PlayerPrefs.GetString("MyName", "");
+        }
     }
 
     public void SetSound_BG(int value)
@@ -831,10 +854,20 @@ public class Data_Manager : MonoBehaviour
 
     public void SetMyName(string name)
     {
-        if (MyName == name) return;
+        if (MyName == name)
+            return;
 
         MyName = name;
-        PlayerPrefs.SetString("MyName", name);
+
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.SetMyName(name);
+        }
+        else
+        {
+            PlayerPrefs.SetString("MyName", name);
+            PlayerPrefs.Save();
+        }
     }
 
     public bool HasFinalConsonant(string text)

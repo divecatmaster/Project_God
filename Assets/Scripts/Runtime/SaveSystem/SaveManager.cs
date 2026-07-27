@@ -171,6 +171,7 @@ public sealed class SaveManager : MonoBehaviour
         public int EndingMask = 0;
         public int LogCount = 0;
         public List<int> GalleryOpenData = new List<int>();
+        public string MyName = "";
     }
 
     [SerializeField] private string globalFileName = "global_save.json";
@@ -283,6 +284,9 @@ public sealed class SaveManager : MonoBehaviour
 
         if (_globalData.GalleryOpenData == null)
             _globalData.GalleryOpenData = new List<int>();
+
+        if (_globalData.MyName == null)
+            _globalData.MyName = "";
     }
 
     public List<int> GetGalleryOpenData()
@@ -341,6 +345,29 @@ public sealed class SaveManager : MonoBehaviour
         if (keepLogCount)
             _globalData.LogCount = logCount;
 
+        SaveGlobalData();
+    }
+
+    public string GetMyName()
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        if (_globalData == null)
+            return "";
+
+        return _globalData.MyName;
+    }
+
+    public void SetMyName(string myName)
+    {
+        if (_globalData == null)
+            LoadGlobalData();
+
+        if (_globalData == null)
+            _globalData = new Global_Save_Data();
+
+        _globalData.MyName = myName;
         SaveGlobalData();
     }
 }

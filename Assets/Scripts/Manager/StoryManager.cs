@@ -131,7 +131,7 @@ public class StoryManager : MonoBehaviour
     float _currentAutoTime = 0f;
     private void Update()
     {
-        if (IsActivePopup() || IsOpening || IsSetName || _isAutoNext)
+        if (IsActivePopup() || IsOpening || _isAutoNext)
         {
             return;
         }

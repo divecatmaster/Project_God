@@ -69,13 +69,15 @@ public class LanguageManager : MonoBehaviour
     public void ChangeLanguage(LanguageType language)
     {
         Data_Manager.Instance.SaveLanguage(language);
+
         StartCoroutine(LoadSceneProcess());
     }
 
     IEnumerator LoadSceneProcess()
     {
         SceneManager.sceneLoaded += OnStartSceneLoaded;
-
+        SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+        SoundManager.Instance.SetMute(SoundCategory.BGM, false);
         SceneManager.LoadSceneAsync("StartScene");
 
         yield break;
