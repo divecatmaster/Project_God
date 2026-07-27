@@ -76,6 +76,8 @@ public class LanguageManager : MonoBehaviour
     IEnumerator LoadSceneProcess()
     {
         SceneManager.sceneLoaded += OnStartSceneLoaded;
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.StopSFX();
         SoundManager.Instance.SetMute(SoundCategory.SFX, false);
         SoundManager.Instance.SetMute(SoundCategory.BGM, false);
         SceneManager.LoadSceneAsync("StartScene");
