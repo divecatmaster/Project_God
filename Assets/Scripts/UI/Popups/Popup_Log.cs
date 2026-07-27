@@ -35,6 +35,8 @@ public class Popup_Log : PopupBase
 
     protected override void Awake()
     {
+        base.Awake();
+
         CloseBtn.onClick.AddListener(OnClickClose);
         CacheLayoutValues();
     }
@@ -123,7 +125,7 @@ public class Popup_Log : PopupBase
 
             if (target[i].Language_Key == "Story_Empty" || target[i].Auto_Next)
                 continue;
-            
+
             _displayData.Add(new LogItemData { story = target[i], isBG = false });
         }
 
@@ -229,7 +231,7 @@ public class Popup_Log : PopupBase
                 itemRt.pivot = new Vector2(0.5f, 1f);
                 itemRt.sizeDelta = new Vector2(1620f, _itemHeight);
 
-                float posY = - (_paddingTop + i * (_itemHeight + _spacing));
+                float posY = -(_paddingTop + i * (_itemHeight + _spacing));
                 itemRt.anchoredPosition = new Vector2(0f, posY);
 
                 item.gameObject.SetActive(true);
