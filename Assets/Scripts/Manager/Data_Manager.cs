@@ -721,7 +721,7 @@ public class Data_Manager : MonoBehaviour
     public int Sound_Effect { get; private set; } = 100;
     public int Sound_UI { get; private set; } = 100;
     public int TextSpeed { get; private set; } = 50;
-    public float AutoSpeed { get; private set; } = 3f;
+    public float AutoSpeed { get; private set; } = 2.5f;
     //public int Production_Effect { get; private set; } = 1;
     public int ScreenMode { get; private set; } = 2;
     public int Screen_Width { get; private set; } = 1920;
@@ -731,7 +731,7 @@ public class Data_Manager : MonoBehaviour
     void InitSettingValue()
     {
         TextSpeed = PlayerPrefs.GetInt("TextSpeed", 50);
-        AutoSpeed = PlayerPrefs.GetFloat("AutoSpeed", 3f);
+        AutoSpeed = PlayerPrefs.GetFloat("AutoSpeed", 2.5f);
 
         Sound_BG = PlayerPrefs.GetInt("Sound_BG", 100);
         Sound_Effect = PlayerPrefs.GetInt("Sound_Effect", 100);
