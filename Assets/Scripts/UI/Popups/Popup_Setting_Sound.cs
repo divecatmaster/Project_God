@@ -34,6 +34,7 @@ public class Popup_Setting_Sound : MonoBehaviour
         Effect_Slider.onValueChanged.AddListener(Effect_Value_Change);
         UI_Slider.onValueChanged.AddListener(UI_Value_Change);
 
+        AddSliderPointerUpEvent(Effect_Slider, OnEffectSliderPointerUp);
         AddSliderPointerUpEvent(UI_Slider, OnUISliderPointerUp);
     }
 
@@ -95,6 +96,12 @@ public class Popup_Setting_Sound : MonoBehaviour
         }
         Effect_Amount.text = _effectValue.ToString();
         SoundManager.Instance.SetVolume(SoundCategory.SFX, (_effectValue * 0.01f));
+    }
+
+    void OnEffectSliderPointerUp(BaseEventData eventData)
+    {
+        SoundManager.Instance.SetVolume(SoundCategory.SFX, _effectValue * 0.01f);
+        SoundManager.Instance.PlaySFX("HeartBeat");
     }
 
     void Set_UI()
