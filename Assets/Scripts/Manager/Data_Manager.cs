@@ -251,10 +251,12 @@ public class Data_Manager : MonoBehaviour
     {
         List<Story_Data> result = new List<Story_Data>();
 
-        // currentIndex에서 Next_Index를 거꾸로 추적해서 실제 루트상 가장 가까운 선택지 찾기
-        Story_Data prevSelect = GetPrevSelectDataByReverseTrace(currentIndex);
+        if (!Story_Dic.ContainsKey(currentIndex))
+            return result;
 
-        // 이전 선택지가 없으면 처음부터 현재 인덱스까지 순서대로 반환
+        Story_Data prevSelect = GetNearestPrevSelectByIndex(currentIndex);
+
+        // 아직 선택지 이전이면 1번부터 현재까지
         if (prevSelect == null)
         {
             return Story_Dic.Values
@@ -263,36 +265,34 @@ public class Data_Manager : MonoBehaviour
                 .ToList();
         }
 
-        int startIndex = prevSelect.Index;
-        int selectIndex = prevSelect.Select_Index;
-
-        // 선택지 문장 자체 추가
-        if (Story_Dic.ContainsKey(startIndex))
+        // 현재가 선택지 자체면 선택지만 표시
+        if (prevSelect.Index == currentIndex)
         {
-            result.Add(Story_Dic[startIndex]);
-        }
-
-        // currentIndex가 선택지 문장 자체면 여기서 끝
-        if (startIndex >= currentIndex)
-        {
+            result.Add(prevSelect);
             return result;
         }
 
+        int selectIndex = prevSelect.Select_Index;
         Select_Data selectData = GetSelectData(selectIndex);
 
         if (selectData == null)
         {
+            result.Add(prevSelect);
             return result;
         }
 
         int savedSelectIndex = GetSavedSelectData(selectIndex);
 
-        // 아직 선택 저장값이 없거나 잘못된 경우
         if (savedSelectIndex < 0 || savedSelectIndex >= selectData.Next_Index.Count)
         {
+            result.Add(prevSelect);
             return result;
         }
 
+        // 선택지 문장 먼저 추가
+        result.Add(prevSelect);
+
+        // 저장된 선택지 루트의 시작점
         int nextIndex = selectData.Next_Index[savedSelectIndex];
 
         HashSet<int> visited = new HashSet<int>();
@@ -305,7 +305,6 @@ public class Data_Manager : MonoBehaviour
             if (!Story_Dic.ContainsKey(nextIndex))
                 break;
 
-            // 무한루프 방지
             if (visited.Contains(nextIndex))
                 break;
 
@@ -314,7 +313,7 @@ public class Data_Manager : MonoBehaviour
             Story_Data data = Story_Dic[nextIndex];
             result.Add(data);
 
-            if (nextIndex >= currentIndex)
+            if (nextIndex == currentIndex)
                 break;
 
             nextIndex = data.Next_Index;
@@ -323,52 +322,12 @@ public class Data_Manager : MonoBehaviour
         return result;
     }
 
-    Story_Data GetPrevSelectDataByReverseTrace(int currentIndex)
+    Story_Data GetNearestPrevSelectByIndex(int currentIndex)
     {
-        if (!Story_Dic.ContainsKey(currentIndex))
-            return null;
-
-        Story_Data currentData = Story_Dic[currentIndex];
-
-        // 현재 데이터 자체가 선택지면 바로 반환
-        if (currentData.Select_Index != 0)
-            return currentData;
-
-        int traceIndex = currentIndex;
-        HashSet<int> visited = new HashSet<int>();
-
-        while (true)
-        {
-            if (traceIndex <= 0)
-                break;
-
-            if (visited.Contains(traceIndex))
-                break;
-
-            visited.Add(traceIndex);
-
-            // 선택지 데이터 중에서 저장된 선택 루트가 현재 traceIndex로 이어지는 것 찾기
-            Story_Data prevSelect = Story_Dic.Values
-                .Where(x => x.Select_Index != 0 && IsSelectedNextIndex(x.Select_Index, traceIndex))
-                .OrderByDescending(x => x.Index)
-                .FirstOrDefault();
-
-            if (prevSelect != null)
-                return prevSelect;
-
-            // 일반 Story_Data의 Next_Index가 현재 traceIndex인 이전 데이터 찾기
-            Story_Data prevStory = Story_Dic.Values
-                .Where(x => x.Next_Index == traceIndex)
-                .OrderByDescending(x => x.Index)
-                .FirstOrDefault();
-
-            if (prevStory == null)
-                break;
-
-            traceIndex = prevStory.Index;
-        }
-
-        return null;
+        return Story_Dic.Values
+            .Where(x => x.Select_Index != 0 && x.Index <= currentIndex)
+            .OrderByDescending(x => x.Index)
+            .FirstOrDefault();
     }
 
     bool IsSelectedNextIndex(int selectIndex, int targetIndex)
