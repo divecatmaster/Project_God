@@ -15,7 +15,7 @@ MonoBehaviour:
   soundID: Forest_4
   category: 2
   clip: {fileID: 8300000, guid: cf338fba6716d7147af42ec74936428d, type: 3}
-  volume: 1
+  volume: 0.8
   pitch: 1
   volumeRandomization: 0
   pitchRandomization: 0
