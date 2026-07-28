@@ -1427,6 +1427,7 @@ BG_Title_7,천궁 알현실,Audience Hall,謁見の間,谒见殿
 BG_Title_8,청연당 - 가을,Cheongyeondang - Autumn,青蓮堂・秋,青莲堂·秋
 BG_Title_9,청연당 - 봄,Cheongyeondang - Spring,青蓮堂・春,青莲堂·春
 BG_Title_10,명계,Underworld,冥界,冥界
+BG_Title_11,청연당 - 밤,Cheongyeondang - Night,青蓮堂・夜,青莲堂·夜
 Save_Warning_1,{0}번 슬롯에 현재 데이터를 저장하시겠습니까?,Save the current data to Slot {0}?,スロット{0}に現在のデータを保存しますか？,要将当前数据保存到槽位{0}吗？
 Save_Warning_2,이미 저장된 데이터가 있습니다. 현제 데이터로 덮어씌우시겠습니까?,Saved data already exists. Overwrite it with the current data?,既に保存データがあります。現在のデータで上書きしますか？,已存在存档。要用当前数据覆盖吗？
 Save_Warning_3,{0}번 슬롯의 데이터를 삭제하시겠습니까?,Delete the data in Slot {0}?,スロット{0}のデータを削除しますか？,要删除槽位{0}的数据吗？
@@ -1538,17 +1539,18 @@ BG_Title_117,영원보다 너를,You Over Eternity,永遠より君を,比起永�
 BG_Title_118,영원보다 너를,You Over Eternity,永遠より君を,比起永远，我选择你
 BG_Title_119,평범한 나날,Ordinary Days,何気ない日々,平凡的日子
 BG_Title_120,깊어지는 연결,A Deepening Bond,深まる繋がり,渐深的联系
-story_1500_1,“{0}....에요...”,,,
+story_1500_1,“{0}....에요...”,“...{0}.”,「……{0}です……」,“……我叫{0}……”
 Log_Select,(선택),(Choice),（選択）,（选择）
 Reset_Title,데이터 초기화,Reset Data,データ初期化,重置数据
 Reset_Button,초기화,Reset,初期化,重置
 Reset_Expl,저장 데이터를 모두 초기화할까요?,Reset all saved data?,保存データをすべて初期化しますか？,要重置所有存档数据吗？
-Ending_Title_1,"[ 하나의 별, 두 개의 빛 ]",,,
-Ending_Title_2,[ 다시 오지 않을 밤 ],,,
-Ending_Title_3,[ 함께 맞이할 아침 ],,,
-Ending,엔딩,,,
-Ending_Next,그 후의 이야기.,,,
-Ending_Expl_1,"그 밤의 끝에서, 우리는 서로의 빛이 되었다.",,,
-Ending_Expl_2,"그 밤 이후로, 그의 세계에는 침묵만이 남았다.",,,
-Ending_Expl_3,"긴 밤이 지나고, 우리는 서로의 오늘이 되었다.",,,
-First_Warning,스토리를 천천히 감상하며 플레이해 보시길 권장합니다.,,,
+Ending_Title_1,"[ 하나의 별, 두 개의 빛 ]","[ One Star, Two Lights ]",[ ひとつの星、ふたつの光 ],[ 一颗星，两道光 ]
+Ending_Title_2,[ 다시 오지 않을 밤 ],[ The Night That Never Returned ],[ 二度と戻らない夜 ],[ 不再归来的夜晚 ]
+Ending_Title_3,[ 함께 맞이할 아침 ],[ A Morning Together ],[ 共に迎える朝 ],[ 共同迎来的清晨 ]
+Ending,엔딩,Ending,エンディング,结局
+Ending_Next,그 후의 이야기.,The Story Afterward.,その後の物語。,后来的故事。
+Ending_Expl_1,"그 밤의 끝에서, 우리는 서로의 빛이 되었다.","At the end of that night, we became each other’s light.",あの夜の果てで、私たちは互いの光となった。,在那个夜晚的尽头，我们成为了彼此的光。
+Ending_Expl_2,"그 밤 이후로, 그의 세계에는 침묵만이 남았다.","After that night, only silence remained in his world.",あの夜を境に、彼の世界には沈黙だけが残った。,从那个夜晚之后，他的世界里只剩下了沉默。
+Ending_Expl_3,"긴 밤이 지나고, 우리는 서로의 오늘이 되었다.","When the long night had passed, we became each other’s today.",長い夜が明けて、私たちは互いの「今日」になった。,漫长的夜晚过去后，我们成为了彼此的今日。
+First_Warning,스토리를 천천히 감상하며 플레이하는 것을 권장합니다.,We recommend taking your time and enjoying the story.,ゆっくりと物語を楽しみながらプレイすることをおすすめします。,建议您放慢节奏，细细品味故事。
+Copy_Text,메일 주소를 복사했습니다.,Email address copied.,メールアドレスをコピーしました。,已复制邮箱地址。

@@ -1490,7 +1490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -94.05, y: 32.56}
+  m_AnchoredPosition: {x: -120, y: 32.56}
   m_SizeDelta: {x: 400, y: 10}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &411037649
@@ -2233,7 +2233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 94.22, y: 32.56}
+  m_AnchoredPosition: {x: 120, y: 32.56}
   m_SizeDelta: {x: 400, y: 10}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &603667687
@@ -2327,6 +2327,13 @@ MonoBehaviour:
   maxBurstDuration: 0.8
   baseGlitchIntensity: 0.03
   currentIntensity: 0
+  screenIntensityMultiplier: 1
+  currentAudioIntensity: 0
+  audioIntensityMultiplier: 0.7
+  audioVolume: 0.1
+  audioHumStrength: 0.3
+  audioBuzzStrength: 0.6
+  audioStaticNoiseStrength: 0.8
   textGlitchChance: 0.35
 --- !u!114 &628545447
 MonoBehaviour:
@@ -2341,8 +2348,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlitchAudioSynthesizer
   audioIntensity: 0
+  volume: 0.15
   humFrequency: 60
   buzzFrequency: 120
+  humStrength: 1
+  buzzStrength: 1
+  staticNoiseStrength: 1
 --- !u!82 &628545448
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7781,7 +7792,7 @@ RenderTexture:
   m_TextureSettings:
     serializedVersion: 2
     m_FilterMode: 1
-    m_Aniso: 1
+    m_Aniso: 0
     m_MipBias: 0
     m_WrapU: 1
     m_WrapV: 1
@@ -8994,7 +9005,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 230, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2528003501482391640
 GameObject:
