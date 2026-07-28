@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class UICursor : MonoBehaviour
 {
+    public static UICursor Instance;
+
     [SerializeField] Canvas Canvas;
     [SerializeField] RectTransform CursorRect;
     [SerializeField] Image CursorImage;
@@ -13,13 +15,21 @@ public class UICursor : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         Cursor.visible = false;
 
         if (CursorRect != null)
         {
             CursorRect.sizeDelta = new Vector2(CursorSize, CursorSize);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
@@ -29,12 +39,19 @@ public class UICursor : MonoBehaviour
 
     private void OnDisable()
     {
-        Cursor.visible = true;
+        if (Instance == this)
+        {
+            Cursor.visible = true;
+        }
     }
 
     private void OnDestroy()
     {
-        Cursor.visible = true;
+        if (Instance == this)
+        {
+            Instance = null;
+            Cursor.visible = true;
+        }
     }
 
     private void Update()
