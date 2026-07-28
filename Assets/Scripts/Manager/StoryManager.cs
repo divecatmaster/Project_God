@@ -1139,7 +1139,7 @@ public class StoryManager : MonoBehaviour
                 Mathf.RoundToInt(cycleCount),
                 glitchDuration,
                 1f,
-                0.9f,
+                0.7f,//글리치 강도 여기서 조절
                 GlitchEffectController.GlitchType.FullChaos
             );
         }
@@ -2398,7 +2398,7 @@ public class StoryManager : MonoBehaviour
     int cycleCount,
     float glitchDuration = 0.35f,
     float restDuration = 1f,
-    float peakIntensity = 0.9f,
+    float peakIntensity = 0.8f,
     GlitchEffectController.GlitchType glitchType = GlitchEffectController.GlitchType.FullChaos
 )
     {
