@@ -893,11 +893,10 @@ public class Data_Manager : MonoBehaviour
     #region Reset
     public void ResetData()
     {
-        Gallery_OpenData = new List<int>();
-        _logCount = -1;
-
         if (SaveManager.Instance != null)
         {
+            Gallery_OpenData = new List<int>();
+
             SaveManager.Instance.ResetGlobalData();
 
             SaveData_Dic = new Dictionary<int, Save_Data>();
@@ -908,6 +907,7 @@ public class Data_Manager : MonoBehaviour
             }
 
             LoadSaveData();
+            MyName = "";
         }
     }
     #endregion
