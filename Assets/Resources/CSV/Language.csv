@@ -1428,6 +1428,7 @@ BG_Title_8,청연당 - 가을,Cheongyeondang - Autumn,青蓮堂・秋,青莲堂�
 BG_Title_9,청연당 - 봄,Cheongyeondang - Spring,青蓮堂・春,青莲堂·春
 BG_Title_10,명계,Underworld,冥界,冥界
 BG_Title_11,청연당 - 밤,Cheongyeondang - Night,青蓮堂・夜,青莲堂·夜
+BG_Title_12,천계 - 누각,Heavenly Realm - Pavilion,天界・楼閣,天界·楼阁
 Save_Warning_1,{0}번 슬롯에 현재 데이터를 저장하시겠습니까?,Save the current data to Slot {0}?,スロット{0}に現在のデータを保存しますか？,要将当前数据保存到槽位{0}吗？
 Save_Warning_2,이미 저장된 데이터가 있습니다. 현제 데이터로 덮어씌우시겠습니까?,Saved data already exists. Overwrite it with the current data?,既に保存データがあります。現在のデータで上書きしますか？,已存在存档。要用当前数据覆盖吗？
 Save_Warning_3,{0}번 슬롯의 데이터를 삭제하시겠습니까?,Delete the data in Slot {0}?,スロット{0}のデータを削除しますか？,要删除槽位{0}的数据吗？

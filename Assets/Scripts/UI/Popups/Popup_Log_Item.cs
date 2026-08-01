@@ -47,7 +47,31 @@ public class Popup_Log_Item : MonoBehaviour
 
         if (story.My_Name)
         {
-            Context.text = string.Format(LanguageManager.Instance.GetText(story.Language_Key), Data_Manager.Instance.MyName);
+            if (LanguageManager.Instance.GetCurrentLanguage() == LanguageType.KR)
+            {
+                if (!Data_Manager.Instance.HasFinalConsonant(Data_Manager.Instance.MyName))
+                {
+                    var str = LanguageManager.Instance.GetText($"{story.Language_Key}_1");
+                    if (str == $"{story.Language_Key}_1")
+                    {
+                        str = LanguageManager.Instance.GetText(story.Language_Key);
+                        Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                    }
+                    else
+                    {
+                        Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                    }
+                }
+                else
+                {
+                    var str = LanguageManager.Instance.GetText(story.Language_Key);
+                    Context.text = string.Format(str, Data_Manager.Instance.MyName);
+                }
+            }
+            else
+            {
+                Context.text = string.Format(LanguageManager.Instance.GetText(story.Language_Key), Data_Manager.Instance.MyName);    
+            }
         }
         else
         {
