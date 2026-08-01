@@ -13,6 +13,7 @@ public class Popup_Setting : PopupBase
 
     int _currentGroup = -1;
     bool _isInit;
+    bool _isInGame = false;
 
     protected override void Awake()
     {
@@ -31,6 +32,16 @@ public class Popup_Setting : PopupBase
     {
         SoundManager.Instance.PlayUI("Click");
         base.Close(onComplete);
+        if (_isInGame)
+        {
+            SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+            SoundManager.Instance.SetMute(SoundCategory.BGM, true);
+        }
+    }
+
+    public void OpenInGame(bool isInGame)
+    {
+        _isInGame = isInGame;
     }
 
     void SetGroups()
@@ -66,6 +77,20 @@ public class Popup_Setting : PopupBase
             GroupBtns[idx].SetSelected(true, false);
         }
         _isInit = false;
+
+        if (_isInGame)
+        {
+            if (_currentGroup == 0)
+            {
+                SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+                SoundManager.Instance.SetMute(SoundCategory.BGM, false);
+            }
+            else
+            {
+                SoundManager.Instance.SetMute(SoundCategory.SFX, true);
+                SoundManager.Instance.SetMute(SoundCategory.BGM, true);
+            }
+        }
 
         Panels[idx].SetActive(true);
     }

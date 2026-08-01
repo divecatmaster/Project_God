@@ -96,7 +96,12 @@ public class MainSceneManager : MonoBehaviour
                 _popup_Setting = item.GetComponent<Popup_Setting>();
             }
         }
-        _popup_Setting.Open();
+
+        if (_popup_Setting != null)
+        {
+            _popup_Setting.OpenInGame(false);
+            _popup_Setting.Open();
+        }
     }
 
     Popup_Gallery _popup_Gallery;

@@ -63,7 +63,14 @@ public class Popup_Menu : PopupBase
                 _popup_Setting = item.GetComponent<Popup_Setting>();
             }
         }
-        _popup_Setting.Open();
+
+        if (_popup_Setting != null)
+        {
+            _popup_Setting.Open();
+            _popup_Setting.OpenInGame(true);
+            SoundManager.Instance.SetMute(SoundCategory.SFX, false);
+            SoundManager.Instance.SetMute(SoundCategory.BGM, false);
+        }
     }
 
     void OnClickMainBtn()
