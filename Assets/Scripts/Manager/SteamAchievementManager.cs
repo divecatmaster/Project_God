@@ -1,3 +1,5 @@
+#if STEAM
+
 using Steamworks;
 using UnityEngine;
 
@@ -19,9 +21,7 @@ public static class SteamAchievementManager
     {
         if (!SteamManager.Initialized)
         {
-            Debug.LogWarning(
-                $"Steam이 초기화되지 않아 업적을 해금하지 못했습니다: {achievementId}"
-            );
+            Debug.LogWarning($"Steam이 초기화되지 않아 업적을 해금하지 못했습니다: {achievementId}");
             return false;
         }
 
@@ -49,6 +49,7 @@ public static class SteamAchievementManager
     }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
+
     public static void ClearAchievement(string achievementId)
     {
         if (!SteamManager.Initialized)
@@ -82,5 +83,8 @@ public static class SteamAchievementManager
 
         Debug.Log("모든 업적 초기화 완료");
     }
+
 #endif
 }
+
+#endif // STEAM

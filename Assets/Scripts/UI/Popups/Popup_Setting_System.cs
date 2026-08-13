@@ -36,9 +36,11 @@ public class Popup_Setting_System : MonoBehaviour
         AddDropdownClickSound(Language_Dropdown);
         ResetBtn.onClick.AddListener(OnClickReset);
 
-#if UNITY_EDITOR
+#if STEAM && UNITY_EDITOR
         ResetAchieve.SetActive(true);
         ResetAchieveBtn.onClick.AddListener(OnClickAchieveReset);
+#else
+        ResetAchieve.SetActive(false);
 #endif
     }
 
@@ -237,20 +239,21 @@ public class Popup_Setting_System : MonoBehaviour
 
     void OnClickAchieveReset()
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        var popup = Resource_Manager.Instance.Get_Yes_Or_No();
-        popup.Open();
-        popup.SetPopup(LanguageManager.Instance.GetText("업적 초기화"), () =>
-        {
-            SteamAchievementManager.ClearAllAchievements();
-            popup.Close();
-        },
-        () =>
-        {
-            popup.Close();
-        });
+#if STEAM && (UNITY_EDITOR || DEVELOPMENT_BUILD)
+    var popup = Resource_Manager.Instance.Get_Yes_Or_No();
+    popup.Open();
+
+    popup.SetPopup(LanguageManager.Instance.GetText("업적 초기화"), () =>
+    {
+        SteamAchievementManager.ClearAllAchievements();
+        popup.Close();
+    },
+    () =>
+    {
+        popup.Close();
+    });
 #else
-    Debug.LogWarning("업적 초기화는 에디터 또는 개발 빌드에서만 사용할 수 있습니다.");
+        Debug.LogWarning("Steam 업적 초기화는 Steam 에디터 또는 개발 빌드에서만 사용할 수 있습니다.");
 #endif
     }
 }

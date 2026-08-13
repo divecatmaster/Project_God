@@ -2340,17 +2340,19 @@ public class StoryManager : MonoBehaviour
         {
             case 1:
                 {
-                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement3);
+                    PlatformAchievement.Unlock(PlatformAchievement.Achievement3);
                 }
                 break;
+
             case 2:
                 {
-                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement4);
+                    PlatformAchievement.Unlock(PlatformAchievement.Achievement4);
                 }
                 break;
+
             case 3:
                 {
-                    SteamAchievementManager.Unlock(SteamAchievementManager.Achievement5);
+                    PlatformAchievement.Unlock(PlatformAchievement.Achievement5);
                 }
                 break;
         }
@@ -2376,12 +2378,12 @@ public class StoryManager : MonoBehaviour
         {
             if (_currentStory.BG == 101)
             {
-                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement1);
+                PlatformAchievement.Unlock(PlatformAchievement.Achievement1);
             }
 
             if (_currentStory.BG == 104 || _currentStory.BG == 105 || _currentStory.BG == 106)
             {
-                SteamAchievementManager.Unlock(SteamAchievementManager.Achievement2);
+                PlatformAchievement.Unlock(PlatformAchievement.Achievement2);
             }
         }
     }

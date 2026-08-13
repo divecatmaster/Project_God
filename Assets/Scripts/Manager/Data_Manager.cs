@@ -51,6 +51,10 @@ public class Data_Manager : MonoBehaviour
         LoadSaveData();
         InitNameColor();
         InitGallery();
+
+#if STOVE && !UNITY_EDITOR
+        STOVEPCSDK3Manager.Instance.Initialize();
+#endif
         IsInit = true;
     }
 
@@ -610,9 +614,9 @@ public class Data_Manager : MonoBehaviour
             Debug.LogError("SaveManager.Instance가 없습니다.");
         }
 
-        if (Gallery_OpenData.Count >= 20)
+        if (Gallery_OpenData.Count >= 22)
         {
-            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement6);
+            PlatformAchievement.Unlock(PlatformAchievement.Achievement6);
         }
     }
     #endregion
@@ -893,7 +897,7 @@ public class Data_Manager : MonoBehaviour
 
         if (_logCount >= 100)
         {
-            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement7);
+            PlatformAchievement.Unlock(PlatformAchievement.Achievement7);
         }
     }
 
@@ -926,7 +930,7 @@ public class Data_Manager : MonoBehaviour
 
         if (IsAllEndingUnlocked(endingMask))
         {
-            SteamAchievementManager.Unlock(SteamAchievementManager.Achievement8);
+            PlatformAchievement.Unlock(PlatformAchievement.Achievement8);
         }
     }
 

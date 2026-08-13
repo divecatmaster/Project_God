@@ -163,74 +163,74 @@ public class Opening : MonoBehaviour
                 Main_Text.color = _offColor;
                 Main_Text.text = LanguageManager.Instance.GetText("opening_1");
                 Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 0);
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
 
-                yield return WaitPauseable(2.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                yield return WaitPauseable(1.4f);
+                Main_Text.DOFade(0, 0.35f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.35f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //그날, 갑작스러운 사고로
-                Main_Text.text = LanguageManager.Instance.GetText("opening_2");
-                Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
-                    x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_2") + "\n" + LanguageManager.Instance.GetText("opening_3");
+                //Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
+                Main_Text.DOFade(1, 0.45f).SetId(OpeningTweenId);
+                // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
+                //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 0.45f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.45f);
+                Main_Text.DOFade(0, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.45f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //부모님이 돌아가셨다
-                Main_Text.text = LanguageManager.Instance.GetText("opening_3");
-                Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
-                    x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3.8f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_3");
+                // Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
+                //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 2f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(3.8f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 마치 준비해 둔 것처럼—
-                yield return WaitPauseable(0.5f);
-                Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 0);
-                Main_Text.text = LanguageManager.Instance.GetText("opening_4");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                //yield return WaitPauseable(0.5f);
+                //Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 0);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_4") + "\n" + LanguageManager.Instance.GetText("opening_5");
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.3f);
+                Main_Text.DOFade(0, 0.35f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.35f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 한 장의 유서가 남겨져 있었다.
-                Main_Text.text = LanguageManager.Instance.GetText("opening_5");
-                //SoundManager.Instance.PlaySFX("Sfx_Opening_2");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                // 종이 넘기는 소리 fade complete 후에
-                // SoundManager.Instance.PlaySFX("paper_flip");
-                yield return WaitPauseable(3.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_5");
+                // //SoundManager.Instance.PlaySFX("Sfx_Opening_2");
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // // 종이 넘기는 소리 fade complete 후에
+                // // SoundManager.Instance.PlaySFX("paper_flip");
+                // yield return WaitPauseable(3.5f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 어릴 적 불치병에 걸려 죽어가던 나를
-                Main_Text.text = LanguageManager.Instance.GetText("opening_6");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_6") + "\n" + LanguageManager.Instance.GetText("opening_7");
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.8f);
+                Main_Text.DOFade(0, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.3f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 성물의 힘으로 살려냈다는 이야기와,
-                Main_Text.text = LanguageManager.Instance.GetText("opening_7");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_7");
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(3.5f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 나를 살리기 위해
-                Main_Text.text = LanguageManager.Instance.GetText("opening_8");
+                Main_Text.text = LanguageManager.Instance.GetText("opening_8") + "\n" + LanguageManager.Instance.GetText("opening_9"); ;
                 // var lang = LanguageManager.Instance.GetCurrentLanguage();
                 // if (lang == LanguageType.KR || lang == LanguageType.EN || lang == LanguageType.JA)
                 // {
@@ -239,140 +239,144 @@ public class Opening : MonoBehaviour
                 //         DOTween.To(() => Main_Text_Sub.fontSize, x => Main_Text_Sub.fontSize = x, 50f, 2f).SetId(OpeningTweenId);
                 // }
 
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.5f);
+                Main_Text.DOFade(1, 0.35f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.75f);
                 Main_Text_Sub.text = "";
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.DOFade(0, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.3f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 // 계속해서 성물을 훔쳐왔다는 사실이 적혀 있었다.
-                Main_Text.text = LanguageManager.Instance.GetText("opening_9");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_9");
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(3.5f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //그리고 마지막으로,
-                Main_Text.text = LanguageManager.Instance.GetText("opening_10");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_10") + "\n" + LanguageManager.Instance.GetText("opening_11");
+                Main_Text.DOFade(1, 0.35f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.15f);
+                Main_Text.DOFade(0, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.3f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //내가 계속 살아가기 위해서는—
-                Main_Text.text = LanguageManager.Instance.GetText("opening_11");
-                Main_Text.DOFade(1, 2.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_11");
+                // Main_Text.DOFade(1, 2.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(4.5f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //신들의 성물을 훔쳐
-                Main_Text.text = LanguageManager.Instance.GetText("opening_12");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_12") + "\n" + LanguageManager.Instance.GetText("opening_13");
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.8f);
+                Main_Text.DOFade(0, 0.35f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.35f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //그 안에 담긴 신력을 흡수해야만 한다는 말.
-                Main_Text.text = LanguageManager.Instance.GetText("opening_13");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_13");
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(4f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(2.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //편지를 읽는 순간,
-                Main_Text.text = LanguageManager.Instance.GetText("opening_14");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_14") + "\n" + LanguageManager.Instance.GetText("opening_15");
+                // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
+                //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 0.4f).SetId(OpeningTweenId);
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.2f);
+                Main_Text.DOFade(0, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.4f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //죄책감이 밀려왔다.
-                Main_Text.text = LanguageManager.Instance.GetText("opening_15");
-                Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
-                //SoundManager.Instance.PlaySFX("Sfx_Opening_3");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
-                    x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 2f).SetId(OpeningTweenId);
-                //complete 이후 피아노 소리 단음 하나 어떤음? 띵?
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_15");
+                // Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
+                // //SoundManager.Instance.PlaySFX("Sfx_Opening_3");
+                // Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
+                // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
+                //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 2f).SetId(OpeningTweenId);
+                // //complete 이후 피아노 소리 단음 하나 어떤음? 띵?
+                // yield return WaitPauseable(4f);
+                // Main_Text.DOFade(0, 2f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(3f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //하지만—
                 Main_Text.text = LanguageManager.Instance.GetText("opening_16");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3.5f);
-                Main_Text.DOFade(0, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3f);
+                Main_Text.DOFade(1, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(1.1f);
+                Main_Text.DOFade(0, 0.25f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.25f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //죽고 싶지 않았다.
                 Main_Text.text = LanguageManager.Instance.GetText("opening_17");
-                Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
-                Main_Text.DOFade(1, 3f).SetId(OpeningTweenId);
-                DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
-                    x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 3f).SetId(OpeningTweenId);
-                yield return WaitPauseable(5.5f);
-                Main_Text.DOFade(0, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2f);
+                //Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 1);
+                Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
+                // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
+                //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 0.5f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.3f);
+                Main_Text.DOFade(0, 0.45f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.45f);
                 Main_Text.text = "";
                 Main_Text.ForceMeshUpdate();
                 //----------------------------------------------------------------------------------------------------
                 //그날 이후
-                Main_Text.text = LanguageManager.Instance.GetText("opening_18");
-                Main_Text.DOFade(1, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(3f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.text = LanguageManager.Instance.GetText("opening_18") + "\n" + LanguageManager.Instance.GetText("opening_19");
+                Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId).OnComplete(() => SoundManager.Instance.PlayStorySFX("Forest_5", -1, 5f));
+                MainBG.DOFade(1f, 9f).SetEase(Ease.InCubic).SetId(OpeningTweenId);
+                
+                //Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.1f);
+                Main_Text.DOFade(0, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.3f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //나는 떠돌며 살아간다.
-                Main_Text.text = LanguageManager.Instance.GetText("opening_19");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId).OnComplete(() => SoundManager.Instance.PlayStorySFX("Forest_5", -1, 5f));
-                //(() => SoundManager.Instance.PlayOpening("Forest_5", 5f, true));
-                //complete 숲소리, 벌레소리,바람소리
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
-                Main_Text.text = "";
+                // Main_Text.text = LanguageManager.Instance.GetText("opening_19");
+                // //(() => SoundManager.Instance.PlayOpening("Forest_5", 5f, true));
+                // //complete 숲소리, 벌레소리,바람소리
+                // yield return WaitPauseable(4f);
+                // Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
+                // yield return WaitPauseable(1.5f);
+                // Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //신들의 물건을 훔치면서.
                 Main_Text.text = LanguageManager.Instance.GetText("opening_20");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                MainBG.DOFade(1f, 20f).SetEase(Ease.InCubic).SetId(OpeningTweenId);
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.DOFade(1, 0.35f).SetId(OpeningTweenId);
+                
+                yield return WaitPauseable(1.65f);
+                Main_Text.DOFade(0, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.3f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //훔치지 않으면—
                 Main_Text.text = LanguageManager.Instance.GetText("opening_21");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.DOFade(1, 0.3f).SetId(OpeningTweenId);
+                yield return WaitPauseable(1.1f);
+                Main_Text.DOFade(0, 0.25f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.25f);
                 Main_Text.text = "";
                 //----------------------------------------------------------------------------------------------------
                 //나는, 죽는다.
                 Main_Text.text = LanguageManager.Instance.GetText("opening_22");
-                Main_Text.DOFade(1, 2f).SetId(OpeningTweenId);
-                yield return WaitPauseable(4.5f);
+                Main_Text.DOFade(1, 0.55f).SetId(OpeningTweenId);
+                yield return WaitPauseable(2.75f);
                 //SoundManager.Instance.StopOpening(1.5f);
-                Main_Text.DOFade(0, 1.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.5f);
+                Main_Text.DOFade(0, 0.7f).SetId(OpeningTweenId);
+                yield return WaitPauseable(0.7f);
                 Main_Text.text = "";
                 StoryManager.Instance.IsOpening = false;
                 PlayerPrefs.SetInt("Opening_View", 1);
-                CanvasGroup.DOFade(0, 1f).SetId(OpeningTweenId).OnComplete(() =>
+                CanvasGroup.DOFade(0, 0.7f).SetId(OpeningTweenId).OnComplete(() =>
                 {
                         this.gameObject.SetActive(false);
                         StoryManager.Instance.EndOpening();

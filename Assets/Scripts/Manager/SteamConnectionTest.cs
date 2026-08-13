@@ -1,3 +1,5 @@
+#if STEAM
+
 using UnityEngine;
 using Steamworks;
 
@@ -14,8 +16,10 @@ public class SteamConnectionTest : MonoBehaviour
         string userName = SteamFriends.GetPersonaName();
         CSteamID steamId = SteamUser.GetSteamID();
 
-        Debug.Log($"Steam 연결 성공");
+        Debug.Log("Steam 연결 성공");
         Debug.Log($"Steam 닉네임: {userName}");
         Debug.Log($"Steam ID: {steamId}");
     }
 }
+
+#endif
