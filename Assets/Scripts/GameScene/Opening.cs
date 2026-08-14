@@ -34,6 +34,39 @@ public class Opening : MonoBehaviour
                 }
         }
 
+        /// <summary>
+        /// Adjusts the old film effect animation speed multiplier (1.0 = normal, 0.5 = slow, 2.0 = fast).
+        /// </summary>
+        public void SetFilmEffectSpeed(float speed)
+        {
+                if (oldFilmEffect != null)
+                {
+                        oldFilmEffect.SetMasterSpeed(speed);
+                }
+        }
+
+        /// <summary>
+        /// Adjusts the old film effect overlay transparency (0.0 = completely transparent, 1.0 = fully opaque).
+        /// </summary>
+        public void SetFilmEffectAlpha(float alpha)
+        {
+                if (oldFilmEffect != null)
+                {
+                        oldFilmEffect.SetAlpha(alpha);
+                }
+        }
+
+        /// <summary>
+        /// Sets custom dust/speck/hair textures (1 to 3). Pass null to clear or leave empty.
+        /// </summary>
+        public void SetFilmEffectDustTextures(Texture2D tex1, Texture2D tex2 = null, Texture2D tex3 = null)
+        {
+                if (oldFilmEffect != null)
+                {
+                        oldFilmEffect.SetDustTextures(tex1, tex2, tex3);
+                }
+        }
+
         float typing_speed_1 = 0.08f;
         Color _offColor = new Color(1f, 1f, 1f, 0f);
         private static readonly int BlurSoftnessId = Shader.PropertyToID("_FaceSoftness");

@@ -7,6 +7,7 @@ Shader "Custom/UIOldFilmShader"
 
         [Header(Master Controls)]
         _MasterIntensity ("Master Intensity", Range(0, 1)) = 1.0
+        _MasterSpeed ("Master Speed Multiplier", Float) = 1.0
 
         [Header(Film Grain)]
         _GrainIntensity ("Grain Intensity", Range(0, 1)) = 0.2
@@ -19,6 +20,14 @@ Shader "Custom/UIOldFilmShader"
 
         [Header(Dust and Specks)]
         _DustDensity ("Dust Density", Range(0, 1)) = 0.25
+        _DustSpeed ("Dust Speed", Float) = 14.0
+        _DustTex1 ("Dust Texture 1", 2D) = "black" {}
+        _DustTex2 ("Dust Texture 2", 2D) = "black" {}
+        _DustTex3 ("Dust Texture 3", 2D) = "black" {}
+        _DustTex1Assigned ("Dust Tex 1 Assigned", Float) = 0
+        _DustTex2Assigned ("Dust Tex 2 Assigned", Float) = 0
+        _DustTex3Assigned ("Dust Tex 3 Assigned", Float) = 0
+        _DustTexScale ("Dust Texture Scale", Float) = 1.0
 
         [Header(Vignette)]
         _VignetteIntensity ("Vignette Intensity", Range(0, 1)) = 0.5
@@ -30,6 +39,7 @@ Shader "Custom/UIOldFilmShader"
 
         [Header(Frame Jitter)]
         _JitterIntensity ("Jitter Intensity", Range(0, 1)) = 0.03
+        _JitterSpeed ("Jitter Speed", Float) = 20.0
 
         // UI Masking / Stencil Properties
         _StencilComp ("Stencil Comparison", Float) = 8
@@ -105,17 +115,27 @@ Shader "Custom/UIOldFilmShader"
             float4 _ClipRect;
 
             float _MasterIntensity;
+            float _MasterSpeed;
             float _GrainIntensity;
             float _GrainSpeed;
             float _ScratchIntensity;
             float _ScratchSpeed;
             float _ScratchWidth;
             float _DustDensity;
+            float _DustSpeed;
+            sampler2D _DustTex1;
+            sampler2D _DustTex2;
+            sampler2D _DustTex3;
+            float _DustTex1Assigned;
+            float _DustTex2Assigned;
+            float _DustTex3Assigned;
+            float _DustTexScale;
             float _VignetteIntensity;
             float _VignetteSmoothness;
             float _FlickerIntensity;
             float _FlickerSpeed;
             float _JitterIntensity;
+            float _JitterSpeed;
 
             // Pseudo-random noise functions
             float hash11(float p)
@@ -150,8 +170,11 @@ Shader "Custom/UIOldFilmShader"
             {
                 float2 uv = IN.texcoord;
 
+                // Time scaled by MasterSpeed
+                float effectiveTime = _Time.y * max(0.0, _MasterSpeed);
+
                 // Frame Jitter (subtle vertical/horizontal shift over quantized time)
-                float jitterTime = floor(_Time.y * 20.0);
+                float jitterTime = floor(effectiveTime * _JitterSpeed);
                 float2 jitterOffset = (float2(hash11(jitterTime * 1.1) - 0.5, hash11(jitterTime * 2.3) - 0.5)) * _JitterIntensity * 0.008 * _MasterIntensity;
                 float2 jitteredUV = uv + jitterOffset;
 
@@ -162,13 +185,13 @@ Shader "Custom/UIOldFilmShader"
                 float vignetteAlpha = vigFactor * _VignetteIntensity * _MasterIntensity;
 
                 // 2. Film Grain (High-frequency noise)
-                float grainTime = floor(_Time.y * _GrainSpeed);
+                float grainTime = floor(effectiveTime * _GrainSpeed);
                 float grainNoise = hash21(jitteredUV * 800.0 + grainTime * 17.3);
                 // Centered grain noise around dark/light
                 float grainAlpha = (grainNoise - 0.5) * _GrainIntensity * _MasterIntensity;
 
                 // 3. Vertical Scratches
-                float scratchTime = floor(_Time.y * _ScratchSpeed);
+                float scratchTime = floor(effectiveTime * _ScratchSpeed);
                 float scratchAlpha = 0.0;
                 // Generate up to 3 scratch lines
                 for (int i = 0; i < 3; i++)
@@ -191,13 +214,64 @@ Shader "Custom/UIOldFilmShader"
                 scratchAlpha = saturate(scratchAlpha) * _ScratchIntensity * _MasterIntensity;
 
                 // 4. Dust and Specks
-                float dustTime = floor(_Time.y * 14.0);
-                float dustNoise = hash21(floor(jitteredUV * float2(60.0, 40.0)) + dustTime * 11.2);
-                float dustMask = step(1.0 - _DustDensity * 0.02 * _MasterIntensity, dustNoise);
-                float dustAlpha = dustMask * 0.7 * _MasterIntensity;
+                float dustTime = floor(effectiveTime * _DustSpeed);
+                float dustAlpha = 0.0;
+                float activeDustTexCount = _DustTex1Assigned + _DustTex2Assigned + _DustTex3Assigned;
+
+                if (activeDustTexCount > 0.5)
+                {
+                    // Custom Texture Dust Mode
+                    float dustSeed = dustTime * 13.37;
+                    float showDust = step(1.0 - _DustDensity * 0.8 * _MasterIntensity, hash11(dustSeed));
+                    if (showDust > 0.0)
+                    {
+                        float2 dustCenter = float2(hash11(dustSeed * 1.5), hash11(dustSeed * 2.5));
+                        float rotAngle = (hash11(dustSeed * 3.5) - 0.5) * 6.28318;
+                        float cosA = cos(rotAngle);
+                        float sinA = sin(rotAngle);
+                        float2x2 rotMat = float2x2(cosA, -sinA, sinA, cosA);
+
+                        float2 dustUV = mul(rotMat, (jitteredUV - dustCenter)) * (1.0 / max(0.01, _DustTexScale)) + 0.5;
+
+                        if (dustUV.x >= 0.0 && dustUV.x <= 1.0 && dustUV.y >= 0.0 && dustUV.y <= 1.0)
+                        {
+                            float pick = hash11(dustSeed * 4.5) * activeDustTexCount;
+                            fixed4 sampledDust = fixed4(0, 0, 0, 0);
+
+                            float currentIdx = 0.0;
+                            if (_DustTex1Assigned > 0.5)
+                            {
+                                if (pick >= currentIdx && pick < currentIdx + 1.0)
+                                    sampledDust = tex2D(_DustTex1, dustUV);
+                                currentIdx += 1.0;
+                            }
+                            if (_DustTex2Assigned > 0.5)
+                            {
+                                if (pick >= currentIdx && pick < currentIdx + 1.0)
+                                    sampledDust = tex2D(_DustTex2, dustUV);
+                                currentIdx += 1.0;
+                            }
+                            if (_DustTex3Assigned > 0.5)
+                            {
+                                if (pick >= currentIdx && pick < currentIdx + 1.0)
+                                    sampledDust = tex2D(_DustTex3, dustUV);
+                            }
+
+                            float texAlpha = max(sampledDust.a, max(sampledDust.r, max(sampledDust.g, sampledDust.b)));
+                            dustAlpha = texAlpha * 0.8 * _MasterIntensity;
+                        }
+                    }
+                }
+                else
+                {
+                    // Procedural Dust & Specks Noise (Fallback when no textures assigned)
+                    float dustNoise = hash21(floor(jitteredUV * float2(60.0, 40.0)) + dustTime * 11.2);
+                    float dustMask = step(1.0 - _DustDensity * 0.02 * _MasterIntensity, dustNoise);
+                    dustAlpha = dustMask * 0.7 * _MasterIntensity;
+                }
 
                 // 5. Projector Flicker (Brightness modulation)
-                float flickerTime = floor(_Time.y * _FlickerSpeed);
+                float flickerTime = floor(effectiveTime * _FlickerSpeed);
                 float flickerVal = (hash11(flickerTime * 7.1) - 0.5) * _FlickerIntensity * _MasterIntensity;
 
                 // Composite dark overlay and light artifacts
