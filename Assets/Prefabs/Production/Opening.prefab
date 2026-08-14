@@ -1168,7 +1168,7 @@ MonoBehaviour:
     \uB3CC\uC544\uAC00\uC168\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0285f8aa0a826e64ab1b75439ae07fdd, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 9b4330d8456e1e247abde8f6d34657de, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1edcaa698b04e5146b8a8420212d5336, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
