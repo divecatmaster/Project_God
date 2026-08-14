@@ -19,6 +19,20 @@ public class Opening : MonoBehaviour
         [SerializeField] GameObject Warning_Obj;
         [SerializeField] CanvasGroup Warning_Obj_Canvas;
         [SerializeField] CanvasGroup Warning;
+        [SerializeField] private God.UI.UIOldFilmEffect oldFilmEffect;
+
+        public God.UI.UIOldFilmEffect OldFilmEffect => oldFilmEffect;
+
+        /// <summary>
+        /// Adjusts the old film effect intensity (0 to 1).
+        /// </summary>
+        public void SetFilmEffectIntensity(float intensity)
+        {
+                if (oldFilmEffect != null)
+                {
+                        oldFilmEffect.SetMasterIntensity(intensity);
+                }
+        }
 
         float typing_speed_1 = 0.08f;
         Color _offColor = new Color(1f, 1f, 1f, 0f);
