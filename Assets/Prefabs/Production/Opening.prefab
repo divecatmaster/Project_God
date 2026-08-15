@@ -89,13 +89,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::God.UI.UIOldFilmEffect
   masterIntensity: 1
+  masterSpeed: 1
   grainIntensity: 0.2
-  scratchIntensity: 0.35
+  grainSpeed: 24
+  scratchIntensity: 0.25
+  scratchSpeed: 8
   dustDensity: 0
+  dustSpeed: 14
+  dustTex1: {fileID: 0}
+  dustTex2: {fileID: 0}
+  dustTex3: {fileID: 0}
+  dustTexScale: 1
   vignetteIntensity: 0.5
   vignetteSmoothness: 0.5
-  flickerIntensity: 0.12
+  flickerIntensity: 0.045
+  flickerSpeed: 5
   jitterIntensity: 0.03
+  jitterSpeed: 20
 --- !u!1 &875202310173213944
 GameObject:
   m_ObjectHideFlags: 0
