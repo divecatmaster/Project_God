@@ -223,7 +223,7 @@ public class Opening : MonoBehaviour
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
                 // DOTween.To(() => Main_Text.fontMaterial.GetFloat(BlurSoftnessId),
                 //     x => Main_Text.fontMaterial.SetFloat(BlurSoftnessId, x), 0f, 0.45f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2f);
+                yield return WaitPauseable(2.5f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
                 Main_Text.text = "";
@@ -244,7 +244,7 @@ public class Opening : MonoBehaviour
                 //Main_Text.fontMaterial.SetFloat(BlurSoftnessId, 0);
                 Main_Text.text = LanguageManager.Instance.GetText("opening_4") + "\n" + LanguageManager.Instance.GetText("opening_5");
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2f);
+                yield return WaitPauseable(2.5f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
                 Main_Text.text = "";
@@ -263,7 +263,7 @@ public class Opening : MonoBehaviour
                 // 어릴 적 불치병에 걸려 죽어가던 나를
                 Main_Text.text = LanguageManager.Instance.GetText("opening_6") + "\n" + LanguageManager.Instance.GetText("opening_7");
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.2f);
+                yield return WaitPauseable(2.5f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
                 Main_Text.text = "";
@@ -287,7 +287,7 @@ public class Opening : MonoBehaviour
                 // }
 
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(2.2f);
+                yield return WaitPauseable(2.5f);
                 //Main_Text_Sub.text = "";
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
@@ -304,7 +304,7 @@ public class Opening : MonoBehaviour
                 //그리고 마지막으로,
                 Main_Text.text = LanguageManager.Instance.GetText("opening_10") + "\n" + LanguageManager.Instance.GetText("opening_11");
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
-                yield return WaitPauseable(1.9f);
+                yield return WaitPauseable(2.5f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
                 Main_Text.text = "";
