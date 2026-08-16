@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb83e015d32539b468953b901dd01630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::God.UI.UIOldFilmEffect
-  masterIntensity: 1
+  masterIntensity: 0
   masterSpeed: 1
   grainIntensity: 0.2
   grainSpeed: 24

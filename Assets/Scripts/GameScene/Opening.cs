@@ -22,12 +22,16 @@ public class Opening : MonoBehaviour
         [SerializeField] private God.UI.UIOldFilmEffect oldFilmEffect;
 
         public God.UI.UIOldFilmEffect OldFilmEffect => oldFilmEffect;
+        float _filmEffectIntensity = 0f;
+        Tween _filmEffectTween;
 
         /// <summary>
         /// Adjusts the old film effect intensity (0 to 1).
         /// </summary>
         public void SetFilmEffectIntensity(float intensity)
         {
+                _filmEffectIntensity = intensity;
+
                 if (oldFilmEffect != null)
                 {
                         oldFilmEffect.SetMasterIntensity(intensity);
@@ -65,6 +69,32 @@ public class Opening : MonoBehaviour
                 {
                         oldFilmEffect.SetDustTextures(tex1, tex2, tex3);
                 }
+        }
+
+        public void PlayFilmEffectFadeOut(float time)
+        {
+                _filmEffectTween?.Kill();
+
+                _filmEffectTween = DOTween.To(
+                    () => _filmEffectIntensity,
+                    value => SetFilmEffectIntensity(value),
+                    0f,
+                    time
+                ).SetEase(Ease.Linear);
+        }
+
+        public void PlayFilmEffectFadeIn(float time)
+        {
+                _filmEffectTween?.Kill();
+
+                SetFilmEffectIntensity(0f);
+
+                _filmEffectTween = DOTween.To(
+                    () => _filmEffectIntensity,
+                    value => SetFilmEffectIntensity(value),
+                    1f,
+                    time
+                ).SetEase(Ease.Linear);
         }
 
         float typing_speed_1 = 0.08f;
@@ -121,14 +151,14 @@ public class Opening : MonoBehaviour
 
                 var popup = Resource_Manager.Instance.Get_Yes_Or_No();
                 popup.Open();
-                popup.SetPopup(LanguageManager.Instance.GetText("Opening_Skip_Title"), ()=>
+                popup.SetPopup(LanguageManager.Instance.GetText("Opening_Skip_Title"), () =>
                 {
                         StoryManager.Instance.IsOpening = false;
                         StoryManager.Instance.EndOpening();
                         DOTween.Kill(OpeningTweenId);
                         this.gameObject.SetActive(false);
                 },
-                ()=>
+                () =>
                 {
                         ResumeOpening();
                 });
@@ -181,6 +211,7 @@ public class Opening : MonoBehaviour
         {
                 StoryManager.Instance.IsOpening = true;
                 SetFont();
+                SetFilmEffectIntensity(0f);
                 //정환 키보드로 마우스 휠업 등등 막기
                 typing_speed_1 = 0.05f;
                 Main_Text.text = "";
@@ -193,18 +224,18 @@ public class Opening : MonoBehaviour
                 if (warning == 0)
                 {
                         Warning_Obj.SetActive(true);
-                        Warning.DOFade(1,2f).SetId(OpeningTweenId);
+                        Warning.DOFade(1, 2f).SetId(OpeningTweenId);
                         yield return WaitPauseable(3f);
 
-                        Warning.DOFade(0,2f).SetId(OpeningTweenId);
-                        Warning_Obj_Canvas.DOFade(0,2f).SetId(OpeningTweenId);
+                        Warning.DOFade(0, 2f).SetId(OpeningTweenId);
+                        Warning_Obj_Canvas.DOFade(0, 2f).SetId(OpeningTweenId);
                         yield return WaitPauseable(2f);
                         Warning_Obj.SetActive(false);
                         PlayerPrefs.SetInt("First_Warning", 1);
                 }
 
                 yield return WaitPauseable(1f);
-                
+                PlayFilmEffectFadeIn(1);
 
                 //20살 생일.
                 Main_Text.color = _offColor;
@@ -380,7 +411,8 @@ public class Opening : MonoBehaviour
                 Main_Text.text = LanguageManager.Instance.GetText("opening_18") + "\n" + LanguageManager.Instance.GetText("opening_19");
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId).OnComplete(() => SoundManager.Instance.PlayStorySFX("Forest_5", -1, 5f));
                 MainBG.DOFade(1f, 8f).SetEase(Ease.InCubic).SetId(OpeningTweenId);
-                
+                PlayFilmEffectFadeOut(7f);
+
                 //Main_Text.DOFade(1, 0.4f).SetId(OpeningTweenId);
                 yield return WaitPauseable(1.5f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
@@ -399,7 +431,7 @@ public class Opening : MonoBehaviour
                 //신들의 물건을 훔치면서.
                 Main_Text.text = LanguageManager.Instance.GetText("opening_20");
                 Main_Text.DOFade(1, 0.5f).SetId(OpeningTweenId);
-                
+
                 yield return WaitPauseable(2f);
                 Main_Text.DOFade(0, 0.5f).SetId(OpeningTweenId);
                 yield return WaitPauseable(0.8f);
