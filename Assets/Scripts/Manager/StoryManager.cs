@@ -2576,6 +2576,7 @@ public class StoryManager : MonoBehaviour
     TestTool _testTool;
     void OpenTestTool()
     {
+#if UNITY_EDITOR
         if (_testTool == null)
         {
             var target = Resources.Load<GameObject>("Popup/Popup_Test");
@@ -2586,6 +2587,7 @@ public class StoryManager : MonoBehaviour
             }
         }
         _testTool.Open();
+#endif
     }
     #endregion
 }

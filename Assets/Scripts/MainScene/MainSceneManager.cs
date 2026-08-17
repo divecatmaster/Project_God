@@ -4,12 +4,14 @@ using UnityEngine.UI;
 using DG.Tweening;
 using DiveCat.God.UI.Popups;
 using God.Audio;
+using TMPro;
 
 public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager Instance;
     [SerializeField] Transform Popup_Trans;
     [SerializeField] Image LoadingDim;
+    [SerializeField] TextMeshProUGUI Version;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class MainSceneManager : MonoBehaviour
     {
         EndLoading();
         SoundManager.Instance.PlayBGM("The Shade of a Tree", 1);
+        Version.SetText($"v{Application.version}");
     }
 
     void EndLoading()
